@@ -1,0 +1,34 @@
+{
+    "name": "Jib",
+    "alias": "jib",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Jib\\Providers\\JibServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "admin_menus": [
+        {
+            "icon": "fa fa-edit",
+            "name": "Workspace",
+            "route": "admin/jib/workspace",
+            "permission": "view_jib-workspace"
+        },
+        {
+            "icon": "fa fa-bars",
+            "name": "List Pengajuan",
+            "route": "admin/jib/pengajuan",
+            "permission": "view_jib-pengajuan"
+        },
+        {
+            "icon": "fa fa-file",
+            "name": "Selesai",
+            "route": "admin/jib/selesai",
+            "permission": "view_jib-selesai"
+        }
+    ],
+    "permissions": ["jib-workspace", "jib-pengajuan", "jib-selesai "]
+}
