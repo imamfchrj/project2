@@ -78,7 +78,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //
     public function findById($id)
     {
-        return Pengajuan::findOrFail($id);
+        return Pengajuan::with('msegments','mcustomers','mcategories','mstatuses','users','minitiators')->findOrFail($id);
     }
 //
 //    public function create($params = [])

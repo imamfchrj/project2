@@ -2,6 +2,8 @@
 return [
     'manage_pengajuan' => 'Manage pengajuan',
     'pengajuan_list' => 'List of pengajuan',
+    'pengajuan_detail' => 'Pengajuan Detail',
+
     'initiaor_label' => 'Initiator',
     'segment_label' => 'Segment',
     'customer_label' => 'Customer',

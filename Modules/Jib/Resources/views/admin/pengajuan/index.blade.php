@@ -13,7 +13,6 @@
             <h2 class="section-title">@lang('jib::pengajuan.pengajuan_list')</h2>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Halaman pengajuan</p>
                     <div class="card">
                         <div class="card-header">
                             <h4>@lang('jib::pengajuan.manage_pengajuan')</h4>
@@ -84,7 +83,7 @@
                                                 @else
                                                     @can('view_jib-pengajuan')
                                                         <a class="btn btn-sm btn-info"
-                                                           href="{{ url('pengajuan/'. $peng->id )}}"><i
+                                                           href="{{ url('admin/jib/pengajuan/'. $peng->id )}}"><i
                                                                     class="far fa-eye"></i> @lang('jib::pengajuan.btn_show_label')
                                                         </a>
                                                     @endcan

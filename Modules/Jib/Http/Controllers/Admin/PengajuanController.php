@@ -96,7 +96,10 @@ class PengajuanController extends JibController
      */
     public function show($id)
     {
-        return view('jib::show');
+//        return view('jib::show');
+        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+
+        return view('jib::admin.pengajuan.show', $this->data);
     }
 
     /**
