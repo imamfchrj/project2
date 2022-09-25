@@ -223,16 +223,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         abort(403, __('jib::pengajuan.fail_delete_message'));
     }
 
-//    public function restore($id)
-//    {
-//        $post  = Post::withTrashed()->findOrFail($id);
-//        if ($post->trashed()) {
-//            return $post->restore();
-//        }
-//
-//        return false;
-//    }
-//
+    public function restore($id)
+    {
+        $pengajuan  = Pengajuan::withTrashed()->findOrFail($id);
+        if ($pengajuan->trashed()) {
+            return $pengajuan->restore();
+        }
+
+        return false;
+    }
+
     public function getStatuses()
     {
         return Pengajuan::STATUSES;

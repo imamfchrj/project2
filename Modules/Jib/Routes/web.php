@@ -22,7 +22,7 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::resource('workspace', 'WorkspaceController');
 
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');
-//    Route::get('pengajuan/{id}/restore', 'PengajuanController@restore')->name('pengajuan.restore');
+    Route::get('pengajuan/{id}/restore', 'PengajuanController@restore')->name('pengajuan.restore');
     Route::resource('pengajuan', 'PengajuanController');
 
     Route::resource('selesai', 'SelesaiController');
