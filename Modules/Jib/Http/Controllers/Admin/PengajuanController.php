@@ -139,4 +139,13 @@ class PengajuanController extends JibController
 
         return redirect('admin/jib/pengajuan')->with('error', __('jib::pengajuan.fail_delete_message'));
     }
+
+    public function restore($id)
+    {
+        if ($this->pengajuanRepository->restore($id)) {
+            return redirect('admin/jib/pengajuan/trashed')->with('success', __('jib::pengajuan.success_restore_message'));
+        }
+
+        return redirect('admin/jib/pengajuan/trashed')->with('error', __('jib::pengajuan.fail_restore_message'));
+    }
 }
