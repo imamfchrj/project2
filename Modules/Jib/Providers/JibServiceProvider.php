@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Factory;
 
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\PengajuanRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
+use Modules\Jib\Repositories\Admin\InitiatorRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
+use Modules\Jib\Repositories\Admin\SegmentRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Jib\Repositories\Admin\CustomerRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
+use Modules\Jib\Repositories\Admin\KategoriRepository;
 
 class JibServiceProvider extends ServiceProvider
 {
@@ -119,6 +127,26 @@ class JibServiceProvider extends ServiceProvider
         $this->app->bind(
             PengajuanRepositoryInterface::class,
             PengajuanRepository::class
+        );
+
+        $this->app->bind(
+            InitiatorRepositoryInterface::class,
+            InitiatorRepository::class
+        );
+
+        $this->app->bind(
+            SegmentRepositoryInterface::class,
+            SegmentRepository::class
+        );
+
+        $this->app->bind(
+            CustomerRepositoryInterface::class,
+            CustomerRepository::class
+        );
+
+        $this->app->bind(
+            KategoriRepositoryInterface::class,
+            KategoriRepository::class
         );
 
     }

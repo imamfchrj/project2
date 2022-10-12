@@ -2,6 +2,7 @@
 
 return [
     'btn_create_label' => 'Create',
+    'btn_draft_label' => 'Draft',
     'btn_edit_label' => 'Edit',
     'btn_show_label' => 'Show',
     'btn_delete_label' => 'Delete',

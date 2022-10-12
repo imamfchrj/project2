@@ -80,7 +80,8 @@
                                 <Label>@lang('jib::pengajuan.est_rev__label')</Label>
                             </div>
                             <div class="col-md-10">
-                                : {{ number_format($pengajuan->est_revenue) }}
+                                {{--: {{ number_format($pengajuan->est_revenue) }}--}}
+                                : {{ !empty($pengajuan->est_revenue) ? $pengajuan->est_revenue : "-" }}
                             </div>
                         </div>
                         <div class="form-row">
@@ -89,6 +90,30 @@
                             </div>
                             <div class="col-md-10">
                                 : {{ !empty($pengajuan->irr) ? $pengajuan->irr."%" : "-" }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-2">
+                                <Label>@lang('jib::pengajuan.npv_label')</Label>
+                            </div>
+                            <div class="col-md-10">
+                                : {{ !empty($pengajuan->npv) ? $pengajuan->npv."%" : "-" }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-2">
+                                <Label>@lang('jib::pengajuan.pbp_label')</Label>
+                            </div>
+                            <div class="col-md-10">
+                                : {{ !empty($pengajuan->pbp) ? $pengajuan->pbp."%" : "-" }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-2">
+                                <Label>@lang('jib::pengajuan.bcr_label')</Label>
+                            </div>
+                            <div class="col-md-10">
+                                : {{ !empty($pengajuan->bcr) ? $pengajuan->bcr."%" : "-" }}
                             </div>
                         </div>
                         <div class="form-row">

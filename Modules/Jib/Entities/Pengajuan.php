@@ -59,7 +59,7 @@ class Pengajuan extends Model
     public const APPROVAL_3 = 5;
     public const SELESAI = 6;
 //
-//    public const POST = 'post';
+    public const POST = 'post';
 //    public const PAGE = 'page';
 //
     public const STATUSES = [
@@ -70,22 +70,6 @@ class Pengajuan extends Model
         self::APPROVAL_3 => 'Approval 3',
         self::SELESAI => 'Selesai',
     ];
-//
-//    public function user()
-//    {
-//        return $this->belongsTo('App\Models\User');
-//    }
-//
-//    public function categories()
-//    {
-//        return $this->belongsToMany('Modules\Blog\Entities\Category', 'blog_categories_posts', 'post_id', 'category_id'); //phpcs:ignore
-//    }
-//
-//    public function tags()
-//    {
-//        return $this->belongsToMany('Modules\Blog\Entities\Tag', 'blog_posts_tags', 'post_id', 'tag_id');
-//    }
-//
 
     public function user()
     {

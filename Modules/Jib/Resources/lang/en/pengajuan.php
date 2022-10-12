@@ -1,23 +1,30 @@
 <?php
 return [
-    'manage_pengajuan' => 'Manage pengajuan',
-    'pengajuan_list' => 'List of pengajuan',
-    'pengajuan_detail' => 'Pengajuan Detail',
+    'manage_pengajuan' => 'Manage pengajuan JIB',
+    'pengajuan_list' => 'List of pengajuan JIB',
+    'pengajuan_detail' => 'Pengajuan JIB Detail',
 
     'initiaor_label' => 'Initiator',
     'segment_label' => 'Segment',
     'customer_label' => 'Customer',
-    'kegiatan_label' => 'Kegiatan',
+    'kegiatan_label' => 'Nama Kegiatan',
     'drp_label' => 'No DRP',
     'kategori_label' => 'Kategori',
     'nilai_capex_label' => 'Nilai CAPEX',
     'est_rev__label' => 'Est Rev',
     'irr_label' => 'IRR',
+    'npv_label' => 'NPV',
+    'pbp_label' => 'PBP',
+    'bcr_label' => 'BCR',
     'persubmit_label' => 'Periode Submit',
     'perclose_label' => 'Periode Close',
     'status_label' => 'Status',
     'submitby_label' => 'Submit By',
     'action_label' => 'Action',
+
+    'select_segment_label' => 'Select Segmnet',
+    'select_customer_label' => 'Select Customer',
+    'select_kategori_label' => 'Select Kategori',
 
     'btn_create_label' => 'Create',
     'btn_show_label' => 'Show',
@@ -32,8 +39,8 @@ return [
 
     'updated_at_label' => 'Last Update',
     'publish_date_label' => 'Publish Date',
-    'pengajuan_add_new' => 'New pengajuan',
-    'pengajuan_update' => 'Update pengajuan',
+    'pengajuan_add_new' => 'New pengajuan JIB',
+    'pengajuan_update' => 'Update pengajuan JIB',
     'add_card_title' => 'Add New pengajuan',
     'update_card_title' => 'Update pengajuan',
 
