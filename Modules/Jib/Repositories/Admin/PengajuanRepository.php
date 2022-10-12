@@ -78,28 +78,63 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //
     public function findById($id)
     {
-        return Pengajuan::findOrFail($id);
+        return Pengajuan::with('msegments','mcustomers','mcategories','mstatuses','users','minitiators')->findOrFail($id);
     }
-//
-//    public function create($params = [])
-//    {
+
+    public function create($params = [])
+    {
 //        $params['user_id'] = auth()->user()->id;
-//        $params['post_type'] = Post::POST;
-//        $params['slug'] = Str::slug($params['title']);
-//        $params['code'] = $this->generateCode();
-//        $params = array_merge($params, $this->buildMetaParams($params));
+//        $params['post_type'] = Pengajuan::POST;
+//        $params['initiator_id'] = $params['initiator_id'];
+////        $params['slug'] = Str::slug($params['title']);
+////        $params['code'] = $this->generateCode();
+////        $params = array_merge($params, $this->buildMetaParams($params));
 //
 //        return DB::transaction(function () use ($params) {
-//            if ($post = Post::create($params)) {
-//                $this->setFeaturedImage($post, $params);
-//                $this->syncCategories($post, $params);
-//                $this->syncTags($post, $params);
+//            if ($post = Pengajuan::create($params)) {
+////                $this->setFeaturedImage($post, $params);
+////                $this->syncCategories($post, $params);
+////                $this->syncTags($post, $params);
 //
 //                return $post;
 //            }
 //        });
-//    }
-//
+        if ($params['kategori_id'] == 1) {
+            $pengajaun = new Pengajuan();
+            $pengajaun->initiator_id = $params['initiator_id'];
+            $pengajaun->kategori_id = $params['kategori_id'];
+            $pengajaun->nama_posisi = $params['nama_posisi'];
+            $pengajaun->nama_sub_unit = $params['nama_sub_unit'];
+            $pengajaun->kegiatan = $params['kegiatan_1'];
+            $pengajaun->segment_id = $params['segment_id_1'];
+            $pengajaun->customer_id = $params['customer_id_1'];
+            $pengajaun->no_drp = $params['no_drp_1'];
+            $pengajaun->nilai_capex = $params['nilai_capex_1'];
+            $pengajaun->est_revenue = $params['est_revenue'];
+            $pengajaun->irr = $params['irr'];
+            $pengajaun->npv = $params['npv'];
+            $pengajaun->pbp = $params['pbp'];
+            $pengajaun->status_id = 1;
+            $pengajaun->user_id = auth()->user()->id;
+            return $pengajaun->save();
+        } else{
+            $pengajaun = new Pengajuan();
+            $pengajaun->initiator_id = $params['initiator_id'];
+            $pengajaun->kategori_id = $params['kategori_id'];
+            $pengajaun->nama_posisi = $params['nama_posisi'];
+            $pengajaun->nama_sub_unit = $params['nama_sub_unit'];
+            $pengajaun->kegiatan = $params['kegiatan_2'];
+            $pengajaun->segment_id = $params['segment_id_2'];
+            $pengajaun->customer_id = $params['customer_id_2'];
+            $pengajaun->no_drp = $params['no_drp_2'];
+            $pengajaun->nilai_capex = $params['nilai_capex_2'];
+            $pengajaun->bcr = $params['bcr'];
+            $pengajaun->status_id = 1;
+            $pengajaun->user_id = auth()->user()->id;
+            return $pengajaun->save();
+        }
+    }
+
 //    /**
 //     * Generate order code
 //     *

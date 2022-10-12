@@ -1,7 +1,7 @@
 @if ($errors->any())
     <div class="alert alert-warning">
         <div class="alert-title">Whoops!</div>
-        @lang('general.validation_error_message')
+        @lang('jib::general.validation_error_message')
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

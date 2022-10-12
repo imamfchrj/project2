@@ -69,6 +69,7 @@
         <!-- Template JS File -->
         <script src="{{ asset('admin/stisla/assets/js/scripts.js') }}"></script>
         <script src="{{ asset('admin/stisla/assets/js/custom.js') }}"></script>
+        <script src="{{ asset('js/pengajuan.js') }}"></script>
         <script>
             $(document).ready(function() {
                 $('.select2').select2();
@@ -78,13 +79,6 @@
 
             });
         </script>
-        {{--<script>--}}
-        {{--$("#pengajuan").DataTable({--}}
-        {{--scrollY: 100,--}}
-        {{--scrollX: true,--}}
-        {{--scrollCollapse: true,--}}
-        {{--});--}}
-        {{--</script>--}}
 
         <!-- Page Specific JS File -->
         @if ($currentAdminMenu && $currentAdminMenu == 'dashboard')
