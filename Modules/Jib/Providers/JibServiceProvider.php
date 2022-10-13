@@ -15,6 +15,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\CustomerRepository;
 use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
 use Modules\Jib\Repositories\Admin\KategoriRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Jib\Repositories\Admin\PemeriksaRepository;
 
 class JibServiceProvider extends ServiceProvider
 {
@@ -147,6 +149,11 @@ class JibServiceProvider extends ServiceProvider
         $this->app->bind(
             KategoriRepositoryInterface::class,
             KategoriRepository::class
+        );
+
+        $this->app->bind(
+            PemeriksaRepositoryInterface::class,
+            PemeriksaRepository::class
         );
 
     }
