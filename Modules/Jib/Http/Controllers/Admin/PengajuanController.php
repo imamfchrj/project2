@@ -13,6 +13,7 @@ use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 
 use App\Authorizable;
 
@@ -24,13 +25,15 @@ class PengajuanController extends JibController
              $initiatorRepository,
              $segmentRepository,
              $customerRepository,
-             $kategoriRepository;
+             $kategoriRepository,
+             $pemeriksaRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 InitiatorRepositoryInterface $initiatorRepository,
                                 SegmentRepositoryInterface $segmentRepository,
                                 CustomerRepositoryInterface $customerRepository,
-                                KategoriRepositoryInterface $kategoriRepository)
+                                KategoriRepositoryInterface $kategoriRepository,
+                                PemeriksaRepositoryInterface $pemeriksaRepository)
     {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'pengajuan';
@@ -40,6 +43,7 @@ class PengajuanController extends JibController
         $this->segmentRepository = $segmentRepository;
         $this->customerRepository = $customerRepository;
         $this->kategoriRepository = $kategoriRepository;
+        $this->pemeriksaRepository = $pemeriksaRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -65,6 +69,8 @@ class PengajuanController extends JibController
         $this->data['pengajuan'] = $this->pengajuanRepository->findAll($options);
 //        dd($this->data['pengajuan']);
         $this->data['filter'] = $params;
+        $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
+        $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');
         return view('jib::admin.pengajuan.index',$this->data);
     }
 
@@ -115,6 +121,7 @@ class PengajuanController extends JibController
         $params = $request->validated();
 
         if ($pengajuan = $this->pengajuanRepository->create($params)) {
+//            $pemeriksa = $this->pemeriksaRepository->create();
             return redirect('admin/jib/pengajuan')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }

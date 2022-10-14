@@ -7,17 +7,28 @@ use DB;
 
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Entities\Pengajuan;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Jib\Entities\Reviewer;
+
 //use Modules\Blog\Entities\Tag;
 
 class PengajuanRepository implements PengajuanRepositoryInterface
 {
+    private $pemeriksaRepository;
+
+    public function __construct(PemeriksaRepositoryInterface $pemeriksaRepository)
+    {
+        $this->pemeriksaRepository = $pemeriksaRepository;
+    }
+
     public function findAll($options = [])
     {
         $perPage = $options['per_page'] ?? null;
         $orderByFields = $options['order'] ?? [];
 
 //        $pengajuan = (new Pengajuan())->with('user');
-        $pengajuan = (new Pengajuan())->with('msegments','mcustomers','mcategories','mstatuses','users','minitiators');
+        $pengajuan = (new Pengajuan())
+                ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators');
 
         if ($orderByFields) {
             foreach ($orderByFields as $field => $sort) {
@@ -29,6 +40,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
                 $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
+//                    ->orWhere('name', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
@@ -37,10 +49,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->where('status_id', $options['filter']['status']);
         }
 
+        if (!empty($options['filter']['segment'])) {
+            $pengajuan = $pengajuan->where('segment_id', $options['filter']['segment']);
+        }
+
+        if (!empty($options['filter']['customer'])) {
+            $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
+        }
+
+
         if ($perPage) {
             return $pengajuan->paginate($perPage);
         }
-        
+
         return $pengajuan->get();
     }
 
@@ -49,7 +70,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $perPage = $options['per_page'] ?? null;
         $orderByFields = $options['order'] ?? [];
 
-        $pengajuan = (new Pengajuan())->onlyTrashed()->with('msegments','mcustomers','mcategories','mstatuses','users','minitiators');
+        $pengajuan = (new Pengajuan())->onlyTrashed()
+            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators');
 
         if ($orderByFields) {
             foreach ($orderByFields as $field => $sort) {
@@ -75,10 +97,12 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
         return $pengajuan->get();
     }
+
 //
     public function findById($id)
     {
-        return Pengajuan::with('msegments','mcustomers','mcategories','mstatuses','users','minitiators')->findOrFail($id);
+        return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
+                ->findOrFail($id);
     }
 
     public function create($params = [])
@@ -100,38 +124,88 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //            }
 //        });
         if ($params['kategori_id'] == 1) {
-            $pengajaun = new Pengajuan();
-            $pengajaun->initiator_id = $params['initiator_id'];
-            $pengajaun->kategori_id = $params['kategori_id'];
-            $pengajaun->nama_posisi = $params['nama_posisi'];
-            $pengajaun->nama_sub_unit = $params['nama_sub_unit'];
-            $pengajaun->kegiatan = $params['kegiatan_1'];
-            $pengajaun->segment_id = $params['segment_id_1'];
-            $pengajaun->customer_id = $params['customer_id_1'];
-            $pengajaun->no_drp = $params['no_drp_1'];
-            $pengajaun->nilai_capex = $params['nilai_capex_1'];
-            $pengajaun->est_revenue = $params['est_revenue'];
-            $pengajaun->irr = $params['irr'];
-            $pengajaun->npv = $params['npv'];
-            $pengajaun->pbp = $params['pbp'];
-            $pengajaun->status_id = 1;
-            $pengajaun->user_id = auth()->user()->id;
-            return $pengajaun->save();
-        } else{
-            $pengajaun = new Pengajuan();
-            $pengajaun->initiator_id = $params['initiator_id'];
-            $pengajaun->kategori_id = $params['kategori_id'];
-            $pengajaun->nama_posisi = $params['nama_posisi'];
-            $pengajaun->nama_sub_unit = $params['nama_sub_unit'];
-            $pengajaun->kegiatan = $params['kegiatan_2'];
-            $pengajaun->segment_id = $params['segment_id_2'];
-            $pengajaun->customer_id = $params['customer_id_2'];
-            $pengajaun->no_drp = $params['no_drp_2'];
-            $pengajaun->nilai_capex = $params['nilai_capex_2'];
-            $pengajaun->bcr = $params['bcr'];
-            $pengajaun->status_id = 1;
-            $pengajaun->user_id = auth()->user()->id;
-            return $pengajaun->save();
+            // Insert Pengajuan
+            $pengajuan = new Pengajuan();
+            $pengajuan->initiator_id = $params['initiator_id'];
+            $pengajuan->kategori_id = $params['kategori_id'];
+            $pengajuan->nama_posisi = $params['nama_posisi'];
+            $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+            $pengajuan->kegiatan = $params['kegiatan_1'];
+            $pengajuan->segment_id = $params['segment_id_1'];
+            $pengajuan->customer_id = $params['customer_id_1'];
+            $pengajuan->no_drp = $params['no_drp_1'];
+            $pengajuan->nilai_capex = $params['nilai_capex_1'];
+            $pengajuan->est_revenue = $params['est_revenue'];
+            $pengajuan->irr = $params['irr'];
+            $pengajuan->npv = $params['npv'];
+            $pengajuan->pbp = $params['pbp'];
+            $pengajuan->status_id = 1;
+            $pengajuan->user_id = auth()->user()->id;
+            $pengajuan->save();
+
+            // insert M review
+            if ($pengajuan) {
+                if ($params['nilai_capex_2'] <= 3000000000) {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                    $reviewer=[];
+                    foreach ($pemeriksa as $pem) {
+                        $last_status = "";
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                }
+            }
+
+
+        } else {
+            // Insert Pengajuan
+            $pengajuan = new Pengajuan();
+            $pengajuan->initiator_id = $params['initiator_id'];
+            $pengajuan->kategori_id = $params['kategori_id'];
+            $pengajuan->nama_posisi = $params['nama_posisi'];
+            $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+            $pengajuan->kegiatan = $params['kegiatan_2'];
+            $pengajuan->segment_id = $params['segment_id_2'];
+            $pengajuan->customer_id = $params['customer_id_2'];
+            $pengajuan->no_drp = $params['no_drp_2'];
+            $pengajuan->nilai_capex = $params['nilai_capex_2'];
+            $pengajuan->bcr = $params['bcr'];
+            $pengajuan->status_id = 1;
+            $pengajuan->user_id = auth()->user()->id;
+            $pengajuan->save();
+
+            // insert M review
+            if ($pengajuan) {
+                if ($params['nilai_capex_2'] <= 3000000000) {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                    $reviewer=[];
+                    foreach ($pemeriksa as $pem) {
+                       $last_status = "";
+                       if ($pem->urutan == 1) {
+                           $last_status = "OPEN";
+                       } else {
+                           $last_status = "QUEUE";
+                       }
+                       $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                }
+            }
         }
     }
 
@@ -229,7 +303,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //
     public function delete($id, $permanentDelete = false)
     {
-        $pengajuan  = Pengajuan::withTrashed()->findOrFail($id);
+        $pengajuan = Pengajuan::withTrashed()->findOrFail($id);
 //        dd($pengajuan);
         $this->checkUserCanDeletePost($pengajuan);
 
@@ -260,7 +334,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
     public function restore($id)
     {
-        $pengajuan  = Pengajuan::withTrashed()->findOrFail($id);
+        $pengajuan = Pengajuan::withTrashed()->findOrFail($id);
         if ($pengajuan->trashed()) {
             return $pengajuan->restore();
         }

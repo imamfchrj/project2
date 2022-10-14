@@ -51,13 +51,6 @@ class PengajuanRequest extends FormRequest
             'nilai_capex_2' => '',
             'bcr' => '',
             'file_jib_2' => '',
-//            'title' => $title,
-//            'excerpt' => '',
-//            'body' => '',
-//            'status' => '',
-//            'publish_date' => '',
-//            'tags' => '',
-//            'categories' => '',
 //            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
     }

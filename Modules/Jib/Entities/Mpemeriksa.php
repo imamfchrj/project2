@@ -14,6 +14,7 @@ class Mpemeriksa extends Model
         'nik',
         'nama',
         'urutan',
+        'initiator_id',
         'objid_posisi',
         'nama_posisil',
         'is_active',
