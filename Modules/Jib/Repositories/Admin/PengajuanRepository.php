@@ -49,6 +49,15 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->where('status_id', $options['filter']['status']);
         }
 
+        if (!empty($options['filter']['segment'])) {
+            $pengajuan = $pengajuan->where('segment_id', $options['filter']['segment']);
+        }
+
+        if (!empty($options['filter']['customer'])) {
+            $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
+        }
+
+
         if ($perPage) {
             return $pengajuan->paginate($perPage);
         }

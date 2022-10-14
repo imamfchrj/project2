@@ -22,7 +22,7 @@ return [
     'submitby_label' => 'Submit By',
     'action_label' => 'Action',
 
-    'select_segment_label' => 'Select Segmnet',
+    'select_segment_label' => 'Select Segment',
     'select_customer_label' => 'Select Customer',
     'select_kategori_label' => 'Select Kategori',
 
@@ -35,7 +35,7 @@ return [
     'btn_delete_label' => 'Delete',
     'btn_delete_permanent_label' => 'Delete Permanently',
     'btn_restore_label' => 'Restore',
-    'btn_show_trashed_label' => 'View Trashed',
+    'btn_show_trashed_label' => 'JIB Deleted',
 
     'updated_at_label' => 'Last Update',
     'publish_date_label' => 'Publish Date',

@@ -52,16 +52,17 @@ class Pengajuan extends Model
         return \Modules\Jib\Database\factories\PengajuanFactory::new();
     }
 
+    // const filter status
     public const REVIEWER_1 = 1;
     public const REVIEWER_2 = 2;
     public const APPROVAL_1 = 3;
     public const APPROVAL_2 = 4;
     public const APPROVAL_3 = 5;
     public const SELESAI = 6;
-//
+
     public const POST = 'post';
 //    public const PAGE = 'page';
-//
+
     public const STATUSES = [
         self::REVIEWER_1 => 'Reviewer 1',
         self::REVIEWER_2 => 'Reviewer 2',

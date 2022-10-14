@@ -32,8 +32,8 @@
                                     <th>@lang('jib::pengajuan.drp_label')</th>
                                     <th>@lang('jib::pengajuan.kategori_label')</th>
                                     <th>@lang('jib::pengajuan.nilai_capex_label')</th>
-                                    <th>@lang('jib::pengajuan.est_rev__label')</th>
-                                    <th>@lang('jib::pengajuan.irr_label')</th>
+                                    {{--<th>@lang('jib::pengajuan.est_rev__label')</th>--}}
+                                    {{--<th>@lang('jib::pengajuan.irr_label')</th>--}}
                                     {{--<th>@lang('jib::pengajuan.persubmit_label')</th>--}}
                                     {{--<th>@lang('jib::pengajuan.perclose_label')</th>--}}
                                     <th>@lang('jib::pengajuan.status_label')</th>
@@ -51,8 +51,8 @@
                                             <td>{{ $peng->no_drp }}</td>
                                             <td>{{ $peng->mcategories->name }}</td>
                                             <td>{{ number_format($peng->nilai_capex) }}</td>
-                                            <td>{{ number_format($peng->est_revenue) }}</td>
-                                            <td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>
+                                            {{--<td>{{ number_format($peng->est_revenue) }}</td>--}}
+                                            {{--<td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>--}}
                                             {{--<td>{{ $peng->periode_up }}</td>--}}
                                             {{--<td>{{ $peng->periode_end }}</td>--}}
                                             <td>{{ $peng->mstatuses->name }}</td>
@@ -87,12 +87,12 @@
                                                                     class="far fa-eye"></i> @lang('jib::pengajuan.btn_show_label')
                                                         </a>
                                                     @endcan
-                                                    @can('edit_jib-pengajuan')
-                                                        <a class="btn btn-sm btn-success"
-                                                           href="{{ url('admin/jib/pengajuan/'. $peng->id .'/edit')}}"><i
-                                                                    class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
-                                                        </a>
-                                                    @endcan
+                                                    {{--@can('edit_jib-pengajuan')--}}
+                                                        {{--<a class="btn btn-sm btn-success"--}}
+                                                           {{--href="{{ url('admin/jib/pengajuan/'. $peng->id .'/edit')}}"><i--}}
+                                                                    {{--class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')--}}
+                                                        {{--</a>--}}
+                                                    {{--@endcan--}}
                                                     @can('delete_jib-pengajuan')
                                                         <a href="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
                                                            class="btn btn-sm btn-warning" onclick="
