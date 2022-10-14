@@ -24,7 +24,7 @@ class Role extends SpatieRole
 //    protected $keyType = 'string';
 //    public $incrementing = false;
 
-    const ADMIN = 'Admin';
+    const ADMIN = 'Superadmin';
 
     public function getCreatedAtFormattedAttribute()
     {
