@@ -174,6 +174,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 if (!empty($params['note'])) {
                     $review = new Review();
                     $review->pengajuan_id = $pengajuan->id;
+                    $review->nik_gsd = auth()->user()->nik_gsd;
+                    $review->nama_karyawan = auth()->user()->name;
                     $review->status = 'SUBMIT';
                     $review->notes = $params['note'];
                     $review->save();
@@ -237,10 +239,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
                 ->orderBy('id', 'DESC')
                 ->first();
-            $last_number = $last_pegnajuan->number;
-            if (empty($last_number)) {
+            if (empty($last_pegnajuan)) {
                 $new_number = sprintf("%05d", 00001);
             } else {
+                $last_number = $last_pegnajuan->number;
                 $new_numbers = $last_number + 1;
                 $new_number = sprintf("%05d", $new_numbers);
             }
@@ -273,6 +275,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 if (!empty($params['note'])) {
                     $review = new Review();
                     $review->pengajuan_id = $pengajuan->id;
+                    $review->nik_gsd = auth()->user()->nik_gsd;
+                    $review->nama_karyawan = auth()->user()->name;
                     $review->status = 'SUBMIT';
                     $review->notes = $params['note'];
                     $review->save();
