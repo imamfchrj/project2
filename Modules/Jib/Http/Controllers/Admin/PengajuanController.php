@@ -61,7 +61,6 @@ class PengajuanController extends JibController
     public function index(Request $request)
     {
         $params = $request->all();
-
         $options = [
             'per_page' => $this->perPage,
             'order' => [
@@ -69,9 +68,7 @@ class PengajuanController extends JibController
             ],
             'filter' => $params,
         ];
-
         $this->data['pengajuan'] = $this->pengajuanRepository->findAll($options);
-//        dd($this->data['pengajuan']);
         $this->data['filter'] = $params;
         $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
         $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');

@@ -29,7 +29,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
 //        $pengajuan = (new Pengajuan())->with('user');
         $pengajuan = (new Pengajuan())
-            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators');
+            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa');
 
         if ($orderByFields) {
             foreach ($orderByFields as $field => $sort) {
@@ -187,12 +187,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -204,12 +208,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -221,12 +229,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -288,12 +300,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -305,12 +321,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -322,12 +342,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];

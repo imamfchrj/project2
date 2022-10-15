@@ -81,7 +81,7 @@
                                             {{--<td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>--}}
                                             {{--<td>{{ $peng->periode_up }}</td>--}}
                                             {{--<td>{{ $peng->periode_end }}</td>--}}
-                                            <td>{{ $peng->mstatuses->name }}</td>
+                                            <td>{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</td>
                                             {{--<td>{{ $peng->users->name }}</td>--}}
                                             <td>
                                                 @if ($peng->trashed())
