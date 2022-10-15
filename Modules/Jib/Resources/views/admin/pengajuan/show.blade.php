@@ -80,8 +80,7 @@
                                 <Label>@lang('jib::pengajuan.est_rev__label')</Label>
                             </div>
                             <div class="col-md-10">
-                                {{--: {{ number_format($pengajuan->est_revenue) }}--}}
-                                : {{ !empty($pengajuan->est_revenue) ? $pengajuan->est_revenue : "-" }}
+                                : {{ number_format($pengajuan->est_revenue) }}
                             </div>
                         </div>
                         <div class="form-row">

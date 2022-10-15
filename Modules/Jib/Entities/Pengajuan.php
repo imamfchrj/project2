@@ -107,6 +107,11 @@ class Pengajuan extends Model
         return $this->belongsTo('Modules\Jib\Entities\Mstatus', 'status_id', 'id');
     }
 
+    public function mpemeriksa()
+    {
+        return $this->belongsTo('Modules\Jib\Entities\Mpemeriksa', 'pemeriksa_id', 'id');
+    }
+
     public function getUpdatedAtFormattedAttribute()
     {
         return Carbon::parse($this->attributes['updated_at'])->format('d, M Y H:i:s');

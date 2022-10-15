@@ -14,6 +14,7 @@ use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 
 use App\Authorizable;
 
@@ -26,6 +27,7 @@ class PengajuanController extends JibController
              $segmentRepository,
              $customerRepository,
              $kategoriRepository,
+             $reviewRepository,
              $pemeriksaRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
@@ -33,6 +35,7 @@ class PengajuanController extends JibController
                                 SegmentRepositoryInterface $segmentRepository,
                                 CustomerRepositoryInterface $customerRepository,
                                 KategoriRepositoryInterface $kategoriRepository,
+                                ReviewRepositoryInterface $reviewRepository,
                                 PemeriksaRepositoryInterface $pemeriksaRepository)
     {
         parent::__construct();
@@ -44,6 +47,7 @@ class PengajuanController extends JibController
         $this->customerRepository = $customerRepository;
         $this->kategoriRepository = $kategoriRepository;
         $this->pemeriksaRepository = $pemeriksaRepository;
+        $this->reviewRepository = $reviewRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -57,7 +61,6 @@ class PengajuanController extends JibController
     public function index(Request $request)
     {
         $params = $request->all();
-
         $options = [
             'per_page' => $this->perPage,
             'order' => [
@@ -65,12 +68,13 @@ class PengajuanController extends JibController
             ],
             'filter' => $params,
         ];
-
         $this->data['pengajuan'] = $this->pengajuanRepository->findAll($options);
-//        dd($this->data['pengajuan']);
         $this->data['filter'] = $params;
         $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
         $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');
+        $this->data['count_review'] = $this->pengajuanRepository->count_review();
+        $this->data['count_approval'] = $this->pengajuanRepository->count_approval();
+        $this->data['count_closed'] = $this->pengajuanRepository->count_closed();
         return view('jib::admin.pengajuan.index',$this->data);
     }
 
@@ -135,10 +139,15 @@ class PengajuanController extends JibController
      */
     public function show($id)
     {
-//        return view('jib::show');
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
-        return view('jib::admin.pengajuan.show', $this->data);
+        if ($this->data['pengajuan']->kategori_id == 1) {
+            return view('jib::admin.pengajuan.show_bisnis', $this->data);
+        } else {
+            return view('jib::admin.pengajuan.show_support', $this->data);
+        }
+
     }
 
     /**

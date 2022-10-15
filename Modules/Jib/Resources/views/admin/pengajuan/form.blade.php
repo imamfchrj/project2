@@ -64,7 +64,7 @@
                                     </select>
                                     * bisnis : <br>* support :
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('kategori_id')
                                 <div class="invalid-feedback">
                                 {{ $message }}
                                 </div>
@@ -78,15 +78,14 @@
                             <h4> BISNIS </h4>
                         </div>
                         <div class="card-body">
-                            @include('jib::admin.shared.flash')
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kegiatan_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="kegiatan_1"
-                                           class="form-control @error('kegiatan') is-invalid @enderror @if (!$errors->has('kegiatan') && old('kegiatan')) is-valid @endif"
-                                           value="{{ old('kegiatan', !empty($pengajuan) ? $pengajuan->kegiatan : null) }}">
+                                           class="form-control @error('kegiatan_1') is-invalid @enderror @if (!$errors->has('kegiatan_1') && old('kegiatan_1')) is-valid @endif"
+                                           value="{{ old('kegiatan_1', !empty($pengajuan) ? $pengajuan->kegiatan : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('kegiatan_1')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -95,49 +94,23 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" name="segment_id_1">
-                                        <option>@lang('jib::pengajuan.select_segment_label')</option>
-
-                                        @foreach ($segment as $key => $value)
-                                            <option value="{{ $key }}" {{ $key == $segment_id ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                {!! Form::select('segment_id_1', $segment, !empty($pengajuan->segment_id) ? $pengajuan->segment_id : old('segment_id_1'), ['class' => 'form-control', 'placeholder' => '-- Select Segment --']) !!}
                                 </div>
-                                @error('nama_sub_unit')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" name="customer_id_1">
-                                        <option>@lang('jib::pengajuan.select_customer_label')</option>
-
-                                        @foreach ($customer as $key => $value)
-                                            <option value="{{ $key }}" {{ $key == $customer_id ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    {!! Form::select('customer_id_1', $customer, !empty($pengajuan->customer_id) ? $pengajuan->customer_id : old('customer_id_1'), ['class' => 'form-control', 'placeholder' => '-- Select Customer --']) !!}
                                 </div>
-                                @error('nama_sub_unit')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_1"
-                                           class="form-control @error('no_drp') is-invalid @enderror @if (!$errors->has('no_drp') && old('no_drp')) is-valid @endif"
-                                           value="{{ old('no_drp', !empty($pengajuan) ? $pengajuan->no_drp : null) }}">
+                                           class="form-control @error('no_drp_1') is-invalid @enderror @if (!$errors->has('no_drp_1') && old('no_drp_1')) is-valid @endif"
+                                           value="{{ old('no_drp_1', !empty($pengajuan) ? $pengajuan->no_drp : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('no_drp_1')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -147,10 +120,10 @@
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="nilai_capex_1"
-                                           class="form-control @error('nilai_capex') is-invalid @enderror @if (!$errors->has('nilai_capex') && old('nilai_capex')) is-valid @endif"
-                                           value="{{ old('nilai_capex', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
+                                           class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"
+                                           value="{{ old('nilai_capex_1', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('nilai_capex_1')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -163,7 +136,7 @@
                                            class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
                                            value="{{ old('est_revenue', !empty($pengajuan) ? $pengajuan->est_revenue : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('est_revenue')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -176,7 +149,7 @@
                                            class="form-control @error('irr') is-invalid @enderror @if (!$errors->has('irr') && old('irr')) is-valid @endif"
                                            value="{{ old('irr', !empty($pengajuan) ? $pengajuan->irr : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('irr')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -189,7 +162,7 @@
                                            class="form-control @error('npv') is-invalid @enderror @if (!$errors->has('npv') && old('npv')) is-valid @endif"
                                            value="{{ old('npv', !empty($pengajuan) ? $pengajuan->npv : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('npv')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -202,7 +175,7 @@
                                            class="form-control @error('pbp') is-invalid @enderror @if (!$errors->has('pbp') && old('pbp')) is-valid @endif"
                                            value="{{ old('pbp', !empty($pengajuan) ? $pengajuan->pbp : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('pbp')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -216,7 +189,7 @@
                                     @endif
                                     <input type="file" name="file_jib_1" class="form-control"/>
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('file_jib_1')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -229,15 +202,14 @@
                             <h4> SUPPORT </h4>
                         </div>
                         <div class="card-body">
-                            @include('jib::admin.shared.flash')
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kegiatan_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="kegiatan_2"
-                                           class="form-control @error('kegiatan') is-invalid @enderror @if (!$errors->has('kegiatan') && old('kegiatan')) is-valid @endif"
-                                           value="{{ old('kegiatan', !empty($pengajuan) ? $pengajuan->kegiatan : null) }}">
+                                           class="form-control @error('kegiatan_2') is-invalid @enderror @if (!$errors->has('kegiatan_2') && old('kegiatan_2')) is-valid @endif"
+                                           value="{{ old('kegiatan_2', !empty($pengajuan) ? $pengajuan->kegiatan : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('kegiatan_2')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -246,49 +218,23 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" name="segment_id_2">
-                                        <option>@lang('jib::pengajuan.select_segment_label')</option>
-
-                                        @foreach ($segment as $key => $value)
-                                            <option value="{{ $key }}" {{ $key == $segment_id ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    {!! Form::select('segment_id_2', $segment, !empty($pengajuan->segment_id) ? $pengajuan->segment_id : old('segment_id_2'), ['class' => 'form-control', 'placeholder' => '-- Select Segment --']) !!}
                                 </div>
-                                @error('nama_sub_unit')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" name="customer_id_2">
-                                        <option>@lang('jib::pengajuan.select_customer_label')</option>
-
-                                        @foreach ($customer as $key => $value)
-                                            <option value="{{ $key }}" {{ $key == $customer_id ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ? $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control', 'placeholder' => '-- Select Customer --']) !!}
                                 </div>
-                                @error('nama_sub_unit')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_2"
-                                           class="form-control @error('no_drp') is-invalid @enderror @if (!$errors->has('no_drp') && old('no_drp')) is-valid @endif"
-                                           value="{{ old('no_drp', !empty($pengajuan) ? $pengajuan->no_drp : null) }}">
+                                           class="form-control @error('no_drp_2') is-invalid @enderror @if (!$errors->has('no_drp_2') && old('no_drp_2')) is-valid @endif"
+                                           value="{{ old('no_drp_2', !empty($pengajuan) ? $pengajuan->no_drp : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('no_drp_2')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -298,10 +244,10 @@
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="nilai_capex_2"
-                                           class="form-control @error('nilai_capex') is-invalid @enderror @if (!$errors->has('nilai_capex') && old('nilai_capex')) is-valid @endif"
-                                           value="{{ old('nilai_capex', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
+                                           class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"
+                                           value="{{ old('nilai_capex_2', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('nilai_capex_2')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -314,7 +260,7 @@
                                            class="form-control @error('bcr') is-invalid @enderror @if (!$errors->has('bcr') && old('bcr')) is-valid @endif"
                                            value="{{ old('bcr', !empty($pengajuan) ? $pengajuan->bcr : null) }}">
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('bcr')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -328,7 +274,7 @@
                                     @endif
                                     <input type="file" name="file_jib_2" class="form-control"/>
                                 </div>
-                                @error('nama_sub_unit')
+                                @error('file_jib_2')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -356,8 +302,6 @@
                             </div>
                         </div>
                         <div class="card-footer text-left">
-                            {{--<button--}}
-                            {{--class="btn btn-primary">{{ empty($pengajuan) ? __('jib::general.btn_draft_label') : __('jib::general.btn_update_label') }}</button>--}}
                             <button
                                     class="btn btn-primary">{{ empty($pengajuan) ? __('jib::general.btn_create_label') : __('jib::general.btn_update_label') }}</button>
                         </div>

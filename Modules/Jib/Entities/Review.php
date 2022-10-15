@@ -29,4 +29,5 @@ class Review extends Model
     {
         return \Modules\Jib\Database\factories\ReviewFactory::new();
     }
+
 }

@@ -29,7 +29,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
 //        $pengajuan = (new Pengajuan())->with('user');
         $pengajuan = (new Pengajuan())
-            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators');
+            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa');
 
         if ($orderByFields) {
             foreach ($orderByFields as $field => $sort) {
@@ -174,6 +174,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 if (!empty($params['note'])) {
                     $review = new Review();
                     $review->pengajuan_id = $pengajuan->id;
+                    $review->nik_gsd = auth()->user()->nik_gsd;
+                    $review->nama_karyawan = auth()->user()->name;
                     $review->status = 'SUBMIT';
                     $review->notes = $params['note'];
                     $review->save();
@@ -185,12 +187,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -202,12 +208,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -219,12 +229,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -237,10 +251,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
                 ->orderBy('id', 'DESC')
                 ->first();
-            $last_number = $last_pegnajuan->number;
-            if (empty($last_number)) {
+            if (empty($last_pegnajuan)) {
                 $new_number = sprintf("%05d", 00001);
             } else {
+                $last_number = $last_pegnajuan->number;
                 $new_numbers = $last_number + 1;
                 $new_number = sprintf("%05d", $new_numbers);
             }
@@ -273,6 +287,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 if (!empty($params['note'])) {
                     $review = new Review();
                     $review->pengajuan_id = $pengajuan->id;
+                    $review->nik_gsd = auth()->user()->nik_gsd;
+                    $review->nama_karyawan = auth()->user()->name;
                     $review->status = 'SUBMIT';
                     $review->notes = $params['note'];
                     $review->save();
@@ -284,12 +300,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -301,12 +321,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -318,12 +342,16 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
                         } else {
                             $last_status = "QUEUE";
                         }
                         $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
@@ -470,6 +498,21 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     public function getStatuses()
     {
         return Pengajuan::STATUSES;
+    }
+
+    public function count_review()
+    {
+        return Pengajuan::whereIn('status_id', array(1, 2))->get()->count();
+    }
+
+    public function count_approval()
+    {
+        return Pengajuan::whereIn('status_id', array(3, 4, 5))->get()->count();
+    }
+
+    public function count_closed()
+    {
+        return Pengajuan::whereIn('status_id', array(6))->get()->count();
     }
 //
 //    public function getMetaFields()
