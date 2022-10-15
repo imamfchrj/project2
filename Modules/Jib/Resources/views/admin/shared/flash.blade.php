@@ -11,7 +11,7 @@
 @endif
 
 @if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">@lang('jib::pengajuan.success_create_message')</div>
 @endif
 
 @if (session('error'))

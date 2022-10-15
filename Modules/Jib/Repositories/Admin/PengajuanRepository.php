@@ -123,16 +123,39 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //                return $post;
 //            }
 //        });
+
+        // Format Number JIB
+        $tahun = date('Y');
+        $array_bulan = array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+        $bulan = $array_bulan[date('n')];
+
         if ($params['kategori_id'] == 1) {
+            // FORMAT NUMBER BISNIS
+            $last_pegnajuan = Pengajuan::where('tahun',$tahun)->where('kategori_id',1)
+                ->orderBy('id', 'DESC')
+                ->first();
+            $last_number = $last_pegnajuan->number;
+            if (empty($last_number)) {
+                $new_number = sprintf("%05d", 00001);
+            } else {
+                $new_numbers = $last_number + 1;
+                $new_number = sprintf("%05d", $new_numbers);
+            }
+            $no_jib = $new_number.'/JIB/B/'.$bulan.'/'.$tahun;
+
             // Insert Pengajuan
             $pengajuan = new Pengajuan();
             $pengajuan->initiator_id = $params['initiator_id'];
             $pengajuan->kategori_id = $params['kategori_id'];
             $pengajuan->nama_posisi = $params['nama_posisi'];
             $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+            $pengajuan->tahun = $tahun;
+            $pengajuan->number = $new_number;
+            $pengajuan->jib_number = $no_jib;
             $pengajuan->kegiatan = $params['kegiatan_1'];
             $pengajuan->segment_id = $params['segment_id_1'];
             $pengajuan->customer_id = $params['customer_id_1'];
+            $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_1'];
             $pengajuan->nilai_capex = $params['nilai_capex_1'];
             $pengajuan->est_revenue = $params['est_revenue'];
@@ -141,6 +164,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->pbp = $params['pbp'];
             $pengajuan->status_id = 1;
             $pengajuan->user_id = auth()->user()->id;
+            $pengajuan->created_by = auth()->user()->id;
+            $pengajuan->updated_by = auth()->user()->name;
             $pengajuan->save();
 
             // insert M review
@@ -168,20 +193,38 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
 
         } else {
+            // FORMAT NUMBER SUPPORT
+            $last_pegnajuan = Pengajuan::where('tahun',$tahun)->where('kategori_id',2)
+                ->orderBy('id', 'DESC')
+                ->first();
+            $last_number = $last_pegnajuan->number;
+            if (empty($last_number)) {
+                $new_number = sprintf("%05d", 00001);
+            } else {
+                $new_numbers = $last_number + 1;
+                $new_number = sprintf("%05d", $new_numbers);
+            }
+            $no_jib = $new_number.'/JIB/S/'.$bulan.'/'.$tahun;
             // Insert Pengajuan
             $pengajuan = new Pengajuan();
             $pengajuan->initiator_id = $params['initiator_id'];
             $pengajuan->kategori_id = $params['kategori_id'];
             $pengajuan->nama_posisi = $params['nama_posisi'];
             $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+            $pengajuan->tahun = $tahun;
+            $pengajuan->number = $new_number;
+            $pengajuan->jib_number = $no_jib;
             $pengajuan->kegiatan = $params['kegiatan_2'];
             $pengajuan->segment_id = $params['segment_id_2'];
             $pengajuan->customer_id = $params['customer_id_2'];
+            $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
             $pengajuan->nilai_capex = $params['nilai_capex_2'];
             $pengajuan->bcr = $params['bcr'];
             $pengajuan->status_id = 1;
             $pengajuan->user_id = auth()->user()->id;
+            $pengajuan->created_by = auth()->user()->id;
+            $pengajuan->updated_by = auth()->user()->name;
             $pengajuan->save();
 
             // insert M review
