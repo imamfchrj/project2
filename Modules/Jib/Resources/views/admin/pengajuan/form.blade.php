@@ -26,6 +26,7 @@
             <h2 class="section-title">{{ empty($pengajuan) ? __('jib::pengajuan.pengajuan_add_new') : __('jib::pengajuan.pengajuan_update') }}</h2>
             <div class="row">
                 <div class="col-lg-12">
+                    <!-- CARD 1 -->
                     <div class="card">
                         <div class="card-header">
                             <h4>{{ empty($pengajuan) ? __('jib::pengajuan.add_card_title') : __('jib::pengajuan.update_card_title') }}</h4>
@@ -70,6 +71,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- CARD 2 -->
                     <div class="card hide" id="group-1">
                         <div class="card-header">
                             <h4> BISNIS </h4>
@@ -345,6 +347,22 @@
                             </div>
                         </div>
                     </div>
+                    <!-- END CARD 2 -->
+                    <!-- CARD 3 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Notes</h4>
+                        </div>
+                        {{--<div class="card-body">--}}
+                            {{--<div class="row">--}}
+                                {{--<div class="col-6">--}}
+                                    {{--@include('jib::admin.pengajuan._nested_pemeriksa', [])--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+                    </div>
+                    <!-- END CARD 3 -->
                 </div>
             </div>
         </div>
