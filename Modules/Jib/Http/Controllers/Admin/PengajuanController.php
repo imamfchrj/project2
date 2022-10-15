@@ -108,6 +108,7 @@ class PengajuanController extends JibController
         $this->data['customer_id'] = null;
         $this->data['kategori'] = $this->kategoriRepository->findAll()->pluck('name', 'id');
         $this->data['kategori_id'] = null;
+        $this->data['pemeriksa'] = $this->pemeriksaRepository->findAll();
         return view('jib::admin.pengajuan.form', $this->data);
     }
 
