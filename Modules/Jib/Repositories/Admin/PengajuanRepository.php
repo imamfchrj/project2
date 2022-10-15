@@ -7,6 +7,7 @@ use DB;
 
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Entities\Pengajuan;
+use Modules\Jib\Entities\Review;
 use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Entities\Reviewer;
 
@@ -28,7 +29,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
 //        $pengajuan = (new Pengajuan())->with('user');
         $pengajuan = (new Pengajuan())
-                ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators');
+            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators');
 
         if ($orderByFields) {
             foreach ($orderByFields as $field => $sort) {
@@ -102,7 +103,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     public function findById($id)
     {
         return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
-                ->findOrFail($id);
+            ->findOrFail($id);
     }
 
     public function create($params = [])
@@ -126,22 +127,22 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
         // Format Number JIB
         $tahun = date('Y');
-        $array_bulan = array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+        $array_bulan = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
         $bulan = $array_bulan[date('n')];
 
         if ($params['kategori_id'] == 1) {
-            // FORMAT NUMBER BISNIS
-            $last_pegnajuan = Pengajuan::where('tahun',$tahun)->where('kategori_id',1)
+            // Format Number Bisnis
+            $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 1)
                 ->orderBy('id', 'DESC')
                 ->first();
-            $last_number = $last_pegnajuan->number;
-            if (empty($last_number)) {
+            if (empty($last_pegnajuan)) {
                 $new_number = sprintf("%05d", 00001);
             } else {
+                $last_number = $last_pegnajuan->number;
                 $new_numbers = $last_number + 1;
                 $new_number = sprintf("%05d", $new_numbers);
             }
-            $no_jib = $new_number.'/JIB/B/'.$bulan.'/'.$tahun;
+            $no_jib = $new_number . '/JIB/B/' . $bulan . '/' . $tahun;
 
             // Insert Pengajuan
             $pengajuan = new Pengajuan();
@@ -168,13 +169,54 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->updated_by = auth()->user()->name;
             $pengajuan->save();
 
-            // insert M review
             if ($pengajuan) {
-                if ($params['nilai_capex_2'] <= 3000000000) {
+                // Insert Review
+                if (!empty($params['note'])) {
+                    $review = new Review();
+                    $review->pengajuan_id = $pengajuan->id;
+                    $review->status = 'SUBMIT';
+                    $review->notes = $params['note'];
+                    $review->save();
+                }
+                // Insert M_Reviewer
+                if ($params['nilai_capex_1'] <= 3000000000) {
                     $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                    $reviewer=[];
+                    $reviewer = [];
                     foreach ($pemeriksa as $pem) {
-                        $last_status = "";
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } elseif ($params['nilai_capex_1'] > 3000000000 && $params['nilai_capex_1'] <= 5000000000) {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } else {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
                         } else {
@@ -190,11 +232,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     return DB::table('jib_reviewer')->insert($reviewer);
                 }
             }
-
-
         } else {
             // FORMAT NUMBER SUPPORT
-            $last_pegnajuan = Pengajuan::where('tahun',$tahun)->where('kategori_id',2)
+            $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
                 ->orderBy('id', 'DESC')
                 ->first();
             $last_number = $last_pegnajuan->number;
@@ -204,7 +244,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $new_numbers = $last_number + 1;
                 $new_number = sprintf("%05d", $new_numbers);
             }
-            $no_jib = $new_number.'/JIB/S/'.$bulan.'/'.$tahun;
+            $no_jib = $new_number . '/JIB/S/' . $bulan . '/' . $tahun;
             // Insert Pengajuan
             $pengajuan = new Pengajuan();
             $pengajuan->initiator_id = $params['initiator_id'];
@@ -229,17 +269,59 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
             // insert M review
             if ($pengajuan) {
+                // Insert Review
+                if (!empty($params['note'])) {
+                    $review = new Review();
+                    $review->pengajuan_id = $pengajuan->id;
+                    $review->status = 'SUBMIT';
+                    $review->notes = $params['note'];
+                    $review->save();
+                }
+                // Insert Reviewer
                 if ($params['nilai_capex_2'] <= 3000000000) {
                     $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                    $reviewer=[];
+                    $reviewer = [];
                     foreach ($pemeriksa as $pem) {
-                       $last_status = "";
-                       if ($pem->urutan == 1) {
-                           $last_status = "OPEN";
-                       } else {
-                           $last_status = "QUEUE";
-                       }
-                       $reviewer[] = [
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } elseif ($params['nilai_capex_2'] > 3000000000 && $params['nilai_capex_2'] <= 5000000000) {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } else {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
                             'pengajuan_id' => $pengajuan->id,
                             'initiator_id' => $pem->initiator_id,
                             'urutan' => $pem->urutan,
