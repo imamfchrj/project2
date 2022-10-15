@@ -75,6 +75,9 @@ class PengajuanController extends JibController
         $this->data['filter'] = $params;
         $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
         $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');
+        $this->data['count_review'] = $this->pengajuanRepository->count_review();
+        $this->data['count_approval'] = $this->pengajuanRepository->count_approval();
+        $this->data['count_closed'] = $this->pengajuanRepository->count_closed();
         return view('jib::admin.pengajuan.index',$this->data);
     }
 

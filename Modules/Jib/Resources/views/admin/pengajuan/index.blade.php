@@ -15,7 +15,33 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>@lang('jib::pengajuan.manage_pengajuan')</h4>
+                            {{--<div class="col-sm-3">--}}
+                                {{--<h4>@lang('jib::pengajuan.manage_pengajuan')</h4>--}}
+                            {{--</div>--}}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
+                                        <div>{{ $count_review + $count_approval }}</div>
+                                        <div class="mt-2 badge badge-info">On Progress</div>
+                                    </div>
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
+                                        <div>{{ $count_review }}</div>
+                                        <div class="mt-2 badge badge-warning">Review</div>
+                                    </div>
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
+                                        <div>{{ $count_approval }}</div>
+                                        <div class="mt-2 badge badge-success">Approval</div>
+                                    </div>
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
+                                        <div>{{ $count_closed }}</div>
+                                        <div class="mt-2 badge badge-secondary">Closed</div>
+                                    </div>
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold   text-center">
+                                        <div>{{ $count_review + $count_approval + $count_closed}}</div>
+                                        <div class="mt-2 badge badge-dark">Total</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             @include('jib::admin.shared.flash')

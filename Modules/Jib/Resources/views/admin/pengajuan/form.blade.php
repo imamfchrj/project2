@@ -69,9 +69,6 @@
                                 {{ $message }}
                                 </div>
                                 @enderror
-                                {{--<div class="col-sm-5">--}}
-                                {{--{!! Form::select('kategori_id', $kategori, !empty($pengajuan->kategori_id) ? $pengajuan->kategori_id : old('kategori_id'), ['id' =>'kategori_id', 'class' => 'form-control', 'placeholder' => '-- Select Kategori --']) !!}--}}
-                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -96,44 +93,12 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<select class="form-control" name="segment_id_1">--}}
-                                        {{--<option>@lang('jib::pengajuan.select_segment_label')</option>--}}
-
-                                        {{--@foreach ($segment as $key => $value)--}}
-                                            {{--<option value="{{ $key }}" {{ $key == $segment_id ? 'selected' : '' }}>--}}
-                                                {{--{{ $value }}--}}
-                                            {{--</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                                {{--@error('segment_id_1')--}}
-                                {{--<div class="invalid-feedback">--}}
-                                    {{--{{ $message }}--}}
-                                {{--</div>--}}
-                                {{--@enderror--}}
                                 <div class="col-sm-5">
                                 {!! Form::select('segment_id_1', $segment, !empty($pengajuan->segment_id) ? $pengajuan->segment_id : old('segment_id_1'), ['class' => 'form-control', 'placeholder' => '-- Select Segment --']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<select class="form-control" name="customer_id_1">--}}
-                                        {{--<option>@lang('jib::pengajuan.select_customer_label')</option>--}}
-
-                                        {{--@foreach ($customer as $key => $value)--}}
-                                            {{--<option value="{{ $key }}" {{ $key == $customer_id ? 'selected' : '' }}>--}}
-                                                {{--{{ $value }}--}}
-                                            {{--</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                                {{--@error('nama_sub_unit')--}}
-                                {{--<div class="invalid-feedback">--}}
-                                    {{--{{ $message }}--}}
-                                {{--</div>--}}
-                                {{--@enderror--}}
                                 <div class="col-sm-5">
                                     {!! Form::select('customer_id_1', $customer, !empty($pengajuan->customer_id) ? $pengajuan->customer_id : old('customer_id_1'), ['class' => 'form-control', 'placeholder' => '-- Select Customer --']) !!}
                                 </div>
@@ -252,44 +217,12 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<select class="form-control" name="segment_id_2">--}}
-                                        {{--<option>@lang('jib::pengajuan.select_segment_label')</option>--}}
-
-                                        {{--@foreach ($segment as $key => $value)--}}
-                                            {{--<option value="{{ $key }}" {{ $key == $segment_id ? 'selected' : '' }}>--}}
-                                                {{--{{ $value }}--}}
-                                            {{--</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                                {{--@error('nama_sub_unit')--}}
-                                {{--<div class="invalid-feedback">--}}
-                                    {{--{{ $message }}--}}
-                                {{--</div>--}}
-                                {{--@enderror--}}
                                 <div class="col-sm-5">
                                     {!! Form::select('segment_id_2', $segment, !empty($pengajuan->segment_id) ? $pengajuan->segment_id : old('segment_id_2'), ['class' => 'form-control', 'placeholder' => '-- Select Segment --']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<select class="form-control" name="customer_id_2">--}}
-                                        {{--<option>@lang('jib::pengajuan.select_customer_label')</option>--}}
-
-                                        {{--@foreach ($customer as $key => $value)--}}
-                                            {{--<option value="{{ $key }}" {{ $key == $customer_id ? 'selected' : '' }}>--}}
-                                                {{--{{ $value }}--}}
-                                            {{--</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                                {{--@error('nama_sub_unit')--}}
-                                {{--<div class="invalid-feedback">--}}
-                                    {{--{{ $message }}--}}
-                                {{--</div>--}}
-                                {{--@enderror--}}
                                 <div class="col-sm-5">
                                     {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ? $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control', 'placeholder' => '-- Select Customer --']) !!}
                                 </div>
@@ -369,8 +302,6 @@
                             </div>
                         </div>
                         <div class="card-footer text-left">
-                            {{--<button--}}
-                            {{--class="btn btn-primary">{{ empty($pengajuan) ? __('jib::general.btn_draft_label') : __('jib::general.btn_update_label') }}</button>--}}
                             <button
                                     class="btn btn-primary">{{ empty($pengajuan) ? __('jib::general.btn_create_label') : __('jib::general.btn_update_label') }}</button>
                         </div>

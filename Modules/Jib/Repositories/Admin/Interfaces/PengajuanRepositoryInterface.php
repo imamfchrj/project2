@@ -15,4 +15,7 @@ interface PengajuanRepositoryInterface
     public function restore($id);
     public function getStatuses();
 //    public function getMetaFields();
+    public function count_review();
+    public function count_approval();
+    public function count_closed();
 }

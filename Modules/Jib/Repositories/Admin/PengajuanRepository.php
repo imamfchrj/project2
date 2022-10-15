@@ -475,6 +475,21 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     {
         return Pengajuan::STATUSES;
     }
+
+    public function count_review()
+    {
+        return Pengajuan::whereIn('status_id', array(1, 2))->get()->count();
+    }
+
+    public function count_approval()
+    {
+        return Pengajuan::whereIn('status_id', array(3, 4, 5))->get()->count();
+    }
+
+    public function count_closed()
+    {
+        return Pengajuan::whereIn('status_id', array(6))->get()->count();
+    }
 //
 //    public function getMetaFields()
 //    {
