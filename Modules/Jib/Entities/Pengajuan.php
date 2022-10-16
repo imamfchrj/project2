@@ -112,6 +112,11 @@ class Pengajuan extends Model
         return $this->belongsTo('Modules\Jib\Entities\Mpemeriksa', 'pemeriksa_id', 'id');
     }
 
+    public function reviewer()
+    {
+        return $this->hasMany('Modules\Jib\Entities\Reviewer', 'id', 'pengajuan_id');
+    }
+
     public function getUpdatedAtFormattedAttribute()
     {
         return Carbon::parse($this->attributes['updated_at'])->format('d, M Y H:i:s');

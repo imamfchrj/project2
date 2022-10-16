@@ -110,7 +110,8 @@
                                                     @can('view_jib-pengajuan')
                                                         <a class="btn btn-sm btn-info"
                                                            href="{{ url('admin/jib/pengajuan/'. $peng->id )}}"><i
-                                                                    class="far fa-eye"></i> @lang('jib::pengajuan.btn_show_label')
+                                                                    class="far fa-eye"></i>
+                                                            {{--@lang('jib::pengajuan.btn_show_label')--}}
                                                         </a>
                                                     @endcan
                                                     {{--@can('edit_jib-pengajuan')--}}
@@ -126,7 +127,8 @@
                                                                 if (confirm('Do you want to remove this?')) {
                                                                 document.getElementById('delete-role-{{ $peng->id }}').submit();
                                                                 }">
-                                                            <i class="far fa-trash-alt"></i> @lang('jib::pengajuan.btn_delete_label')
+                                                            <i class="far fa-trash-alt"></i>
+                                                            {{--@lang('jib::pengajuan.btn_delete_label')--}}
                                                         </a>
                                                         <form id="delete-role-{{ $peng->id }}"
                                                               action="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
