@@ -18,6 +18,7 @@
                             {{--<div class="col-sm-3">--}}
                                 {{--<h4>@lang('jib::pengajuan.manage_pengajuan')</h4>--}}
                             {{--</div>--}}
+                            @if($viewTrash == false)
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
@@ -42,6 +43,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             @include('jib::admin.shared.flash')

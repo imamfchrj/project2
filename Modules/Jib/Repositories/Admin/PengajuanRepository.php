@@ -74,10 +74,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $pengajuan = (new Pengajuan())
             ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa');
 
-        $pengajuan = $pengajuan->join('jib_reviewer', 'jib_pengajuan.id', '=', 'jib_reviewer.pengajuan_id')
-            ->where('jib_reviewer.last_status', 'OPEN')
-            ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
-
 //        if ($orderByFields) {
 //            foreach ($orderByFields as $field => $sort) {
 //                $pengajuan = $pengajuan->orderBy($field, $sort);
@@ -104,6 +100,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         if (!empty($options['filter']['customer'])) {
             $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
         }
+
+        $pengajuan = $pengajuan->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id')
+            ->where('jib_reviewer.last_status', 'OPEN')
+            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
+            ->orderBy('jib_pengajuan.id', 'ASC');
 
         if ($perPage) {
             return $pengajuan->paginate($perPage);

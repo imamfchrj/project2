@@ -10,6 +10,7 @@ use Modules\Jib\Http\Controllers\JibController;
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 
 use App\Authorizable;
 
@@ -19,11 +20,13 @@ class WorkspaceController extends JibController
 
     private  $pengajuanRepository,
         $segmentRepository,
-        $customerRepository;
+        $customerRepository,
+        $reviewRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 SegmentRepositoryInterface $segmentRepository,
-                                CustomerRepositoryInterface $customerRepository)
+                                CustomerRepositoryInterface $customerRepository,
+                                ReviewRepositoryInterface $reviewRepository)
     {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
@@ -31,6 +34,7 @@ class WorkspaceController extends JibController
         $this->pengajuanRepository = $pengajuanRepository;
         $this->segmentRepository = $segmentRepository;
         $this->customerRepository = $customerRepository;
+        $this->reviewRepository = $reviewRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -85,14 +89,17 @@ class WorkspaceController extends JibController
         return view('jib::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function editworkspace($id)
     {
-        return view('jib::edit');
+//        return view('jib::edit');
+        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
+
+        if ($this->data['pengajuan']->kategori_id == 1) {
+            return view('jib::admin.workspace.edit_bisnis', $this->data);
+        } else {
+            return view('jib::admin.workspace.edit_support', $this->data);
+        }
     }
 
     /**
