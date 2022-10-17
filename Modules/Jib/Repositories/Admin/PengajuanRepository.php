@@ -66,6 +66,53 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         return $pengajuan->get();
     }
 
+    public function findAllWorkspace($options = [])
+    {
+        $perPage = $options['per_page'] ?? null;
+        $orderByFields = $options['order'] ?? [];
+
+        $pengajuan = (new Pengajuan())
+            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa');
+
+//        if ($orderByFields) {
+//            foreach ($orderByFields as $field => $sort) {
+//                $pengajuan = $pengajuan->orderBy($field, $sort);
+//            }
+//        }
+
+        if (!empty($options['filter']['q'])) {
+            $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
+                $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
+//                    ->orWhere('name', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
+            });
+        }
+
+        if (!empty($options['filter']['status'])) {
+            $pengajuan = $pengajuan->where('status_id', $options['filter']['status']);
+        }
+
+        if (!empty($options['filter']['segment'])) {
+            $pengajuan = $pengajuan->where('segment_id', $options['filter']['segment']);
+        }
+
+        if (!empty($options['filter']['customer'])) {
+            $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
+        }
+
+        $pengajuan = $pengajuan->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id')
+            ->where('jib_reviewer.last_status', 'OPEN')
+            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
+            ->orderBy('jib_pengajuan.id', 'ASC');
+
+        if ($perPage) {
+            return $pengajuan->paginate($perPage);
+        }
+
+        return $pengajuan->get();
+    }
+
     public function findAllInTrash($options = [])
     {
         $perPage = $options['per_page'] ?? null;

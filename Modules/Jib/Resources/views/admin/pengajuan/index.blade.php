@@ -18,6 +18,7 @@
                             {{--<div class="col-sm-3">--}}
                                 {{--<h4>@lang('jib::pengajuan.manage_pengajuan')</h4>--}}
                             {{--</div>--}}
+                            @if($viewTrash == false)
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
@@ -42,6 +43,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             @include('jib::admin.shared.flash')
@@ -110,7 +112,8 @@
                                                     @can('view_jib-pengajuan')
                                                         <a class="btn btn-sm btn-info"
                                                            href="{{ url('admin/jib/pengajuan/'. $peng->id )}}"><i
-                                                                    class="far fa-eye"></i> @lang('jib::pengajuan.btn_show_label')
+                                                                    class="far fa-eye"></i>
+                                                            {{--@lang('jib::pengajuan.btn_show_label')--}}
                                                         </a>
                                                     @endcan
                                                     {{--@can('edit_jib-pengajuan')--}}
@@ -126,7 +129,8 @@
                                                                 if (confirm('Do you want to remove this?')) {
                                                                 document.getElementById('delete-role-{{ $peng->id }}').submit();
                                                                 }">
-                                                            <i class="far fa-trash-alt"></i> @lang('jib::pengajuan.btn_delete_label')
+                                                            <i class="far fa-trash-alt"></i>
+                                                            {{--@lang('jib::pengajuan.btn_delete_label')--}}
                                                         </a>
                                                         <form id="delete-role-{{ $peng->id }}"
                                                               action="{{ url('admin/jib/pengajuan/'. $peng->id) }}"

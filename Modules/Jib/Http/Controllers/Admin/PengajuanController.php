@@ -93,6 +93,8 @@ class PengajuanController extends JibController
         $this->data['viewTrash'] = true;
         $this->data['pengajuan'] = $this->pengajuanRepository->findAllInTrash($options);
         $this->data['filter'] = $params;
+        $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
+        $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');
         return view('jib::admin.pengajuan.index', $this->data);
     }
 
