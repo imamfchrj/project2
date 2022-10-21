@@ -151,7 +151,13 @@ class PengajuanController extends JibController
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
         if ($this->data['pengajuan']->kategori_id == 1) {
-            return view('jib::admin.pengajuan.show_bisnis', $this->data);
+            // BISNIS CAPEX
+            if ($this->data['pengajuan']->jenis_id == 1) {
+                return view('jib::admin.pengajuan.show_bisnis', $this->data);
+            // BISNIS OPEX
+            }else {
+                return view('jib::admin.pengajuan.show_bisnis_opex', $this->data);
+            }
         } else {
             return view('jib::admin.pengajuan.show_support', $this->data);
         }
