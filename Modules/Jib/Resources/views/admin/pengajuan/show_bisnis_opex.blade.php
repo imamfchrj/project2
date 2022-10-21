@@ -48,21 +48,21 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4> SUPPORT CAPEX/OPEX</h4>
+                            <h4> BISNIS OPEX</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kegiatan_label')</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="kegiatan_2"
-                                           class="form-control @error('kegiatan_2') is-invalid @enderror @if (!$errors->has('kegiatan_2') && old('kegiatan_2')) is-valid @endif"
+                                    <input type="text" name="kegiatan_1"
+                                           class="form-control @error('kegiatan_1') is-invalid @enderror @if (!$errors->has('kegiatan_1') && old('kegiatan_1')) is-valid @endif"
                                            value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" name="segment_id_2" id ="segment_id_2" disabled>
+                                    <select class="form-control" name="segment_id_1" id ="segment_id_1" disabled>
                                         <option value=" ">
                                             {{ !empty($pengajuan->msegments->name) ? $pengajuan->msegments->name : '' }}
                                         </option>
@@ -72,7 +72,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" name="customer_id_2" id ="customer_id_2" disabled>
+                                    <select class="form-control" name="customer_id_1" id ="customer_id_1" disabled>
                                         <option value=" ">
                                             {{ !empty($pengajuan->mcustomers->name) ? $pengajuan->mcustomers->name : '' }}
                                         </option>
@@ -80,27 +80,59 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
+                                <label class="col-sm-2 col-form-label">NO DRK</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="no_drp_2"
-                                           class="form-control @error('no_drp_2') is-invalid @enderror @if (!$errors->has('no_drp_2') && old('no_drp_2')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : null }}" disabled>
+                                    <input type="text" name="no_drp_1"
+                                           class="form-control @error('no_drp_1') is-invalid @enderror @if (!$errors->has('no_drp_1') && old('no_drp_1')) is-valid @endif"
+                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
+                                <label class="col-sm-2 col-form-label">Nilai Proyek</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="nilai_capex_2"
-                                           class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"
-                                           value="{{!empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : null }}" disabled>
+                                    <input type="text" name="nilai_capex_1"
+                                           class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"
+                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.bcr_label')</label>
+                                <label class="col-sm-2 col-form-label">Revenue</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="bcr"
-                                           class="form-control @error('bcr') is-invalid @enderror @if (!$errors->has('bcr') && old('bcr')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->bcr) ? $pengajuan->bcr : null }}" disabled>
+                                    <input type="text" name="est_revenue"
+                                           class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Cost</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="cost"
+                                           class="form-control @error('cost') is-invalid @enderror @if (!$errors->has('cost') && old('cost')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->cost : '' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Profit Margin</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="profit_margin"
+                                           class="form-control @error('profit_margin') is-invalid @enderror @if (!$errors->has('profit_margin') && old('profit_margin')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->profit_margin : '' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Net Cash Flow</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="net_cf"
+                                           class="form-control @error('net_cf') is-invalid @enderror @if (!$errors->has('net_cf') && old('net_cf')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->net_cf : '' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Suku Bunga Acuan</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="suku_bunga"
+                                           class="form-control @error('suku_bunga') is-invalid @enderror @if (!$errors->has('suku_bunga') && old('suku_bunga')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->suku_bunga : '' }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -113,16 +145,16 @@
                             <div class="table-responsive">
                                 <table id="pengajuan" class="table table-bordered table-sm ">
                                     <thead class ="thead-dark text-center">
-                                    <th>Upload Date</th>
-                                    <th>Uploader</th>
-                                    <th>Download</th>
+                                        <th>Upload Date</th>
+                                        <th>Uploader</th>
+                                        <th>Download</th>
                                     </thead>
                                     <tbody class ="text-center">
-                                    <tr>
-                                        <td>Monday 8 Agustus 2022 16:51:27</td>
-                                        <td>95509517</td>
-                                        <td><a><i class="fas fa-download"></i></a></td>
-                                    </tr>
+                                        <tr>
+                                            <td>Monday 8 Agustus 2022 16:51:27</td>
+                                            <td>95509517</td>
+                                            <td><a><i class="fas fa-download"></i></a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
