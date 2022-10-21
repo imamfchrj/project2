@@ -102,6 +102,11 @@ class Pengajuan extends Model
         return $this->belongsTo('Modules\Jib\Entities\Mkategori', 'kategori_id', 'id');
     }
 
+    public function mjenises()
+    {
+        return $this->belongsTo('Modules\Jib\Entities\Mjenis', 'jenis_id', 'id');
+    }
+
     public function mstatuses()
     {
         return $this->belongsTo('Modules\Jib\Entities\Mstatus', 'status_id', 'id');

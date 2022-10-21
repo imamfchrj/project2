@@ -29,7 +29,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
 //        $pengajuan = (new Pengajuan())->with('user');
         $pengajuan = (new Pengajuan())
-            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa');
+            ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa', 'mjenises');
 
         if ($orderByFields) {
             foreach ($orderByFields as $field => $sort) {
@@ -41,7 +41,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
                 $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
-//                    ->orWhere('name', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('jenis_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
@@ -58,6 +58,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
         }
 
+        if (!empty($options['filter']['jenis'])) {
+            $pengajuan = $pengajuan->where('jenis_id', $options['filter']['jenis']);
+        }
 
         if ($perPage) {
             return $pengajuan->paginate($perPage);
