@@ -51,6 +51,25 @@
                                 @enderror
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="jenis_id" id ="jenis_id">
+                                        <option>@lang('jib::pengajuan.select_jenis_label')</option>
+
+                                        @foreach ($jenis as $key => $value)
+                                            <option value="{{ $key }}" {{ $key == $jenis_id ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('jenis_id')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" name="kategori_id" id ="kategori_id">
@@ -66,16 +85,16 @@
                                 </div>
                                 @error('kategori_id')
                                 <div class="invalid-feedback">
-                                {{ $message }}
+                                    {{ $message }}
                                 </div>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                    <!-- CARD 2 -->
+                    <!-- CARD 1 -->
                     <div class="card hide" id="group-1">
                         <div class="card-header">
-                            <h4> BISNIS </h4>
+                            <h4> BISNIS CAPEX </h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -197,9 +216,11 @@
                             </div>
                         </div>
                     </div>
+                    <!-- END CARD 1 -->
+                    <!-- CARD 2 -->
                     <div class="card hide" id="group-2">
                         <div class="card-header">
-                            <h4> SUPPORT </h4>
+                            <h4> SUPPORT CAPEX/OPEX</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -228,7 +249,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
+                                <label class="col-sm-2 col-form-label">No DRP/DRK</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_2"
                                            class="form-control @error('no_drp_2') is-invalid @enderror @if (!$errors->has('no_drp_2') && old('no_drp_2')) is-valid @endif"
@@ -283,6 +304,145 @@
                         </div>
                     </div>
                     <!-- END CARD 2 -->
+                    <!-- CARD 4 -->
+                    <div class="card hide" id="group-4">
+                        <div class="card-header">
+                            <h4> BISNIS OPEX </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kegiatan_label')</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="kegiatan_4"
+                                           class="form-control @error('kegiatan_4') is-invalid @enderror @if (!$errors->has('kegiatan_4') && old('kegiatan_4')) is-valid @endif"
+                                           value="{{ old('kegiatan_4', !empty($pengajuan) ? $pengajuan->kegiatan : null) }}">
+                                </div>
+                                @error('kegiatan_4')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
+                                <div class="col-sm-5">
+                                    {!! Form::select('segment_id_4', $segment, !empty($pengajuan->segment_id) ? $pengajuan->segment_id : old('segment_id_4'), ['class' => 'form-control', 'placeholder' => '-- Select Segment --']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                <div class="col-sm-5">
+                                    {!! Form::select('customer_id_4', $customer, !empty($pengajuan->customer_id) ? $pengajuan->customer_id : old('customer_id_4'), ['class' => 'form-control', 'placeholder' => '-- Select Customer --']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="no_drp_4"
+                                           class="form-control @error('no_drp_4') is-invalid @enderror @if (!$errors->has('no_drp_4') && old('no_drp_4')) is-valid @endif"
+                                           value="{{ old('no_drp_4', !empty($pengajuan) ? $pengajuan->no_drp : null) }}">
+                                </div>
+                                @error('no_drp_4')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Nilai Proyek</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="nilai_capex_4"
+                                           class="form-control @error('nilai_capex_4') is-invalid @enderror @if (!$errors->has('nilai_capex_4') && old('nilai_capex_4')) is-valid @endif"
+                                           value="{{ old('nilai_capex_4', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
+                                </div>
+                                @error('nilai_capex_4')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Revenue</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="est_revenue_4"
+                                           class="form-control @error('est_revenue_4') is-invalid @enderror @if (!$errors->has('est_revenue_4') && old('est_revenue_4')) is-valid @endif"
+                                           value="{{ old('est_revenue_4', !empty($pengajuan) ? $pengajuan->est_revenue : null) }}">
+                                </div>
+                                @error('est_revenue_4')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Cost</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="cost"
+                                           class="form-control @error('cost') is-invalid @enderror @if (!$errors->has('cost') && old('cost')) is-valid @endif"
+                                           value="{{ old('cost', !empty($pengajuan) ? $pengajuan->cost : null) }}">
+                                </div>
+                                @error('cost')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Profit Margin</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="profit_margin"
+                                           class="form-control @error('profit_margin') is-invalid @enderror @if (!$errors->has('profit_margin') && old('profit_margin')) is-valid @endif"
+                                           value="{{ old('profit_margin', !empty($pengajuan) ? $pengajuan->profit_margin : null) }}">
+                                </div>
+                                @error('profit_margin')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Net Cash Flow</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="net_cf"
+                                           class="form-control @error('net_cf') is-invalid @enderror @if (!$errors->has('net_cf') && old('net_cf')) is-valid @endif"
+                                           value="{{ old('net_cf', !empty($pengajuan) ? $pengajuan->net_cf : null) }}">
+                                </div>
+                                @error('net_cf')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Suku Bunga Acuan</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="suku_bunga"
+                                           class="form-control @error('suku_bunga') is-invalid @enderror @if (!$errors->has('suku_bunga') && old('suku_bunga')) is-valid @endif"
+                                           value="{{ old('suku_bunga', !empty($pengajuan) ? $pengajuan->suku_bunga : null) }}">
+                                </div>
+                                @error('suku_bunga')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">File Upload</label>
+                                <div class="col-sm-5">
+                                    @if (!empty($pengajuan) && $pengajuan->featured_image)
+                                        <img src="{{ $pengajuan->featured_image }}" alt="{{ $pengajuan->featured_image_caption }}" class="img-fluid img-thumbnail"/>
+                                    @endif
+                                    <input type="file" name="file_jib_4" class="form-control"/>
+                                </div>
+                                @error('file_jib_4')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END CARD 4 -->
                     <!-- CARD 3 -->
                     <div class="card hide" id="group-3">
                         <div class="card-header">

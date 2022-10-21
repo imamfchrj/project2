@@ -7,6 +7,7 @@ return [
     'initiaor_label' => 'Initiator',
     'segment_label' => 'Segment',
     'customer_label' => 'Customer',
+    'jenis_label' => 'Jenis Pengadaan',
     'kegiatan_label' => 'Nama Kegiatan',
     'drp_label' => 'No DRP',
     'kategori_label' => 'Kategori',
@@ -25,6 +26,7 @@ return [
     'select_segment_label' => 'Select Segment',
     'select_customer_label' => 'Select Customer',
     'select_kategori_label' => 'Select Kategori',
+    'select_jenis_label' => 'Select Jenis Pengadaan',
 
     'btn_create_label' => 'Create',
     'btn_show_label' => 'Show',
