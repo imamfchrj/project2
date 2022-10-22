@@ -20,6 +20,7 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
 //    Route::get('workspace/trashed', 'WorkspaceController@trashed')->name('workspace.trashed');
     Route::get('workspace/{id}/restore', 'WorkspaceController@restore')->name('workspace.restore');
     Route::get('workspace/{id}/editworkspace', 'WorkspaceController@editworkspace')->name('workspace.editworkspace');
+    Route::get('workspace/createform/{id}', 'WorkspaceController@createform')->name('workspace.createform');
     Route::resource('workspace', 'WorkspaceController');
 
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');
