@@ -126,7 +126,7 @@
                                            value="">
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">Score Risk</label>
+                                <label class="col-sm-2 col-form-label">Score Inheret Risk</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="score_risk"
                                            class="form-control @error('score_risk') is-invalid @enderror @if (!$errors->has('score_risk') && old('score_risk')) is-valid @endif"

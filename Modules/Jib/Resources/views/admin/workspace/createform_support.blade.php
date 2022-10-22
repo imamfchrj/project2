@@ -17,14 +17,19 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">No DRP</label>
+                                <label class="col-sm-2 col-form-label">No DRP/DRK</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="no_drp"
                                            class="form-control @error('no_drp') is-invalid @enderror @if (!$errors->has('no_drp') && old('no_drp')) is-valid @endif"
                                            value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" disabled>
                                 </div>
 
-                                <label class="col-sm-2 col-form-label"><b>ANALISA KELAYAKAN BISNIS</b></label>
+                                <label class="col-sm-2 col-form-label">BCR</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="bcr"
+                                           class="form-control @error('bcr') is-invalid @enderror @if (!$errors->has('bcr') && old('bcr')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->bcr : '' }}" disabled>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Kelompok Akun</label>
@@ -34,11 +39,11 @@
                                            value="">
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">Revenue</label>
+                                <label class="col-sm-2 col-form-label">Analisa Inheret Risk</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="est_revenue"
-                                           class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" disabled>
+                                    <input type="text" name="analisa_risk"
+                                           class="form-control @error('analisa_risk') is-invalid @enderror @if (!$errors->has('analisa_risk') && old('analisa_risk')) is-valid @endif"
+                                           value="">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -49,11 +54,11 @@
                                            value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" disabled>
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">IRR</label>
+                                <label class="col-sm-2 col-form-label">Score Inheret Risk</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="irr"
-                                           class="form-control @error('irr') is-invalid @enderror @if (!$errors->has('irr') && old('irr')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->irr : '' }}" disabled>
+                                    <input type="text" name="score_risk"
+                                           class="form-control @error('score_risk') is-invalid @enderror @if (!$errors->has('score_risk') && old('score_risk')) is-valid @endif"
+                                           value="">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -66,11 +71,11 @@
                                     </select>
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">NPV</label>
+                                <label class="col-sm-2 col-form-label">Rencana Mitigasi</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="npv"
-                                           class="form-control @error('npv') is-invalid @enderror @if (!$errors->has('npv') && old('npv')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->npv : '' }}" disabled>
+                                    <input type="text" name="rencana_mitigasi"
+                                           class="form-control @error('rencana_mitigasi') is-invalid @enderror @if (!$errors->has('rencana_mitigasi') && old('rencana_mitigasi')) is-valid @endif"
+                                           value="">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -78,81 +83,6 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="lokasi"
                                            class="form-control @error('lokasi') is-invalid @enderror @if (!$errors->has('lokasi') && old('lokasi')) is-valid @endif"
-                                           value="">
-                                </div>
-
-                                <label class="col-sm-2 col-form-label">Playback Period</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="playback_period"
-                                           class="form-control @error('playback_period') is-invalid @enderror @if (!$errors->has('playback_period') && old('playback_period')) is-valid @endif"
-                                           value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Jangka Waktu Kerja Sama</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="waktu_kerja"
-                                           class="form-control @error('waktu_kerja') is-invalid @enderror @if (!$errors->has('waktu_kerja') && old('waktu_kerja')) is-valid @endif"
-                                           value="">
-                                </div>
-
-                                <label class="col-sm-2 col-form-label">WACC</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="wacc"
-                                           class="form-control @error('wacc') is-invalid @enderror @if (!$errors->has('wacc') && old('wacc')) is-valid @endif"
-                                           value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Konstribusi Fee</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="konstribusi_fee"
-                                           class="form-control @error('konstribusi_fee') is-invalid @enderror @if (!$errors->has('konstribusi_fee') && old('konstribusi_fee')) is-valid @endif"
-                                           value="">
-                                </div>
-
-                                <label class="col-sm-2 col-form-label">Analisa Inheret Risk</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="analisa_risk"
-                                           class="form-control @error('analisa_risk') is-invalid @enderror @if (!$errors->has('analisa_risk') && old('analisa_risk')) is-valid @endif"
-                                           value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Skema Kerja Sama</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="skema"
-                                           class="form-control @error('skema') is-invalid @enderror @if (!$errors->has('skema') && old('skema')) is-valid @endif"
-                                           value="">
-                                </div>
-
-                                <label class="col-sm-2 col-form-label">Score Risk</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="score_risk"
-                                           class="form-control @error('score_risk') is-invalid @enderror @if (!$errors->has('score_risk') && old('score_risk')) is-valid @endif"
-                                           value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Nilai Proyek</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="nilai_capex"
-                                           class="form-control @error('nilai_capex') is-invalid @enderror @if (!$errors->has('nilai_capex') && old('nilai_capex')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" disabled>
-                                </div>
-
-                                <label class="col-sm-2 col-form-label">Resiko Setelah Mitigasi</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="risk_mitigasi"
-                                           class="form-control @error('risk_mitigasi') is-invalid @enderror @if (!$errors->has('risk_mitigasi') && old('risk_mitigasi')) is-valid @endif"
-                                           value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Total Investasi GSD</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="tot_invest"
-                                           class="form-control @error('tot_invest') is-invalid @enderror @if (!$errors->has('tot_invest') && old('tot_invest')) is-valid @endif"
                                            value="">
                                 </div>
 
