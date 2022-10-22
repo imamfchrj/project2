@@ -109,7 +109,6 @@ class WorkspaceController extends JibController
     public function createform($id)
     {
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
-        $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
         // BISNIS CAPEX
         if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
@@ -121,6 +120,14 @@ class WorkspaceController extends JibController
         } else {
             return view('jib::admin.workspace.createform_support', $this->data);
         }
+    }
+
+    public function createmom($id)
+    {
+        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+
+        return view('jib::admin.workspace.createform_mom', $this->data);
+
     }
 
     /**

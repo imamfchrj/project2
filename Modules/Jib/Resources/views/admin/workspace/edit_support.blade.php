@@ -107,12 +107,8 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="text-md-right">Form Persetujuan dan MoM</h4>
+                            <h4 class="text-md-right">Form Persetujuan</h4>
                             <div class="card-header-action">
-                                {{--<a class="btn btn-sm btn-success"--}}
-                                {{--href=""><i class="fas fa-file"></i>--}}
-                                {{--Create--}}
-                                {{--</a>--}}
                                 <a class="btn btn-sm btn-success"
                                    href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
                                             class="fas fa-file"></i> Create
@@ -125,7 +121,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="pengajuan" class="table table-bordered table-sm ">
+                                <table class="table table-bordered table-sm ">
                                     <thead class ="thead-dark text-center">
                                     <th>Dokumen Type</th>
                                     <th>Upload Date</th>
@@ -139,6 +135,35 @@
                                         <td>95509517</td>
                                         <td><a><i class="fas fa-download"></i></a></td>
                                     </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-md-right">MoM</h4>
+                            <div class="card-header-action">
+                                <a class="btn btn-sm btn-success"
+                                   href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
+                                            class="fas fa-file"></i> Create
+                                </a>
+                                <a class="btn btn-sm btn-danger"
+                                   href="#"><i class="fas fa-upload"></i>
+                                    Upload
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm ">
+                                    <thead class ="thead-dark text-center">
+                                    <th>Dokumen Type</th>
+                                    <th>Upload Date</th>
+                                    <th>Uploader</th>
+                                    <th>Download</th>
+                                    </thead>
+                                    <tbody class ="text-center">
                                     <tr>
                                         <td class ="text-left">MoM</td>
                                         <td>Monday 8 Agustus 2022 16:51:27</td>

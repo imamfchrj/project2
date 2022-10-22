@@ -2,7 +2,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>@lang('jib::pengajuan.manage_pengajuan')</h1>
+            <h1>MoM JIB</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="{{ url('admin/jib/pengajuan') }}">@lang('jib::pengajuan.manage_pengajuan')</a></div>
@@ -13,225 +13,145 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>@lang('jib::pengajuan.pengajuan_detail')</h4>
+                            <h4> Form MoM JIB</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.initiaor_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="nama_sub_unit"
-                                           class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->nama_sub_unit : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="jenis_id" id ="jenis_id" disabled>
-                                        <option value=" ">
-                                            {{ !empty($pengajuan->mjenises->name) ? $pengajuan->mjenises->name : '' }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="kategori_id" id ="kategori_id" disabled>
-                                        <option value=" ">
-                                            {{ !empty($pengajuan->mcategories->name) ? $pengajuan->mcategories->name : '' }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4> BISNIS CAPEX</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kegiatan_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="kegiatan_1"
-                                           class="form-control @error('kegiatan_1') is-invalid @enderror @if (!$errors->has('kegiatan_1') && old('kegiatan_1')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="segment_id_1" id ="segment_id_1" disabled>
-                                        <option value=" ">
-                                            {{ !empty($pengajuan->msegments->name) ? $pengajuan->msegments->name : '' }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="customer_id_1" id ="customer_id_1" disabled>
-                                        <option value=" ">
-                                            {{ !empty($pengajuan->mcustomers->name) ? $pengajuan->mcustomers->name : '' }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="no_drp_1"
-                                           class="form-control @error('no_drp_1') is-invalid @enderror @if (!$errors->has('no_drp_1') && old('no_drp_1')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="nilai_capex_1"
-                                           class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.est_rev__label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="est_revenue"
-                                           class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.irr_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="irr"
-                                           class="form-control @error('irr') is-invalid @enderror @if (!$errors->has('irr') && old('irr')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->irr : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.npv_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="npv"
-                                           class="form-control @error('npv') is-invalid @enderror @if (!$errors->has('npv') && old('npv')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->npv : '' }}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.pbp_label')</label>
-                                <div class="col-sm-5">
-                                    <input type="text" name="pbp"
-                                           class="form-control @error('pbp') is-invalid @enderror @if (!$errors->has('pbp') && old('pbp')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->pbp : '' }}" disabled>
-                                </div>
-                            </div>
+                                <label class="col-sm-6 col-form-label"><b>Review Bisnis</b></label>
 
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Upload History</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="pengajuan" class="table table-bordered table-sm ">
-                                    <thead class ="thead-dark text-center">
-                                        <th>Upload Date</th>
-                                        <th>Uploader</th>
-                                        <th>Download</th>
-                                    </thead>
-                                    <tbody class ="text-center">
-                                        <tr>
-                                            <td>Monday 8 Agustus 2022 16:51:27</td>
-                                            <td>95509517</td>
-                                            <td><a><i class="fas fa-download"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <label class="col-sm-6 col-form-label"><b>Informasi Umum</b></label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-md-right">Form Persetujuan dan MoM</h4>
-                            <div class="card-header-action">
-                                {{--<a class="btn btn-sm btn-success"--}}
-                                   {{--href=""><i class="fas fa-file"></i>--}}
-                                    {{--Create--}}
-                                {{--</a>--}}
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="pengajuan" class="table table-bordered table-sm ">
-                                    <thead class ="thead-dark text-center">
-                                    <th>Dokumen Type</th>
-                                    <th>Upload Date</th>
-                                    <th>Uploader</th>
-                                    <th>Download</th>
-                                    </thead>
-                                    <tbody class ="text-center">
-                                    <tr>
-                                        <td class ="text-left">Form Persetujuan</td>
-                                        <td>Monday 8 Agustus 2022 16:51:27</td>
-                                        <td>95509517</td>
-                                        <td><a><i class="fas fa-download"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class ="text-left">MoM</td>
-                                        <td>Monday 8 Agustus 2022 16:51:27</td>
-                                        <td>95509517</td>
-                                        <td><a><i class="fas fa-download"></i></a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Notes</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-row">
-                                @if (!empty($notes))
-                                    @foreach ($notes as $note)
-                                        <div class="col-md-2 text-center">
-                                            <i class="far fa-comment-dots"></i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            {{ $note->created_at }} - <b>{{$note->nama_karyawan.' / '.$note->nik_gsd}}</b> - {{$note->status}}<br>
-                                            {{ $note->notes }}<hr>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                        <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right"><b>Komentar</b></label>
-                                <div class="col-sm-5">
-                                    <textarea name="note" class="form-control" style="height: 100px;"></textarea>
+                                <label class="col-sm-2 col-form-label">Dasar Inisiatif Bisnis</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="dasar_mom"
+                                           class="form-control @error('dasar_mom') is-invalid @enderror @if (!$errors->has('dasar_mom') && old('dasar_mom')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Ruang Lingkup</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="ruang_lingkup"
+                                           class="form-control @error('ruang_lingkup') is-invalid @enderror @if (!$errors->has('ruang_lingkup') && old('ruang_lingkup')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Datetime</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="tanggal_mom"
+                                           class="form-control @error('tanggal_mom') is-invalid @enderror @if (!$errors->has('tanggal_mom') && old('tanggal_mom')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Spesifikasi</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="spesifikasi"
+                                           class="form-control @error('spesifikasi') is-invalid @enderror @if (!$errors->has('spesifikasi') && old('spesifikasi')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Venue</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="venue"
+                                           class="form-control @error('venue') is-invalid @enderror @if (!$errors->has('venue') && old('venue')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Pelaksanaan Kegiatan</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="kegiatan"
+                                           class="form-control @error('kegiatan') is-invalid @enderror @if (!$errors->has('kegiatan') && old('kegiatan')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Meeting Called</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="meeting_called"
+                                           class="form-control @error('meeting_called') is-invalid @enderror @if (!$errors->has('meeting_called') && old('meeting_called')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Lokasi</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="lokasi"
+                                           class="form-control @error('lokasi') is-invalid @enderror @if (!$errors->has('lokasi') && old('lokasi')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Type of Meeting</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="meeting_type"
+                                           class="form-control @error('meeting_type') is-invalid @enderror @if (!$errors->has('meeting_type') && old('meeting_type')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Tata Cara Pembayaran</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="top"
+                                           class="form-control @error('top') is-invalid @enderror @if (!$errors->has('top') && old('top')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Facilitator</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="facilitator"
+                                           class="form-control @error('facilitator') is-invalid @enderror @if (!$errors->has('facilitator') && old('facilitator')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Analisa Kelayakan Investasi</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="aki"
+                                           class="form-control @error('aki') is-invalid @enderror @if (!$errors->has('aki') && old('aki')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Attende</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="attende"
+                                           class="form-control @error('attende') is-invalid @enderror @if (!$errors->has('attende') && old('attende')) is-valid @endif"
+                                           value="">
+                                </div>
+
+                                <label class="col-sm-2 col-form-label"><b>Kesimpulan dan Rekomendasi</b></label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 col-form-label"><b>Pembahasan dan Analisa</b></label>
+
+                                <label class="col-sm-2 col-form-label">Catatan</label>
+                                <div class="col-sm-4">
+                                    <textarea name="catatan" class="form-control" style="height: 70px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Review Kelengkapan Administrasi</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="kelengkapan"
+                                           class="form-control @error('kelengkapan') is-invalid @enderror @if (!$errors->has('kelengkapan') && old('kelengkapan')) is-valid @endif"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Review Ketersediaan Anggaran</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="anggaran"
+                                           class="form-control @error('anggaran') is-invalid @enderror @if (!$errors->has('anggaran') && old('anggaran')) is-valid @endif"
+                                           value="">
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-left">
-                            <a href="{{ url('admin/jib/pengajuan') }}"><button class="btn btn-light">Close</button></a>
-                            <a href=""><button class="btn btn-warning">Return</button></a>
-                            <a href=""><button class="btn btn-danger">Reject</button></a>
-                            <a href=""><button class="btn btn-primary">Submit</button></a>
+                            <a href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}"><button class="btn btn-light">Back</button></a>
+                            <a href=""><button class="btn btn-success">Create</button></a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
