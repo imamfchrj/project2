@@ -25,6 +25,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="jenis_id" id ="jenis_id" disabled>
+                                        <option value=" ">
+                                            {{ !empty($pengajuan->mjenises->name) ? $pengajuan->mjenises->name : '' }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" name="kategori_id" id ="kategori_id" disabled>
@@ -38,7 +48,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4> BISNIS </h4>
+                            <h4> BISNIS CAPEX</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -145,14 +155,54 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
+                            <h4 class="text-md-right">Form Persetujuan dan MoM</h4>
+                            <div class="card-header-action">
+                                {{--<a class="btn btn-sm btn-success"--}}
+                                   {{--href=""><i class="fas fa-file"></i>--}}
+                                    {{--Create--}}
+                                {{--</a>--}}
+                                <a class="btn btn-sm btn-success"
+                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
+                                            class="fas fa-file"></i> Create
+                                </a>
+                                <a class="btn btn-sm btn-danger"
+                                   href="#"><i class="fas fa-upload"></i>
+                                    Upload
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="pengajuan" class="table table-bordered table-sm ">
+                                    <thead class ="thead-dark text-center">
+                                    <th>Dokumen Type</th>
+                                    <th>Upload Date</th>
+                                    <th>Uploader</th>
+                                    <th>Download</th>
+                                    </thead>
+                                    <tbody class ="text-center">
+                                    <tr>
+                                        <td class ="text-left">Form Persetujuan</td>
+                                        <td>Monday 8 Agustus 2022 16:51:27</td>
+                                        <td>95509517</td>
+                                        <td><a><i class="fas fa-download"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class ="text-left">MoM</td>
+                                        <td>Monday 8 Agustus 2022 16:51:27</td>
+                                        <td>95509517</td>
+                                        <td><a><i class="fas fa-download"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
                             <h4>Notes</h4>
                         </div>
                         <div class="card-body">
-                            {{--<div class="row">--}}
-                            {{--<div class="col-6">--}}
-                            {{--@include('jib::admin.pengajuan._nested_pemeriksa', [])--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
                             <div class="form-row">
                                 @if (!empty($notes))
                                     @foreach ($notes as $note)
@@ -167,8 +217,19 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right"><b>Komentar</b></label>
+                                <div class="col-sm-5">
+                                    <textarea name="note" class="form-control" style="height: 100px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-footer text-left">
                             <a href="{{ url('admin/jib/pengajuan') }}"><button class="btn btn-light">Close</button></a>
+                            <a href=""><button class="btn btn-warning">Return</button></a>
+                            <a href=""><button class="btn btn-danger">Reject</button></a>
+                            <a href=""><button class="btn btn-primary">Submit</button></a>
                         </div>
                     </div>
                 </div>
