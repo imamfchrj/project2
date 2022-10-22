@@ -164,9 +164,13 @@
                         <div class="card-header">
                             <h4 class="text-md-right">Form Persetujuan dan MoM</h4>
                             <div class="card-header-action">
+                                {{--<a class="btn btn-sm btn-success"--}}
+                                {{--href=""><i class="fas fa-file"></i>--}}
+                                {{--Create--}}
+                                {{--</a>--}}
                                 <a class="btn btn-sm btn-success"
-                                   href="#"><i class="fas fa-file"></i>
-                                    Create
+                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
+                                            class="fas fa-file"></i> Create
                                 </a>
                                 <a class="btn btn-sm btn-danger"
                                    href="#"><i class="fas fa-upload"></i>

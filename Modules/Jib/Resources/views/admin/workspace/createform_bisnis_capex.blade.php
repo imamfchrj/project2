@@ -11,41 +11,6 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
-                    {{--<div class="card">--}}
-                        {{--<div class="card-header">--}}
-                            {{--<h4>@lang('jib::pengajuan.pengajuan_detail')</h4>--}}
-                        {{--</div>--}}
-                        {{--<div class="card-body">--}}
-                            {{--<div class="form-group row">--}}
-                                {{--<label class="col-sm-2 col-form-label">@lang('jib::pengajuan.initiaor_label')</label>--}}
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<input type="text" name="nama_sub_unit"--}}
-                                           {{--class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"--}}
-                                           {{--value="{{ !empty($pengajuan) ? $pengajuan->nama_sub_unit : '' }}" disabled>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group row">--}}
-                                {{--<label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>--}}
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<select class="form-control" name="jenis_id" id ="jenis_id" disabled>--}}
-                                        {{--<option value=" ">--}}
-                                            {{--{{ !empty($pengajuan->mjenises->name) ? $pengajuan->mjenises->name : '' }}--}}
-                                        {{--</option>--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group row">--}}
-                                {{--<label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>--}}
-                                {{--<div class="col-sm-5">--}}
-                                    {{--<select class="form-control" name="kategori_id" id ="kategori_id" disabled>--}}
-                                        {{--<option value=" ">--}}
-                                            {{--{{ !empty($pengajuan->mcategories->name) ? $pengajuan->mcategories->name : '' }}--}}
-                                        {{--</option>--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                     <div class="card">
                         <div class="card-header">
                             <h4> BISNIS CAPEX</h4>
