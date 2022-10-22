@@ -113,13 +113,13 @@ class WorkspaceController extends JibController
 
         // BISNIS CAPEX
         if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
-            return view('jib::admin.workspace.edit_bisnis', $this->data);
-            // BISNIS OPEX
+            return view('jib::admin.workspace.createform_bisnis_capex', $this->data);
+        // BISNIS OPEX
         } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
-            return view('jib::admin.workspace.edit_bisnis_opex', $this->data);
-            // SUPPORT CAPEX/OPEX
+            return view('jib::admin.workspace.createform_bisnis_opex', $this->data);
+        // SUPPORT CAPEX/OPEX
         } else {
-            return view('jib::admin.workspace.edit_support', $this->data);
+            return view('jib::admin.workspace.createform_support', $this->data);
         }
     }
 
