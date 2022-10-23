@@ -66,6 +66,7 @@ class PengajuanRequest extends FormRequest
             'file_jib_4' => '',
 //            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
             'note' => '',
+            'draft_status' => '',
         ]);
     }
 
