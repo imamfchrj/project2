@@ -29,6 +29,7 @@ class PengajuanRequest extends FormRequest
 
         return array_merge([
             'initiator_id' => '',
+            'jenis_id' => '',
             'kategori_id' => '',
             'nama_posisi' => '',
             'nama_sub_unit' => '',
@@ -51,6 +52,18 @@ class PengajuanRequest extends FormRequest
             'nilai_capex_2' => '',
             'bcr' => '',
             'file_jib_2' => '',
+
+            'kegiatan_4' => '',
+            'segment_id_4' => '',
+            'customer_id_4' => '',
+            'no_drp_4' => '',
+            'nilai_capex_4' => '',
+            'est_revenue_4' => '',
+            'cost' => '',
+            'profit_margin' => '',
+            'net_cf' => '',
+            'suku_bunga' => '',
+            'file_jib_4' => '',
 //            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
             'note' => '',
             'draft_status' => '',

@@ -24,6 +24,7 @@ class Pengajuan extends Model implements HasMedia
         'kegiatan',
         'no_drp',
         'rra',
+        'jenis_id',
         'kategori_id',
         'segment_id',
         'customer_id',
@@ -35,6 +36,10 @@ class Pengajuan extends Model implements HasMedia
         'npv',
         'pbp',
         'bcr',
+        'cost',
+        'profit_margin',
+        'net_cf',
+        'suku_bunga',
         'detail',
         'file_jib',
         'file_jib_asli',
@@ -113,6 +118,11 @@ class Pengajuan extends Model implements HasMedia
         return $this->belongsTo('Modules\Jib\Entities\Mkategori', 'kategori_id', 'id');
     }
 
+    public function mjenises()
+    {
+        return $this->belongsTo('Modules\Jib\Entities\Mjenis', 'jenis_id', 'id');
+    }
+
     public function mstatuses()
     {
         return $this->belongsTo('Modules\Jib\Entities\Mstatus', 'status_id', 'id');
@@ -126,6 +136,11 @@ class Pengajuan extends Model implements HasMedia
     public function reviewer()
     {
         return $this->hasMany('Modules\Jib\Entities\Reviewer', 'id', 'pengajuan_id');
+    }
+
+    public function persetujuan()
+    {
+        return $this->hasMany('Modules\Jib\Entities\Persetujuan','id','pengajuan_id');
     }
 
     public function getUpdatedAtFormattedAttribute()

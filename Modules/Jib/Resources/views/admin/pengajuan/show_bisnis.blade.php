@@ -25,6 +25,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="jenis_id" id ="jenis_id" disabled>
+                                        <option value=" ">
+                                            {{ !empty($pengajuan->mjenises->name) ? $pengajuan->mjenises->name : '' }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" name="kategori_id" id ="kategori_id" disabled>
@@ -38,7 +48,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4> BISNIS </h4>
+                            <h4> BISNIS CAPEX</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">

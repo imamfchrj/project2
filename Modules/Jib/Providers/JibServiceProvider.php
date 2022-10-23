@@ -15,6 +15,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\CustomerRepository;
 use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
 use Modules\Jib\Repositories\Admin\KategoriRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\JenisRepositoryInterface;
+use Modules\Jib\Repositories\Admin\JenisRepository;
 use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\PemeriksaRepository;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
@@ -161,6 +163,11 @@ class JibServiceProvider extends ServiceProvider
         $this->app->bind(
             ReviewRepositoryInterface::class,
             ReviewRepository::class
+        );
+
+        $this->app->bind(
+            JenisRepositoryInterface::class,
+            JenisRepository::class
         );
 
     }

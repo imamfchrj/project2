@@ -13,6 +13,7 @@ use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\JenisRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -30,7 +31,8 @@ class PengajuanController extends JibController
              $customerRepository,
              $kategoriRepository,
              $reviewRepository,
-             $pemeriksaRepository;
+             $pemeriksaRepository,
+             $jenisRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 InitiatorRepositoryInterface $initiatorRepository,
@@ -38,7 +40,8 @@ class PengajuanController extends JibController
                                 CustomerRepositoryInterface $customerRepository,
                                 KategoriRepositoryInterface $kategoriRepository,
                                 ReviewRepositoryInterface $reviewRepository,
-                                PemeriksaRepositoryInterface $pemeriksaRepository)
+                                PemeriksaRepositoryInterface $pemeriksaRepository,
+                                JenisRepositoryInterface $jenisRepository)
     {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'pengajuan';
@@ -48,6 +51,7 @@ class PengajuanController extends JibController
         $this->segmentRepository = $segmentRepository;
         $this->customerRepository = $customerRepository;
         $this->kategoriRepository = $kategoriRepository;
+        $this->jenisRepository = $jenisRepository;
         $this->pemeriksaRepository = $pemeriksaRepository;
         $this->reviewRepository = $reviewRepository;
 
@@ -116,6 +120,8 @@ class PengajuanController extends JibController
         $this->data['customer_id'] = null;
         $this->data['kategori'] = $this->kategoriRepository->findAll()->pluck('name', 'id');
         $this->data['kategori_id'] = null;
+        $this->data['jenis'] = $this->jenisRepository->findAll()->pluck('name', 'id');
+        $this->data['jenis_id'] = null;
         $this->data['pemeriksa'] = $this->pemeriksaRepository->findAll();
         return view('jib::admin.pengajuan.form', $this->data);
     }
@@ -174,8 +180,13 @@ class PengajuanController extends JibController
         $this->data['file_jib'] = $pengajuan['file_jib'];
 
         if ($this->data['pengajuan']->kategori_id == 1) {
-            // return view('jib::admin.pengajuan.show_bisnis', $this->data);
-            return view('jib::admin.pengajuan.show_bisnis', $this->data);
+            // BISNIS CAPEX
+            if ($this->data['pengajuan']->jenis_id == 1) {
+                return view('jib::admin.pengajuan.show_bisnis', $this->data);
+            // BISNIS OPEX
+            }else {
+                return view('jib::admin.pengajuan.show_bisnis_opex', $this->data);
+            }
         } else {
             return view('jib::admin.pengajuan.show_support', $this->data);
         }

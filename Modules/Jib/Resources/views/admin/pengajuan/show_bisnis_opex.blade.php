@@ -48,7 +48,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4> BISNIS CAPEX</h4>
+                            <h4> BISNIS OPEX</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
+                                <label class="col-sm-2 col-form-label">NO DRK</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_1"
                                            class="form-control @error('no_drp_1') is-invalid @enderror @if (!$errors->has('no_drp_1') && old('no_drp_1')) is-valid @endif"
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
+                                <label class="col-sm-2 col-form-label">Nilai Proyek</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="nilai_capex_1"
                                            class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.est_rev__label')</label>
+                                <label class="col-sm-2 col-form-label">Revenue</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="est_revenue"
                                            class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
@@ -104,30 +104,37 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.irr_label')</label>
+                                <label class="col-sm-2 col-form-label">Cost</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="irr"
-                                           class="form-control @error('irr') is-invalid @enderror @if (!$errors->has('irr') && old('irr')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->irr : '' }}" disabled>
+                                    <input type="text" name="cost"
+                                           class="form-control @error('cost') is-invalid @enderror @if (!$errors->has('cost') && old('cost')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->cost : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.npv_label')</label>
+                                <label class="col-sm-2 col-form-label">Profit Margin</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="npv"
-                                           class="form-control @error('npv') is-invalid @enderror @if (!$errors->has('npv') && old('npv')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->npv : '' }}" disabled>
+                                    <input type="text" name="profit_margin"
+                                           class="form-control @error('profit_margin') is-invalid @enderror @if (!$errors->has('profit_margin') && old('profit_margin')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->profit_margin : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.pbp_label')</label>
+                                <label class="col-sm-2 col-form-label">Net Cash Flow</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="pbp"
-                                           class="form-control @error('pbp') is-invalid @enderror @if (!$errors->has('pbp') && old('pbp')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->pbp : '' }}" disabled>
+                                    <input type="text" name="net_cf"
+                                           class="form-control @error('net_cf') is-invalid @enderror @if (!$errors->has('net_cf') && old('net_cf')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->net_cf : '' }}" disabled>
                                 </div>
                             </div>
-
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Suku Bunga Acuan</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="suku_bunga"
+                                           class="form-control @error('suku_bunga') is-invalid @enderror @if (!$errors->has('suku_bunga') && old('suku_bunga')) is-valid @endif"
+                                           value="{{ !empty($pengajuan) ? $pengajuan->suku_bunga : '' }}" disabled>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -155,79 +162,14 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="text-md-right">Form Persetujuan</h4>
-                            <div class="card-header-action">
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm ">
-                                    <thead class ="thead-dark text-center">
-                                    <th>Dokumen Type</th>
-                                    <th>Upload Date</th>
-                                    <th>Uploader</th>
-                                    <th>Download</th>
-                                    </thead>
-                                    <tbody class ="text-center">
-                                    <tr>
-                                        <td class ="text-left">Form Persetujuan</td>
-                                        <td>Monday 8 Agustus 2022 16:51:27</td>
-                                        <td>95509517</td>
-                                        <td><a><i class="fas fa-download"></i></a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-md-right">MoM</h4>
-                            <div class="card-header-action">
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm ">
-                                    <thead class ="thead-dark text-center">
-                                    <th>Dokumen Type</th>
-                                    <th>Upload Date</th>
-                                    <th>Uploader</th>
-                                    <th>Download</th>
-                                    </thead>
-                                    <tbody class ="text-center">
-                                    <tr>
-                                        <td class ="text-left">MoM</td>
-                                        <td>Monday 8 Agustus 2022 16:51:27</td>
-                                        <td>95509517</td>
-                                        <td><a><i class="fas fa-download"></i></a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
                             <h4>Notes</h4>
                         </div>
                         <div class="card-body">
+                            {{--<div class="row">--}}
+                            {{--<div class="col-6">--}}
+                            {{--@include('jib::admin.pengajuan._nested_pemeriksa', [])--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
                             <div class="form-row">
                                 @if (!empty($notes))
                                     @foreach ($notes as $note)
@@ -242,19 +184,8 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right"><b>Komentar</b></label>
-                                <div class="col-sm-5">
-                                    <textarea name="note" class="form-control" style="height: 100px;"></textarea>
-                                </div>
-                            </div>
-                        </div>
                         <div class="card-footer text-left">
                             <a href="{{ url('admin/jib/pengajuan') }}"><button class="btn btn-light">Close</button></a>
-                            <a href=""><button class="btn btn-warning">Return</button></a>
-                            <a href=""><button class="btn btn-danger">Reject</button></a>
-                            <a href=""><button class="btn btn-primary">Submit</button></a>
                         </div>
                     </div>
                 </div>
