@@ -13,6 +13,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 
 use App\Authorizable;
 
@@ -23,12 +25,16 @@ class WorkspaceController extends JibController
     private  $pengajuanRepository,
         $segmentRepository,
         $customerRepository,
-        $reviewRepository;
+        $reviewRepository,
+        $persetujuanRepository,
+        $momRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 SegmentRepositoryInterface $segmentRepository,
                                 CustomerRepositoryInterface $customerRepository,
-                                ReviewRepositoryInterface $reviewRepository)
+                                ReviewRepositoryInterface $reviewRepository,
+                                PersetujuanRepositoryInterface $persetujuanRepository,
+                                MomRepositoryInterface $momRepository)
     {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
@@ -37,6 +43,8 @@ class WorkspaceController extends JibController
         $this->segmentRepository = $segmentRepository;
         $this->customerRepository = $customerRepository;
         $this->reviewRepository = $reviewRepository;
+        $this->persetujuanRepository = $persetujuanRepository;
+        $this->momRepository = $momRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -136,7 +144,7 @@ class WorkspaceController extends JibController
     {
         $params = $request->validated();
 
-        if ($pengajuan = $this->pengajuanRepository->create($params)) {
+        if ($pengajuan = $this->persetujuanRepository->create($params)) {
             return redirect('admin/jib/workspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }

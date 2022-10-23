@@ -20,7 +20,30 @@ class PersetujuanRequest extends FormRequest
     public function rules()
     {
         return array_merge([
-            'pengajuan_id' => ''
+            'pengajuan_id' => '',
+            'no_drp' => '',
+            'akun' => '',
+            'est_revenue' => '',
+            'kegiatan' => '',
+            'irr' => '',
+            'customer_id' => '',
+            'npv' => '',
+            'lokasi' => '',
+            'playback_period' => '',
+            'waktu_kerja' => '',
+            'wacc' => '',
+            'konstribusi_fee' => '',
+            'analisa_risk' => '',
+            'skema' => '',
+            'score_risk' => '',
+            'nilai_capex' => '',
+            'risk_mitigasi' => '',
+            'tot_invest' => '',
+            'score_mitigasi' => '',
+            'sow' => '',
+            'kesimpulan' => '',
+            'delivery_time' => '',
+            'catatan' => ''
         ]);
     }
 
