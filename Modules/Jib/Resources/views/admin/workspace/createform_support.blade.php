@@ -73,8 +73,8 @@
 
                                 <label class="col-sm-2 col-form-label">Rencana Mitigasi</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="rencana_mitigasi"
-                                           class="form-control @error('rencana_mitigasi') is-invalid @enderror @if (!$errors->has('rencana_mitigasi') && old('rencana_mitigasi')) is-valid @endif"
+                                    <input type="text" name="risk_mitigasi"
+                                           class="form-control @error('risk_mitigasi') is-invalid @enderror @if (!$errors->has('risk_mitigasi') && old('risk_mitigasi')) is-valid @endif"
                                            value="">
                                 </div>
                             </div>

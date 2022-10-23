@@ -8,6 +8,7 @@
                 <div class="breadcrumb-item active"><a href="{{ url('admin/jib/pengajuan') }}">@lang('jib::pengajuan.manage_pengajuan')</a></div>
             </div>
         </div>
+        {!! Form::open(['url' => 'admin/jib/workspace']) !!}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -19,6 +20,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">No DRP</label>
                                 <div class="col-sm-4">
+                                    <input type="hidden" name="pengajuan_id"
+                                           value="{{ old('pengajuan_id', !empty($pengajuan) ? $pengajuan->id : '') }}">
                                     <input type="text" name="no_drp"
                                            class="form-control @error('no_drp') is-invalid @enderror @if (!$errors->has('no_drp') && old('no_drp')) is-valid @endif"
                                            value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" disabled>
