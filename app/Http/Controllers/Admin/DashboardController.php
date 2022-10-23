@@ -14,6 +14,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+        //test
         $this->data['currentAdminMenu'] = 'dashboard';
         return view('admin.dashboard.index', $this->data);
     }
