@@ -13,6 +13,7 @@
         {!! Form::hidden('id') !!}
     @else
         {!! Form::open(['url' => 'admin/jib/pengajuan', 'files'=>true]) !!}
+        <!-- {!! Form::hidden('xxxxxxx') !!} -->
     @endif
     {{--@if (empty($pengajuan))--}}
         {{--<form method="POST" action="{{ route('users.store') }}">--}}
@@ -22,6 +23,7 @@
         {{--@method('PUT')--}}
     {{--@endif--}}
     @csrf
+    <input type="hidden" id="draft_status" name="draft_status" />
         <div class="section-body">
             <h2 class="section-title">{{ empty($pengajuan) ? __('jib::pengajuan.pengajuan_add_new') : __('jib::pengajuan.pengajuan_update') }}</h2>
             <div class="row">
@@ -302,8 +304,10 @@
                             </div>
                         </div>
                         <div class="card-footer text-left">
-                            <button
+                            <button id="btn_pengajuan"
                                     class="btn btn-primary">{{ empty($pengajuan) ? __('jib::general.btn_create_label') : __('jib::general.btn_update_label') }}</button>
+                            <button id="btn_pengajuan_draft" name="draft" value="true"
+                                    class="btn btn-secondary">{{ empty($pengajuan) ? __('jib::general.btn_draft_label') : __('jib::general.btn_draft_label') }}</button>
                         </div>
                     </div>
                     <!-- END CARD 3 -->

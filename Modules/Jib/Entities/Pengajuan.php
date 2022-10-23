@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-class Pengajuan extends Model
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\File;
+
+
+class Pengajuan extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
         'initator_id',
@@ -71,6 +76,12 @@ class Pengajuan extends Model
         self::APPROVAL_3 => 'Approval 3',
         self::SELESAI => 'Selesai',
     ];
+
+    // public function registerMediaCollections(): void
+    // {
+    //     $this
+    //         ->addMediaCollection('file_jib');
+    // }
 
     public function user()
     {

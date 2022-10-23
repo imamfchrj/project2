@@ -58,7 +58,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
         }
 
-
         if ($perPage) {
             return $pengajuan->paginate($perPage);
         }
@@ -149,9 +148,15 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //
     public function findById($id)
     {
-        return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
-            ->findOrFail($id);
+        $pengajuan = Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
+        ->findOrFail($id);
+        $file_jib = $pengajuan->getMedia('file_jib');
+        
+        return compact(['pengajuan', 'file_jib']);
+        // return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
+        //     ->findOrFail($id);
     }
+
 
     public function create($params = [])
     {
@@ -210,10 +215,22 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->irr = $params['irr'];
             $pengajuan->npv = $params['npv'];
             $pengajuan->pbp = $params['pbp'];
-            $pengajuan->status_id = 1;
+
+            if ($params['draft_status']==true)
+                $pengajuan->status_id = 7;
+            else
+                $pengajuan->status_id = 1;
+
             $pengajuan->user_id = auth()->user()->id;
             $pengajuan->created_by = auth()->user()->id;
             $pengajuan->updated_by = auth()->user()->name;
+
+            //Upload File
+            if (isset($params['file_jib_1'])) {
+                $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
+                //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+            }
+
             $pengajuan->save();
 
             if ($pengajuan) {
@@ -322,10 +339,22 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->no_drp = $params['no_drp_2'];
             $pengajuan->nilai_capex = $params['nilai_capex_2'];
             $pengajuan->bcr = $params['bcr'];
-            $pengajuan->status_id = 1;
+            
+            if ($params['draft_status']==true)
+                $pengajuan->status_id = 7;
+            else
+                $pengajuan->status_id = 1;
+            
             $pengajuan->user_id = auth()->user()->id;
             $pengajuan->created_by = auth()->user()->id;
             $pengajuan->updated_by = auth()->user()->name;
+
+            //Upload File
+            if (isset($params['file_jib_2'])) {
+                $pengajuan->addMediaFromRequest('file_jib_2')->toMediaCollection('file_jib');
+                //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+            }
+
             $pengajuan->save();
 
             // insert M review
