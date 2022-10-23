@@ -25,6 +25,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="jenis_id" id ="jenis_id" disabled>
+                                        <option value=" ">
+                                            {{ !empty($pengajuan->mjenises->name) ? $pengajuan->mjenises->name : '' }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" name="kategori_id" id ="kategori_id" disabled>
@@ -38,7 +48,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4> SUPPORT </h4>
+                            <h4> SUPPORT CAPEX/OPEX </h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -92,6 +102,76 @@
                                            class="form-control @error('bcr') is-invalid @enderror @if (!$errors->has('bcr') && old('bcr')) is-valid @endif"
                                            value="{{ !empty($pengajuan->bcr) ? $pengajuan->bcr : null }}" disabled>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-md-right">Form Persetujuan</h4>
+                            <div class="card-header-action">
+                                <a class="btn btn-sm btn-success"
+                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
+                                            class="fas fa-file"></i> Create
+                                </a>
+                                <a class="btn btn-sm btn-danger"
+                                   href="#"><i class="fas fa-upload"></i>
+                                    Upload
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm ">
+                                    <thead class ="thead-dark text-center">
+                                    <th>Dokumen Type</th>
+                                    <th>Upload Date</th>
+                                    <th>Uploader</th>
+                                    <th>Download</th>
+                                    </thead>
+                                    <tbody class ="text-center">
+                                    <tr>
+                                        <td class ="text-left">Form Persetujuan</td>
+                                        <td>Monday 8 Agustus 2022 16:51:27</td>
+                                        <td>95509517</td>
+                                        <td><a><i class="fas fa-download"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-md-right">MoM</h4>
+                            <div class="card-header-action">
+                                <a class="btn btn-sm btn-success"
+                                   href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
+                                            class="fas fa-file"></i> Create
+                                </a>
+                                <a class="btn btn-sm btn-danger"
+                                   href="#"><i class="fas fa-upload"></i>
+                                    Upload
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm ">
+                                    <thead class ="thead-dark text-center">
+                                    <th>Dokumen Type</th>
+                                    <th>Upload Date</th>
+                                    <th>Uploader</th>
+                                    <th>Download</th>
+                                    </thead>
+                                    <tbody class ="text-center">
+                                    <tr>
+                                        <td class ="text-left">MoM</td>
+                                        <td>Monday 8 Agustus 2022 16:51:27</td>
+                                        <td>95509517</td>
+                                        <td><a><i class="fas fa-download"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

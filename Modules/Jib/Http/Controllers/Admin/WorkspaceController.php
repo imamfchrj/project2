@@ -91,15 +91,43 @@ class WorkspaceController extends JibController
 
     public function editworkspace($id)
     {
-//        return view('jib::edit');
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
-        if ($this->data['pengajuan']->kategori_id == 1) {
+        // BISNIS CAPEX
+        if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
             return view('jib::admin.workspace.edit_bisnis', $this->data);
+        // BISNIS OPEX
+        } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
+            return view('jib::admin.workspace.edit_bisnis_opex', $this->data);
+        // SUPPORT CAPEX/OPEX
         } else {
             return view('jib::admin.workspace.edit_support', $this->data);
         }
+    }
+
+    public function createform($id)
+    {
+        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+
+        // BISNIS CAPEX
+        if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
+            return view('jib::admin.workspace.createform_bisnis_capex', $this->data);
+        // BISNIS OPEX
+        } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
+            return view('jib::admin.workspace.createform_bisnis_opex', $this->data);
+        // SUPPORT CAPEX/OPEX
+        } else {
+            return view('jib::admin.workspace.createform_support', $this->data);
+        }
+    }
+
+    public function createmom($id)
+    {
+        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+
+        return view('jib::admin.workspace.createform_mom', $this->data);
+
     }
 
     /**
