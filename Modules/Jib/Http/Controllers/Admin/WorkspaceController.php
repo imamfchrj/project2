@@ -4,6 +4,8 @@ namespace Modules\Jib\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Modules\Jib\Http\Requests\Admin\PersetujuanRequest;
+use Modules\Jib\Http\Requests\Admin\MomRequest;
 
 use Modules\Jib\Http\Controllers\JibController;
 
@@ -127,6 +129,28 @@ class WorkspaceController extends JibController
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
 
         return view('jib::admin.workspace.createform_mom', $this->data);
+
+    }
+
+    public function storeform(PersetujuanRequest $request)
+    {
+        $params = $request->validated();
+
+        if ($pengajuan = $this->pengajuanRepository->create($params)) {
+            return redirect('admin/jib/workspace')
+                ->with('success', __('blog::pegnajuan.success_create_message'));
+        }
+
+    }
+
+    public function storemom(MomRequest $request)
+    {
+//        $params = $request->validated();
+//
+//        if ($pengajuan = $this->pengajuanRepository->create($params)) {
+//            return redirect('admin/jib/pengajuan')
+//                ->with('success', __('blog::pegnajuan.success_create_message'));
+//        }
 
     }
 

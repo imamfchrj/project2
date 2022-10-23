@@ -1,10 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: IT TELPRO
+ * Date: 23/10/2022
+ * Time: 16:59
+ */
 
 namespace Modules\Jib\Http\Requests\Admin;
 
+
 use Illuminate\Foundation\Http\FormRequest;
 
-class PengajuanRequest extends FormRequest
+class MomRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,19 +20,6 @@ class PengajuanRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method() == 'PUT') {
-            $title = 'required|unique:jib_pengajuan,title,' . $this->get('id');
-        } else {
-            $title = 'required|unique:jib_pengajuan,title';
-        }
-
-//        $metaFieldsRules = [];
-//        if (Post::META_FIELDS) {
-//            foreach (Post::META_FIELDS as $metaField => $metaFieldAttr) {
-//                $metaFieldsRules[$metaField] = $metaFieldAttr['validation_rules'];
-//            }
-//        }
-
         return array_merge([
             'initiator_id' => '',
             'jenis_id' => '',
@@ -63,7 +57,6 @@ class PengajuanRequest extends FormRequest
             'net_cf' => '',
             'suku_bunga' => '',
             'file_jib_4' => '',
-//            'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
             'note' => '',
         ]);
     }

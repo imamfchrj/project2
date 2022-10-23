@@ -5,10 +5,10 @@
             <h1>Form Persetujuan JIB</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item active"><a href="{{ url('admin/jib/pengajuan') }}">@lang('jib::pengajuan.manage_pengajuan')</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('admin/jib/workspace') }}">Manage Pengajuan JIB</a></div>
             </div>
         </div>
-        {!! Form::open(['url' => 'admin/jib/workspace']) !!}
+        {!! Form::open(['url' => 'admin/jib/workspace/storeform']) !!}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -205,5 +205,6 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </section>
 @endsection
