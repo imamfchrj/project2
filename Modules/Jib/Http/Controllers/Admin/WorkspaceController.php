@@ -146,7 +146,7 @@ class WorkspaceController extends JibController
     {
         $params = $request->validated();
 
-        if ($pengajuan = $this->persetujuanRepository->create($params)) {
+        if ($persetujuan = $this->persetujuanRepository->create($params)) {
             return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
@@ -155,12 +155,12 @@ class WorkspaceController extends JibController
 
     public function storemom(MomRequest $request)
     {
-//        $params = $request->validated();
-//
-//        if ($pengajuan = $this->pengajuanRepository->create($params)) {
-//            return redirect('admin/jib/pengajuan')
-//                ->with('success', __('blog::pegnajuan.success_create_message'));
-//        }
+        $params = $request->validated();
+
+        if ($mom = $this->momRepository->create($params)) {
+            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+                ->with('success', __('blog::pegnajuan.success_create_message'));
+        }
 
     }
 

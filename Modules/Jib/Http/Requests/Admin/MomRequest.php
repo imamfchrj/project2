@@ -21,7 +21,23 @@ class MomRequest extends FormRequest
     public function rules()
     {
         return array_merge([
-            'initiator_id' => '',
+            'pengajuan_id' => '',
+            'dasar_mom' => '',
+            'ruang_lingkup' => '',
+            'tanggal_mom' => '',
+            'spesifikasi' => '',
+            'venue' => '',
+            'kegiatan' => '',
+            'meeting_called' => '',
+            'lokasi' => '',
+            'meeting_type' => '',
+            'top' => '',
+            'facilitator' => '',
+            'aki' => '',
+            'attende' => '',
+            'catatan' => '',
+            'kelengkapan' => '',
+            'anggaran' => ''
         ]);
     }
 

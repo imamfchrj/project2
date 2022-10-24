@@ -190,8 +190,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-sm ">
                                     <thead class ="thead-dark text-center">
-                                    <th>No DRP</th>
-                                    <th>Nama Kegiatan</th>
+                                    <th>Dasar MoM</th>
                                     <th>Download PDF</th>
                                     <th>Created Date</th>
                                     <th>Created By</th>
@@ -200,8 +199,7 @@
                                     <tbody class ="text-center">
                                     @forelse ($mom as $moms)
                                         <tr>
-                                            <td>{{ $moms->no_drp }}</td>
-                                            <td>{{ $moms->kegiatan }}</td>
+                                            <td>{{ $moms->dasar_mom }}</td>
                                             <td><a class="btn btn-sm btn-light"
                                                    href="">Generate PDF
                                                 </a></td>
