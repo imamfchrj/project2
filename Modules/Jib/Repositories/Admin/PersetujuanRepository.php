@@ -17,23 +17,13 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan = new Persetujuan();
         $persetujuan->pengajuan_id = $params['pengajuan_id'];
         $persetujuan->no_drp = $params['no_drp'];
-        $persetujuan->akun = $params['akun'];
-        $persetujuan->est_revenue = $params['est_revenue'];
         $persetujuan->kegiatan = $params['kegiatan'];
-        $persetujuan->irr = $params['irr'];
+        $persetujuan->akun = $params['akun'];
         $persetujuan->customer_id = $params['customer_id'];
-        $persetujuan->npv = $params['npv'];
         $persetujuan->lokasi = $params['lokasi'];
-        $persetujuan->playback_period = $params['playback_period'];
-        $persetujuan->waktu_kerja = $params['waktu_kerja'];
-        $persetujuan->wacc = $params['wacc'];
-        $persetujuan->konstribusi_fee = $params['konstribusi_fee'];
         $persetujuan->analisa_risk = $params['analisa_risk'];
-        $persetujuan->skema = $params['skema'];
         $persetujuan->score_risk = $params['score_risk'];
-        $persetujuan->nilai_capex = $params['nilai_capex'];
         $persetujuan->risk_mitigasi = $params['risk_mitigasi'];
-        $persetujuan->tot_invest = $params['tot_invest'];
         $persetujuan->score_mitigasi = $params['score_mitigasi'];
         $persetujuan->sow = $params['sow'];
         $persetujuan->kesimpulan = $params['kesimpulan'];
@@ -41,6 +31,43 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan->catatan = $params['catatan'];
         $persetujuan->created_by = auth()->user()->id;
         $persetujuan->updated_by = auth()->user()->name;
+
+        // BISNIS CAPEX
+        if (!empty($params['irr'])){
+            $persetujuan->irr = $params['irr'];
+        }
+        if (!empty($params['est_revenue'])){
+            $persetujuan->est_revenue = $params['est_revenue'];
+        }
+        if (!empty($params['npv'])){
+            $persetujuan->npv = $params['npv'];
+        }
+        if (!empty($params['playback_period'])){
+            $persetujuan->playback_period = $params['playback_period'];
+        }
+        if (!empty($params['waktu_kerja'])) {
+            $persetujuan->waktu_kerja = $params['waktu_kerja'];
+        }
+        if (!empty($params['wacc'])) {
+            $persetujuan->wacc = $params['wacc'];
+        }
+        if (!empty($params['konstribusi_fee'])) {
+            $persetujuan->konstribusi_fee = $params['konstribusi_fee'];
+        }
+        if (!empty($params['skema'])) {
+            $persetujuan->skema = $params['skema'];
+        }
+        if (!empty($params['nilai_capex'])) {
+            $persetujuan->nilai_capex = $params['nilai_capex'];
+        }
+        if (!empty($params['tot_invest'])) {
+            $persetujuan->tot_invest = $params['tot_invest'];
+        }
+
+        // SUPPORT CAPEX/OPEX
+        if (!empty($params['bcr'])){
+            $persetujuan->bcr = $params['bcr'];
+        }
         return $persetujuan->save();
 
     }

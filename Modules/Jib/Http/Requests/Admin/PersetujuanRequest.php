@@ -43,7 +43,9 @@ class PersetujuanRequest extends FormRequest
             'sow' => '',
             'kesimpulan' => '',
             'delivery_time' => '',
-            'catatan' => ''
+            'catatan' => '',
+
+            'bcr' => ''
         ]);
     }
 
