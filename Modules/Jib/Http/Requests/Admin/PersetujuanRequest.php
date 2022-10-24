@@ -45,6 +45,11 @@ class PersetujuanRequest extends FormRequest
             'delivery_time' => '',
             'catatan' => '',
 
+            'top' => '',
+            'beban' => '',
+            'net_cf' => '',
+            'suku_bunga' => '',
+
             'bcr' => ''
         ]);
     }

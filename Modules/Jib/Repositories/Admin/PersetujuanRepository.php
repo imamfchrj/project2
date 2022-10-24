@@ -21,8 +21,12 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan->akun = $params['akun'];
         $persetujuan->customer_id = $params['customer_id'];
         $persetujuan->lokasi = $params['lokasi'];
-        $persetujuan->analisa_risk = $params['analisa_risk'];
-        $persetujuan->score_risk = $params['score_risk'];
+        if (!empty($params['analisa_risk'])){
+            $persetujuan->analisa_risk = $params['analisa_risk'];
+        }
+        if (!empty($params['score_risk'])){
+            $persetujuan->score_risk = $params['score_risk'];
+        }
         $persetujuan->risk_mitigasi = $params['risk_mitigasi'];
         $persetujuan->score_mitigasi = $params['score_mitigasi'];
         $persetujuan->sow = $params['sow'];
@@ -63,6 +67,22 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         if (!empty($params['tot_invest'])) {
             $persetujuan->tot_invest = $params['tot_invest'];
         }
+
+
+        // BISNIS OPEX
+        if (!empty($params['top'])) {
+            $persetujuan->top = $params['top'];
+        }
+        if (!empty($params['beban'])) {
+            $persetujuan->beban = $params['beban'];
+        }
+        if (!empty($params['net_cf'])) {
+            $persetujuan->net_cf = $params['net_cf'];
+        }
+        if (!empty($params['suku_bunga'])) {
+            $persetujuan->suku_bunga = $params['suku_bunga'];
+        }
+
 
         // SUPPORT CAPEX/OPEX
         if (!empty($params['bcr'])){

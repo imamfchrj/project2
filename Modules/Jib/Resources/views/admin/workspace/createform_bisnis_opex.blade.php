@@ -8,6 +8,7 @@
                 <div class="breadcrumb-item active"><a href="{{ url('admin/jib/workspace') }}">Manage Pengajuan JIB</a></div>
             </div>
         </div>
+        {!! Form::open(['url' => 'admin/jib/workspace/storeform']) !!}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -19,9 +20,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">No DRK</label>
                                 <div class="col-sm-4">
+                                    <input type="hidden" name="pengajuan_id"
+                                           value="{{ old('pengajuan_id', !empty($pengajuan) ? $pengajuan->id : '') }}">
                                     <input type="text" name="no_drp"
                                            class="form-control @error('no_drp') is-invalid @enderror @if (!$errors->has('no_drp') && old('no_drp')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" readonly>
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Term of Payment</label>
@@ -43,7 +46,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="beban"
                                            class="form-control @error('beban') is-invalid @enderror @if (!$errors->has('beban') && old('beban')) is-valid @endif"
-                                           value="" disabled>
+                                           value="">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -51,20 +54,20 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="kegiatan"
                                            class="form-control @error('kegiatan') is-invalid @enderror @if (!$errors->has('kegiatan') && old('kegiatan')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" readonly>
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Profit Margin (%)</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="profit_margin"
                                            class="form-control @error('profit_margin') is-invalid @enderror @if (!$errors->has('profit_margin') && old('profit_margin')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->profit_margin : '' }}" disabled>
+                                           value="{{ !empty($pengajuan) ? $pengajuan->profit_margin : '' }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Customer</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" name="customer_id" id ="customer_id" disabled>
+                                    <select class="form-control" name="customer_id" id ="customer_id" readonly>
                                         <option value=" ">
                                             {{ !empty($pengajuan->mcustomers->name) ? $pengajuan->mcustomers->name : '' }}
                                         </option>
@@ -75,7 +78,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="net_cf"
                                            class="form-control @error('net_cf') is-invalid @enderror @if (!$errors->has('net_cf') && old('net_cf')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->net_cf : '' }}" disabled>
+                                           value="{{ !empty($pengajuan) ? $pengajuan->net_cf : '' }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -98,7 +101,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="nilai_capex"
                                            class="form-control @error('nilai_capex') is-invalid @enderror @if (!$errors->has('nilai_capex') && old('nilai_capex')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" readonly>
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Resiko</label>
@@ -157,5 +160,6 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </section>
 @endsection
