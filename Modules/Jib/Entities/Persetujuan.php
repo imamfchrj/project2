@@ -58,4 +58,9 @@ class Persetujuan extends Model
     {
         return \Modules\Jib\Database\factories\PersetujuanFactory::new();
     }
+
+    public function mcustomers()
+    {
+        return $this->belongsTo('Modules\Jib\Entities\Mcustomer', 'customer_id', 'id');
+    }
 }

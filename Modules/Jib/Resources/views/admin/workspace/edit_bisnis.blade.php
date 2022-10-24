@@ -168,21 +168,48 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            {{--<div class="table-responsive">--}}
+                                {{--<table class="table table-bordered table-sm ">--}}
+                                    {{--<thead class ="thead-dark text-center">--}}
+                                    {{--<th>Dokumen Type</th>--}}
+                                    {{--<th>Upload Date</th>--}}
+                                    {{--<th>Uploader</th>--}}
+                                    {{--<th>Download</th>--}}
+                                    {{--</thead>--}}
+                                    {{--<tbody class ="text-center">--}}
+                                    {{--<tr>--}}
+                                        {{--<td class ="text-left">Form Persetujuan</td>--}}
+                                        {{--<td>Monday 8 Agustus 2022 16:51:27</td>--}}
+                                        {{--<td>95509517</td>--}}
+                                        {{--<td><a><i class="fas fa-download"></i></a></td>--}}
+                                    {{--</tr>--}}
+                                    {{--</tbody>--}}
+                                {{--</table>--}}
+                            {{--</div>--}}
                             <div class="table-responsive">
                                 <table class="table table-bordered table-sm ">
                                     <thead class ="thead-dark text-center">
-                                    <th>Dokumen Type</th>
-                                    <th>Upload Date</th>
-                                    <th>Uploader</th>
-                                    <th>Download</th>
+                                    <th>No DRP</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Download PDF</th>
+                                    <th>Created Date</th>
+                                    <th>Created By</th>
+                                    <th>Download Full Sign</th>
                                     </thead>
                                     <tbody class ="text-center">
-                                    <tr>
-                                        <td class ="text-left">Form Persetujuan</td>
-                                        <td>Monday 8 Agustus 2022 16:51:27</td>
-                                        <td>95509517</td>
-                                        <td><a><i class="fas fa-download"></i></a></td>
-                                    </tr>
+                                    @forelse ($persetujuan as $setuju)
+                                        <tr>
+                                            <td>{{ $setuju->no_drp }}</td>
+                                            <td>{{ $setuju->kegiatan }}</td>
+                                            <td><a class="btn btn-sm btn-light"
+                                                   href="">Generate PDF
+                                                </a></td>
+                                            <td>{{ $setuju->created_at }}</td>
+                                            <td>{{ $setuju->updated_by }}</td>
+                                            <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
+                                        </tr>
+                                    @empty
+                                    @endforelse
                                     </tbody>
                                 </table>
                             </div>

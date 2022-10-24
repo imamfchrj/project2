@@ -102,6 +102,7 @@ class WorkspaceController extends JibController
     public function editworkspace($id)
     {
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
         // BISNIS CAPEX
@@ -145,7 +146,7 @@ class WorkspaceController extends JibController
         $params = $request->validated();
 
         if ($pengajuan = $this->persetujuanRepository->create($params)) {
-            return redirect('admin/jib/workspace')
+            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
 

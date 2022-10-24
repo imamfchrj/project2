@@ -24,7 +24,7 @@
                                            value="{{ old('pengajuan_id', !empty($pengajuan) ? $pengajuan->id : '') }}">
                                     <input type="text" name="no_drp"
                                            class="form-control @error('no_drp') is-invalid @enderror @if (!$errors->has('no_drp') && old('no_drp')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->no_drp) ? $pengajuan->no_drp : '' }}" readonly>
                                 </div>
 
                                 <label class="col-sm-2 col-form-label"><b>ANALISA KELAYAKAN BISNIS</b></label>
@@ -41,7 +41,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="est_revenue"
                                            class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" disabled>
+                                           value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -49,20 +49,20 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="kegiatan"
                                            class="form-control @error('kegiatan') is-invalid @enderror @if (!$errors->has('kegiatan') && old('kegiatan')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->kegiatan) ? $pengajuan->kegiatan : '' }}" readonly>
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">IRR</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="irr"
                                            class="form-control @error('irr') is-invalid @enderror @if (!$errors->has('irr') && old('irr')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->irr : '' }}" disabled>
+                                           value="{{ !empty($pengajuan) ? $pengajuan->irr : '' }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Customer</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" name="customer_id" id ="customer_id" disabled>
+                                    <select class="form-control" name="customer_id" id ="customer_id" readonly>
                                         <option value=" ">
                                             {{ !empty($pengajuan->mcustomers->name) ? $pengajuan->mcustomers->name : '' }}
                                         </option>
@@ -73,7 +73,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="npv"
                                            class="form-control @error('npv') is-invalid @enderror @if (!$errors->has('npv') && old('npv')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->npv : '' }}" disabled>
+                                           value="{{ !empty($pengajuan) ? $pengajuan->npv : '' }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -141,7 +141,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="nilai_capex"
                                            class="form-control @error('nilai_capex') is-invalid @enderror @if (!$errors->has('nilai_capex') && old('nilai_capex')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" readonly>
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Resiko Setelah Mitigasi</label>
