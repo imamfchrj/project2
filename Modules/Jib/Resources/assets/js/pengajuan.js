@@ -34,3 +34,6 @@ $('#kategori_id').on('change', function () {
     // return false;
 });
 
+$('#btn_pengajuan_draft').click(function(){
+    $('#draft_status').val("true");
+});

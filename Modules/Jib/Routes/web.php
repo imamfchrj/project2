@@ -28,6 +28,7 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
 
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');
     Route::get('pengajuan/{id}/restore', 'PengajuanController@restore')->name('pengajuan.restore');
+    Route::get('pengajuan/{uid}/download', 'PengajuanController@download')->name('pengajuan.download');
     Route::resource('pengajuan', 'PengajuanController');
 
     Route::resource('selesai', 'SelesaiController');

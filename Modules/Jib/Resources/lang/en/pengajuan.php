@@ -47,6 +47,7 @@ return [
     'update_card_title' => 'Update pengajuan',
 
     'success_create_message' => 'The pengajuan has been created.',
+    'success_create_draft_message' => 'The pengajuan has been created and draft.',
     'success_update_message' => 'The pengajuan has been updated.',
     'fail_update_message' => 'Could not update the pengajuan.',
     'success_delete_message' => 'The pengajuan has been deleted.',

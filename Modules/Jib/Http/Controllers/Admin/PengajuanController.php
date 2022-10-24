@@ -16,6 +16,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\JenisRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\Support\MediaStream;
 
 use App\Authorizable;
 
@@ -140,6 +142,17 @@ class PengajuanController extends JibController
         }
     }
 
+    public function store_draft(PengajuanRequest $request)
+    {
+        $params = $request->validated();
+
+        if ($pengajuan = $this->pengajuanRepository->create($params)) {
+
+            return redirect('admin/jib/pengajuan')
+                ->with('success', __('blog::pegnajuan.success_create_draf_message'));
+        }
+    }
+
     /**
      * Show the specified resource.
      * @param int $id
@@ -147,8 +160,24 @@ class PengajuanController extends JibController
      */
     public function show($id)
     {
-        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        // $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        // $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
+
+        $pengajuan = $this->pengajuanRepository->findById($id);
+        $notes=$this->reviewRepository->findByPengajuanId($id);
+
+        // if ($this->data['pengajuan']['pengajuan']->kategori_id == 1) {
+        //     // return view('jib::admin.pengajuan.show_bisnis', $this->data);
+        //     return view('jib::admin.pengajuan.show_bisnis', compact(['pengajuan','notes']));
+        // } else {
+        //     return view('jib::admin.pengajuan.show_support', $this->data);
+        // }
+
+        // dd($pengajuan);
+        // $file_jib = $pengajuan['file_jib'];
+        $this->data['pengajuan']=$pengajuan['pengajuan'];
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
+        $this->data['file_jib'] = $pengajuan['file_jib'];
 
         if ($this->data['pengajuan']->kategori_id == 1) {
             // BISNIS CAPEX
@@ -164,6 +193,18 @@ class PengajuanController extends JibController
 
     }
 
+   public function download($uid)
+   {
+       # code...
+        $filedownload = Media::where('uuid',$uid)->first();
+       return response()->download($filedownload->getPath());
+
+   }
+
+   public function down(Media $mediaItem)
+   {
+      return $mediaItem;
+   }
     /**
      * Show the form for editing the specified resource.
      * @param int $id

@@ -73,3 +73,6 @@ $(document).ready(function(){
     $("#group-4").hide();
 });
 
+$('#btn_pengajuan_draft').click(function(){
+    $('#draft_status').val(true);
+});

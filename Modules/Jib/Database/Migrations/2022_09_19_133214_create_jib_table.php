@@ -25,8 +25,13 @@ class CreateJibTable extends Migration
             $table->string('updated_by');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained('users');
         });
+
+        // Schema::table('m_initiator', function (Blueprint $table) {
+        //     $table->foreignId(''user_id'')->constrained('users')->onDelete('cascade');
+        // });
 
         Schema::create('m_pemeriksa', function (Blueprint $table) {
             $table->integer('id')->primary();

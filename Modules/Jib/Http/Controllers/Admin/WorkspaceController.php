@@ -101,9 +101,12 @@ class WorkspaceController extends JibController
 
     public function editworkspace($id)
     {
-        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $pengajuan = $this->pengajuanRepository->findById($id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
         $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
         $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
         // BISNIS CAPEX

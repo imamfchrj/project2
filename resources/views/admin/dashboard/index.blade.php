@@ -2,11 +2,104 @@
 
 @section('content')
 <section class="section">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+              <div class="card-icon bg-danger">
+                <i class="far fa-newspaper"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4>BUDGET CAPEX</h4>
+                </div>
+                <div class="card-body">
+                  Rp. 668,56Bn
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+              <i class="far fa-user"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Realisasi CAPEX</h4>
+              </div>
+              <div class="card-body">
+                Rp. 59,80Bn
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+              <div class="card-icon bg-success">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4>Available CAPEX</h4>
+                </div>
+                <div class="card-body">
+                    Rp. 608,76Bn
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+              <div class="card-icon bg-success">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4>% Realisasi CAPEX</h4>
+                </div>
+                <div class="card-body">
+                  8.94%
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+              <div class="card-icon bg-danger">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4>Nilai CAPEX</h4>
+                </div>
+                <div class="card-body">
+                  {{ Str::rupiah($nilai_capex) }}
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-warning">
+              <i class="far fa-file"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>EST. REVENUE</h4>
+              </div>
+              <div class="card-body">
+                {{-- 1,201 --}}
+                {{ Str::rupiah($rev) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="card card-statistic-2">
         <div class="card-stats">
-          <div class="card-stats-title">Order Statistics -
+          <div class="card-stats-title">JIB Statistics -
             <div class="dropdown d-inline">
               <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">August</a>
               <ul class="dropdown-menu dropdown-menu-sm">
@@ -28,17 +121,25 @@
           </div>
           <div class="card-stats-items">
             <div class="card-stats-item">
-              <div class="card-stats-item-count">24</div>
-              <div class="card-stats-item-label">Pending</div>
+              <div class="card-stats-item-count">{{$doc_submit}}</div>
+              <div class="card-stats-item-label">Submit</div>
             </div>
             <div class="card-stats-item">
-              <div class="card-stats-item-count">12</div>
-              <div class="card-stats-item-label">Shipping</div>
+              <div class="card-stats-item-count">{{$doc_review}}</div>
+              <div class="card-stats-item-label">Review</div>
             </div>
             <div class="card-stats-item">
-              <div class="card-stats-item-count">23</div>
-              <div class="card-stats-item-label">Completed</div>
+              <div class="card-stats-item-count">{{$doc_approval}}</div>
+              <div class="card-stats-item-label">Approval</div>
             </div>
+            <div class="card-stats-item">
+                <div class="card-stats-item-count">{{$doc_closed}}</div>
+                <div class="card-stats-item-label">Closed</div>
+            </div>
+            <div class="card-stats-item">
+              <div class="card-stats-item-count">{{$doc_total}}</div>
+              <div class="card-stats-item-label">Total</div>
+          </div>
           </div>
         </div>
         <div class="card-icon shadow-primary bg-primary">
@@ -46,15 +147,15 @@
         </div>
         <div class="card-wrap">
           <div class="card-header">
-            <h4>Total Orders</h4>
+            <h4>Average Completion JIB /day</h4>
           </div>
           <div class="card-body">
-            59
+            {{$doc_avg}}
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-12">
+    {{-- <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">
         <div class="card-chart">
           <canvas id="balance-chart" height="80"></canvas>
@@ -71,8 +172,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-12">
+    </div> --}}
+    {{-- <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">
         <div class="card-chart">
           <canvas id="sales-chart" height="80"></canvas>
@@ -89,9 +190,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
-  <div class="row">
+  {{-- <div class="row">
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
@@ -218,151 +319,34 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-12 col-md-6 col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h4>Best Products</h4>
+          <h4>Allocation</h4>
         </div>
         <div class="card-body">
-          <div class="owl-carousel owl-theme" id="products-carousel">
-            <div>
-              <div class="product-item pb-3">
-                <div class="product-image">
-                  <img alt="image" src="{{ asset('admin/stisla/assets/img/products/product-4-50.png') }}" class="img-fluid">
-                </div>
-                <div class="product-details">
-                  <div class="product-name">iBook Pro 2018</div>
-                  <div class="product-review">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <div class="text-muted text-small">67 Sales</div>
-                  <div class="product-cta">
-                    <a href="#" class="btn btn-primary">Detail</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-item">
-                <div class="product-image">
-                  <img alt="image" src="{{ asset('admin/stisla/assets/img/products/product-3-50.png') }}" class="img-fluid">
-                </div>
-                <div class="product-details">
-                  <div class="product-name">oPhone S9 Limited</div>
-                  <div class="product-review">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half"></i>
-                  </div>
-                  <div class="text-muted text-small">86 Sales</div>
-                  <div class="product-cta">
-                    <a href="#" class="btn btn-primary">Detail</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-item">
-                <div class="product-image">
-                  <img alt="image" src="{{ asset('admin/stisla/assets/img/products/product-1-50.png') }}" class="img-fluid">
-                </div>
-                <div class="product-details">
-                  <div class="product-name">Headphone Blitz</div>
-                  <div class="product-review">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                  </div>
-                  <div class="text-muted text-small">63 Sales</div>
-                  <div class="product-cta">
-                    <a href="#" class="btn btn-primary">Detail</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <canvas id="myChart3"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-12 col-md-6 col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h4>Top Countries</h4>
+          <h4>Status JIB</h4>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="text-title mb-2">July</div>
-              <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
-                <li class="media">
-                  <img class="img-fluid mt-1 img-shadow" src="{{ asset('admin/stisla/plugins/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
-                  <div class="media-body ml-3">
-                    <div class="media-title">Indonesia</div>
-                    <div class="text-small text-muted">3,282 <i class="fas fa-caret-down text-danger"></i></div>
-                  </div>
-                </li>
-                <li class="media">
-                  <img class="img-fluid mt-1 img-shadow" src="{{ asset('admin/stisla/plugins/flag-icon-css/flags/4x3/my.svg') }}" alt="image" width="40">
-                  <div class="media-body ml-3">
-                    <div class="media-title">Malaysia</div>
-                    <div class="text-small text-muted">2,976 <i class="fas fa-caret-down text-danger"></i></div>
-                  </div>
-                </li>
-                <li class="media">
-                  <img class="img-fluid mt-1 img-shadow" src="{{ asset('admin/stisla/plugins/flag-icon-css/flags/4x3/us.svg') }}" alt="image" width="40">
-                  <div class="media-body ml-3">
-                    <div class="media-title">United States</div>
-                    <div class="text-small text-muted">1,576 <i class="fas fa-caret-up text-success"></i></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="col-sm-6 mt-sm-0 mt-4">
-              <div class="text-title mb-2">August</div>
-              <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
-                <li class="media">
-                  <img class="img-fluid mt-1 img-shadow" src="{{ asset('admin/stisla/plugins/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
-                  <div class="media-body ml-3">
-                    <div class="media-title">Indonesia</div>
-                    <div class="text-small text-muted">3,486 <i class="fas fa-caret-up text-success"></i></div>
-                  </div>
-                </li>
-                <li class="media">
-                  <img class="img-fluid mt-1 img-shadow" src="{{ asset('admin/stisla/plugins/flag-icon-css/flags/4x3/ps.svg') }}" alt="image" width="40">
-                  <div class="media-body ml-3">
-                    <div class="media-title">Palestine</div>
-                    <div class="text-small text-muted">3,182 <i class="fas fa-caret-up text-success"></i></div>
-                  </div>
-                </li>
-                <li class="media">
-                  <img class="img-fluid mt-1 img-shadow" src="{{ asset('admin/stisla/plugins/flag-icon-css/flags/4x3/de.svg') }}" alt="image" width="40">
-                  <div class="media-body ml-3">
-                    <div class="media-title">Germany</div>
-                    <div class="text-small text-muted">2,317 <i class="fas fa-caret-down text-danger"></i></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <canvas id="myChart4"></canvas>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4>Invoices</h4>
+          <h4>JIB ONLINE</h4>
           <div class="card-header-action">
             <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
           </div>
@@ -371,110 +355,137 @@
           <div class="table-responsive table-invoice">
             <table class="table table-striped">
               <tr>
-                <th>Invoice ID</th>
-                <th>Customer</th>
+                <th>Kegiatan</th>
+                <th>Inisiator</th>
+                <th>Pembagian</th>
+                <th>Nilai CAPEX</th>
+                <th>Est. Revenue</th>
+                <th>IRR</th>
                 <th>Status</th>
-                <th>Due Date</th>
-                <th>Action</th>
+                <th>Year</th>
               </tr>
+              @foreach ($jib as $item)
               <tr>
+                <td><a href="#">{{ $item->kegiatan}}</a></td>
+                <td class="font-weight-600">{{ $item->nama_sub_unit}}</td>
+                <td class="font-weight-600">{{ $item->kategori_id}}</td>
+                <td class="font-weight-600">{{ $item->nilai_capex}}</td>
+                <td class="font-weight-600">{{ $item->est_revenue}}</td>
+                <td class="font-weight-600">{{ $item->irr}}</td>
+                <td class="font-weight-600">{{ $item->status_id}}</td>
+                <td class="font-weight-600"> {{\Carbon\Carbon::parse($item->created_at)->format('Y')}}</td>
+                {{-- <td>
+                  <a href="#" class="btn btn-primary">Detail</a>
+                </td> --}}
+                {{-- <td><div class="badge badge-warning">Unpaid</div></td> --}}
+              </tr>
+              {{-- <tr>
                 <td><a href="#">INV-87239</a></td>
+                <td class="font-weight-600">Kusnadi</td>
+                <td class="font-weight-600">Kusnadi</td>
                 <td class="font-weight-600">Kusnadi</td>
                 <td><div class="badge badge-warning">Unpaid</div></td>
                 <td>July 19, 2018</td>
+                <td class="font-weight-600">Kusnadi</td>
+                <td class="font-weight-600">Kusnadi</td>
                 <td>
                   <a href="#" class="btn btn-primary">Detail</a>
                 </td>
-              </tr>
-              <tr>
-                <td><a href="#">INV-48574</a></td>
-                <td class="font-weight-600">Hasan Basri</td>
-                <td><div class="badge badge-success">Paid</div></td>
-                <td>July 21, 2018</td>
-                <td>
-                  <a href="#" class="btn btn-primary">Detail</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="#">INV-76824</a></td>
-                <td class="font-weight-600">Muhamad Nuruzzaki</td>
-                <td><div class="badge badge-warning">Unpaid</div></td>
-                <td>July 22, 2018</td>
-                <td>
-                  <a href="#" class="btn btn-primary">Detail</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="#">INV-84990</a></td>
-                <td class="font-weight-600">Agung Ardiansyah</td>
-                <td><div class="badge badge-warning">Unpaid</div></td>
-                <td>July 22, 2018</td>
-                <td>
-                  <a href="#" class="btn btn-primary">Detail</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="#">INV-87320</a></td>
-                <td class="font-weight-600">Ardian Rahardiansyah</td>
-                <td><div class="badge badge-success">Paid</div></td>
-                <td>July 28, 2018</td>
-                <td>
-                  <a href="#" class="btn btn-primary">Detail</a>
-                </td>
-              </tr>
+              </tr> --}}
+              @endforeach
             </table>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card card-hero">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="far fa-question-circle"></i>
-          </div>
-          <h4>14</h4>
-          <div class="card-description">Customers need help</div>
-        </div>
-        <div class="card-body p-0">
-          <div class="tickets-list">
-            <a href="#" class="ticket-item">
-              <div class="ticket-title">
-                <h4>My order hasn't arrived yet</h4>
-              </div>
-              <div class="ticket-info">
-                <div>Laila Tazkiah</div>
-                <div class="bullet"></div>
-                <div class="text-primary">1 min ago</div>
-              </div>
-            </a>
-            <a href="#" class="ticket-item">
-              <div class="ticket-title">
-                <h4>Please cancel my order</h4>
-              </div>
-              <div class="ticket-info">
-                <div>Rizal Fakhri</div>
-                <div class="bullet"></div>
-                <div>2 hours ago</div>
-              </div>
-            </a>
-            <a href="#" class="ticket-item">
-              <div class="ticket-title">
-                <h4>Do you see my mother?</h4>
-              </div>
-              <div class="ticket-info">
-                <div>Syahdan Ubaidillah</div>
-                <div class="bullet"></div>
-                <div>6 hours ago</div>
-              </div>
-            </a>
-            <a href="features-tickets.html" class="ticket-item ticket-more">
-              View All <i class="fas fa-chevron-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+<script>
+
+
+//     const ctx = document.getElementById('myChart3').getContext('2d');
+//     const myChart = new Chart(ctx, {
+//     type: 'doughnut',
+//     data: {
+//         labels: _labels
+//         datasets: [{
+//             data: _datas
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 1)',
+//                 'rgba(255, 206, 86, 1)'
+//             ],
+//             hoverOffset: 4
+//         }]
+//     },
+//     options: {
+//         responsive: true,
+//     }
+//   });
+
+const d_chart = document.getElementById('myChart3').getContext('2d');
+const bisnis = {!! json_encode($bisnis) !!};
+const support = {!! json_encode($support) !!};
+const allocation_chart = new Chart(d_chart, {
+    type: 'doughnut',
+    data: {
+        labels: ['Bisnis', 'Support'],
+        datasets: [{
+            // label: [
+            //     enabled: true,
+            //     formatter: function(val, opt) {
+            //         return parseInt(val) + '%';
+            //     }
+            // ],
+            data: [
+                {{ $bisnis }},
+                {{ $support }},
+
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        responsive: true,
+    }
+  });
+
+
+    const ctx1 = document.getElementById('myChart4').getContext('2d');
+    const review = {!! json_encode($doc_review) !!};
+    const approval = {!! json_encode($doc_approval) !!};
+    const closed = {!! json_encode($doc_closed) !!};
+
+    const myChart1 = new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Review', 'Approval', 'Closed'],
+            datasets: [{
+                label: '# of Votes',
+                data: [
+                        {{$doc_review}},
+                        {{$doc_approval}},
+                        {{$doc_closed}},
+                ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+  });
+</script>
 </section>
+
 @endsection
+
