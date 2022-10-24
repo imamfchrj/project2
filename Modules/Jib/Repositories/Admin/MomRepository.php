@@ -13,212 +13,87 @@ class MomRepository implements MomRepositoryInterface
 
     public function create($params = [])
     {
-//        // Format Number JIB
-//        $tahun = date('Y');
-//        $array_bulan = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-//        $bulan = $array_bulan[date('n')];
-//
-//        // BISNIS CAPEX / OPEX
-//        if ($params['kategori_id'] == 1) {
-//            // Format Number Bisnis
-//            $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 1)
-//                ->orderBy('id', 'DESC')
-//                ->first();
-//            if (empty($last_pegnajuan)) {
-//                $new_number = sprintf("%05d", 00001);
-//            } else {
-//                $last_number = $last_pegnajuan->number;
-//                $new_numbers = $last_number + 1;
-//                $new_number = sprintf("%05d", $new_numbers);
-//            }
-//            $no_jib = $new_number . '/JIB/B/' . $bulan . '/' . $tahun;
-//
-//            // BISNIS CAPEX
-//            if ($params['jenis_id'] == 1) {
-//                // Insert Pengajuan
-//                $pengajuan = new Pengajuan();
-//                $pengajuan->initiator_id = $params['initiator_id'];
-//                $pengajuan->jenis_id = $params['jenis_id'];
-//                $pengajuan->kategori_id = $params['kategori_id'];
-//                $pengajuan->nama_posisi = $params['nama_posisi'];
-//                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-//                $pengajuan->tahun = $tahun;
-//                $pengajuan->number = $new_number;
-//                $pengajuan->jib_number = $no_jib;
-//                $pengajuan->kegiatan = $params['kegiatan_1'];
-//                $pengajuan->segment_id = $params['segment_id_1'];
-//                $pengajuan->customer_id = $params['customer_id_1'];
-//                $pengajuan->periode_up = date('Y-m-d H:i:s');
-//                $pengajuan->no_drp = $params['no_drp_1'];
-//                $pengajuan->nilai_capex = $params['nilai_capex_1'];
-//                $pengajuan->est_revenue = $params['est_revenue'];
-//                $pengajuan->irr = $params['irr'];
-//                $pengajuan->npv = $params['npv'];
-//                $pengajuan->pbp = $params['pbp'];
-//                $pengajuan->status_id = 1;
-//                $pengajuan->user_id = auth()->user()->id;
-//                $pengajuan->created_by = auth()->user()->id;
-//                $pengajuan->updated_by = auth()->user()->name;
-//                $pengajuan->save();
-//                // BISNIS OPEX
-//            } else {
-//                // Insert Pengajuan
-//                $pengajuan = new Pengajuan();
-//                $pengajuan->initiator_id = $params['initiator_id'];
-//                $pengajuan->jenis_id = $params['jenis_id'];
-//                $pengajuan->kategori_id = $params['kategori_id'];
-//                $pengajuan->nama_posisi = $params['nama_posisi'];
-//                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-//                $pengajuan->tahun = $tahun;
-//                $pengajuan->number = $new_number;
-//                $pengajuan->jib_number = $no_jib;
-//                $pengajuan->kegiatan = $params['kegiatan_4'];
-//                $pengajuan->segment_id = $params['segment_id_4'];
-//                $pengajuan->customer_id = $params['customer_id_4'];
-//                $pengajuan->periode_up = date('Y-m-d H:i:s');
-//                $pengajuan->no_drp = $params['no_drp_4'];
-//                $pengajuan->nilai_capex = $params['nilai_capex_4'];
-//                $pengajuan->est_revenue = $params['est_revenue_4'];
-//                $pengajuan->cost = $params['cost'];
-//                $pengajuan->profit_margin = $params['profit_margin'];
-//                $pengajuan->net_cf = $params['net_cf'];
-//                $pengajuan->suku_bunga = $params['suku_bunga'];
-//                $pengajuan->status_id = 1;
-//                $pengajuan->user_id = auth()->user()->id;
-//                $pengajuan->created_by = auth()->user()->id;
-//                $pengajuan->updated_by = auth()->user()->name;
-//                $pengajuan->save();
-//            }
-//
-//            if ($pengajuan) {
-//                // Insert Review
-//                if (!empty($params['note'])) {
-//                    $review = new Review();
-//                    $review->pengajuan_id = $pengajuan->id;
-//                    $review->nik_gsd = auth()->user()->nik_gsd;
-//                    $review->nama_karyawan = auth()->user()->name;
-//                    $review->status = 'SUBMIT';
-//                    $review->notes = $params['note'];
-//                    $review->save();
-//                }
-//                // Insert M_Reviewer
-//                if ($params['jenis_id'] == 1) {
-//                    if ($params['nilai_capex_1'] <= 3000000000) {
-//                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-//                    } else if ($params['nilai_capex_1'] > 3000000000 && $params['nilai_capex_1'] <= 5000000000) {
-//                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-//                    } else {
-//                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-//                    }
-//                }else {
-//                    if ($params['nilai_capex_4'] <= 3000000000) {
-//                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-//                    } else if ($params['nilai_capex_4'] > 3000000000 && $params['nilai_capex_4'] <= 5000000000) {
-//                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-//                    } else {
-//                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-//                    }
-//                }
-//
-//                $reviewer = [];
-//                foreach ($pemeriksa as $pem) {
-//                    if ($pem->urutan == 1) {
-//                        $last_status = "OPEN";
-//                        $pengajuan->pemeriksa_id = $pem->id;
-//                        $pengajuan->save();
-//                    } else {
-//                        $last_status = "QUEUE";
-//                    }
-//                    $reviewer[] = [
-//                        'pengajuan_id' => $pengajuan->id,
-//                        'initiator_id' => $pem->initiator_id,
-//                        'nik' => $pem->nik,
-//                        'nama' => $pem->nama,
-//                        'urutan' => $pem->urutan,
-//                        'last_status' => $last_status,
-//                    ];
-//                }
-//                return DB::table('jib_reviewer')->insert($reviewer);
-//            }
-//            // SUPPORT CAPEX/OPEX
-//        } else {
-//            // FORMAT NUMBER SUPPORT
-//            $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
-//                ->orderBy('id', 'DESC')
-//                ->first();
-//            if (empty($last_pegnajuan)) {
-//                $new_number = sprintf("%05d", 00001);
-//            } else {
-//                $last_number = $last_pegnajuan->number;
-//                $new_numbers = $last_number + 1;
-//                $new_number = sprintf("%05d", $new_numbers);
-//            }
-//            $no_jib = $new_number . '/JIB/S/' . $bulan . '/' . $tahun;
-//
-//            // Insert Pengajuan
-//            $pengajuan = new Pengajuan();
-//            $pengajuan->initiator_id = $params['initiator_id'];
-//            $pengajuan->jenis_id = $params['jenis_id'];
-//            $pengajuan->kategori_id = $params['kategori_id'];
-//            $pengajuan->nama_posisi = $params['nama_posisi'];
-//            $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-//            $pengajuan->tahun = $tahun;
-//            $pengajuan->number = $new_number;
-//            $pengajuan->jib_number = $no_jib;
-//            $pengajuan->kegiatan = $params['kegiatan_2'];
-//            $pengajuan->segment_id = $params['segment_id_2'];
-//            $pengajuan->customer_id = $params['customer_id_2'];
-//            $pengajuan->periode_up = date('Y-m-d H:i:s');
-//            $pengajuan->no_drp = $params['no_drp_2'];
-//            $pengajuan->nilai_capex = $params['nilai_capex_2'];
-//            $pengajuan->bcr = $params['bcr'];
-//            $pengajuan->status_id = 1;
-//            $pengajuan->user_id = auth()->user()->id;
-//            $pengajuan->created_by = auth()->user()->id;
-//            $pengajuan->updated_by = auth()->user()->name;
-//            $pengajuan->save();
-//
-//            // insert M review
-//            if ($pengajuan) {
-//                // Insert Review
-//                if (!empty($params['note'])) {
-//                    $review = new Review();
-//                    $review->pengajuan_id = $pengajuan->id;
-//                    $review->nik_gsd = auth()->user()->nik_gsd;
-//                    $review->nama_karyawan = auth()->user()->name;
-//                    $review->status = 'SUBMIT';
-//                    $review->notes = $params['note'];
-//                    $review->save();
-//                }
-//                // Insert Reviewer
-//                if ($params['nilai_capex_2'] <= 3000000000) {
-//                    $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-//                } elseif ($params['nilai_capex_2'] > 3000000000 && $params['nilai_capex_2'] <= 5000000000) {
-//                    $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-//                } else {
-//                    $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-//                }
-//                $reviewer = [];
-//                foreach ($pemeriksa as $pem) {
-//                    if ($pem->urutan == 1) {
-//                        $last_status = "OPEN";
-//                        $pengajuan->pemeriksa_id = $pem->id;
-//                        $pengajuan->save();
-//                    } else {
-//                        $last_status = "QUEUE";
-//                    }
-//                    $reviewer[] = [
-//                        'pengajuan_id' => $pengajuan->id,
-//                        'initiator_id' => $pem->initiator_id,
-//                        'nik' => $pem->nik,
-//                        'nama' => $pem->nama,
-//                        'urutan' => $pem->urutan,
-//                        'last_status' => $last_status,
-//                    ];
-//                }
-//                return DB::table('jib_reviewer')->insert($reviewer);
-//            }
+//        // Insert Persetujuan
+//        $persetujuan = new Persetujuan();
+//        $persetujuan->pengajuan_id = $params['pengajuan_id'];
+//        $persetujuan->no_drp = $params['no_drp'];
+//        $persetujuan->kegiatan = $params['kegiatan'];
+//        $persetujuan->akun = $params['akun'];
+//        $persetujuan->customer_id = $params['customer_id'];
+//        $persetujuan->lokasi = $params['lokasi'];
+//        if (!empty($params['analisa_risk'])){
+//            $persetujuan->analisa_risk = $params['analisa_risk'];
 //        }
+//        if (!empty($params['score_risk'])){
+//            $persetujuan->score_risk = $params['score_risk'];
+//        }
+//        $persetujuan->risk_mitigasi = $params['risk_mitigasi'];
+//        $persetujuan->score_mitigasi = $params['score_mitigasi'];
+//        $persetujuan->sow = $params['sow'];
+//        $persetujuan->kesimpulan = $params['kesimpulan'];
+//        $persetujuan->delivery_time = $params['delivery_time'];
+//        $persetujuan->catatan = $params['catatan'];
+//        $persetujuan->created_by = auth()->user()->id;
+//        $persetujuan->updated_by = auth()->user()->name;
+//
+//        // BISNIS CAPEX
+//        if (!empty($params['irr'])){
+//            $persetujuan->irr = $params['irr'];
+//        }
+//        if (!empty($params['est_revenue'])){
+//            $persetujuan->est_revenue = $params['est_revenue'];
+//        }
+//        if (!empty($params['npv'])){
+//            $persetujuan->npv = $params['npv'];
+//        }
+//        if (!empty($params['playback_period'])){
+//            $persetujuan->playback_period = $params['playback_period'];
+//        }
+//        if (!empty($params['waktu_kerja'])) {
+//            $persetujuan->waktu_kerja = $params['waktu_kerja'];
+//        }
+//        if (!empty($params['wacc'])) {
+//            $persetujuan->wacc = $params['wacc'];
+//        }
+//        if (!empty($params['konstribusi_fee'])) {
+//            $persetujuan->konstribusi_fee = $params['konstribusi_fee'];
+//        }
+//        if (!empty($params['skema'])) {
+//            $persetujuan->skema = $params['skema'];
+//        }
+//        if (!empty($params['nilai_capex'])) {
+//            $persetujuan->nilai_capex = $params['nilai_capex'];
+//        }
+//        if (!empty($params['tot_invest'])) {
+//            $persetujuan->tot_invest = $params['tot_invest'];
+//        }
+//
+//
+//        // BISNIS OPEX
+//        if (!empty($params['top'])) {
+//            $persetujuan->top = $params['top'];
+//        }
+//        if (!empty($params['beban'])) {
+//            $persetujuan->beban = $params['beban'];
+//        }
+//        if (!empty($params['net_cf'])) {
+//            $persetujuan->net_cf = $params['net_cf'];
+//        }
+//        if (!empty($params['suku_bunga'])) {
+//            $persetujuan->suku_bunga = $params['suku_bunga'];
+//        }
+//
+//
+//        // SUPPORT CAPEX/OPEX
+//        if (!empty($params['bcr'])){
+//            $persetujuan->bcr = $params['bcr'];
+//        }
+//        return $persetujuan->save();
+    }
+
+    public function findAllbyPengId($id)
+    {
+        return Mom::where('pengajuan_id',$id)->get();
     }
 
 }

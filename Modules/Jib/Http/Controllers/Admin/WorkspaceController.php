@@ -103,6 +103,7 @@ class WorkspaceController extends JibController
     {
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
         $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
+        $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
         // BISNIS CAPEX

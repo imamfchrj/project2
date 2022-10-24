@@ -12,4 +12,5 @@ namespace Modules\Jib\Repositories\Admin\Interfaces;
 interface MomRepositoryInterface
 {
     public function create($params = []);
+    public function findAllbyPengId($id);
 }
