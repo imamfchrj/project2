@@ -3,7 +3,6 @@
 namespace Modules\Jib\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Modules\Jib\Entities\Pengajuan;
 
 class PengajuanRequest extends FormRequest
 {

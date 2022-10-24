@@ -5,9 +5,10 @@
             <h1>MoM JIB</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item active"><a href="{{ url('admin/jib/pengajuan') }}">@lang('jib::pengajuan.manage_pengajuan')</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('admin/jib/workspace') }}">Manage Pengajuan JIB</a></div>
             </div>
         </div>
+        {!! Form::open(['url' => 'admin/jib/workspace/storemom']) !!}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -15,6 +16,8 @@
                         <div class="card-header">
                             <h4> Form MoM JIB</h4>
                         </div>
+                        <input type="hidden" name="pengajuan_id"
+                               value="{{ old('pengajuan_id', !empty($pengajuan) ? $pengajuan->id : '') }}">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-6 col-form-label"><b>Review Bisnis</b></label>
@@ -155,5 +158,6 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </section>
 @endsection
