@@ -155,6 +155,15 @@
                                             <td>95509517</td>
                                             <td><a><i class="fas fa-download"></i></a></td>
                                         </tr>
+                                        @if(!empty($file_jib))
+                                        @foreach($file_jib as $file_upload)
+                                        <tr>
+                                            <td>{{ $file_upload->created_at }}</td>
+                                            <td>{{ !empty($pengajuan) ? $pengajuan->users->name.' / '.$pengajuan->users->nik_gsd : '' }} </td>
+                                            <td><a href={{ $file_upload->uuid.'/download' }} ><i class="fas fa-download"></i> {{ $file_upload->name }}</a></td>
+                                        </tr>
+                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
