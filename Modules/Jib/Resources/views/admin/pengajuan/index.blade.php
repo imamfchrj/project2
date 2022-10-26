@@ -21,10 +21,10 @@
                             @if($viewTrash == false)
                             <div class="col-sm-6">
                                 <div class="row">
-                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
-                                        <div>{{ $count_review + $count_approval }}</div>
-                                        <div class="mt-2 badge badge-info">On Progress</div>
-                                    </div>
+                                    {{--<div class="col mb-4 mb-lg-0 font-weight-bold text-center">--}}
+                                        {{--<div>{{ $count_review + $count_approval }}</div>--}}
+                                        {{--<div class="mt-2 badge badge-info">On Progress</div>--}}
+                                    {{--</div>--}}
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
                                         <div>{{ $count_review }}</div>
                                         <div class="mt-2 badge badge-warning">Review</div>
