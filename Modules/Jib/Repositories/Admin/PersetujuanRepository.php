@@ -21,12 +21,9 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan->akun = $params['akun'];
         $persetujuan->customer_id = $params['customer_id'];
         $persetujuan->lokasi = $params['lokasi'];
-        if (!empty($params['analisa_risk'])){
-            $persetujuan->analisa_risk = $params['analisa_risk'];
-        }
-        if (!empty($params['score_risk'])){
-            $persetujuan->score_risk = $params['score_risk'];
-        }
+        $persetujuan->analisa_risk = $params['analisa_risk'];
+        $persetujuan->score_risk = $params['score_risk'];
+        $persetujuan->rencana_mitigasi = $params['rencana_mitigasi'];
         $persetujuan->risk_mitigasi = $params['risk_mitigasi'];
         $persetujuan->score_mitigasi = $params['score_mitigasi'];
         $persetujuan->sow = $params['sow'];
@@ -122,6 +119,7 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         if (!empty($params['score_risk'])){
             $persetujuan->score_risk = $params['score_risk'];
         }
+        $persetujuan->rencana_mitigasi = $params['rencana_mitigasi'];
         $persetujuan->risk_mitigasi = $params['risk_mitigasi'];
         $persetujuan->score_mitigasi = $params['score_mitigasi'];
         $persetujuan->sow = $params['sow'];

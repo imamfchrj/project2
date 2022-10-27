@@ -14,16 +14,7 @@
         @else
             {!! Form::open(['url' => 'admin/jib/workspace/storeform', 'files'=>true]) !!}
         @endif
-
-        {{--@if (empty($user))--}}
-            {{--<form method="POST" action="{{ route('users.store') }}">--}}
-                {{--@else--}}
-                    {{--<form method="POST" action="{{ route('users.update', $user->id) }}">--}}
-                        {{--<input type="hidden" name="id" value="{{ $user->id }}" />--}}
-                        {{--@method('PUT')--}}
-                        {{--@endif--}}
         @csrf
-{{--        {!! Form::open(['url' => 'admin/jib/workspace/storeform']) !!}--}}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -157,9 +148,11 @@
                                            value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" readonly>
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">Resiko Setelah Mitigasi</label>
+                                <label class="col-sm-2 col-form-label">Rencana Mitigasi</label>
                                 <div class="col-sm-4">
-                                    {!! Form::select('risk_mitigasi', $risiko, !empty($persetujuan->risk_mitigasi) ? $persetujuan->risk_mitigasi : old('risk_mitigasi'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
+                                    <input type="text" name="rencana_mitigasi"
+                                           class="form-control @error('rencana_mitigasi') is-invalid @enderror @if (!$errors->has('rencana_mitigasi') && old('rencana_mitigasi')) is-valid @endif"
+                                           value="{{ !empty($persetujuan->rencana_mitigasi) ? $persetujuan->rencana_mitigasi : '' }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -170,11 +163,9 @@
                                            value="{{ !empty($persetujuan->tot_invest) ? $persetujuan->tot_invest : '' }}">
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">Score Resiko Setelah Mitigasi</label>
+                                <label class="col-sm-2 col-form-label">Resiko Setelah Mitigasi</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="score_mitigasi"
-                                           class="form-control @error('score_mitigasi') is-invalid @enderror @if (!$errors->has('score_mitigasi') && old('score_mitigasi')) is-valid @endif"
-                                           value="{{ !empty($persetujuan->score_mitigasi) ? $persetujuan->score_mitigasi : '' }}">
+                                    {!! Form::select('risk_mitigasi', $risiko, !empty($persetujuan->risk_mitigasi) ? $persetujuan->risk_mitigasi : old('risk_mitigasi'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -185,9 +176,11 @@
                                            value="{{ !empty($persetujuan->sow) ? $persetujuan->sow : '' }}">
                                 </div>
 
-                                <label class="col-sm-2 col-form-label">Kesimpulan Inisiatif Bisnis</label>
+                                <label class="col-sm-2 col-form-label">Score Resiko Setelah Mitigasi</label>
                                 <div class="col-sm-4">
-                                    {!! Form::select('kesimpulan', $kesimpulan, !empty($persetujuan->kesimpulan) ? $persetujuan->kesimpulan : old('kesimpulan'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
+                                    <input type="text" name="score_mitigasi"
+                                           class="form-control @error('score_mitigasi') is-invalid @enderror @if (!$errors->has('score_mitigasi') && old('score_mitigasi')) is-valid @endif"
+                                           value="{{ !empty($persetujuan->score_mitigasi) ? $persetujuan->score_mitigasi : '' }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -198,6 +191,14 @@
                                            value="{{ !empty($persetujuan->delivery_time) ? $persetujuan->delivery_time : '' }}">
                                 </div>
 
+
+                                <label class="col-sm-2 col-form-label">Kesimpulan Inisiatif Bisnis</label>
+                                <div class="col-sm-4">
+                                    {!! Form::select('kesimpulan', $kesimpulan, !empty($persetujuan->kesimpulan) ? $persetujuan->kesimpulan : old('kesimpulan'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
+                                </div>
+                                <label class="col-sm-2 col-form-label">Catatan</label>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Catatan</label>
                                 <div class="col-sm-4">
                                     <textarea name="catatan" class="form-control" style="height: 70px;">{{ !empty($persetujuan->catatan) ? $persetujuan->catatan : '' }}</textarea>

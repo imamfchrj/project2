@@ -37,6 +37,7 @@ class PersetujuanRequest extends FormRequest
             'skema' => '',
             'score_risk' => '',
             'nilai_capex' => '',
+            'rencana_mitigasi' => '',
             'risk_mitigasi' => '',
             'tot_invest' => '',
             'score_mitigasi' => '',
