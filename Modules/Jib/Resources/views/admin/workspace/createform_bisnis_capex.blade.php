@@ -197,7 +197,7 @@
 
                         </div>
                         <div class="card-footer text-left">
-                            <a href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}"><button class="btn btn-light">Back</button></a>
+                            <a class="btn btn-light" href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}">Back</a>
                             <a href=""><button class="btn btn-success">Create</button></a>
                         </div>
                     </div>
