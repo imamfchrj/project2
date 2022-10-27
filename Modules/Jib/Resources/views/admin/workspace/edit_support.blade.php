@@ -136,14 +136,16 @@
                         <div class="card-header">
                             <h4 class="text-md-right">Form Persetujuan</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
+                                @if (empty($persetujuan_id))
+                                    <a class="btn btn-sm btn-success"
+                                       href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
+                                                class="fas fa-file"></i> Create
+                                    </a>
+                                @endif
+                                {{--<a class="btn btn-sm btn-danger"--}}
+                                   {{--href="#"><i class="fas fa-upload"></i>--}}
+                                    {{--Upload--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -156,6 +158,7 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    <th>Action</th>
                                     </thead>
                                     <tbody class ="text-center">
                                     @forelse ($persetujuan as $setuju)
@@ -168,6 +171,12 @@
                                             <td>{{ $setuju->created_at }}</td>
                                             <td>{{ $setuju->updated_by }}</td>
                                             <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-light"
+                                                   href="{{ url('admin/jib/workspace/'. $setuju->id .'/editform')}}"><i
+                                                            class="far fa-edit"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse
@@ -180,14 +189,16 @@
                         <div class="card-header">
                             <h4 class="text-md-right">MoM</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
+                                @if (empty($mom_id))
+                                    <a class="btn btn-sm btn-success"
+                                       href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
+                                                class="fas fa-file"></i> Create
+                                    </a>
+                                @endif
+                                {{--<a class="btn btn-sm btn-danger"--}}
+                                   {{--href="#"><i class="fas fa-upload"></i>--}}
+                                    {{--Upload--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -199,6 +210,7 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    <th>Action</th>
                                     </thead>
                                     <tbody class ="text-center">
                                     @forelse ($mom as $moms)
@@ -210,6 +222,12 @@
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
                                             <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-light"
+                                                   href="{{ url('admin/jib/workspace/'. $setuju->id .'/editmom')}}"><i
+                                                            class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
+                                                </a>
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse

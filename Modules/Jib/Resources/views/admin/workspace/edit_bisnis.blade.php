@@ -249,7 +249,7 @@
                                             <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-light"
-                                                   href="{{ url('admin/jib/workspace/'. $setuju->id .'/edit')}}"><i
+                                                   href="{{ url('admin/jib/workspace/'. $setuju->id .'/editmom')}}"><i
                                                             class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
                                                 </a>
                                             </td>
