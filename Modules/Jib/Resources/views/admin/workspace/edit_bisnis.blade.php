@@ -143,11 +143,15 @@
                                         <th>Download</th>
                                     </thead>
                                     <tbody class ="text-center">
-                                        <tr>
-                                            <td>Monday 8 Agustus 2022 16:51:27</td>
-                                            <td>95509517</td>
-                                            <td><a><i class="fas fa-download"></i></a></td>
-                                        </tr>
+                                    @if(!empty($file_jib))
+                                        @foreach($file_jib as $file_upload)
+                                            <tr>
+                                                <td>{{ $file_upload->created_at }}</td>
+                                                <td>{{ !empty($pengajuan) ? $pengajuan->users->name.' / '.$pengajuan->users->nik_gsd : '' }} </td>
+                                                <td><a href={{ $file_upload->uuid.'/download' }} ><i class="fas fa-download"></i> {{ $file_upload->name }}</a></td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -173,7 +177,7 @@
                                     <thead class ="thead-dark text-center">
                                     <th>No DRP</th>
                                     <th>Nama Kegiatan</th>
-                                    <th>Download PDF</th>
+                                    {{--<th>Download PDF</th>--}}
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
@@ -183,8 +187,8 @@
                                         <tr>
                                             <td>{{ $setuju->no_drp }}</td>
                                             <td>{{ $setuju->kegiatan }}</td>
-                                            <td><a class="btn btn-sm btn-light"
-                                                   href="">Generate PDF
+                                            {{--<td><a class="btn btn-sm btn-light"--}}
+                                                   {{--href="">Generate PDF--}}
                                                 </a></td>
                                             <td>{{ $setuju->created_at }}</td>
                                             <td>{{ $setuju->updated_by }}</td>
@@ -216,7 +220,7 @@
                                 <table class="table table-bordered table-sm ">
                                     <thead class ="thead-dark text-center">
                                     <th>Dasar MoM</th>
-                                    <th>Download PDF</th>
+                                    {{--<th>Download PDF</th>--}}
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
@@ -225,9 +229,9 @@
                                     @forelse ($mom as $moms)
                                         <tr>
                                             <td>{{ $moms->dasar_mom }}</td>
-                                            <td><a class="btn btn-sm btn-light"
-                                                   href="">Generate PDF
-                                                </a></td>
+                                            {{--<td><a class="btn btn-sm btn-light"--}}
+                                                   {{--href="">Generate PDF--}}
+                                                {{--</a></td>--}}
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
                                             <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
