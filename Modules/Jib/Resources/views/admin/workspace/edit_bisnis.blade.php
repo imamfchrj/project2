@@ -181,6 +181,7 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    <th>Action</th>
                                     </thead>
                                     <tbody class ="text-center">
                                     @forelse ($persetujuan as $setuju)
@@ -189,10 +190,16 @@
                                             <td>{{ $setuju->kegiatan }}</td>
                                             {{--<td><a class="btn btn-sm btn-light"--}}
                                                    {{--href="">Generate PDF--}}
-                                                </a></td>
+                                                {{--</a></td>--}}
                                             <td>{{ $setuju->created_at }}</td>
                                             <td>{{ $setuju->updated_by }}</td>
                                             <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-light"
+                                                href="{{ url('admin/jib/workspace/'. $setuju->id .'/edit')}}"><i
+                                                class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
+                                                </a>
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse
@@ -224,6 +231,7 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    <th>Action</th>
                                     </thead>
                                     <tbody class ="text-center">
                                     @forelse ($mom as $moms)
@@ -235,6 +243,12 @@
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
                                             <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-light"
+                                                   href="{{ url('admin/jib/workspace/'. $setuju->id .'/edit')}}"><i
+                                                            class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
+                                                </a>
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse

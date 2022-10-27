@@ -17,10 +17,10 @@ Route::prefix('jib')->group(function() {
 
 Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers\Admin')->middleware(['auth'])->group(function () { // phpcs:ignore
 
-//    Route::get('workspace/trashed', 'WorkspaceController@trashed')->name('workspace.trashed');
     Route::get('workspace/{id}/restore', 'WorkspaceController@restore')->name('workspace.restore');
     Route::get('workspace/{id}/editworkspace', 'WorkspaceController@editworkspace')->name('workspace.editworkspace');
     Route::get('workspace/createform/{id}', 'WorkspaceController@createform')->name('workspace.createform');
+    Route::get('workspace/{id}/editform', 'WorkspaceController@editform')->name('workspace.editform');
     Route::match(['get', 'post'],'workspace/storeform', 'WorkspaceController@storeform')->name('workspace.storeform');
     Route::get('workspace/createmom/{id}', 'WorkspaceController@createmom')->name('workspace.createmom');
     Route::match(['get', 'post'],'workspace/storemom', 'WorkspaceController@storemom')->name('workspace.storemom');
