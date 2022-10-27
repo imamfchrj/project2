@@ -168,24 +168,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            {{--<div class="table-responsive">--}}
-                                {{--<table class="table table-bordered table-sm ">--}}
-                                    {{--<thead class ="thead-dark text-center">--}}
-                                    {{--<th>Dokumen Type</th>--}}
-                                    {{--<th>Upload Date</th>--}}
-                                    {{--<th>Uploader</th>--}}
-                                    {{--<th>Download</th>--}}
-                                    {{--</thead>--}}
-                                    {{--<tbody class ="text-center">--}}
-                                    {{--<tr>--}}
-                                        {{--<td class ="text-left">Form Persetujuan</td>--}}
-                                        {{--<td>Monday 8 Agustus 2022 16:51:27</td>--}}
-                                        {{--<td>95509517</td>--}}
-                                        {{--<td><a><i class="fas fa-download"></i></a></td>--}}
-                                    {{--</tr>--}}
-                                    {{--</tbody>--}}
-                                {{--</table>--}}
-                            {{--</div>--}}
                             <div class="table-responsive">
                                 <table class="table table-bordered table-sm ">
                                     <thead class ="thead-dark text-center">
