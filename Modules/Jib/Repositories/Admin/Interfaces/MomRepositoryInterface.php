@@ -14,4 +14,6 @@ interface MomRepositoryInterface
     public function create($params = []);
     public function findAllbyPengId($id);
     public function findbyPengId($id);
+    public function findById($id);
+    public function update($id, $params = []);
 }

@@ -159,7 +159,6 @@ class WorkspaceController extends JibController
 
     public function editform($id)
     {
-//        $pengajuan = $this->pengajuanRepository->findById($id);
         $this->data['persetujuan'] = $this->persetujuanRepository->findById($id);
         $pengajuan_id = $this->data['persetujuan']->pengajuan_id;
         $pengajuan = $this->pengajuanRepository->findById($pengajuan_id);
@@ -215,12 +214,28 @@ class WorkspaceController extends JibController
 
     public function createmom($id)
     {
-        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $pengajuan = $this->pengajuanRepository->findById($id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
+
         $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
         $this->data['anggaran_id'] = null;
 
         return view('jib::admin.workspace.createform_mom', $this->data);
 
+    }
+
+    public function editmom($id)
+    {
+        $this->data['mom'] = $this->momRepository->findById($id);
+        $pengajuan_id = $this->data['mom']->pengajuan_id;
+        $pengajuan = $this->pengajuanRepository->findById($pengajuan_id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
+        $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
+        $this->data['anggaran_id'] = null;
+
+        return view('jib::admin.workspace.createform_mom', $this->data);
     }
 
     public function storemom(MomRequest $request)
@@ -232,6 +247,26 @@ class WorkspaceController extends JibController
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
 
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param Request $request
+     * @param int $id
+     * @return Renderable
+     */
+    public function updatemom(MomRequest $request, $id)
+    {
+        $params = $request->validated();
+        $mom = $this->momRepository->findById($id);
+
+        if ($this->momRepository->update($id, $params)) {
+            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+                ->with('success', __('jib::pengajuan.success_create_message'));
+        }
+
+        return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+            ->with('error', __('jib::pengajuan.fail_update_message'));
     }
 
     /**

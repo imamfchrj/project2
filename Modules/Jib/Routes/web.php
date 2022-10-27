@@ -26,6 +26,7 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::get('workspace/createmom/{id}', 'WorkspaceController@createmom')->name('workspace.createmom');
     Route::get('workspace/{id}/editmom', 'WorkspaceController@editmom')->name('workspace.editmom');
     Route::match(['get', 'post'],'workspace/storemom', 'WorkspaceController@storemom')->name('workspace.storemom');
+    Route::match(['put', 'patch'],'workspace/updatemom/{id}', 'WorkspaceController@updatemom')->name('workspace.updatemom');
     Route::resource('workspace', 'WorkspaceController');
 
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');

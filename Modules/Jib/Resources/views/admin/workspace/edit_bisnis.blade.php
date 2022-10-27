@@ -162,7 +162,7 @@
                             <h4 class="text-md-right">Form Persetujuan</h4>
                             <div class="card-header-action">
                                 @if (empty($persetujuan_id))
-                                    <a class="btn btn-sm btn-success"
+                                    <a class="btn btn-sm btn-primary"
                                        href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
                                                 class="fas fa-file"></i> Create
                                     </a>
@@ -197,7 +197,7 @@
                                             <td>{{ $setuju->updated_by }}</td>
                                             <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-light"
+                                                <a class="btn btn-sm btn-primary"
                                                 href="{{ url('admin/jib/workspace/'. $setuju->id .'/editform')}}"><i
                                                 class="far fa-edit"></i>
                                                 </a>
@@ -215,7 +215,7 @@
                             <h4 class="text-md-right">MoM</h4>
                             <div class="card-header-action">
                                 @if (empty($mom_id))
-                                    <a class="btn btn-sm btn-success"
+                                    <a class="btn btn-sm btn-primary"
                                        href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
                                                 class="fas fa-file"></i> Create
                                     </a>
@@ -248,9 +248,9 @@
                                             <td>{{ $moms->updated_by }}</td>
                                             <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-light"
-                                                   href="{{ url('admin/jib/workspace/'. $setuju->id .'/editmom')}}"><i
-                                                            class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
+                                                <a class="btn btn-sm btn-primary"
+                                                   href="{{ url('admin/jib/workspace/'. $moms->id .'/editmom')}}"><i
+                                                            class="far fa-edit"></i>
                                                 </a>
                                             </td>
                                         </tr>
