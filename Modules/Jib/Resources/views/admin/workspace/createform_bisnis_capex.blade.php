@@ -8,7 +8,22 @@
                 <div class="breadcrumb-item active"><a href="{{ url('admin/jib/workspace') }}">Manage Pengajuan JIB</a></div>
             </div>
         </div>
-        {!! Form::open(['url' => 'admin/jib/workspace/storeform']) !!}
+        @if(isset($persetujuan))
+            {!! Form::model($persetujuan, ['url' => ['admin/jib/workspace/updateform', $persetujuan->id], 'method' => 'PUT', 'files' => true ]) !!}
+            {!! Form::hidden('id') !!}
+        @else
+            {!! Form::open(['url' => 'admin/jib/workspace/storeform', 'files'=>true]) !!}
+        @endif
+
+        {{--@if (empty($user))--}}
+            {{--<form method="POST" action="{{ route('users.store') }}">--}}
+                {{--@else--}}
+                    {{--<form method="POST" action="{{ route('users.update', $user->id) }}">--}}
+                        {{--<input type="hidden" name="id" value="{{ $user->id }}" />--}}
+                        {{--@method('PUT')--}}
+                        {{--@endif--}}
+        @csrf
+{{--        {!! Form::open(['url' => 'admin/jib/workspace/storeform']) !!}--}}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -192,7 +207,7 @@
                         </div>
                         <div class="card-footer text-left">
                             <a class="btn btn-light" href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}">Back</a>
-                            <a href=""><button class="btn btn-success">Create</button></a>
+                            <a href=""><button class="btn btn-primary">{{ !empty($persetujuan) ? 'Update' : 'Create' }}</button></a>
                         </div>
                     </div>
 

@@ -42,4 +42,8 @@ class MomRepository implements MomRepositoryInterface
         return Mom::where('pengajuan_id',$id)->get();
     }
 
+    public function findbyPengId($id)
+    {
+        return Mom::where('pengajuan_id',$id)->first();
+    }
 }

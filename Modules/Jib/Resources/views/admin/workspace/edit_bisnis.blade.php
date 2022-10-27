@@ -161,14 +161,16 @@
                         <div class="card-header">
                             <h4 class="text-md-right">Form Persetujuan</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
+                                @if (empty($persetujuan_id))
+                                    <a class="btn btn-sm btn-success"
+                                       href="{{ url('admin/jib/workspace/createform/'. $pengajuan->id)}}"><i
+                                                class="fas fa-file"></i> Create
+                                    </a>
+                                @endif
+                                {{--<a class="btn btn-sm btn-danger"--}}
+                                   {{--href="#"><i class="fas fa-upload"></i>--}}
+                                    {{--Upload--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -212,14 +214,16 @@
                         <div class="card-header">
                             <h4 class="text-md-right">MoM</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-sm btn-success"
-                                   href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
-                                            class="fas fa-file"></i> Create
-                                </a>
-                                <a class="btn btn-sm btn-danger"
-                                   href="#"><i class="fas fa-upload"></i>
-                                    Upload
-                                </a>
+                                @if (empty($mom_id))
+                                    <a class="btn btn-sm btn-success"
+                                       href="{{ url('admin/jib/workspace/createmom/'. $pengajuan->id)}}"><i
+                                                class="fas fa-file"></i> Create
+                                    </a>
+                                @endif
+                                {{--<a class="btn btn-sm btn-danger"--}}
+                                   {{--href="#"><i class="fas fa-upload"></i>--}}
+                                    {{--Upload--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                         <div class="card-body">

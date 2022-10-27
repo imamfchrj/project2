@@ -117,7 +117,9 @@ class WorkspaceController extends JibController
         $this->data['pengajuan'] = $pengajuan['pengajuan'];
         $this->data['file_jib'] = $pengajuan['file_jib'];
         $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
+        $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
         $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+        $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
 
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
@@ -155,16 +157,6 @@ class WorkspaceController extends JibController
         }
     }
 
-    public function createmom($id)
-    {
-        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
-        $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
-        $this->data['anggaran_id'] = null;
-
-        return view('jib::admin.workspace.createform_mom', $this->data);
-
-    }
-
     public function editform($id)
     {
 //        $pengajuan = $this->pengajuanRepository->findById($id);
@@ -196,8 +188,38 @@ class WorkspaceController extends JibController
 
         if ($persetujuan = $this->persetujuanRepository->create($params)) {
             return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
-                ->with('success', __('blog::pegnajuan.success_create_message'));
+                ->with('success', __('blog::pengajuan.success_create_message'));
         }
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param Request $request
+     * @param int $id
+     * @return Renderable
+     */
+    public function updateform(PersetujuanRequest $request, $id)
+    {
+        $params = $request->validated();
+        $persetujuan = $this->persetujuanRepository->findById($id);
+
+        if ($this->persetujuanRepository->update($id, $params)) {
+            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+                ->with('success', __('jib::pengajuan.success_create_message'));
+        }
+
+        return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+            ->with('error', __('jib::pengajuan.fail_update_message'));
+    }
+
+    public function createmom($id)
+    {
+        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
+        $this->data['anggaran_id'] = null;
+
+        return view('jib::admin.workspace.createform_mom', $this->data);
 
     }
 

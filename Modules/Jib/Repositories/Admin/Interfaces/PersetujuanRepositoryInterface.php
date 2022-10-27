@@ -14,4 +14,5 @@ interface PersetujuanRepositoryInterface
     public function create($params = []);
     public function findAllbyPengId($id);
     public function findById($id);
+    public function findbyPengId($id);
 }
