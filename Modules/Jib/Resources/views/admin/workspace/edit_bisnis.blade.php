@@ -196,8 +196,8 @@
                                             <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-light"
-                                                href="{{ url('admin/jib/workspace/'. $setuju->id .'/edit')}}"><i
-                                                class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')
+                                                href="{{ url('admin/jib/workspace/'. $setuju->id .'/editform')}}"><i
+                                                class="far fa-edit"></i>
                                                 </a>
                                             </td>
                                         </tr>

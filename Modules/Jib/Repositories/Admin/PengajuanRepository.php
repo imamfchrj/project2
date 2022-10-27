@@ -159,6 +159,14 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         //     ->findOrFail($id);
     }
 
+    public function findByPersetujuanId($persetujuan_id)
+    {
+        $pengajuan = Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
+            ->where('id',$persetujuan_id)
+            ->findOrFail($id);
+
+        return $pengajuan;
+    }
 
     public function create($params = [])
     {

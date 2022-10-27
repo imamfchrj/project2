@@ -15,6 +15,9 @@ use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
 
 use App\Authorizable;
 
@@ -27,14 +30,20 @@ class WorkspaceController extends JibController
         $customerRepository,
         $reviewRepository,
         $persetujuanRepository,
-        $momRepository;
+        $momRepository,
+        $kesimpulanRepository,
+        $risikoRepository,
+        $anggaranRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 SegmentRepositoryInterface $segmentRepository,
                                 CustomerRepositoryInterface $customerRepository,
                                 ReviewRepositoryInterface $reviewRepository,
                                 PersetujuanRepositoryInterface $persetujuanRepository,
-                                MomRepositoryInterface $momRepository)
+                                MomRepositoryInterface $momRepository,
+                                KesimpulanRepositoryInterface $kesimpulanRepository,
+                                RisikoRepositoryInterface $risikoRepository,
+                                AnggaranRepositoryInterface $anggaranRepository)
     {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
@@ -45,6 +54,9 @@ class WorkspaceController extends JibController
         $this->reviewRepository = $reviewRepository;
         $this->persetujuanRepository = $persetujuanRepository;
         $this->momRepository = $momRepository;
+        $this->kesimpulanRepository = $kesimpulanRepository;
+        $this->risikoRepository = $risikoRepository;
+        $this->anggaranRepository = $anggaranRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -126,6 +138,10 @@ class WorkspaceController extends JibController
         $pengajuan = $this->pengajuanRepository->findById($id);
         $this->data['pengajuan'] = $pengajuan['pengajuan'];
         $this->data['file_jib'] = $pengajuan['file_jib'];
+        $this->data['kesimpulan'] = $this->kesimpulanRepository->findAll()->pluck('name', 'id');
+        $this->data['kesimpulan_id'] = null;
+        $this->data['risiko'] = $this->risikoRepository->findAll()->pluck('name', 'id');
+        $this->data['risiko_id'] = null;
 
         // BISNIS CAPEX
         if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
@@ -142,9 +158,36 @@ class WorkspaceController extends JibController
     public function createmom($id)
     {
         $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
+        $this->data['anggaran_id'] = null;
 
         return view('jib::admin.workspace.createform_mom', $this->data);
 
+    }
+
+    public function editform($id)
+    {
+//        $pengajuan = $this->pengajuanRepository->findById($id);
+        $this->data['persetujuan'] = $this->persetujuanRepository->findById($id);
+        $pengajuan_id = $this->data['persetujuan']->pengajuan_id;
+        $pengajuan = $this->pengajuanRepository->findById($pengajuan_id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
+        $this->data['kesimpulan'] = $this->kesimpulanRepository->findAll()->pluck('name', 'id');
+        $this->data['kesimpulan_id'] = null;
+        $this->data['risiko'] = $this->risikoRepository->findAll()->pluck('name', 'id');
+        $this->data['risiko_id'] = null;
+
+        // BISNIS CAPEX
+        if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
+            return view('jib::admin.workspace.createform_bisnis_capex', $this->data);
+            // BISNIS OPEX
+        } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
+            return view('jib::admin.workspace.createform_bisnis_opex', $this->data);
+            // SUPPORT CAPEX/OPEX
+        } else {
+            return view('jib::admin.workspace.createform_support', $this->data);
+        }
     }
 
     public function storeform(PersetujuanRequest $request)

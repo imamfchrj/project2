@@ -34,7 +34,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="akun"
                                            class="form-control @error('akun') is-invalid @enderror @if (!$errors->has('akun') && old('akun')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->akun) ? $persetujuan->akun : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Revenue</label>
@@ -81,14 +81,14 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="lokasi"
                                            class="form-control @error('lokasi') is-invalid @enderror @if (!$errors->has('lokasi') && old('lokasi')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->lokasi) ? $persetujuan->lokasi : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Playback Period</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="playback_period"
                                            class="form-control @error('playback_period') is-invalid @enderror @if (!$errors->has('playback_period') && old('playback_period')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->playback_period) ? $persetujuan->playback_period : '' }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -96,14 +96,14 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="waktu_kerja"
                                            class="form-control @error('waktu_kerja') is-invalid @enderror @if (!$errors->has('waktu_kerja') && old('waktu_kerja')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->waktu_kerja) ? $persetujuan->waktu_kerja : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">WACC</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="wacc"
                                            class="form-control @error('wacc') is-invalid @enderror @if (!$errors->has('wacc') && old('wacc')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->wacc) ? $persetujuan->wacc : '' }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -111,14 +111,12 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="konstribusi_fee"
                                            class="form-control @error('konstribusi_fee') is-invalid @enderror @if (!$errors->has('konstribusi_fee') && old('konstribusi_fee')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->konstribusi_fee) ? $persetujuan->konstribusi_fee : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Analisa Inheret Risk</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="analisa_risk"
-                                           class="form-control @error('analisa_risk') is-invalid @enderror @if (!$errors->has('analisa_risk') && old('analisa_risk')) is-valid @endif"
-                                           value="">
+                                    {!! Form::select('analisa_risk', $risiko, !empty($persetujuan->analisa_risk) ? $persetujuan->analisa_risk : old('analisa_risk'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -126,14 +124,14 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="skema"
                                            class="form-control @error('skema') is-invalid @enderror @if (!$errors->has('skema') && old('skema')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->skema) ? $persetujuan->skema : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Score Inheret Risk</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="score_risk"
                                            class="form-control @error('score_risk') is-invalid @enderror @if (!$errors->has('score_risk') && old('score_risk')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->score_risk) ? $persetujuan->score_risk : '' }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -146,9 +144,7 @@
 
                                 <label class="col-sm-2 col-form-label">Resiko Setelah Mitigasi</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="risk_mitigasi"
-                                           class="form-control @error('risk_mitigasi') is-invalid @enderror @if (!$errors->has('risk_mitigasi') && old('risk_mitigasi')) is-valid @endif"
-                                           value="">
+                                    {!! Form::select('risk_mitigasi', $risiko, !empty($persetujuan->risk_mitigasi) ? $persetujuan->risk_mitigasi : old('risk_mitigasi'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -156,14 +152,14 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="tot_invest"
                                            class="form-control @error('tot_invest') is-invalid @enderror @if (!$errors->has('tot_invest') && old('tot_invest')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->tot_invest) ? $persetujuan->tot_invest : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Score Resiko Setelah Mitigasi</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="score_mitigasi"
                                            class="form-control @error('score_mitigasi') is-invalid @enderror @if (!$errors->has('score_mitigasi') && old('score_mitigasi')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->score_mitigasi) ? $persetujuan->score_mitigasi : '' }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -171,14 +167,12 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="sow"
                                            class="form-control @error('sow') is-invalid @enderror @if (!$errors->has('sow') && old('sow')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->sow) ? $persetujuan->sow : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Kesimpulan Inisiatif Bisnis</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="kesimpulan"
-                                           class="form-control @error('kesimpulan') is-invalid @enderror @if (!$errors->has('kesimpulan') && old('kesimpulan')) is-valid @endif"
-                                           value="">
+                                    {!! Form::select('kesimpulan', $kesimpulan, !empty($persetujuan->kesimpulan) ? $persetujuan->kesimpulan : old('kesimpulan'), ['class' => 'form-control', 'placeholder' => '-- Select --']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -186,12 +180,12 @@
                                 <div class="col-sm-4">
                                     <input type="text" name="delivery_time"
                                            class="form-control @error('delivery_time') is-invalid @enderror @if (!$errors->has('delivery_time') && old('delivery_time')) is-valid @endif"
-                                           value="">
+                                           value="{{ !empty($persetujuan->delivery_time) ? $persetujuan->delivery_time : '' }}">
                                 </div>
 
                                 <label class="col-sm-2 col-form-label">Catatan</label>
                                 <div class="col-sm-4">
-                                    <textarea name="catatan" class="form-control" style="height: 70px;"></textarea>
+                                    <textarea name="catatan" class="form-control" style="height: 70px;">{{ !empty($persetujuan->catatan) ? $persetujuan->catatan : '' }}</textarea>
                                 </div>
                             </div>
 

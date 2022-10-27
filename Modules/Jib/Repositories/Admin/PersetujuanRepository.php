@@ -97,4 +97,9 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         return Persetujuan::where('pengajuan_id',$id)->get();
     }
 
+    public function findById($id)
+    {
+        return Persetujuan::findOrFail($id);
+    }
+
 }
