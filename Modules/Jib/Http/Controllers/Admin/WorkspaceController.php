@@ -123,7 +123,9 @@ class WorkspaceController extends JibController
 
     public function createform($id)
     {
-        $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
+        $pengajuan = $this->pengajuanRepository->findById($id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
 
         // BISNIS CAPEX
         if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {

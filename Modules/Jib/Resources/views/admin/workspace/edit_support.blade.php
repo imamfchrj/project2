@@ -118,7 +118,6 @@
                                     <th>Download</th>
                                     </thead>
                                     <tbody class ="text-center">
-                                    <tbody class ="text-center">
                                     @if(!empty($file_jib))
                                         @foreach($file_jib as $file_upload)
                                             <tr>
@@ -128,7 +127,6 @@
                                             </tr>
                                         @endforeach
                                     @endif
-                                    </tbody>
                                     </tbody>
                                 </table>
                             </div>
