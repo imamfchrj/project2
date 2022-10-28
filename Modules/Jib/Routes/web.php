@@ -17,13 +17,16 @@ Route::prefix('jib')->group(function() {
 
 Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers\Admin')->middleware(['auth'])->group(function () { // phpcs:ignore
 
-//    Route::get('workspace/trashed', 'WorkspaceController@trashed')->name('workspace.trashed');
     Route::get('workspace/{id}/restore', 'WorkspaceController@restore')->name('workspace.restore');
     Route::get('workspace/{id}/editworkspace', 'WorkspaceController@editworkspace')->name('workspace.editworkspace');
     Route::get('workspace/createform/{id}', 'WorkspaceController@createform')->name('workspace.createform');
+    Route::get('workspace/{id}/editform', 'WorkspaceController@editform')->name('workspace.editform');
     Route::match(['get', 'post'],'workspace/storeform', 'WorkspaceController@storeform')->name('workspace.storeform');
+    Route::match(['put', 'patch'],'workspace/updateform/{id}', 'WorkspaceController@updateform')->name('workspace.updateform');
     Route::get('workspace/createmom/{id}', 'WorkspaceController@createmom')->name('workspace.createmom');
+    Route::get('workspace/{id}/editmom', 'WorkspaceController@editmom')->name('workspace.editmom');
     Route::match(['get', 'post'],'workspace/storemom', 'WorkspaceController@storemom')->name('workspace.storemom');
+    Route::match(['put', 'patch'],'workspace/updatemom/{id}', 'WorkspaceController@updatemom')->name('workspace.updatemom');
     Route::resource('workspace', 'WorkspaceController');
 
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');
@@ -31,5 +34,5 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::get('pengajuan/{uid}/download', 'PengajuanController@download')->name('pengajuan.download');
     Route::resource('pengajuan', 'PengajuanController');
 
-    Route::resource('selesai', 'SelesaiController');
+//    Route::resource('selesai', 'SelesaiController');
 });
