@@ -353,7 +353,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $reviewer[] = [
                         'pengajuan_id' => $pengajuan->id,
                         'initiator_id' => $pem->initiator_id,
-                        'pemeriksa_id' => $pem->pemeriksa_id,
+                        'pemeriksa_id' => $pem->id,
                         'nik' => $pem->nik,
                         'nama' => $pem->nama,
                         'urutan' => $pem->urutan,
@@ -444,7 +444,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $reviewer[] = [
                         'pengajuan_id' => $pengajuan->id,
                         'initiator_id' => $pem->initiator_id,
-                        'pemeriksa_id' => $pem->pemeriksa_id,
+                        'pemeriksa_id' => $pem->id,
                         'nik' => $pem->nik,
                         'nama' => $pem->nama,
                         'urutan' => $pem->urutan,
@@ -547,11 +547,21 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->status_id = 3;
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
             } elseif ($pengajuan->status_id == 3) {
-                $pengajuan->status_id = 4;
-                $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                if ($reviewer_count == 3) {
+                    $pengajuan->status_id = 6;
+                    $pengajuan->pemeriksa_id = null;
+                } else {
+                    $pengajuan->status_id = 4;
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
             } elseif ($pengajuan->status_id == 4) {
-                $pengajuan->status_id = 5;
-                $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                if ($reviewer_count == 4) {
+                    $pengajuan->status_id = 6;
+                    $pengajuan->pemeriksa_id = null;
+                } else {
+                    $pengajuan->status_id = 5;
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
             } else {
                 $pengajuan->status_id = 6;
                 $pengajuan->pemeriksa_id = null;
@@ -561,6 +571,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             if (!empty($params['note'])) {
                 $review = new Review();
                 $review->pengajuan_id = $pengajuan->id;
+                $review->reviewer_id = $reviewer->id;
                 $review->nik_gsd = auth()->user()->nik_gsd;
                 $review->nama_karyawan = auth()->user()->name;
                 $review->status = 'APPROVE';
