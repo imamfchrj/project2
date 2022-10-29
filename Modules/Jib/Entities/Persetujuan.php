@@ -30,6 +30,7 @@ class Persetujuan extends Model
         'wacc',
         'analisa_risk',
         'score_risk',
+        'rencana_mitigasi',
         'risk_mitigasi',
         'score_mitigasi',
         'top',

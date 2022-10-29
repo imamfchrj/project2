@@ -47,7 +47,11 @@
                                             <td>{{ $peng->no_drp }}</td>
                                             <td>{{ $peng->mcategories->name }}</td>
                                             <td>{{ number_format($peng->nilai_capex) }}</td>
-                                            <td>{{ $peng->mstatuses->name }}</td>
+                                            @if ($peng->status_id == 7)
+                                                <td>{{ $peng->mstatuses->name.' - '.$peng->users->name}}</td>
+                                            @else
+                                                <td>{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</td>
+                                            @endif
                                             <td>
                                                 @can('edit_jib-pengajuan')
                                                     <a class="btn btn-sm btn-light"

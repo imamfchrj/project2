@@ -18,6 +18,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\MediaStream;
+use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 
 use App\Authorizable;
 
@@ -32,7 +34,9 @@ class PengajuanController extends JibController
              $kategoriRepository,
              $reviewRepository,
              $pemeriksaRepository,
-             $jenisRepository;
+             $jenisRepository,
+             $persetujuanRepository,
+             $momRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 InitiatorRepositoryInterface $initiatorRepository,
@@ -41,7 +45,9 @@ class PengajuanController extends JibController
                                 KategoriRepositoryInterface $kategoriRepository,
                                 ReviewRepositoryInterface $reviewRepository,
                                 PemeriksaRepositoryInterface $pemeriksaRepository,
-                                JenisRepositoryInterface $jenisRepository)
+                                JenisRepositoryInterface $jenisRepository,
+                                PersetujuanRepositoryInterface $persetujuanRepository,
+                                MomRepositoryInterface $momRepository)
     {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'pengajuan';
@@ -54,6 +60,8 @@ class PengajuanController extends JibController
         $this->jenisRepository = $jenisRepository;
         $this->pemeriksaRepository = $pemeriksaRepository;
         $this->reviewRepository = $reviewRepository;
+        $this->persetujuanRepository = $persetujuanRepository;
+        $this->momRepository = $momRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -160,24 +168,13 @@ class PengajuanController extends JibController
      */
     public function show($id)
     {
-        // $this->data['pengajuan'] = $this->pengajuanRepository->findById($id);
-        // $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
-
         $pengajuan = $this->pengajuanRepository->findById($id);
-        $notes=$this->reviewRepository->findByPengajuanId($id);
 
-        // if ($this->data['pengajuan']['pengajuan']->kategori_id == 1) {
-        //     // return view('jib::admin.pengajuan.show_bisnis', $this->data);
-        //     return view('jib::admin.pengajuan.show_bisnis', compact(['pengajuan','notes']));
-        // } else {
-        //     return view('jib::admin.pengajuan.show_support', $this->data);
-        // }
-
-        // dd($pengajuan);
-        // $file_jib = $pengajuan['file_jib'];
         $this->data['pengajuan']=$pengajuan['pengajuan'];
-        $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
         $this->data['file_jib'] = $pengajuan['file_jib'];
+        $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
+        $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
+        $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
 
         if ($this->data['pengajuan']->kategori_id == 1) {
             // BISNIS CAPEX

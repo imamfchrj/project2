@@ -338,7 +338,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
+                                <label class="col-sm-2 col-form-label">No DRK</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_4"
                                            class="form-control @error('no_drp_4') is-invalid @enderror @if (!$errors->has('no_drp_4') && old('no_drp_4')) is-valid @endif"

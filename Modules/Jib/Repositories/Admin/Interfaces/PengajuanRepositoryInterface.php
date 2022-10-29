@@ -9,6 +9,7 @@ interface PengajuanRepositoryInterface
     public function findAll($options = []);
     public function findAllInTrash($options = []);
     public function findById($id);
+    public function findByPersetujuanId($id);
     public function create($params = []);
 //    public function update(Pengajuan $pengajuan, $params = []);
     public function delete($id, $permanentDelete = false);
@@ -21,4 +22,5 @@ interface PengajuanRepositoryInterface
 
     //workspace
     public function findAllWorkspace($options = []);
+    public function action_update($params = []);
 }
