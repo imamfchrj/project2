@@ -8,14 +8,11 @@
                 <div class="breadcrumb-item active"><a href="{{ url('admin/jib/pengajuan') }}">@lang('jib::pengajuan.manage_pengajuan')</a></div>
             </div>
         </div>
-        @if(isset($pengajuan))
-            {{--{!! Form::model($pengajuan, ['url' => ['admin/jib/pengajuan', $pengajuan->id], 'method' => 'PUT', 'files' => true ]) !!}--}}
-            {{--{!! Form::hidden('id') !!}--}}
-        @else
-            {{--            {!! Form::open(['url' => 'admin/jib/pengajuan', 'files'=>true]) !!}--}}
-        @endif
+        {!! Form::open(['url' => 'admin/jib/workspace/storeworkspace', 'files'=>true]) !!}
         @csrf
         <input type="hidden" id="status_btn" name="status_btn" />
+        <input type="hidden" name="pengajuan_id"
+               value="{{ old('pengajuan_id', !empty($pengajuan) ? $pengajuan->id : '') }}">
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -277,7 +274,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-left">
-                            <a class="btn btn-light" href="{{ url('admin/jib/pengajuan') }}">Close</a>
+                            <a class="btn btn-light" href="{{ url('admin/jib/workspace') }}">Close</a>
                             <button id="btn_workspace_approve"
                                     class="btn btn-success">Approve</button>
                             <button id="btn_workspace_return" name="draft" value="true"
@@ -289,5 +286,6 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </section>
 @endsection

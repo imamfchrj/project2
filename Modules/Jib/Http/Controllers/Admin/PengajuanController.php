@@ -89,6 +89,9 @@ class PengajuanController extends JibController
         $this->data['count_review'] = $this->pengajuanRepository->count_review();
         $this->data['count_approval'] = $this->pengajuanRepository->count_approval();
         $this->data['count_closed'] = $this->pengajuanRepository->count_closed();
+        $this->data['count_draft'] = $this->pengajuanRepository->count_draft();
+        $this->data['count_initiator'] = $this->pengajuanRepository->count_initiator();
+        $this->data['count_rejected'] = $this->pengajuanRepository->count_rejected();
         return view('jib::admin.pengajuan.index',$this->data);
     }
 

@@ -19,6 +19,9 @@ interface PengajuanRepositoryInterface
     public function count_review();
     public function count_approval();
     public function count_closed();
+    public function count_draft();
+    public function count_initiator();
+    public function count_rejected();
 
     //workspace
     public function findAllWorkspace($options = []);
