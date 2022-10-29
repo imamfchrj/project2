@@ -133,6 +133,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $query->where('jib_pengajuan.status_id', 7)
                         ->Where('jib_pengajuan.user_id', auth()->user()->id);
                 }
+            )->orwhere(
+                function ($query) {
+                    $query->where('jib_pengajuan.status_id', 8)
+                        ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
             )
             ->orderBy('jib_pengajuan.id', 'ASC')
             ->groupby(
