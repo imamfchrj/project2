@@ -294,7 +294,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-left">
-                            <a class="btn btn-light" href="{{ url('admin/jib/pengajuan') }}">Close</a>
+                            <a class="btn btn-light" href="{{ url('admin/jib/workspace') }}">Close</a>
                             <button id="btn_workspace_approve"
                                     class="btn btn-success">Approve</button>
                             <button id="btn_workspace_return" name="draft" value="true"
@@ -306,5 +306,6 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </section>
 @endsection
