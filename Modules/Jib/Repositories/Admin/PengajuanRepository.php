@@ -517,6 +517,21 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         return Pengajuan::whereIn('status_id', array(6))->get()->count();
     }
 
+    public function count_draft()
+    {
+        return Pengajuan::whereIn('status_id', array(7))->get()->count();
+    }
+
+    public function count_initiator()
+    {
+        return Pengajuan::whereIn('status_id', array(8))->get()->count();
+    }
+
+    public function count_rejected()
+    {
+        return Pengajuan::whereIn('status_id', array(9))->get()->count();
+    }
+
     // Workspace
     public function action_update($params = [])
     {
@@ -530,7 +545,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         // Approve
         if ($status_btn == 1) {
             // Update REVIEWER
-            $reviewer->last_status = 'APPROVED';
+            $reviewer->last_status = 'APPROVE';
             $reviewer->save();
             if ($urutan < $reviewer_count) {
                 $urutan_next = $urutan + 1;
@@ -574,19 +589,75 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->reviewer_id = $reviewer->id;
                 $review->nik_gsd = auth()->user()->nik_gsd;
                 $review->nama_karyawan = auth()->user()->name;
-                $review->status = 'APPROVE';
+                $review->status = 'APPROVED';
+                $review->notes = $params['note'];
+                $review->save();
+            }
+            return $pengajuan->save();
+
+            // Return
+        } elseif ($status_btn == 2) {
+            // Update REVIEWER
+            $reviewer->last_status = 'QUEUE';
+            $reviewer->save();
+            if ($urutan != 1) {
+                $urutan_before = $urutan - 1;
+                $reviewer_before = Reviewer::where('pengajuan_id', $pengajuan_id)->where('urutan', $urutan_before)->firstorfail();
+                $reviewer_before->last_status = 'OPEN';
+                $reviewer_before->save();
+            }
+
+            // UPDATE PENGAJUAN
+            if ($pengajuan->status_id == 1) {
+                $pengajuan->status_id = 8;
+                $pengajuan->pemeriksa_id = null;
+            } elseif ($pengajuan->status_id == 2) {
+                $pengajuan->status_id = 1;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 3) {
+                $pengajuan->status_id = 2;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 4) {
+                $pengajuan->status_id = 3;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            } else {
+                $pengajuan->status_id = 4;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            }
+
+            // Insert Review
+            if (!empty($params['note'])) {
+                $review = new Review();
+                $review->pengajuan_id = $pengajuan->id;
+                $review->reviewer_id = $reviewer->id;
+                $review->nik_gsd = auth()->user()->nik_gsd;
+                $review->nama_karyawan = auth()->user()->name;
+                $review->status = 'RETURNED';
+                $review->notes = $params['note'];
+                $review->save();
+            }
+            return $pengajuan->save();
+            // Reject
+        } else {
+            // Update REVIEWER
+            $reviewer->last_status = 'REJECT';
+            $reviewer->save();
+
+            // UPDATE PENGAJUAN
+            $pengajuan->status_id = 9;
+
+            // Insert Review
+            if (!empty($params['note'])) {
+                $review = new Review();
+                $review->pengajuan_id = $pengajuan->id;
+                $review->reviewer_id = $reviewer->id;
+                $review->nik_gsd = auth()->user()->nik_gsd;
+                $review->nama_karyawan = auth()->user()->name;
+                $review->status = 'REJECTED';
                 $review->notes = $params['note'];
                 $review->save();
             }
             return $pengajuan->save();
         }
-
-//        // Return
-//        } elseif ($status_btn == 2) {
-//
-//        // Reject
-//        } else {
-//
-//        }
     }
 }
