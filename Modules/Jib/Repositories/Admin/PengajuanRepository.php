@@ -102,10 +102,54 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
         }
 
-        $pengajuan = $pengajuan->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id')
-            ->where('jib_reviewer.last_status', 'OPEN')
-            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
-            ->orderBy('jib_pengajuan.id', 'ASC');
+        $pengajuan = $pengajuan->select(
+            'jib_pengajuan.initiator_id',
+            'jib_pengajuan.id',
+            'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.segment_id',
+            'jib_pengajuan.customer_id',
+            'jib_pengajuan.kegiatan',
+            'jib_pengajuan.no_drp',
+            'jib_pengajuan.kategori_id',
+            'jib_pengajuan.nilai_capex',
+            'jib_pengajuan.pemeriksa_id',
+            'jib_pengajuan.status_id',
+            'jib_pengajuan.user_id',
+            'jib_reviewer.pengajuan_id'
+        )
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id')
+//            ->where('jib_pengajuan.user_id', auth()->user()->id)
+//            ->orwhere('jib_pengajuan.status_id', 7)
+//            ->where('jib_reviewer.last_status', 'OPEN')
+//            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
+            ->where(
+                function($query){
+                    $query->where('jib_reviewer.last_status', 'OPEN')
+                    ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
+                }
+            )
+            ->orwhere(
+                function($query){
+                    $query->where('jib_pengajuan.status_id', 7)
+                        ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            )
+            ->orderBy('jib_pengajuan.id', 'ASC')
+            ->groupby(
+                'jib_pengajuan.id',
+                'jib_pengajuan.initiator_id',
+                'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.segment_id',
+                'jib_pengajuan.customer_id',
+                'jib_pengajuan.kegiatan',
+                'jib_pengajuan.no_drp',
+                'jib_pengajuan.kategori_id',
+                'jib_pengajuan.nilai_capex',
+                'jib_pengajuan.pemeriksa_id',
+                'jib_pengajuan.status_id',
+                'jib_pengajuan.user_id',
+                'jib_reviewer.pengajuan_id'
+            );
 
         if ($perPage) {
             return $pengajuan->paginate($perPage);

@@ -83,14 +83,18 @@
                                             {{--<td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>--}}
                                             {{--<td>{{ $peng->periode_up }}</td>--}}
                                             {{--<td>{{ $peng->periode_end }}</td>--}}
-                                            <td>{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</td>
+                                            @if ($peng->status_id == 7)
+                                                <td>{{ $peng->mstatuses->name.' - '.$peng->users->name}}</td>
+                                            @else
+                                                <td>{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</td>
+                                            @endif
                                             {{--<td>{{ $peng->users->name }}</td>--}}
                                             <td>
                                                 @if ($peng->trashed())
                                                     @can('delete_jib-pengajuan')
                                                         <a class="btn btn-sm btn-warning"
                                                            href="{{ url('admin/jib/pengajuan/'. $peng->id .'/restore')}}"><i
-                                                                    class="fa fa-sync-alt"></i> @lang('jib::pengajuan.btn_restore_label')
+                                                                    class="fa fa-sync-alt"></i>
                                                         </a>
                                                         <a href="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
                                                            class="btn btn-sm btn-danger" onclick="
@@ -98,7 +102,7 @@
                                                                 if (confirm('Do you want to remove this permanently?')) {
                                                                 document.getElementById('delete-role-{{ $peng->id }}').submit();
                                                                 }">
-                                                            <i class="far fa-trash-alt"></i> @lang('jib::pengajuan.btn_delete_permanent_label')
+                                                            <i class="far fa-trash-alt"></i>
                                                         </a>
                                                         <form id="delete-role-{{ $peng->id }}"
                                                               action="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
