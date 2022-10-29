@@ -71,6 +71,9 @@ $(document).ready(function(){
     $("#group-2").hide();
     $("#group-3").hide();
     $("#group-4").hide();
+
+    $('#jenis_id').change();
+    $('#kategori_id').change();
 });
 
 $('#btn_pengajuan_draft').click(function(){

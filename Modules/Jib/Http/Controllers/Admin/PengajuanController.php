@@ -220,7 +220,13 @@ class PengajuanController extends JibController
      */
     public function update(Request $request, $id)
     {
-        //
+        $params = $request->validated();
+
+        if ($pengajuan = $this->pengajuanRepository->create($params)) {
+            return redirect('admin/jib/pengajuan')
+                ->with('success', __('blog::pegnajuan.success_create_message'));
+        }
+    
     }
 
     /**

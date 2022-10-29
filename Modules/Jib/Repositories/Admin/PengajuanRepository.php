@@ -2,14 +2,12 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
-use Facades\Str;
 use DB;
-
-use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Entities\Pengajuan;
 use Modules\Jib\Entities\Review;
-use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Entities\Reviewer;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 
 //use Modules\Blog\Entities\Tag;
 
@@ -122,16 +120,20 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //            ->orwhere('jib_pengajuan.status_id', 7)
 //            ->where('jib_reviewer.last_status', 'OPEN')
 //            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
-            ->where(
+            ->orWhere(
                 function ($query) {
-                    $query->where('jib_reviewer.last_status', 'OPEN')
-                        ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
+                    if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") { //Role Approver
+                        $query->where('jib_reviewer.last_status', 'OPEN')
+                            ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
+                    }
                 }
             )
             ->orwhere(
                 function ($query) {
-                    $query->where('jib_pengajuan.status_id', 7)
-                        ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                    if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Initiator") { //Role Initiator
+                        $query->where('jib_pengajuan.status_id', 7)
+                            ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                    }
                 }
             )
             ->orderBy('jib_pengajuan.id', 'ASC')
@@ -257,10 +259,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->npv = $params['npv'];
                 $pengajuan->pbp = $params['pbp'];
 
-                if ($params['draft_status'] == true)
+                if ($params['draft_status'] == true) {
                     $pengajuan->status_id = 7;
-                else
+                } else {
                     $pengajuan->status_id = 1;
+                }
 
                 $pengajuan->user_id = auth()->user()->id;
                 $pengajuan->created_by = auth()->user()->id;
@@ -295,10 +298,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->net_cf = $params['net_cf'];
                 $pengajuan->suku_bunga = $params['suku_bunga'];
 
-                if ($params['draft_status'] == true)
+                if ($params['draft_status'] == true) {
                     $pengajuan->status_id = 7;
-                else
+                } else {
                     $pengajuan->status_id = 1;
+                }
 
                 $pengajuan->user_id = auth()->user()->id;
                 $pengajuan->created_by = auth()->user()->id;
@@ -344,7 +348,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $reviewer = [];
                 foreach ($pemeriksa as $pem) {
                     if ($pem->urutan == 1) {
-                        $last_status = "OPEN";
+
+                        if ($params['draft_status'] == true) {
+                            $last_status = "DRAFT";
+                        } else {
+                            $last_status = "OPEN";
+                        }
+
                         $pengajuan->pemeriksa_id = $pem->id;
                         $pengajuan->save();
                     } else {
@@ -395,10 +405,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->nilai_capex = $params['nilai_capex_2'];
             $pengajuan->bcr = $params['bcr'];
 
-            if ($params['draft_status'] == true)
+            if ($params['draft_status'] == true) {
                 $pengajuan->status_id = 7;
-            else
+            } else {
                 $pengajuan->status_id = 1;
+            }
 
             $pengajuan->user_id = auth()->user()->id;
             $pengajuan->created_by = auth()->user()->id;

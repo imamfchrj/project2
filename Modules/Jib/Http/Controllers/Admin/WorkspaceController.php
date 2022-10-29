@@ -2,49 +2,58 @@
 
 namespace Modules\Jib\Http\Controllers\Admin;
 
-use Modules\Jib\Http\Controllers\JibController;
+use App\Authorizable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Modules\Jib\Http\Requests\Admin\PersetujuanRequest;
+use Modules\Jib\Http\Controllers\JibController;
 use Modules\Jib\Http\Requests\Admin\MomRequest;
+use Modules\Jib\Http\Requests\Admin\PersetujuanRequest;
 use Modules\Jib\Http\Requests\Admin\WorkspaceRequest;
-
-use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
-
-use App\Authorizable;
+use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\JenisRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 
 class WorkspaceController extends JibController
 {
     use Authorizable;
 
-    private  $pengajuanRepository,
-        $segmentRepository,
-        $customerRepository,
-        $reviewRepository,
-        $persetujuanRepository,
-        $momRepository,
-        $kesimpulanRepository,
-        $risikoRepository,
-        $anggaranRepository;
+    private $pengajuanRepository,
+    $segmentRepository,
+    $customerRepository,
+    $reviewRepository,
+    $persetujuanRepository,
+    $momRepository,
+    $kesimpulanRepository,
+    $risikoRepository,
+    $anggaranRepository,
+    $initiatorRepository,
+    $kategoriRepository,
+    $jenisRepository,
+    $pemeriksaRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
-                                SegmentRepositoryInterface $segmentRepository,
-                                CustomerRepositoryInterface $customerRepository,
-                                ReviewRepositoryInterface $reviewRepository,
-                                PersetujuanRepositoryInterface $persetujuanRepository,
-                                MomRepositoryInterface $momRepository,
-                                KesimpulanRepositoryInterface $kesimpulanRepository,
-                                RisikoRepositoryInterface $risikoRepository,
-                                AnggaranRepositoryInterface $anggaranRepository)
-    {
+        SegmentRepositoryInterface $segmentRepository,
+        CustomerRepositoryInterface $customerRepository,
+        ReviewRepositoryInterface $reviewRepository,
+        PersetujuanRepositoryInterface $persetujuanRepository,
+        MomRepositoryInterface $momRepository,
+        KesimpulanRepositoryInterface $kesimpulanRepository,
+        RisikoRepositoryInterface $risikoRepository,
+        AnggaranRepositoryInterface $anggaranRepository, 
+        InitiatorRepositoryInterface $initiatorRepository,
+        KategoriRepositoryInterface $kategoriRepository,
+        JenisRepositoryInterface $jenisRepository,
+        PemeriksaRepositoryInterface $pemeriksaRepository,) {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
 
@@ -57,6 +66,10 @@ class WorkspaceController extends JibController
         $this->kesimpulanRepository = $kesimpulanRepository;
         $this->risikoRepository = $risikoRepository;
         $this->anggaranRepository = $anggaranRepository;
+        $this->initiatorRepository = $initiatorRepository;
+        $this->kategoriRepository = $kategoriRepository;
+        $this->jenisRepository = $jenisRepository;
+        $this->pemeriksaRepository = $pemeriksaRepository;
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
@@ -79,7 +92,7 @@ class WorkspaceController extends JibController
         $this->data['filter'] = $params;
         $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
         $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');
-        return view('jib::admin.workspace.index',$this->data);
+        return view('jib::admin.workspace.index', $this->data);
     }
 
     /**
@@ -113,25 +126,44 @@ class WorkspaceController extends JibController
 
     public function editworkspace($id)
     {
+        $user = auth()->user();
         $pengajuan = $this->pengajuanRepository->findById($id);
-        $this->data['pengajuan'] = $pengajuan['pengajuan'];
-        $this->data['file_jib'] = $pengajuan['file_jib'];
-        $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
-        $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
-        $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
-        $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
 
-        $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
+        if ($user->roles[0]->name == "Approver") {
+            $this->data['pengajuan'] = $pengajuan['pengajuan'];
+            $this->data['file_jib'] = $pengajuan['file_jib'];
+            $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
+            $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
+            $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+            $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
 
-        // BISNIS CAPEX
-        if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
-            return view('jib::admin.workspace.edit_bisnis', $this->data);
-        // BISNIS OPEX
-        } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
-            return view('jib::admin.workspace.edit_bisnis_opex', $this->data);
-        // SUPPORT CAPEX/OPEX
+            $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
+
+            // BISNIS CAPEX
+            if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
+                return view('jib::admin.workspace.edit_bisnis', $this->data);
+                // BISNIS OPEX
+            } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
+                return view('jib::admin.workspace.edit_bisnis_opex', $this->data);
+                // SUPPORT CAPEX/OPEX
+            } else {
+                return view('jib::admin.workspace.edit_support', $this->data);
+            }
         } else {
-            return view('jib::admin.workspace.edit_support', $this->data);
+            $this->data['pengajuan'] = $pengajuan['pengajuan'];
+            $this->data['file_jib'] = $pengajuan['file_jib'];
+            $this->data['initiator'] = $this->initiatorRepository->findByUserId();
+            $this->data['segment'] = $this->segmentRepository->findAll()->pluck('name', 'id');
+            $this->data['segment_id'] = null;
+            $this->data['customer'] = $this->customerRepository->findAll()->pluck('name', 'id');
+            $this->data['customer_id'] = null;
+            $this->data['kategori'] = $this->kategoriRepository->findAll()->pluck('name', 'id');
+            $this->data['kategori_id'] = null;
+            $this->data['jenis'] = $this->jenisRepository->findAll()->pluck('name', 'id');
+            $this->data['jenis_id'] = null;
+            $this->data['pemeriksa'] = $this->pemeriksaRepository->findAll();
+
+            return view('jib::admin.pengajuan.form', $this->data);
         }
     }
 
@@ -158,10 +190,10 @@ class WorkspaceController extends JibController
         // BISNIS CAPEX
         if ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 1) {
             return view('jib::admin.workspace.createform_bisnis_capex', $this->data);
-        // BISNIS OPEX
+            // BISNIS OPEX
         } elseif ($this->data['pengajuan']->kategori_id == 1 && $this->data['pengajuan']->jenis_id == 2) {
             return view('jib::admin.workspace.createform_bisnis_opex', $this->data);
-        // SUPPORT CAPEX/OPEX
+            // SUPPORT CAPEX/OPEX
         } else {
             return view('jib::admin.workspace.createform_support', $this->data);
         }
@@ -196,7 +228,7 @@ class WorkspaceController extends JibController
         $params = $request->validated();
 
         if ($persetujuan = $this->persetujuanRepository->create($params)) {
-            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+            return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pengajuan.success_create_message'));
         }
     }
@@ -213,11 +245,11 @@ class WorkspaceController extends JibController
         $persetujuan = $this->persetujuanRepository->findById($id);
 
         if ($this->persetujuanRepository->update($id, $params)) {
-            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+            return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('jib::pengajuan.success_create_message'));
         }
 
-        return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+        return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
             ->with('error', __('jib::pengajuan.fail_update_message'));
     }
 
@@ -252,7 +284,7 @@ class WorkspaceController extends JibController
         $params = $request->validated();
 
         if ($mom = $this->momRepository->create($params)) {
-            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+            return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
 
@@ -270,11 +302,11 @@ class WorkspaceController extends JibController
         $mom = $this->momRepository->findById($id);
 
         if ($this->momRepository->update($id, $params)) {
-            return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+            return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('jib::pengajuan.success_create_message'));
         }
 
-        return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
+        return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
             ->with('error', __('jib::pengajuan.fail_update_message'));
     }
 
