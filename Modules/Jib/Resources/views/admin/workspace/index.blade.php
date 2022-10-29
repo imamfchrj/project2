@@ -63,6 +63,10 @@
                                                 <td>
                                                     <div class="mt-1 badge badge-success">{{ $peng->mstatuses->name }}</div>
                                                 </td>
+                                            @elseif ($peng->status_id == 9) <!-- Rejected -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-danger">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div>
+                                                </td>
                                             @else <!-- Reviewer -->
                                                 <td>
                                                     <div class="mt-1 badge badge-warning">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div>
