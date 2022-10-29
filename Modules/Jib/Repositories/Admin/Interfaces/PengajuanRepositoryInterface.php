@@ -22,4 +22,5 @@ interface PengajuanRepositoryInterface
 
     //workspace
     public function findAllWorkspace($options = []);
+    public function action_update($params = []);
 }

@@ -2,12 +2,12 @@
 
 namespace Modules\Jib\Http\Controllers\Admin;
 
+use Modules\Jib\Http\Controllers\JibController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Modules\Jib\Http\Requests\Admin\PersetujuanRequest;
 use Modules\Jib\Http\Requests\Admin\MomRequest;
-
-use Modules\Jib\Http\Controllers\JibController;
+use Modules\Jib\Http\Requests\Admin\WorkspaceRequest;
 
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
@@ -135,6 +135,16 @@ class WorkspaceController extends JibController
         }
     }
 
+    public function storeworkspace(WorkspaceRequest $request)
+    {
+        $params = $request->validated();
+
+        if ($this->pengajuanRepository->action_update($params)) {
+            return redirect('admin/jib/workspace')
+                ->with('success', __('blog::pengajuan.success_create_message'));
+        }
+    }
+
     public function createform($id)
     {
         $pengajuan = $this->pengajuanRepository->findById($id);
@@ -189,7 +199,6 @@ class WorkspaceController extends JibController
             return redirect('admin/jib/workspace/'.$params['pengajuan_id'].'/editworkspace')
                 ->with('success', __('blog::pengajuan.success_create_message'));
         }
-
     }
 
     /**

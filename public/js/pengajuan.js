@@ -76,3 +76,15 @@ $(document).ready(function(){
 $('#btn_pengajuan_draft').click(function(){
     $('#draft_status').val(true);
 });
+
+$('#btn_workspace_approve').click(function(){
+    $('#status_btn').val(1);
+});
+
+$('#btn_workspace_return').click(function(){
+    $('#status_btn').val(2);
+});
+
+$('#btn_workspace_reject').click(function(){
+    $('#status_btn').val(3);
+});
