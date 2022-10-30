@@ -8,13 +8,7 @@
                 <div class="breadcrumb-item active"><a href="{{ url('admin/jib/workspace') }}">Manage Pengajuan JIB</a></div>
             </div>
         </div>
-        @if(isset($persetujuan))
-            {!! Form::model($persetujuan, ['url' => ['admin/jib/workspace/updateform', $persetujuan->id], 'method' => 'PUT', 'files' => true ]) !!}
-            {!! Form::hidden('id') !!}
-        @else
-            {!! Form::open(['url' => 'admin/jib/workspace/storeform', 'files'=>true]) !!}
-        @endif
-        @csrf
+        
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -22,6 +16,7 @@
                         <div class="card-header">
                             <h4> SUPPORT CAPEX/OPEX</h4>
                         </div>
+                        {!! Form::open(['url' => 'admin/jib/workspace/storeform']) !!}
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">No DRP/DRK</label>
@@ -134,15 +129,17 @@
                             </div>
 
                         </div>
+                       
                         <div class="card-footer text-left">
-                            <a class="btn btn-light" href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}">Back</a>
-                            <a href=""><button class="btn btn-primary">{{ !empty($persetujuan) ? 'Update' : 'Create' }}</button></a>
+                            <a class = "btn btn-light" href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}">Back</a>
+                            <a href=""><button class="btn btn-success">Create</button></a>
                         </div>
+                        {!! Form::close() !!}
                     </div>
 
                 </div>
             </div>
         </div>
-        {!! Form::close() !!}
+        
     </section>
 @endsection
