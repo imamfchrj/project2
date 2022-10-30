@@ -11,17 +11,18 @@ use Modules\Jib\Http\Requests\Admin\PersetujuanRequest;
 use Modules\Jib\Http\Requests\Admin\WorkspaceRequest;
 use Modules\Jib\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\JenisRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\JenisRepositoryInterface;
-use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use PDF;
 
 class WorkspaceController extends JibController
 {
@@ -39,7 +40,7 @@ class WorkspaceController extends JibController
     $initiatorRepository,
     $kategoriRepository,
     $jenisRepository,
-    $pemeriksaRepository;
+        $pemeriksaRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
         SegmentRepositoryInterface $segmentRepository,
@@ -49,11 +50,11 @@ class WorkspaceController extends JibController
         MomRepositoryInterface $momRepository,
         KesimpulanRepositoryInterface $kesimpulanRepository,
         RisikoRepositoryInterface $risikoRepository,
-        AnggaranRepositoryInterface $anggaranRepository, 
+        AnggaranRepositoryInterface $anggaranRepository,
         InitiatorRepositoryInterface $initiatorRepository,
         KategoriRepositoryInterface $kategoriRepository,
         JenisRepositoryInterface $jenisRepository,
-        PemeriksaRepositoryInterface $pemeriksaRepository,) {
+        PemeriksaRepositoryInterface $pemeriksaRepository, ) {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
 
@@ -329,5 +330,16 @@ class WorkspaceController extends JibController
     public function destroy($id)
     {
         //
+    }
+
+    public function download($id)
+    {
+        # code...
+        $pengajuan = $this->pengajuanRepository->findById($id);
+        $data = $pengajuan['pengajuan'];
+
+        $pdf = PDF::loadView('jib::layouts.temp_capexbisnis', $data);
+
+        return $pdf->download('jib.pdf');
     }
 }

@@ -65,7 +65,8 @@
                                     <option>@lang('jib::pengajuan.select_jenis_label')</option>
 
                                     @foreach ($jenis as $key => $value)
-                                    <option value="{{ $key }}" {{ $key == $pengajuan->jenis_id ? 'selected' : '' }}>
+                                    <option value="{{ $key }}"
+                                        {{ $key == (!empty($pengajuan)? $pengajuan->jenis_id : '') ? 'selected' : '' }}>
                                         {{ $value }}
                                     </option>
                                     @endforeach
@@ -85,7 +86,8 @@
                                     <option>@lang('jib::pengajuan.select_kategori_label')</option>
 
                                     @foreach ($kategori as $key => $value)
-                                    <option value="{{ $key }}" {{ $key == $pengajuan->kategori_id ? 'selected' : '' }}>
+                                    <option value="{{ $key }}"
+                                        {{ $key == (!empty($pengajuan)? $pengajuan->kategori_id : '') ? 'selected' : '' }}>
                                         {{ $value }}
                                     </option>
                                     @endforeach
@@ -232,6 +234,7 @@
                     </div>
                 </div>
                 <!-- END CARD 1 -->
+
                 <!-- CARD 2 -->
                 <div class="card hide" id="group-2">
                     <div class="card-header">
@@ -324,6 +327,39 @@
                     </div>
                 </div>
                 <!-- END CARD 2 -->
+
+                <!-- Card Upload History -->
+                <div class="card hide" id="upload_history">
+                    <div class="card-header">
+                        <h4>Upload History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="pengajuan" class="table table-bordered table-sm ">
+                                <thead class="thead-dark text-center">
+                                    <th>Upload Date</th>
+                                    <th>Uploader</th>
+                                    <th>Download</th>
+                                </thead>
+                                <tbody class="text-center">
+                                    @if(!empty($file_jib))
+                                    @foreach($file_jib as $file_upload)
+                                    <tr>
+                                        <td>{{ $file_upload->created_at }}</td>
+                                        <td>{{ !empty($pengajuan) ? $pengajuan->users->name.' / '.$pengajuan->users->nik_gsd : '' }}
+                                        </td>
+                                        <td><a href={{ $file_upload->uuid.'/download' }}><i class="fas fa-download"></i>
+                                                {{ $file_upload->name }}</a></td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Card Upload History -->
+
                 <!-- CARD 4 -->
                 <div class="card hide" id="group-4">
                     <div class="card-header">

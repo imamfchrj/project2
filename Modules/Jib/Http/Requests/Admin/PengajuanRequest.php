@@ -27,6 +27,7 @@ class PengajuanRequest extends FormRequest
 //        }
 
         return array_merge([
+            'id' => '',
             'initiator_id' => '',
             'jenis_id' => '',
             'kategori_id' => '',
