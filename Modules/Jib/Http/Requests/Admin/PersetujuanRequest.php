@@ -51,7 +51,9 @@ class PersetujuanRequest extends FormRequest
             'net_cf' => '',
             'suku_bunga' => '',
 
-            'bcr' => ''
+            'bcr' => '',
+            'file_approval' => ''
+
         ]);
     }
 

@@ -204,7 +204,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $pengajuan = Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
             ->findOrFail($id);
         $file_jib = $pengajuan->getMedia('file_jib');
-
+// dd($pengajuan);
         return compact(['pengajuan', 'file_jib']);
         // return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
         //     ->findOrFail($id);

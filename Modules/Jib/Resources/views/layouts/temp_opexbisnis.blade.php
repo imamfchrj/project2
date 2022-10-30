@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta http-equiv=Content-Type content="text/html; charset=unicode">
 <meta name=Generator content="Microsoft Word 15 (filtered)">
 <style>
 <!--
@@ -18,7 +18,7 @@
 	margin-right:0cm;
 	margin-bottom:8.0pt;
 	margin-left:0cm;
-	line-height:107%;
+	line-height:106%;
 	font-size:11.0pt;
 	font-family:"Calibri",sans-serif;}
 .MsoChpDefault
@@ -26,17 +26,12 @@
 	font-family:"Calibri",sans-serif;}
 .MsoPapDefault
 	{margin-bottom:8.0pt;
-	line-height:107%;}
+	line-height:106%;}
 @page WordSection1
 	{size:595.3pt 841.9pt;
 	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
 div.WordSection1
 	{page:WordSection1;}
- /* List Definitions */
- ol
-	{margin-bottom:0cm;}
-ul
-	{margin-bottom:0cm;}
 -->
 </style>
 
@@ -46,18 +41,19 @@ ul
 
 <div class=WordSection1>
 
-<p class=MsoNormal align=center style='text-align:center'><b>FORM PERSETUJUAN
-INISIATIF INVESTASI / OPEX BISNIS</b></p>
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:14.0pt;line-height:106%'>FORM PERSETUJUAN INISIATIF INVESTASI
+/ OPEX BISNIS</span></b></p>
 
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse'>
  <tr>
   <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>1</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border-top:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>No DRK</p>
@@ -67,9 +63,10 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border:solid windowtext 1.0pt;
+  <td width=327 valign=top style='width:245.2pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->no_drp }}</span></p>
   </td>
  </tr>
  <tr>
@@ -78,7 +75,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>2</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Kelompok Akun</p>
   </td>
@@ -86,10 +83,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->akun }}</span></p>
   </td>
  </tr>
  <tr>
@@ -98,7 +96,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>3</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Nama Proyek</p>
   </td>
@@ -106,10 +104,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->kegiatan }}</span></p>
   </td>
  </tr>
  <tr>
@@ -118,7 +117,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>4</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Customer</p>
   </td>
@@ -126,10 +125,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $customer }}</span></p>
   </td>
  </tr>
  <tr>
@@ -138,7 +138,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>5</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Lokasi</p>
   </td>
@@ -146,10 +146,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->lokasi }}</span></p>
   </td>
  </tr>
  <tr>
@@ -158,7 +159,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>6</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Nilai Proyek</p>
   </td>
@@ -166,10 +167,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->nilai_capex }}</span></p>
   </td>
  </tr>
  <tr>
@@ -178,7 +180,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
@@ -186,10 +188,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $terbilang_capex }}</span></p>
   </td>
  </tr>
  <tr>
@@ -198,7 +201,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>7</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Scope of Work</p>
   </td>
@@ -206,10 +209,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->sow }}</span></p>
   </td>
  </tr>
  <tr>
@@ -218,7 +222,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>8</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Delivery Time</p>
   </td>
@@ -226,10 +230,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->delivery_time }}</span></p>
   </td>
  </tr>
  <tr>
@@ -238,7 +243,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>9</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Analisa
   Kelayakan Proyek</p>
@@ -247,10 +252,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;</span></p>
   </td>
  </tr>
  <tr>
@@ -259,7 +265,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>9.1 Analisa
   Kelayakan Bisnis</p>
@@ -268,10 +274,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;</span></p>
   </td>
  </tr>
  <tr>
@@ -280,19 +287,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>        
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   Revenue</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->est_revenue }}</span></p>
   </td>
  </tr>
  <tr>
@@ -301,18 +309,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>         Cost</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Cost</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->beban }}</span></p>
   </td>
  </tr>
  <tr>
@@ -321,19 +331,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>        
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   Profit Margin</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->profit_margin }}</span></p>
   </td>
  </tr>
  <tr>
@@ -342,19 +353,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>         Net
-  Cash Flow</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Net Cash Flow</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->net_cf }}</span></p>
   </td>
  </tr>
  <tr>
@@ -363,19 +375,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>         Suku
-  Bunga</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Suku Bunga</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->suku_bunga }}</span></p>
   </td>
  </tr>
  <tr>
@@ -384,7 +397,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>9.2 Analisa
   Inherent Risk</p>
@@ -393,10 +406,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->analisa_risk }}</span></p>
   </td>
  </tr>
  <tr>
@@ -405,19 +419,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>        
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   Score Inherent Risk</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->score_risk }}</span></p>
   </td>
  </tr>
  <tr>
@@ -426,7 +441,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>9.3 Rencana
   Mitigasi</p>
@@ -435,10 +450,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->rencana_mitigasi }}</span></p>
   </td>
  </tr>
  <tr>
@@ -447,7 +463,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>9.4 Risiko
   setelah Mitigasi</p>
@@ -456,10 +472,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->risk_mitigasi }}</span></p>
   </td>
  </tr>
  <tr>
@@ -468,19 +485,20 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>        
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   Score Risiko setelah Mitigasi</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp;{{ $persetujuan->score_mitigasi}}</span></p>
   </td>
  </tr>
  <tr>
@@ -489,7 +507,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>10</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Kesimpulan
   Usulan Initiatif Bisnis</p>
@@ -498,10 +516,11 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp; {{ $persetujuan->kesimpulan }}</span></p>
   </td>
  </tr>
  <tr>
@@ -510,7 +529,7 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>11</p>
   </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+  <td width=221 valign=top style='width:165.5pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Catatan</p>
   </td>
@@ -518,18 +537,19 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
   </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+  <td width=327 valign=top style='width:245.2pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+  style='font-size:10.5pt'>&nbsp; {{ $persetujuan->catatan }}</span></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><span style='color:white'>&nbsp;</span></p>
 
-<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse'>
  <tr>
   <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
@@ -574,6 +594,8 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'>&nbsp;</p>
   </td>
   <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
@@ -614,8 +636,6 @@ INISIATIF INVESTASI / OPEX BISNIS</b></p>
   </td>
  </tr>
 </table>
-
-<p class=MsoNormal>&nbsp;</p>
 
 <p class=MsoNormal>&nbsp;</p>
 
