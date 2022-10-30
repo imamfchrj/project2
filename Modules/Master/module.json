@@ -9,5 +9,79 @@
     ],
     "aliases": {},
     "files": [],
-    "requires": []
+    "requires": [],
+    "admin_menus": [
+        {
+            "icon": "fa fa-dollar-sign",
+            "name": "Anggaran",
+            "route": "admin/master/anggaran",
+            "permission": "view_master-anggaran"
+        },
+        {
+            "icon": "fa fa-person-booth",
+            "name": "Customer",
+            "route": "admin/master/customer",
+            "permission": "view_master-customer"
+        },
+        {
+            "icon": "fa fa-user-alt",
+            "name": "Initiator",
+            "route": "admin/master/initiator",
+            "permission": "view_master-initiator"
+        },
+        {
+            "icon": "fa fa-money-bill",
+            "name": "Jenis",
+            "route": "admin/master/jenis",
+            "permission": "view_master-jenis"
+        },
+        {
+            "icon": "fa fa-business-time",
+            "name": "Kategori",
+            "route": "admin/master/kategori",
+            "permission": "view_master-kategori"
+        },
+        {
+            "icon": "fa fa-file-archive",
+            "name": "Kesimpulan",
+            "route": "admin/master/kesimpulan",
+            "permission": "view_master-kesimpulan"
+        },
+        {
+            "icon": "fa fa-user-astronaut",
+            "name": "Pemeriksa",
+            "route": "admin/master/pemeriksa",
+            "permission": "view_master-pemeriksa"
+        },
+        {
+            "icon": "fa fa-percentage",
+            "name": "Risiko",
+            "route": "admin/master/risiko",
+            "permission": "view_master-risiko"
+        },
+        {
+            "icon": "fa fa-asterisk",
+            "name": "Segment",
+            "route": "admin/master/segment",
+            "permission": "view_master-segment"
+        },
+        {
+            "icon": "fa fa-vote-yea",
+            "name": "Status",
+            "route": "admin/master/status",
+            "permission": "view_master-status"
+        }
+    ],
+    "permissions": [
+        "master-anggaran",
+        "master-customer",
+        "master-initiator",
+        "master-jenis",
+        "master-kategori",
+        "master-kesimpulan",
+        "master-pemeriksa",
+        "master-risiko",
+        "master-segment",
+        "master-status"
+    ]
 }
