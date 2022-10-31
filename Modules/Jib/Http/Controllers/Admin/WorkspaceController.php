@@ -239,7 +239,7 @@ class WorkspaceController extends JibController
         $persetujuan =null;
         if ($persetujuan = $this->persetujuanRepository->create($params)) {
 
-            $this->download($persetujuan->id);
+//            $this->download($persetujuan->id);
 
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pengajuan.success_create_message'));
