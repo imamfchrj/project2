@@ -61,7 +61,7 @@
                                                 </td>
                                             @elseif ($peng->status_id == 3 || $peng->status_id == 4 || $peng->status_id == 5) <!-- Approval -->
                                                 <td>
-                                                    <div class="mt-1 badge badge-success">{{ $peng->mstatuses->name }}</div>
+                                                    <div class="mt-1 badge badge-success">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div>
                                                 </td>
                                             @elseif ($peng->status_id == 9) <!-- Rejected -->
                                                 <td>
