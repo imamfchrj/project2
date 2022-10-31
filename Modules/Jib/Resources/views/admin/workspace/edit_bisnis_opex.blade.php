@@ -214,10 +214,15 @@
                                         <!-- <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td> -->
                                         <td>
                                             @if(!empty($file_approval))
-                                            <a href="{{ $file_approval->uuid.'/download' }}"><i class="fas fa-download"></i>
-                                                {{ $file_approval->name }}</a>
+                                                {{--{{ dd($file_approval->count()) }}--}}
+                                                @if ($file_approval->count() > 0)
+                                                    <a href="{{ $file_approval->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                        {{ $file_approval->last()->name }}</a>
+                                                @else
+                                                    -
+                                                @endif
                                             @else
-                                            -
+                                                -
                                             @endif
                                         </td>
                                         <td>

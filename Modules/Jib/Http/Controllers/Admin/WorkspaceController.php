@@ -32,20 +32,21 @@ class WorkspaceController extends JibController
     use Authorizable;
 
     private $pengajuanRepository,
-    $segmentRepository,
-    $customerRepository,
-    $reviewRepository,
-    $persetujuanRepository,
-    $momRepository,
-    $kesimpulanRepository,
-    $risikoRepository,
-    $anggaranRepository,
-    $initiatorRepository,
-    $kategoriRepository,
-    $jenisRepository,
+        $segmentRepository,
+        $customerRepository,
+        $reviewRepository,
+        $persetujuanRepository,
+        $momRepository,
+        $kesimpulanRepository,
+        $risikoRepository,
+        $anggaranRepository,
+        $initiatorRepository,
+        $kategoriRepository,
+        $jenisRepository,
         $pemeriksaRepository;
 
-    public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
+    public function __construct(
+        PengajuanRepositoryInterface $pengajuanRepository,
         SegmentRepositoryInterface $segmentRepository,
         CustomerRepositoryInterface $customerRepository,
         ReviewRepositoryInterface $reviewRepository,
@@ -57,7 +58,8 @@ class WorkspaceController extends JibController
         InitiatorRepositoryInterface $initiatorRepository,
         KategoriRepositoryInterface $kategoriRepository,
         JenisRepositoryInterface $jenisRepository,
-        PemeriksaRepositoryInterface $pemeriksaRepository, ) {
+        PemeriksaRepositoryInterface $pemeriksaRepository
+    ) {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
 
@@ -78,11 +80,13 @@ class WorkspaceController extends JibController
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
     }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index(Request $request)
+    public
+    function index(Request $request)
     {
         $params = $request->all();
         $options = [
@@ -236,7 +240,7 @@ class WorkspaceController extends JibController
     public function storeform(PersetujuanRequest $request)
     {
         $params = $request->validated();
-        $persetujuan =null;
+        $persetujuan = null;
         if ($persetujuan = $this->persetujuanRepository->create($params)) {
 
 //            $this->download($persetujuan->id);
@@ -276,7 +280,6 @@ class WorkspaceController extends JibController
         $this->data['anggaran_id'] = null;
 
         return view('jib::admin.workspace.createform_mom', $this->data);
-
     }
 
     public function editmom($id)
@@ -300,7 +303,6 @@ class WorkspaceController extends JibController
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
-
     }
 
     /**
@@ -347,7 +349,7 @@ class WorkspaceController extends JibController
     public function download_fullsign($id, $uid)
     {
         # code...
-         $filedownload = Media::where('uuid',$uid)->first();
+        $filedownload = Media::where('uuid', $uid)->first();
         return response()->download($filedownload->getPath());
     }
 
