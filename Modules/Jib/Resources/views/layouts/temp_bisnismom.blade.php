@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta http-equiv=Content-Type content="text/html; charset=unicode">
 <meta name=Generator content="Microsoft Word 15 (filtered)">
 <style>
 <!--
@@ -18,7 +18,7 @@
 	margin-right:0cm;
 	margin-bottom:8.0pt;
 	margin-left:0cm;
-	line-height:107%;
+	line-height:105%;
 	font-size:11.0pt;
 	font-family:"Calibri",sans-serif;}
 p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
@@ -26,49 +26,17 @@ p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
 	margin-right:0cm;
 	margin-bottom:8.0pt;
 	margin-left:36.0pt;
-	line-height:107%;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
-	{margin-top:0cm;
-	margin-right:0cm;
-	margin-bottom:0cm;
-	margin-left:36.0pt;
-	line-height:107%;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
-	{margin-top:0cm;
-	margin-right:0cm;
-	margin-bottom:0cm;
-	margin-left:36.0pt;
-	line-height:107%;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
-	{margin-top:0cm;
-	margin-right:0cm;
-	margin-bottom:8.0pt;
-	margin-left:36.0pt;
-	line-height:107%;
+	line-height:105%;
 	font-size:11.0pt;
 	font-family:"Calibri",sans-serif;}
 .MsoChpDefault
 	{font-size:11.0pt;
 	font-family:"Calibri",sans-serif;}
-.MsoPapDefault
-	{margin-bottom:8.0pt;
-	line-height:107%;}
 @page WordSection1
 	{size:595.3pt 841.9pt;
 	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
 div.WordSection1
 	{page:WordSection1;}
- /* List Definitions */
- ol
-	{margin-bottom:0cm;}
-ul
-	{margin-bottom:0cm;}
 -->
 </style>
 
@@ -81,13 +49,13 @@ ul
 <p class=MsoNormal align=center style='text-align:center'><b>REVIEW BISNIS /
 MOM</b></p>
 
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse'>
  <tr>
   <td width=171 colspan=2 rowspan=4 valign=top style='width:127.9pt;border:
   solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>       <img
-  width=71 height=54 id="Picture 1" src="temp_bisnismom.fld/image001.png"></p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width=71 height=54 src="temp_bisnismom.fld/image001.png"></p>
   </td>
   <td width=149 colspan=3 valign=top style='width:111.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
@@ -95,7 +63,8 @@ MOM</b></p>
   </td>
   <td width=281 valign=top style='width:211.0pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp; {{
+  $mom_tanggal->tanggal }}</p>
   </td>
  </tr>
  <tr>
@@ -107,7 +76,8 @@ MOM</b></p>
   <td width=281 valign=top style='width:211.0pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp; {{
+  $mom_tanggal->waktu }}</p>
   </td>
  </tr>
  <tr>
@@ -119,7 +89,8 @@ MOM</b></p>
   <td width=281 valign=top style='width:211.0pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp; {{
+  $mom->venue }}</p>
   </td>
  </tr>
  <tr>
@@ -159,7 +130,8 @@ MOM</b></p>
   <td width=431 colspan=4 valign=top style='width:322.9pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->meeting_called }}</p>
   </td>
  </tr>
  <tr>
@@ -171,7 +143,8 @@ MOM</b></p>
   <td width=431 colspan=4 valign=top style='width:322.9pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->meeting_type }}</p>
   </td>
  </tr>
  <tr>
@@ -182,7 +155,8 @@ MOM</b></p>
   <td width=431 colspan=4 valign=top style='width:322.9pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->facilitator }}</p>
   </td>
  </tr>
  <tr>
@@ -193,7 +167,8 @@ MOM</b></p>
   <td width=431 colspan=4 valign=top style='width:322.9pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->attende }}</p>
   </td>
  </tr>
  <tr>
@@ -207,16 +182,16 @@ MOM</b></p>
   <td width=601 colspan=6 valign=top style='width:450.8pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:22.35pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
-  line-height:normal'><b>Project ABC</b></p>
+  line-height:normal'><b>{{ $project }}</b></p>
   </td>
  </tr>
  <tr>
   <td width=601 colspan=6 valign=top style='width:450.8pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoListParagraph style='margin-top:0cm;margin-right:0cm;margin-bottom:
-  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>A.<span
-  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></b><b>Dasar
-  Inisiatif Bisnis</b></p>
+  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>A.</b><b><span
+  style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;&nbsp;&nbsp;
+  </span>Dasar Inisiatif Bisnis</b></p>
   </td>
  </tr>
  <tr>
@@ -228,17 +203,19 @@ MOM</b></p>
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Penjelasan
-  dasar initiative Bisnis
-  …………………………………………………………………………………………………………………………………………………………………………………………………….</p>
+  dasar initiative Bisnis </p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>{{
+  $mom->dasar_mom }}</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
  </tr>
  <tr>
   <td width=601 colspan=6 valign=top style='width:450.8pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoListParagraph style='margin-top:0cm;margin-right:0cm;margin-bottom:
-  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>B.<span
-  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></b><b>Informasi
-  Umum</b></p>
+  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>B.</b><b><span
+  style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>Informasi Umum</b></p>
   </td>
  </tr>
  <tr>
@@ -260,7 +237,8 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->ruang_lingkup }}</p>
   </td>
  </tr>
  <tr>
@@ -281,7 +259,8 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->spesifikasi }}</p>
   </td>
  </tr>
  <tr>
@@ -292,8 +271,7 @@ MOM</b></p>
   <td width=217 colspan=2 valign=top style='width:163.0pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Pelaksanaan
-  Kegiatan</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Pelaksanaan Kegiatan</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -303,7 +281,8 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->kegiatan }}</p>
   </td>
  </tr>
  <tr>
@@ -324,7 +303,8 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->lokasi }}</p>
   </td>
  </tr>
  <tr>
@@ -346,7 +326,8 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->top }}</p>
   </td>
  </tr>
  <tr>
@@ -368,16 +349,17 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->aki }}</p>
   </td>
  </tr>
  <tr>
   <td width=601 colspan=6 valign=top style='width:450.8pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoListParagraph style='margin-top:0cm;margin-right:0cm;margin-bottom:
-  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>C.<span
-  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></b><b>Pembahasan
-  dan Analisa</b></p>
+  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>C.</b><b><span
+  style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>Pembahasan dan Analisa</b></p>
   </td>
  </tr>
  <tr>
@@ -388,8 +370,8 @@ MOM</b></p>
   <td width=217 colspan=2 valign=top style='width:163.0pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Review
-  Kelengkapan Administrasi</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Review Kelengkapan
+  Administrasi</p>
   </td>
   <td width=19 valign=top style='width:14.15pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -399,7 +381,8 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->kelengkapan }}</p>
   </td>
  </tr>
  <tr>
@@ -421,16 +404,17 @@ MOM</b></p>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
+  $mom->anggaran }}</p>
   </td>
  </tr>
  <tr>
   <td width=601 colspan=6 valign=top style='width:450.8pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoListParagraph style='margin-top:0cm;margin-right:0cm;margin-bottom:
-  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>D.<span
-  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></b><b>Kesimpulan
-  dan Rekomendasi</b></p>
+  0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>D.</b><b><span
+  style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;&nbsp;&nbsp;
+  </span>Kesimpulan dan Rekomendasi</b></p>
   </td>
  </tr>
  <tr style='height:32.05pt'>
@@ -442,6 +426,8 @@ MOM</b></p>
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:32.05pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Catatan</p>
+  <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>{{
+  $mom->catatan }}</p>
   </td>
   <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -449,67 +435,78 @@ MOM</b></p>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
  </tr>
- <tr height=0>
-  <td width=28 style='border:none'></td>
-  <td width=238 style='border:none'></td>
-  <td width=105 style='border:none'></td>
-  <td width=40 style='border:none'></td>
-  <td width=70 style='border:none'></td>
-  <td width=315 style='border:none'></td>
+ <tr>
+  <td width=28 style='width:21.0pt;padding:0cm 0cm 0cm 0cm'></td>
+  <td width=238 style='width:178.5pt;padding:0cm 0cm 0cm 0cm'></td>
+  <td width=105 style='width:78.75pt;padding:0cm 0cm 0cm 0cm'></td>
+  <td width=40 style='width:30.0pt;padding:0cm 0cm 0cm 0cm'></td>
+  <td width=70 style='width:52.5pt;padding:0cm 0cm 0cm 0cm'></td>
+  <td width=315 style='width:236.25pt;padding:0cm 0cm 0cm 0cm'></td>
  </tr>
 </table>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><span style='color:white'>&nbsp;</span></p>
 
 <p class=MsoNormal>&nbsp;</p>
 
-<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
- <tr>
-  <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse'>
+ <tr style='height:12.15pt'>
+  <td width=808 colspan=3 valign=top style='width:605.95pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:12.15pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>Reviewer</p>
   </td>
  </tr>
- <tr style='height:67.35pt'>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt;
-  height:67.35pt'>
+ <tr style='height:58.5pt'>
+  <td width=406 valign=top style='width:304.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:58.5pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt;
-  height:67.35pt'>
+  <td width=397 valign=top style='width:297.65pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:58.5pt'>
   <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;</p>
   </td>
+  <td style='border:none;padding:0cm 0cm 0cm 0cm' width=5><p class='MsoNormal'>&nbsp;</td>
  </tr>
- <tr>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+ <tr style='height:12.15pt'>
+  <td width=406 valign=top style='width:304.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:12.15pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'><u>CHANDRA GT PURBA</u></p>
   </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <td width=397 valign=top style='width:297.65pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:12.15pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'><u>YOU DEVY</u></p>
   </td>
+  <td style='border:none;padding:0cm 0cm 0cm 0cm' width=5><p class='MsoNormal'>&nbsp;</td>
  </tr>
- <tr>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+ <tr style='height:37.35pt'>
+  <td width=406 valign=top style='width:304.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:37.35pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>SVP CORPORATE STRATEGY</p>
   </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <td width=397 valign=top style='width:297.65pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:37.35pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>VP STRATEGIC BUSINESS DEVELOPMENT</p>
   </td>
+  <td style='border:none;padding:0cm 0cm 0cm 0cm' width=5><p class='MsoNormal'>&nbsp;</td>
  </tr>
- <tr>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+ <tr style='height:13.0pt'>
+  <td width=406 valign=top style='width:304.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:13.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <td width=397 valign=top style='width:297.65pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:13.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
   line-height:normal'>&nbsp;</p>
   </td>
+  <td style='border:none;padding:0cm 0cm 0cm 0cm' width=5><p class='MsoNormal'>&nbsp;</td>
  </tr>
 </table>
 
