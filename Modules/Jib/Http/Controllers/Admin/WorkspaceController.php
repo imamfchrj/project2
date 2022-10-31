@@ -138,8 +138,9 @@ class WorkspaceController extends JibController
 
             $this->data['pengajuan'] = $pengajuan['pengajuan'];
             $this->data['file_jib'] = $pengajuan['file_jib'];
-            // $this->data['persetujuan'] = $persetujuan['persetujuan'];
-            $this->data['persetujuan'] = $persetujuan;
+            $this->data['persetujuan'] = $persetujuan['persetujuan'];
+            $this->data['file_approval'] = $persetujuan['file_approval'];
+            // $this->data['persetujuan'] = $persetujuan;
             $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
             $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
             $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
@@ -341,6 +342,13 @@ class WorkspaceController extends JibController
     public function destroy($id)
     {
         //
+    }
+
+    public function download_fullsign($id, $uid)
+    {
+        # code...
+         $filedownload = Media::where('uuid',$uid)->first();
+        return response()->download($filedownload->getPath());
     }
 
     public function download($id)
