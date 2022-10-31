@@ -1,4 +1,5 @@
 {
-    "Blog": true,
-    "Jib": true
+    "Blog": false,
+    "Jib": true,
+    "Master": true
 }

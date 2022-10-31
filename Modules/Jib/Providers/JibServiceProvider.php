@@ -21,6 +21,16 @@ use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\PemeriksaRepository;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Modules\Jib\Repositories\Admin\ReviewRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\PersetujuanRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
+use Modules\Jib\Repositories\Admin\MomRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
+use Modules\Jib\Repositories\Admin\KesimpulanRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
+use Modules\Jib\Repositories\Admin\AnggaranRepository;
+use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
+use Modules\Jib\Repositories\Admin\RisikoRepository;
 
 class JibServiceProvider extends ServiceProvider
 {
@@ -168,6 +178,31 @@ class JibServiceProvider extends ServiceProvider
         $this->app->bind(
             JenisRepositoryInterface::class,
             JenisRepository::class
+        );
+
+        $this->app->bind(
+            PersetujuanRepositoryInterface::class,
+            PersetujuanRepository::class
+        );
+
+        $this->app->bind(
+            MomRepositoryInterface::class,
+            MomRepository::class
+        );
+
+        $this->app->bind(
+            KesimpulanRepositoryInterface::class,
+            KesimpulanRepository::class
+        );
+
+        $this->app->bind(
+            AnggaranRepositoryInterface::class,
+            AnggaranRepository::class
+        );
+
+        $this->app->bind(
+            RisikoRepositoryInterface::class,
+            RisikoRepository::class
         );
 
     }
