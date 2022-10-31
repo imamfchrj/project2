@@ -5,9 +5,13 @@ namespace Modules\Jib\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Persetujuan extends Model
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\File;
+
+class Persetujuan extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'pengajuan_id',
@@ -54,6 +58,11 @@ class Persetujuan extends Model
     protected $table = 'jib_persetujuan';
     protected $primaryKey = 'id';
 
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('file_approval');
+    }
 
     protected static function newFactory()
     {

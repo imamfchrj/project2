@@ -71,13 +71,20 @@ $(document).ready(function(){
     $("#group-2").hide();
     $("#group-3").hide();
     $("#group-4").hide();
-
     $('#jenis_id').change();
     $('#kategori_id').change();
+
+    $('input[name=id]').length ? 
+        $('#upload_history').show() :
+        $('#upload_history').hide()
 });
 
 $('#btn_pengajuan_draft').click(function(){
     $('#draft_status').val(true);
+});
+
+$('#btn_pengajuan').click(function(){
+    $('#draft_status').val(false);
 });
 
 $('#btn_workspace_approve').click(function(){
