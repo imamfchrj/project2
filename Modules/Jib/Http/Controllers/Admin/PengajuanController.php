@@ -165,7 +165,10 @@ class PengajuanController extends JibController
         $this->data['pengajuan']=$pengajuan['pengajuan'];
         $this->data['file_jib'] = $pengajuan['file_jib'];
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
-        $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
+
+        $persetujuan =$this->persetujuanRepository->findAllbyPengId($id);
+        $this->data['persetujuan'] = $persetujuan['persetujuan'];
+        $this->data['file_approval'] = $persetujuan['file_approval'];
         $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
 
         if ($this->data['pengajuan']->kategori_id == 1) {
