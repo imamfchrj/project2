@@ -236,10 +236,10 @@ class WorkspaceController extends JibController
     public function storeform(PersetujuanRequest $request)
     {
         $params = $request->validated();
-
+        $persetujuan =null;
         if ($persetujuan = $this->persetujuanRepository->create($params)) {
 
-            download($persetujuan->id);
+            $this->download($persetujuan->id);
 
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pengajuan.success_create_message'));
