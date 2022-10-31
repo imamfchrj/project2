@@ -2,11 +2,8 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
-use Facades\Str;
-use DB;
-
-use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 use Modules\Jib\Entities\Persetujuan;
+use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 
 class PersetujuanRepository implements PersetujuanRepositoryInterface
 {
@@ -34,16 +31,16 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan->updated_by = auth()->user()->name;
 
         // BISNIS CAPEX
-        if (!empty($params['irr'])){
+        if (!empty($params['irr'])) {
             $persetujuan->irr = $params['irr'];
         }
-        if (!empty($params['est_revenue'])){
+        if (!empty($params['est_revenue'])) {
             $persetujuan->est_revenue = $params['est_revenue'];
         }
-        if (!empty($params['npv'])){
+        if (!empty($params['npv'])) {
             $persetujuan->npv = $params['npv'];
         }
-        if (!empty($params['playback_period'])){
+        if (!empty($params['playback_period'])) {
             $persetujuan->playback_period = $params['playback_period'];
         }
         if (!empty($params['waktu_kerja'])) {
@@ -65,7 +62,6 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
             $persetujuan->tot_invest = $params['tot_invest'];
         }
 
-
         // BISNIS OPEX
         if (!empty($params['top'])) {
             $persetujuan->top = $params['top'];
@@ -80,9 +76,8 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
             $persetujuan->suku_bunga = $params['suku_bunga'];
         }
 
-
         // SUPPORT CAPEX/OPEX
-        if (!empty($params['bcr'])){
+        if (!empty($params['bcr'])) {
             $persetujuan->bcr = $params['bcr'];
         }
         return $persetujuan->save();
@@ -91,7 +86,11 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
 
     public function findAllbyPengId($id)
     {
-        return Persetujuan::where('pengajuan_id',$id)->get();
+        return Persetujuan::where('pengajuan_id', $id)->get();
+        // $persetujuan = Persetujuan::where('pengajuan_id', $id)->get();
+        // $file_approval = $persetujuan->getMedia('file_approval');
+
+        // return compact(['persetujuan', 'file_approval']);
     }
 
     public function findById($id)
@@ -101,7 +100,7 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
 
     public function findbyPengId($id)
     {
-        return Persetujuan::where('pengajuan_id',$id)->first();
+        return Persetujuan::where('pengajuan_id', $id)->first();
     }
 
     public function update($id, $params = [])
@@ -113,10 +112,10 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan->akun = $params['akun'];
         $persetujuan->customer_id = $params['customer_id'];
         $persetujuan->lokasi = $params['lokasi'];
-        if (!empty($params['analisa_risk'])){
+        if (!empty($params['analisa_risk'])) {
             $persetujuan->analisa_risk = $params['analisa_risk'];
         }
-        if (!empty($params['score_risk'])){
+        if (!empty($params['score_risk'])) {
             $persetujuan->score_risk = $params['score_risk'];
         }
         $persetujuan->rencana_mitigasi = $params['rencana_mitigasi'];
@@ -130,16 +129,16 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         $persetujuan->updated_by = auth()->user()->name;
 
         // BISNIS CAPEX
-        if (!empty($params['irr'])){
+        if (!empty($params['irr'])) {
             $persetujuan->irr = $params['irr'];
         }
-        if (!empty($params['est_revenue'])){
+        if (!empty($params['est_revenue'])) {
             $persetujuan->est_revenue = $params['est_revenue'];
         }
-        if (!empty($params['npv'])){
+        if (!empty($params['npv'])) {
             $persetujuan->npv = $params['npv'];
         }
-        if (!empty($params['playback_period'])){
+        if (!empty($params['playback_period'])) {
             $persetujuan->playback_period = $params['playback_period'];
         }
         if (!empty($params['waktu_kerja'])) {
@@ -161,7 +160,6 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
             $persetujuan->tot_invest = $params['tot_invest'];
         }
 
-
         // BISNIS OPEX
         if (!empty($params['top'])) {
             $persetujuan->top = $params['top'];
@@ -176,11 +174,17 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
             $persetujuan->suku_bunga = $params['suku_bunga'];
         }
 
-
         // SUPPORT CAPEX/OPEX
-        if (!empty($params['bcr'])){
+        if (!empty($params['bcr'])) {
             $persetujuan->bcr = $params['bcr'];
         }
+
+        //Upload File
+        if (isset($params['file_approval'])) {
+            $persetujuan->addMediaFromRequest('file_approval')->toMediaCollection('file_approval');
+            //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+        }
+
         return $persetujuan->save();
     }
 

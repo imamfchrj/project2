@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::prefix('jib')->group(function () {
     Route::get('/', 'JibController@index');
@@ -22,11 +22,14 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::get('workspace/{id}/editworkspace', 'WorkspaceController@editworkspace')->name('workspace.editworkspace');
     Route::match(['get', 'post'], 'workspace/storeworkspace', 'WorkspaceController@storeworkspace')->name('workspace.storeworkspace');
     Route::resource('workspace', 'WorkspaceController');
+
     // WORKSPACE FORM PERSETUJUAN
     Route::get('workspace/createform/{id}', 'WorkspaceController@createform')->name('workspace.createform');
     Route::get('workspace/{id}/editform', 'WorkspaceController@editform')->name('workspace.editform');
     Route::match(['get', 'post'], 'workspace/storeform', 'WorkspaceController@storeform')->name('workspace.storeform');
     Route::match(['put', 'patch'], 'workspace/updateform/{id}', 'WorkspaceController@updateform')->name('workspace.updateform');
+    Route::get('workspace/persetujuan/{id}/download', 'WorkspaceController@download')->name('workspace.download');
+
     // WORKSPACE FORM MOM
     Route::get('workspace/createmom/{id}', 'WorkspaceController@createmom')->name('workspace.createmom');
     Route::get('workspace/{id}/editmom', 'WorkspaceController@editmom')->name('workspace.editmom');

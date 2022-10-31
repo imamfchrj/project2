@@ -153,17 +153,6 @@ class PengajuanController extends JibController
         }
     }
 
-    public function store_draft(PengajuanRequest $request)
-    {
-        $params = $request->validated();
-
-        if ($pengajuan = $this->pengajuanRepository->create($params)) {
-
-            return redirect('admin/jib/pengajuan')
-                ->with('success', __('blog::pegnajuan.success_create_draf_message'));
-        }
-    }
-
     /**
      * Show the specified resource.
      * @param int $id
@@ -198,7 +187,6 @@ class PengajuanController extends JibController
        # code...
         $filedownload = Media::where('uuid',$uid)->first();
        return response()->download($filedownload->getPath());
-
    }
 
    public function down(Media $mediaItem)
@@ -221,9 +209,16 @@ class PengajuanController extends JibController
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(PengajuanRequest $request)
     {
-        //
+        // dd($request);
+        $params = $request->validated();
+// dd($params);
+        if ($pengajuan = $this->pengajuanRepository->update($params)) {
+            return redirect('admin/jib/pengajuan')
+                ->with('success', __('blog::pegnajuan.success_update_message'));
+        }
+    
     }
 
     /**

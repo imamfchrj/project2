@@ -74,8 +74,14 @@
                                             @endif
                                             <td>
                                                 @can('edit_jib-pengajuan')
+                                                    <!-- <a class="btn btn-sm btn-light"
+                                                    href="{{ url('admin/jib/workspace/'. $peng->pengajuan_id .'/editworkspace')}}"><i
+                                                                class="far fa-edit"></i>
+                                                        {{--@lang('jib::pengajuan.btn_edit_label')--}}
+                                                    </a> -->
+                                                    <!-- pakai ID pengajuan bukan di reviewer karena draft blm ada di reviewer -->
                                                     <a class="btn btn-sm btn-light"
-                                                       href="{{ url('admin/jib/workspace/'. $peng->pengajuan_id .'/editworkspace')}}"><i
+                                                    href="{{ url('admin/jib/workspace/'. $peng->id .'/editworkspace')}}"><i
                                                                 class="far fa-edit"></i>
                                                         {{--@lang('jib::pengajuan.btn_edit_label')--}}
                                                     </a>
