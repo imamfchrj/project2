@@ -204,7 +204,7 @@
                                         {{--</a></td>--}}
                                         <td>{{ $setuju->created_at }}</td>
                                         <td>{{ $setuju->updated_by }}</td>
-                                        <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
+                                        <!-- <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td> -->
                                         <td>
                                             @if(!empty($file_approval))
                                             <a href="{{ $file_approval->uuid.'/download' }}"><i class="fas fa-download"></i>

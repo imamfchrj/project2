@@ -2,11 +2,8 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
-use Facades\Str;
-use DB;
-
-use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 use Modules\Jib\Entities\Mom;
+use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 
 class MomRepository implements MomRepositoryInterface
 {
@@ -39,12 +36,12 @@ class MomRepository implements MomRepositoryInterface
 
     public function findAllbyPengId($id)
     {
-        return Mom::where('pengajuan_id',$id)->get();
+        return Mom::where('pengajuan_id', $id)->get();
     }
 
     public function findbyPengId($id)
     {
-        return Mom::where('pengajuan_id',$id)->first();
+        return Mom::where('pengajuan_id', $id)->first();
     }
 
     public function findById($id)
@@ -74,6 +71,13 @@ class MomRepository implements MomRepositoryInterface
         $mom->anggaran = $params['anggaran'];
         $mom->created_by = auth()->user()->id;
         $mom->updated_by = auth()->user()->name;
+
+        //Upload File
+        if (isset($params['file_mom'])) {
+            $mom->addMediaFromRequest('file_mom')->toMediaCollection('file_mom');
+            //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+        }
+
         return $mom->save();
     }
 
