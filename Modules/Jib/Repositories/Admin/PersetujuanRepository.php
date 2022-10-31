@@ -88,7 +88,8 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
     {
         // return Persetujuan::where('pengajuan_id', $id)->get();
         $persetujuan = Persetujuan::where('pengajuan_id', $id)->get();
-        if (!empty($persetujuan)) {
+        // dd($persetujuan);
+        if ($persetujuan->count() != 0) {
             $file_approval = $persetujuan->last()->getFirstMedia('file_approval');
         } else {
             $file_approval = null;

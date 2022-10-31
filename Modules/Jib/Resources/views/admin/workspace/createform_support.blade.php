@@ -157,7 +157,7 @@
                     <div class="card-footer text-left">
                         <a class="btn btn-light"
                             href="{{ url('admin/jib/workspace/'.$pengajuan->id.'/editworkspace') }}">Back</a>
-                        <a href=""><button class="btn btn-success">Create</button></a>
+                        <a href=""><button class="btn btn-success">{{ !empty($mom) ? 'Update' : 'Create' }}</button></a>
                     </div>
                     {!! Form::close() !!}
                 </div>
