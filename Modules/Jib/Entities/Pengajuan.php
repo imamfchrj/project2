@@ -68,7 +68,10 @@ class Pengajuan extends Model implements HasMedia
     public const APPROVAL_1 = 3;
     public const APPROVAL_2 = 4;
     public const APPROVAL_3 = 5;
-    public const SELESAI = 6;
+    public const CLOSED = 6;
+    public const DRAFT = 7;
+    public const INITIATOR = 8;
+    public const REJECTED = 9;
 
     public const POST = 'post';
 //    public const PAGE = 'page';
@@ -79,7 +82,10 @@ class Pengajuan extends Model implements HasMedia
         self::APPROVAL_1 => 'Approval 1',
         self::APPROVAL_2 => 'Approval 2',
         self::APPROVAL_3 => 'Approval 3',
-        self::SELESAI => 'Selesai',
+        self::CLOSED => 'Closed',
+        self::DRAFT => 'Draft',
+        self::INITIATOR => 'Initiator',
+        self::REJECTED => 'Rejected',
     ];
 
     // public function registerMediaCollections(): void
