@@ -23,26 +23,25 @@ use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\Support\MediaStream;
 use PDF;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class WorkspaceController extends JibController
 {
     use Authorizable;
 
     private $pengajuanRepository,
-        $segmentRepository,
-        $customerRepository,
-        $reviewRepository,
-        $persetujuanRepository,
-        $momRepository,
-        $kesimpulanRepository,
-        $risikoRepository,
-        $anggaranRepository,
-        $initiatorRepository,
-        $kategoriRepository,
-        $jenisRepository,
+    $segmentRepository,
+    $customerRepository,
+    $reviewRepository,
+    $persetujuanRepository,
+    $momRepository,
+    $kesimpulanRepository,
+    $risikoRepository,
+    $anggaranRepository,
+    $initiatorRepository,
+    $kategoriRepository,
+    $jenisRepository,
         $pemeriksaRepository;
 
     public function __construct(
@@ -85,8 +84,7 @@ class WorkspaceController extends JibController
      * Display a listing of the resource.
      * @return Renderable
      */
-    public
-    function index(Request $request)
+    public function index(Request $request)
     {
         $params = $request->all();
         $options = [
@@ -139,6 +137,7 @@ class WorkspaceController extends JibController
 
         if ($user->roles[0]->name == "Approver") {
             $persetujuan = $this->persetujuanRepository->findAllbyPengId($id);
+            $mom = $this->momRepository->findAllbyPengId($id);
 
             $this->data['pengajuan'] = $pengajuan['pengajuan'];
             $this->data['file_jib'] = $pengajuan['file_jib'];
@@ -146,7 +145,9 @@ class WorkspaceController extends JibController
             $this->data['file_approval'] = $persetujuan['file_approval'];
             // $this->data['persetujuan'] = $persetujuan;
             $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
-            $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+            $this->data['mom'] = $mom['mom'];
+            $this->data['file_mom'] = $mom['file_mom'];
+
             $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
 
             // $this->data['file_approval'] = $persetujuan['file_approval'];
@@ -298,7 +299,7 @@ class WorkspaceController extends JibController
     public function storemom(MomRequest $request)
     {
         $params = $request->validated();
-
+        
         if ($mom = $this->momRepository->create($params)) {
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
@@ -351,6 +352,31 @@ class WorkspaceController extends JibController
         # code...
         $filedownload = Media::where('uuid', $uid)->first();
         return response()->download($filedownload->getPath());
+    }
+
+    public function download_mom($id, $uid)
+    {
+        
+        # code...
+        $filedownload = Media::where('uuid', $uid)->first();
+        return response()->download($filedownload->getPath());
+    }
+
+    public function download_mom_print($id)
+    {
+        # code...
+
+        $this->data['mom'] = $this->momRepository->findById($id);
+        $pengajuan_id = $this->data['mom']->pengajuan_id;
+        $pengajuan = $this->pengajuanRepository->findById($pengajuan_id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
+        $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
+        $this->data['anggaran_id'] = null;
+
+        return View('jib::layouts.temp_bisnismom', ['mom' => $this->data['mom'],
+        'pengajuan' => $this->data['pengajuan'],
+        'tanggal' => Carbon::now()]);
     }
 
     public function download($id)
