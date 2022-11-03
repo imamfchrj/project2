@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('master')->group(function() {
+Route::prefix('master')->group(function () {
     Route::get('/', 'MasterController@index');
 });
 

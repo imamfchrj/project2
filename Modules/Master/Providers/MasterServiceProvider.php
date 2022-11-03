@@ -5,6 +5,9 @@ namespace Modules\Master\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
+use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Jib\Repositories\Admin\CustomerRepository;
+
 class MasterServiceProvider extends ServiceProvider
 {
     /**
@@ -28,6 +31,7 @@ class MasterServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->registerRepositories();
     }
 
     /**
@@ -108,5 +112,13 @@ class MasterServiceProvider extends ServiceProvider
             }
         }
         return $paths;
+    }
+
+    private function registerRepositories()
+    {
+        $this->app->bind(
+            CustomerRepositoryInterface::class,
+            CustomerRepository::class
+        );
     }
 }
