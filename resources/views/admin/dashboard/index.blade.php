@@ -13,7 +13,8 @@
                   <h4>BUDGET CAPEX</h4>
                 </div>
                 <div class="card-body">
-                  Rp. 668,56Bn
+                  {{-- Rp. 668,56Bn --}}
+                  {{ Str::num($budget_capex) }}
                 </div>
               </div>
             </div>
@@ -28,7 +29,7 @@
                 <h4>Total Realisasi CAPEX</h4>
               </div>
               <div class="card-body">
-                Rp. 59,80Bn
+                {{ Str::num($total_realisasi) }}
               </div>
             </div>
           </div>
@@ -43,7 +44,7 @@
                   <h4>Available CAPEX</h4>
                 </div>
                 <div class="card-body">
-                    Rp. 608,76Bn
+                    {{ Str::num($available_capex) }}
                 </div>
               </div>
             </div>
@@ -58,7 +59,7 @@
                   <h4>% Realisasi CAPEX</h4>
                 </div>
                 <div class="card-body">
-                  8.94%
+                    {{ $persen_realisasi }}%
                 </div>
               </div>
             </div>
@@ -73,7 +74,7 @@
                   <h4>Nilai CAPEX</h4>
                 </div>
                 <div class="card-body">
-                  {{ Str::rupiah($nilai_capex) }}
+                  {{ Str::num($nilai_capex) }}
                 </div>
               </div>
             </div>
@@ -89,7 +90,7 @@
               </div>
               <div class="card-body">
                 {{-- 1,201 --}}
-                {{ Str::rupiah($rev) }}
+                {{ Str::num($rev) }}
               </div>
             </div>
           </div>
@@ -131,6 +132,10 @@
             <div class="card-stats-item">
               <div class="card-stats-item-count">{{$doc_approval}}</div>
               <div class="card-stats-item-label">Approval</div>
+            </div>
+            <div class="card-stats-item">
+                <div class="card-stats-item-count">{{$doc_return}}</div>
+                <div class="card-stats-item-label">Return</div>
             </div>
             <div class="card-stats-item">
                 <div class="card-stats-item-count">{{$doc_closed}}</div>
@@ -368,30 +373,13 @@
               <tr>
                 <td><a href="#">{{ $item->kegiatan}}</a></td>
                 <td class="font-weight-600">{{ $item->nama_sub_unit}}</td>
-                <td class="font-weight-600">{{ $item->kategori_id}}</td>
+                <td class="font-weight-600">{{ $item->nama_kategori}}</td>
                 <td class="font-weight-600">{{ $item->nilai_capex}}</td>
                 <td class="font-weight-600">{{ $item->est_revenue}}</td>
                 <td class="font-weight-600">{{ $item->irr}}</td>
-                <td class="font-weight-600">{{ $item->status_id}}</td>
+                <td class="font-weight-600">{{ $item->nama_status}}</td>
                 <td class="font-weight-600"> {{\Carbon\Carbon::parse($item->created_at)->format('Y')}}</td>
-                {{-- <td>
-                  <a href="#" class="btn btn-primary">Detail</a>
-                </td> --}}
-                {{-- <td><div class="badge badge-warning">Unpaid</div></td> --}}
               </tr>
-              {{-- <tr>
-                <td><a href="#">INV-87239</a></td>
-                <td class="font-weight-600">Kusnadi</td>
-                <td class="font-weight-600">Kusnadi</td>
-                <td class="font-weight-600">Kusnadi</td>
-                <td><div class="badge badge-warning">Unpaid</div></td>
-                <td>July 19, 2018</td>
-                <td class="font-weight-600">Kusnadi</td>
-                <td class="font-weight-600">Kusnadi</td>
-                <td>
-                  <a href="#" class="btn btn-primary">Detail</a>
-                </td>
-              </tr> --}}
               @endforeach
             </table>
           </div>
@@ -460,22 +448,25 @@ const allocation_chart = new Chart(d_chart, {
     const review = {!! json_encode($doc_review) !!};
     const approval = {!! json_encode($doc_approval) !!};
     const closed = {!! json_encode($doc_closed) !!};
+    const initiator = {!! json_encode($doc_return) !!};
 
     const myChart1 = new Chart(ctx1, {
         type: 'doughnut',
         data: {
-            labels: ['Review', 'Approval', 'Closed'],
+            labels: ['Review', 'Approval', 'Closed', 'Return'],
             datasets: [{
                 label: '# of Votes',
                 data: [
                         {{$doc_review}},
                         {{$doc_approval}},
                         {{$doc_closed}},
+                        {{$doc_return}}
                 ],
                 backgroundColor: [
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 99, 132, 1)',
-                    'rgba(255, 206, 86, 1)'
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
                 ],
                 hoverOffset: 4
             }]
