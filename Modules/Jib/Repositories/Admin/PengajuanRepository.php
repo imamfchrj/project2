@@ -273,11 +273,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->user_id = auth()->user()->id;
                 $pengajuan->created_by = auth()->user()->id;
                 $pengajuan->updated_by = auth()->user()->name;
+
                 //Upload File
                 if (isset($params['file_jib_1'])) {
                     $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
                     //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
                 }
+                
                 $pengajuan->save();
                 // BISNIS OPEX
             } else {
@@ -313,6 +315,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->created_by = auth()->user()->id;
                 $pengajuan->updated_by = auth()->user()->name;
                 //Upload File
+
                 if (isset($params['file_jib_1'])) {
                     $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
                     //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();

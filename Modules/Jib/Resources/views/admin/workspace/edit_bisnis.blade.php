@@ -225,7 +225,7 @@
                                             </a>
                                             <a class="btn btn-sm btn-secondary" target="_blank"
                                                 href="{{ url('admin/jib/workspace/persetujuan/'. $setuju->id .'/download')}}"><i
-                                                    class="fas fa-download"></i>
+                                                    class="fas fa-print"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -272,11 +272,27 @@
                                         {{--</a></td>--}}
                                         <td>{{ $moms->created_at }}</td>
                                         <td>{{ $moms->updated_by }}</td>
-                                        <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                        <!-- <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td> -->
+                                        <td>
+                                            @if(!empty($file_mom))
+                                                @if ($file_mom->count() > 0)
+                                                    <a href="{{ $file_mom->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                        {{ $file_mom->last()->name }}</a>
+                                                @else
+                                                    -
+                                                @endif
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                         <td>
                                             <a class="btn btn-sm btn-primary"
                                                 href="{{ url('admin/jib/workspace/'. $moms->id .'/editmom')}}"><i
                                                     class="far fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-secondary" target="_blank"
+                                                href="{{ url('admin/jib/workspace/mom/'. $moms->id .'/print')}}"><i
+                                                    class="fas fa-print"></i>
                                             </a>
                                         </td>
                                     </tr>
