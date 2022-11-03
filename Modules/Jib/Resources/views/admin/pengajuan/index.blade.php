@@ -19,11 +19,19 @@
                                 {{--<h4>@lang('jib::pengajuan.manage_pengajuan')</h4>--}}
                             {{--</div>--}}
                             @if($viewTrash == false)
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 <div class="row">
+                                    {{--<div class="col mb-4 mb-lg-0 font-weight-bold text-center">--}}
+                                        {{--<div>{{ $count_review + $count_approval }}</div>--}}
+                                        {{--<div class="mt-2 badge badge-info">On Progress</div>--}}
+                                    {{--</div>--}}
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
-                                        <div>{{ $count_review + $count_approval }}</div>
-                                        <div class="mt-2 badge badge-info">On Progress</div>
+                                        <div>{{ $count_draft }}</div>
+                                        <div class="mt-2 badge badge-info">Draft</div>
+                                    </div>
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
+                                        <div>{{ $count_initiator }}</div>
+                                        <div class="mt-2 badge badge-info">Initiator</div>
                                     </div>
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
                                         <div>{{ $count_review }}</div>
@@ -37,8 +45,12 @@
                                         <div>{{ $count_closed }}</div>
                                         <div class="mt-2 badge badge-secondary">Closed</div>
                                     </div>
+                                    <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
+                                        <div>{{ $count_rejected }}</div>
+                                        <div class="mt-2 badge badge-danger">Rejected</div>
+                                    </div>
                                     <div class="col mb-4 mb-lg-0 font-weight-bold   text-center">
-                                        <div>{{ $count_review + $count_approval + $count_closed}}</div>
+                                        <div>{{ $count_review + $count_approval + $count_closed + $count_draft + $count_initiator + $count_rejected}}</div>
                                         <div class="mt-2 badge badge-dark">Total</div>
                                     </div>
                                 </div>
@@ -83,14 +95,26 @@
                                             {{--<td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>--}}
                                             {{--<td>{{ $peng->periode_up }}</td>--}}
                                             {{--<td>{{ $peng->periode_end }}</td>--}}
-                                            <td>{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</td>
+                                            @if ($peng->status_id == 7) <!-- Draft -->
+                                                <td><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name.' - '.$peng->users->name}}</div></td>
+                                            @elseif ($peng->status_id == 8) <!-- Initiator -->
+                                                <td><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name }}</div></td>
+                                            @elseif ($peng->status_id == 6) <!-- Closed -->
+                                                <td><div class="mt-1 badge badge-secondary">{{ $peng->mstatuses->name }}</div></td>
+                                            @elseif ($peng->status_id == 3 || $peng->status_id == 4 || $peng->status_id == 5) <!-- Approval -->
+                                                <td><div class="mt-1 badge badge-success">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
+                                            @elseif ($peng->status_id == 9) <!-- Rejected -->
+                                                <td><div class="mt-1 badge badge-danger">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
+                                            @else <!-- Reviewer -->
+                                                <td><div class="mt-1 badge badge-warning">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
+                                            @endif
                                             {{--<td>{{ $peng->users->name }}</td>--}}
                                             <td>
                                                 @if ($peng->trashed())
                                                     @can('delete_jib-pengajuan')
                                                         <a class="btn btn-sm btn-warning"
                                                            href="{{ url('admin/jib/pengajuan/'. $peng->id .'/restore')}}"><i
-                                                                    class="fa fa-sync-alt"></i> @lang('jib::pengajuan.btn_restore_label')
+                                                                    class="fa fa-sync-alt"></i>
                                                         </a>
                                                         <a href="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
                                                            class="btn btn-sm btn-danger" onclick="
@@ -98,7 +122,7 @@
                                                                 if (confirm('Do you want to remove this permanently?')) {
                                                                 document.getElementById('delete-role-{{ $peng->id }}').submit();
                                                                 }">
-                                                            <i class="far fa-trash-alt"></i> @lang('jib::pengajuan.btn_delete_permanent_label')
+                                                            <i class="far fa-trash-alt"></i>
                                                         </a>
                                                         <form id="delete-role-{{ $peng->id }}"
                                                               action="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
@@ -110,7 +134,7 @@
                                                     @endcan
                                                 @else
                                                     @can('view_jib-pengajuan')
-                                                        <a class="btn btn-sm btn-info"
+                                                        <a class="btn btn-sm btn-primary"
                                                            href="{{ url('admin/jib/pengajuan/'. $peng->id )}}"><i
                                                                     class="far fa-eye"></i>
                                                             {{--@lang('jib::pengajuan.btn_show_label')--}}
@@ -124,7 +148,7 @@
                                                     {{--@endcan--}}
                                                     @can('delete_jib-pengajuan')
                                                         <a href="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
-                                                           class="btn btn-sm btn-warning" onclick="
+                                                           class="btn btn-sm btn-danger" onclick="
                                                                 event.preventDefault();
                                                                 if (confirm('Do you want to remove this?')) {
                                                                 document.getElementById('delete-role-{{ $peng->id }}').submit();

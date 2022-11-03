@@ -3,7 +3,6 @@
 namespace Modules\Jib\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Modules\Jib\Entities\Pengajuan;
 
 class PengajuanRequest extends FormRequest
 {
@@ -28,6 +27,7 @@ class PengajuanRequest extends FormRequest
 //        }
 
         return array_merge([
+            'id' => '',
             'initiator_id' => '',
             'jenis_id' => '',
             'kategori_id' => '',

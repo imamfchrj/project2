@@ -3,11 +3,12 @@
 @endphp
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="{{ url('/')}}">{{ config('app.name', 'Laravel') }}</a>
+        {{--<a href="{{ url('/')}}">{{ config('app.name', 'Laravel') }}</a>--}}
+        <a href="">JIB ONLINE</a>
     </div>
-    <div class="sidebar-brand sidebar-brand-sm">
-        <a href="{{ url('/')}}">LS</a>
-    </div>
+    {{--<div class="sidebar-brand sidebar-brand-sm">--}}
+        {{--<a href="{{ url('/')}}">LS</a>--}}
+    {{--</div>--}}
     <ul class="sidebar-menu">
         <li class="{{ ($currentAdminMenu == 'dashboard') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
         @foreach ($moduleAdminMenus as $moduleAdminMenu)

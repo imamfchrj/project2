@@ -47,11 +47,41 @@
                                             <td>{{ $peng->no_drp }}</td>
                                             <td>{{ $peng->mcategories->name }}</td>
                                             <td>{{ number_format($peng->nilai_capex) }}</td>
-                                            <td>{{ $peng->mstatuses->name }}</td>
+                                            @if ($peng->status_id == 7) <!-- Draft -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-info">{{ $peng->mstatuses->name.' - '.$peng->users->name}}</div>
+                                                </td>
+                                            @elseif ($peng->status_id == 8) <!-- Initiator -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-info">{{ $peng->mstatuses->name }}</div>
+                                                </td>
+                                            @elseif ($peng->status_id == 6) <!-- Closed -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-secondary">{{ $peng->mstatuses->name }}</div>
+                                                </td>
+                                            @elseif ($peng->status_id == 3 || $peng->status_id == 4 || $peng->status_id == 5) <!-- Approval -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-success">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div>
+                                                </td>
+                                            @elseif ($peng->status_id == 9) <!-- Rejected -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-danger">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div>
+                                                </td>
+                                            @else <!-- Reviewer -->
+                                                <td>
+                                                    <div class="mt-1 badge badge-warning">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div>
+                                                </td>
+                                            @endif
                                             <td>
                                                 @can('edit_jib-pengajuan')
+                                                    <!-- <a class="btn btn-sm btn-light"
+                                                    href="{{ url('admin/jib/workspace/'. $peng->pengajuan_id .'/editworkspace')}}"><i
+                                                                class="far fa-edit"></i>
+                                                        {{--@lang('jib::pengajuan.btn_edit_label')--}}
+                                                    </a> -->
+                                                    <!-- pakai ID pengajuan bukan di reviewer karena draft blm ada di reviewer -->
                                                     <a class="btn btn-sm btn-light"
-                                                       href="{{ url('admin/jib/workspace/'. $peng->pengajuan_id .'/editworkspace')}}"><i
+                                                    href="{{ url('admin/jib/workspace/'. $peng->id .'/editworkspace')}}"><i
                                                                 class="far fa-edit"></i>
                                                         {{--@lang('jib::pengajuan.btn_edit_label')--}}
                                                     </a>

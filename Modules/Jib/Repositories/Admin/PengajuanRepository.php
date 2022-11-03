@@ -2,14 +2,12 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
-use Facades\Str;
 use DB;
-
-use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 use Modules\Jib\Entities\Pengajuan;
 use Modules\Jib\Entities\Review;
-use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Entities\Reviewer;
+use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 
 //use Modules\Blog\Entities\Tag;
 
@@ -102,10 +100,63 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->where('customer_id', $options['filter']['customer']);
         }
 
-        $pengajuan = $pengajuan->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id')
-            ->where('jib_reviewer.last_status', 'OPEN')
-            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
-            ->orderBy('jib_pengajuan.id', 'ASC');
+        $pengajuan = $pengajuan->select(
+            'jib_pengajuan.initiator_id',
+            'jib_pengajuan.id',
+            'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.segment_id',
+            'jib_pengajuan.customer_id',
+            'jib_pengajuan.kegiatan',
+            'jib_pengajuan.no_drp',
+            'jib_pengajuan.kategori_id',
+            'jib_pengajuan.nilai_capex',
+            'jib_pengajuan.pemeriksa_id',
+            'jib_pengajuan.status_id',
+            'jib_pengajuan.user_id',
+            'jib_reviewer.pengajuan_id'
+        )
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id','left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+//            ->where('jib_pengajuan.user_id', auth()->user()->id)
+//            ->orwhere('jib_pengajuan.status_id', 7)
+//            ->where('jib_reviewer.last_status', 'OPEN')
+//            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
+            ->orWhere(
+                function ($query) {
+                    // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") { //Role Approver
+                        $query->where('jib_reviewer.last_status', 'OPEN')
+                            ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
+                    // }
+                }
+            )
+            ->orwhere(
+                function ($query) {
+                    // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Initiator") { //Role Initiator
+                        $query->where('jib_pengajuan.status_id', 7)
+                            ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                    // }
+                }
+            )->orwhere(
+            function ($query) {
+                $query->where('jib_pengajuan.status_id', 8)
+                    ->Where('jib_pengajuan.user_id', auth()->user()->id);
+            }
+        )
+            ->orderBy('jib_pengajuan.id', 'ASC')
+            ->groupby(
+                'jib_pengajuan.id',
+                'jib_pengajuan.initiator_id',
+                'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.segment_id',
+                'jib_pengajuan.customer_id',
+                'jib_pengajuan.kegiatan',
+                'jib_pengajuan.no_drp',
+                'jib_pengajuan.kategori_id',
+                'jib_pengajuan.nilai_capex',
+                'jib_pengajuan.pemeriksa_id',
+                'jib_pengajuan.status_id',
+                'jib_pengajuan.user_id',
+                'jib_reviewer.pengajuan_id'
+            );
 
         if ($perPage) {
             return $pengajuan->paginate($perPage);
@@ -151,34 +202,25 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     public function findById($id)
     {
         $pengajuan = Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
-        ->findOrFail($id);
+            ->findOrFail($id);
         $file_jib = $pengajuan->getMedia('file_jib');
-        
+// dd($pengajuan);
         return compact(['pengajuan', 'file_jib']);
         // return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
         //     ->findOrFail($id);
     }
 
+    public function findByPersetujuanId($persetujuan_id)
+    {
+        $pengajuan = Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
+            ->where('id', $persetujuan_id)
+            ->findOrFail($id);
+
+        return $pengajuan;
+    }
 
     public function create($params = [])
     {
-//        $params['user_id'] = auth()->user()->id;
-//        $params['post_type'] = Pengajuan::POST;
-//        $params['initiator_id'] = $params['initiator_id'];
-////        $params['slug'] = Str::slug($params['title']);
-////        $params['code'] = $this->generateCode();
-////        $params = array_merge($params, $this->buildMetaParams($params));
-//
-//        return DB::transaction(function () use ($params) {
-//            if ($post = Pengajuan::create($params)) {
-////                $this->setFeaturedImage($post, $params);
-////                $this->syncCategories($post, $params);
-////                $this->syncTags($post, $params);
-//
-//                return $post;
-//            }
-//        });
-
         // Format Number JIB
         $tahun = date('Y');
         $array_bulan = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
@@ -221,12 +263,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->irr = $params['irr'];
                 $pengajuan->npv = $params['npv'];
                 $pengajuan->pbp = $params['pbp'];
-                
-                if ($params['draft_status']==true)
-                  $pengajuan->status_id = 7;
-                else
-                  $pengajuan->status_id = 1;
-                  
+
+                if ($params['draft_status'] === "true") {
+                    $pengajuan->status_id = 7;
+                } else {
+                    $pengajuan->status_id = 1;
+                }
+
                 $pengajuan->user_id = auth()->user()->id;
                 $pengajuan->created_by = auth()->user()->id;
                 $pengajuan->updated_by = auth()->user()->name;
@@ -236,7 +279,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
                 }
                 $pengajuan->save();
-            // BISNIS OPEX
+                // BISNIS OPEX
             } else {
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
@@ -259,12 +302,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->profit_margin = $params['profit_margin'];
                 $pengajuan->net_cf = $params['net_cf'];
                 $pengajuan->suku_bunga = $params['suku_bunga'];
-                
-                if ($params['draft_status']==true)
+
+                if ($params['draft_status'] === "true") {
                     $pengajuan->status_id = 7;
-                else
+                } else {
                     $pengajuan->status_id = 1;
-                    
+                }
+
                 $pengajuan->user_id = auth()->user()->id;
                 $pengajuan->created_by = auth()->user()->id;
                 $pengajuan->updated_by = auth()->user()->name;
@@ -296,7 +340,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     } else {
                         $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                     }
-                }else {
+                } else {
                     if ($params['nilai_capex_4'] <= 3000000000) {
                         $pemeriksa = $this->pemeriksaRepository->findByRules(1);
                     } else if ($params['nilai_capex_4'] > 3000000000 && $params['nilai_capex_4'] <= 5000000000) {
@@ -306,27 +350,34 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     }
                 }
 
-                $reviewer = [];
-                foreach ($pemeriksa as $pem) {
-                    if ($pem->urutan == 1) {
-                        $last_status = "OPEN";
-                        $pengajuan->pemeriksa_id = $pem->id;
-                        $pengajuan->save();
-                    } else {
-                        $last_status = "QUEUE";
+                if ($params['draft_status'] === "false") {
+
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'pemeriksa_id' => $pem->id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
                     }
-                    $reviewer[] = [
-                        'pengajuan_id' => $pengajuan->id,
-                        'initiator_id' => $pem->initiator_id,
-                        'nik' => $pem->nik,
-                        'nama' => $pem->nama,
-                        'urutan' => $pem->urutan,
-                        'last_status' => $last_status,
-                    ];
+
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } else {
+                    return true;
                 }
-                return DB::table('jib_reviewer')->insert($reviewer);
             }
-        // SUPPORT CAPEX/OPEX
+            // SUPPORT CAPEX/OPEX
         } else {
             // FORMAT NUMBER SUPPORT
             $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
@@ -358,12 +409,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->no_drp = $params['no_drp_2'];
             $pengajuan->nilai_capex = $params['nilai_capex_2'];
             $pengajuan->bcr = $params['bcr'];
-            
-            if ($params['draft_status']==true)
+
+            if ($params['draft_status'] === "true") {
                 $pengajuan->status_id = 7;
-            else
+            } else {
                 $pengajuan->status_id = 1;
-            
+            }
+
             $pengajuan->user_id = auth()->user()->id;
             $pengajuan->created_by = auth()->user()->id;
             $pengajuan->updated_by = auth()->user()->name;
@@ -396,121 +448,259 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 } else {
                     $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 }
-                $reviewer = [];
-                foreach ($pemeriksa as $pem) {
-                    if ($pem->urutan == 1) {
-                        $last_status = "OPEN";
-                        $pengajuan->pemeriksa_id = $pem->id;
-                        $pengajuan->save();
-                    } else {
-                        $last_status = "QUEUE";
+
+                if ($params['draft_status'] === "false") {
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'pemeriksa_id' => $pem->id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
                     }
-                    $reviewer[] = [
-                        'pengajuan_id' => $pengajuan->id,
-                        'initiator_id' => $pem->initiator_id,
-                        'nik' => $pem->nik,
-                        'nama' => $pem->nama,
-                        'urutan' => $pem->urutan,
-                        'last_status' => $last_status,
-                    ];
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } else {
+                    return true;
                 }
-                return DB::table('jib_reviewer')->insert($reviewer);
             }
         }
     }
 
-//    /**
-//     * Generate order code
-//     *
-//     * @return string
-//     */
-//    public static function generateCode()
-//    {
-//        $postCode = Str::random(12);
-//
-//        if (self::isCodeExists($postCode)) {
-//            return generateOrderCode();
-//        }
-//
-//        return $postCode;
-//    }
-//
-//    /**
-//     * Check if the generated order code is exists
-//     *
-//     * @param string $orderCode order code
-//     *
-//     * @return void
-//     */
-//    private static function isCodeExists($postCode)
-//    {
-//        return Post::where('code', '=', $postCode)->exists();
-//    }
-//
-//    public function update(Post $post, $params = [])
-//    {
-//        $params = array_merge($params, $this->buildMetaParams($params));
-//
-//        return DB::transaction(function () use ($post, $params) {
-//            $this->setFeaturedImage($post, $params);
-//            $this->syncCategories($post, $params);
-//            $this->syncTags($post, $params);
-//
-//            return $post->update($params);
-//        });
-//    }
-//
-//    private function setFeaturedImage($post, $params)
-//    {
-//        if (isset($params['image'])) {
-//            $post->clearMediaCollection('images');
-//
-//            $post->addMediaFromRequest('image')->toMediaCollection('images');
-//            $post->featured_image = $post->getFirstMedia('images')->getUrl();
-//            $post->featured_image_caption = $post->getFirstMedia('images')->name;
-//
-//            $post->save();
-//        }
-//    }
-//
-//    private function syncCategories($post, $params)
-//    {
-//        $categoryIds = (isset($params['categories'])) ? $params['categories'] : [];
-//        $post->categories()->sync($categoryIds);
-//    }
-//
-//    private function syncTags($post, $params)
-//    {
-//        if (isset($params['tags'])) {
-//            $tagIds = [];
-//
-//            foreach ($params['tags'] as $tag) {
-//                if (!Str::isUuid($tag)) {
-//                    $newTag = Tag::firstOrCreate(['name' => $tag, 'slug' => Str::slug($tag)]);
-//                    $tagIds[] = $newTag->id;
-//                } else {
-//                    $tagIds[] = $tag;
-//                }
-//            }
-//
-//            $post->tags()->sync($tagIds);
-//        }
-//    }
-//
-//    private function buildMetaParams($params)
-//    {
-//        $metaParams = [];
-//        foreach (Post::META_FIELDS as $metaField => $metaFieldAttr) {
-//            if (!empty($params[$metaField])) {
-//                $metaParams[$metaField] = $params[$metaField];
-//            }
-//        }
-//
-//        $params['metas'] = $metaParams;
-//
-//        return $params;
-//    }
-//
+    //Revisi Pengajuan
+    public function update($params = [])
+    {
+        // dd($params);
+        // $id = $this->get('id');
+        // BISNIS CAPEX / OPEX
+        if ($params['kategori_id'] == 1) {
+            // BISNIS CAPEX
+            if ($params['jenis_id'] == 1) {
+                // Update Pengajuan
+                $pengajuan = Pengajuan::findOrFail($params['id']);
+                $pengajuan->initiator_id = $params['initiator_id'];
+                $pengajuan->jenis_id = $params['jenis_id'];
+                $pengajuan->kategori_id = $params['kategori_id'];
+                $pengajuan->nama_posisi = $params['nama_posisi'];
+                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                $pengajuan->kegiatan = $params['kegiatan_1'];
+                $pengajuan->segment_id = $params['segment_id_1'];
+                $pengajuan->customer_id = $params['customer_id_1'];
+                $pengajuan->periode_up = date('Y-m-d H:i:s');
+                $pengajuan->no_drp = $params['no_drp_1'];
+                $pengajuan->nilai_capex = $params['nilai_capex_1'];
+                $pengajuan->est_revenue = $params['est_revenue'];
+                $pengajuan->irr = $params['irr'];
+                $pengajuan->npv = $params['npv'];
+                $pengajuan->pbp = $params['pbp'];
+
+                if ($params['draft_status'] == "true") {
+                    $pengajuan->status_id = 7;
+                } else {
+                    $pengajuan->status_id = 1;
+                }
+
+                $pengajuan->user_id = auth()->user()->id;
+                $pengajuan->created_by = auth()->user()->id;
+                $pengajuan->updated_by = auth()->user()->name;
+                //Upload File
+                if (isset($params['file_jib_1'])) {
+                    $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
+                    //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+                }
+                $pengajuan->save();
+                // BISNIS OPEX
+            } else {
+                // Insert Pengajuan
+                $pengajuan = Pengajuan::findOrFail($params['id']);
+                $pengajuan->initiator_id = $params['initiator_id'];
+                $pengajuan->jenis_id = $params['jenis_id'];
+                $pengajuan->kategori_id = $params['kategori_id'];
+                $pengajuan->nama_posisi = $params['nama_posisi'];
+                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                $pengajuan->kegiatan = $params['kegiatan_4'];
+                $pengajuan->segment_id = $params['segment_id_4'];
+                $pengajuan->customer_id = $params['customer_id_4'];
+                $pengajuan->periode_up = date('Y-m-d H:i:s');
+                $pengajuan->no_drp = $params['no_drp_4'];
+                $pengajuan->nilai_capex = $params['nilai_capex_4'];
+                $pengajuan->est_revenue = $params['est_revenue_4'];
+                $pengajuan->cost = $params['cost'];
+                $pengajuan->profit_margin = $params['profit_margin'];
+                $pengajuan->net_cf = $params['net_cf'];
+                $pengajuan->suku_bunga = $params['suku_bunga'];
+                
+                
+                if ($params['draft_status'] == "true") {
+                    $pengajuan->status_id = 7;
+                } else {
+                    $pengajuan->status_id = 1;
+                }
+
+                $pengajuan->user_id = auth()->user()->id;
+                $pengajuan->created_by = auth()->user()->id;
+                $pengajuan->updated_by = auth()->user()->name;
+                //Upload File
+                if (isset($params['file_jib_1'])) {
+                    $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
+                    //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+                }
+                $pengajuan->save();
+            }
+
+            if ($pengajuan) {
+                // Insert Review
+                if (!empty($params['note'])) {
+                    $review = new Review();
+                    $review->pengajuan_id = $pengajuan->id;
+                    $review->nik_gsd = auth()->user()->nik_gsd;
+                    $review->nama_karyawan = auth()->user()->name;
+                    $review->status = 'SUBMIT';
+                    $review->notes = $params['note'];
+                    $review->save();
+                }
+                // Insert M_Reviewer
+                if ($params['jenis_id'] == 1) {
+                    if ($params['nilai_capex_1'] <= 3000000000) {
+                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                    } else if ($params['nilai_capex_1'] > 3000000000 && $params['nilai_capex_1'] <= 5000000000) {
+                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                    } else {
+                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                    }
+                } else {
+                    if ($params['nilai_capex_4'] <= 3000000000) {
+                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                    } else if ($params['nilai_capex_4'] > 3000000000 && $params['nilai_capex_4'] <= 5000000000) {
+                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                    } else {
+                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                    }
+                }
+
+                if ($params['draft_status'] == "false") {
+
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'pemeriksa_id' => $pem->id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } else {
+                    return true;
+                }
+            }
+            // SUPPORT CAPEX/OPEX
+        } else {
+
+            // Insert Pengajuan
+            $pengajuan = Pengajuan::findOrFail($params['id']);
+            $pengajuan->initiator_id = $params['initiator_id'];
+            $pengajuan->jenis_id = $params['jenis_id'];
+            $pengajuan->kategori_id = $params['kategori_id'];
+            $pengajuan->nama_posisi = $params['nama_posisi'];
+            $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+
+            $pengajuan->kegiatan = $params['kegiatan_2'];
+            $pengajuan->segment_id = $params['segment_id_2'];
+            $pengajuan->customer_id = $params['customer_id_2'];
+            $pengajuan->periode_up = date('Y-m-d H:i:s');
+            $pengajuan->no_drp = $params['no_drp_2'];
+            $pengajuan->nilai_capex = $params['nilai_capex_2'];
+            $pengajuan->bcr = $params['bcr'];
+
+            if ($params['draft_status'] == "true") {
+                $pengajuan->status_id = 7;
+            } else {
+                $pengajuan->status_id = 1;
+            }
+
+            $pengajuan->user_id = auth()->user()->id;
+            $pengajuan->created_by = auth()->user()->id;
+            $pengajuan->updated_by = auth()->user()->name;
+
+            //Upload File
+            if (isset($params['file_jib_2'])) {
+                $pengajuan->addMediaFromRequest('file_jib_2')->toMediaCollection('file_jib');
+                //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+            }
+
+            $pengajuan->save();
+
+            // insert M review
+            if ($pengajuan) {
+                // Insert Review
+                if (!empty($params['note'])) {
+                    $review = new Review();
+                    $review->pengajuan_id = $pengajuan->id;
+                    $review->nik_gsd = auth()->user()->nik_gsd;
+                    $review->nama_karyawan = auth()->user()->name;
+                    $review->status = 'SUBMIT';
+                    $review->notes = $params['note'];
+                    $review->save();
+                }
+                // Insert Reviewer
+                if ($params['nilai_capex_2'] <= 3000000000) {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                } elseif ($params['nilai_capex_2'] > 3000000000 && $params['nilai_capex_2'] <= 5000000000) {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                } else {
+                    $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                }
+                
+                if ($params['draft_status'] == "false") {
+                    $reviewer = [];
+                    foreach ($pemeriksa as $pem) {
+                        if ($pem->urutan == 1) {
+                            $last_status = "OPEN";
+                            $pengajuan->pemeriksa_id = $pem->id;
+                            $pengajuan->save();
+                        } else {
+                            $last_status = "QUEUE";
+                        }
+                        $reviewer[] = [
+                            'pengajuan_id' => $pengajuan->id,
+                            'initiator_id' => $pem->initiator_id,
+                            'pemeriksa_id' => $pem->id,
+                            'nik' => $pem->nik,
+                            'nama' => $pem->nama,
+                            'urutan' => $pem->urutan,
+                            'last_status' => $last_status,
+                        ];
+                    }
+                    return DB::table('jib_reviewer')->insert($reviewer);
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+
     public function delete($id, $permanentDelete = false)
     {
         $pengajuan = Pengajuan::withTrashed()->findOrFail($id);
@@ -571,9 +761,150 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     {
         return Pengajuan::whereIn('status_id', array(6))->get()->count();
     }
-//
-//    public function getMetaFields()
-//    {
-//        return Post::META_FIELDS;
-//    }
+
+    public function count_draft()
+    {
+        return Pengajuan::whereIn('status_id', array(7))->get()->count();
+    }
+
+    public function count_initiator()
+    {
+        return Pengajuan::whereIn('status_id', array(8))->get()->count();
+    }
+
+    public function count_rejected()
+    {
+        return Pengajuan::whereIn('status_id', array(9))->get()->count();
+    }
+
+    // Workspace
+    public function action_update($params = [])
+    {
+        $pengajuan_id = $params['pengajuan_id'];
+        $status_btn = $params['status_btn'];
+
+        $pengajuan = Pengajuan::where('id', $pengajuan_id)->firstorfail();
+        $reviewer = Reviewer::where('pengajuan_id', $pengajuan_id)->where('last_status', 'OPEN')->firstorfail();
+        $urutan = $reviewer->urutan; // 1
+        $reviewer_count = Reviewer::where('pengajuan_id', $pengajuan_id)->count(); //3
+        // Approve
+        if ($status_btn == 1) {
+            // Update REVIEWER
+            $reviewer->last_status = 'APPROVE';
+            $reviewer->save();
+            if ($urutan < $reviewer_count) {
+                $urutan_next = $urutan + 1;
+                $reviewer_next = Reviewer::where('pengajuan_id', $pengajuan_id)->where('urutan', $urutan_next)->firstorfail();
+                $reviewer_next->last_status = 'OPEN';
+                $reviewer_next->save();
+            }
+
+            // UPDATE PENGAJUAN
+            if ($pengajuan->status_id == 1) {
+                $pengajuan->status_id = 2;
+                $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 2) {
+                $pengajuan->status_id = 3;
+                $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 3) {
+                if ($reviewer_count == 3) {
+                    $pengajuan->status_id = 6;
+                    $pengajuan->pemeriksa_id = null;
+                } else {
+                    $pengajuan->status_id = 4;
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
+            } elseif ($pengajuan->status_id == 4) {
+                if ($reviewer_count == 4) {
+                    $pengajuan->status_id = 6;
+                    $pengajuan->pemeriksa_id = null;
+                } else {
+                    $pengajuan->status_id = 5;
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
+            } else {
+                $pengajuan->status_id = 6;
+                $pengajuan->pemeriksa_id = null;
+            }
+
+            // Insert Review
+            if (!empty($params['note'])) {
+                $review = new Review();
+                $review->pengajuan_id = $pengajuan->id;
+                $review->reviewer_id = $reviewer->id;
+                $review->nik_gsd = auth()->user()->nik_gsd;
+                $review->nama_karyawan = auth()->user()->name;
+                $review->status = 'APPROVED';
+                $review->notes = $params['note'];
+                $review->save();
+            }
+            return $pengajuan->save();
+
+            // Return
+        } elseif ($status_btn == 2) {
+            // Update REVIEWER
+            $reviewer->last_status = 'QUEUE';
+            $reviewer->save();
+            $reviewer_before = "";
+
+            if ($urutan != 1) {
+                $urutan_before = $urutan - 1;
+                $reviewer_before = Reviewer::where('pengajuan_id', $pengajuan_id)->where('urutan', $urutan_before)->firstorfail();
+                $reviewer_before->last_status = 'OPEN';
+                $reviewer_before->save();
+            }
+
+            // UPDATE PENGAJUAN
+            if ($pengajuan->status_id == 1) {
+                $pengajuan->status_id = 8;
+                $pengajuan->pemeriksa_id = null;
+            } elseif ($pengajuan->status_id == 2) {
+                $pengajuan->status_id = 1;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 3) {
+                $pengajuan->status_id = 2;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 4) {
+                $pengajuan->status_id = 3;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            } else {
+                $pengajuan->status_id = 4;
+                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+            }
+
+            // Insert Review
+            if (!empty($params['note'])) {
+                $review = new Review();
+                $review->pengajuan_id = $pengajuan->id;
+                $review->reviewer_id = $reviewer->id;
+                $review->nik_gsd = auth()->user()->nik_gsd;
+                $review->nama_karyawan = auth()->user()->name;
+                $review->status = 'RETURNED';
+                $review->notes = $params['note'];
+                $review->save();
+            }
+            return $pengajuan->save();
+            // Reject
+        } else {
+            // Update REVIEWER
+            $reviewer->last_status = 'REJECT';
+            $reviewer->save();
+
+            // UPDATE PENGAJUAN
+            $pengajuan->status_id = 9;
+
+            // Insert Review
+            if (!empty($params['note'])) {
+                $review = new Review();
+                $review->pengajuan_id = $pengajuan->id;
+                $review->reviewer_id = $reviewer->id;
+                $review->nik_gsd = auth()->user()->nik_gsd;
+                $review->nama_karyawan = auth()->user()->name;
+                $review->status = 'REJECTED';
+                $review->notes = $params['note'];
+                $review->save();
+            }
+            return $pengajuan->save();
+        }
+    }
 }
