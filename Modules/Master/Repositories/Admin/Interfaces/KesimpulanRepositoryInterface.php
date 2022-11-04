@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: IT TELPRO
- * Date: 04/11/2022
- * Time: 23:40
+ * Date: 05/11/2022
+ * Time: 00:16
  */
 
 namespace Modules\Master\Repositories\Admin\Interfaces;
 
 
-interface AnggaranRepositoryInterface
+interface KesimpulanRepositoryInterface
 {
     public function findAll($options = []);
     public function create($params = []);

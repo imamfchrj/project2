@@ -20,4 +20,10 @@ Route::prefix('admin/master')->as('master-')->namespace('\Modules\Master\Http\Co
     // CUSTOMER
     Route::resource('customer', 'CustomerController');
     Route::resource('anggaran', 'AnggaranController');
+    Route::resource('jenis', 'JenisController');
+    Route::resource('kategori', 'KategoriController');
+    Route::resource('kesimpulan', 'KesimpulanController');
+    Route::resource('risiko', 'RisikoController');
+    Route::resource('segment', 'SegmentController');
+    Route::resource('status', 'StatusController');
 });

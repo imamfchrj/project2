@@ -32,15 +32,15 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{ $customer->name }}</td>
                                             <td>
-                                                @can('view_master-customer')
-                                                    <a class="btn btn-sm btn-primary"
-                                                       href="{{ url('admin/master/customer/'. $customer->id )}}"><i
-                                                                class="far fa-eye"></i>
-                                                        Show
-                                                    </a>
-                                                @endcan
+                                                {{--@can('view_master-customer')--}}
+                                                    {{--<a class="btn btn-sm btn-primary"--}}
+                                                       {{--href="{{ url('admin/master/customer/'. $customer->id )}}"><i--}}
+                                                                {{--class="far fa-eye"></i>--}}
+                                                        {{--Show--}}
+                                                    {{--</a>--}}
+                                                {{--@endcan--}}
                                                 @can('edit_master-customer')
-                                                    <a class="btn btn-sm btn-success"
+                                                    <a class="btn btn-sm btn-warning"
                                                        href="{{ url('admin/master/customer/'. $customer->id .'/edit')}}"><i
                                                                 class="far fa-edit"></i>
                                                         Edit

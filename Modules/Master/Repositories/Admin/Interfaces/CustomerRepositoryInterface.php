@@ -9,4 +9,5 @@ interface CustomerRepositoryInterface
     public function create($params = []);
     public function findById($id);
     public function update($id, $params = []);
+    public function delete($id);
 }
