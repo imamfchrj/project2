@@ -2,16 +2,18 @@
 
 namespace Modules\Master\Repositories\Admin\Interfaces;
 
-use Modules\Master\Entities\Customer;
+use Modules\Master\Entities\Mcustomer;
 
 interface CustomerRepositoryInterface
 {
     public function findAll($options = []);
+    public function create($params = []);
+    public function findById($id);
+    public function update($id, $params = []);
 //    public function findAllInTrash($options = []);
-//    public function findById($id);
 //    public function findByPersetujuanId($id);
-//    public function create($params = []);
-////    public function update(Pengajuan $pengajuan, $params = []);
+
+
 //    public function delete($id, $permanentDelete = false);
 //    public function restore($id);
 //    public function getStatuses();

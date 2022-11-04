@@ -10,6 +10,7 @@ namespace Modules\Master\Repositories\Admin;
 
 use DB;
 use Modules\Jib\Entities\Mcustomer;
+use Modules\Master\Http\Requests\Admin\CustomerRequest;
 use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 
 class CustomerRepository implements CustomerRepositoryInterface
@@ -31,30 +32,39 @@ class CustomerRepository implements CustomerRepositoryInterface
         if (!empty($options['filter']['q'])) {
             $customer = $customer->with('minitiators')->where(function ($query) use ($options) {
                 $query->where('name', 'LIKE', "%{$options['filter']['q']}%");
-//                    ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
-//                    ->orWhere('jenis_id', 'LIKE', "%{$options['filter']['q']}%")
-//                    ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
 
-//        if (!empty($options['filter']['status'])) {
-//            $customer = $customer->where('status_id', $options['filter']['status']);
-//        }
-//
-//        if (!empty($options['filter']['segment'])) {
-//            $customer = $customer->where('segment_id', $options['filter']['segment']);
-//        }
-//
-//        if (!empty($options['filter']['customer'])) {
-//            $customer = $customer->where('customer_id', $options['filter']['customer']);
-//        }
-//        if (!empty($options['filter']['jenis'])) {
-//            $customer = $customer->where('jenis_id', $options['filter']['jenis']);
-//        }
         if ($perPage) {
             return $customer->paginate($perPage);
         }
 
         return $customer->get();
+    }
+
+    public function create($params = [])
+    {
+        // Insert Customer
+        $customer = new Mcustomer();
+        $customer->name = $params['name'];
+        return $customer->save();
+    }
+
+    public function findById($id)
+    {
+        return Mcustomer::findOrFail($id);
+    }
+
+    public function update($id, $params = [])
+    {
+        $customer = Mcustomer::findOrFail($id);
+        $customer->name = $params['name'];
+        return $customer->save();
+    }
+
+    public function delete($id)
+    {
+        $customer = Mcustomer::findOrFail($id);
+        return $customer->forceDelete();
     }
 }

@@ -4,9 +4,11 @@ namespace Modules\Master\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Modules\Master\Http\Controllers\MasterController;
 
-use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Master\Http\Controllers\MasterController;
+use Modules\Master\Http\Requests\Admin\CustomerRequest;
+
+use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 
 use App\Authorizable;
 
@@ -22,9 +24,6 @@ class CustomerController extends MasterController
         $this->data['currentAdminMenu'] = 'customer';
 
         $this->customerRepository = $customerRepository;
-
-//        $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
-        $this->data['viewTrash'] = false;
     }
     /**
      * Display a listing of the resource.
@@ -42,14 +41,6 @@ class CustomerController extends MasterController
         ];
         $this->data['customers'] = $this->customerRepository->findAll($options);
         $this->data['filter'] = $params;
-//        $this->data['segments'] = $this->segmentRepository->findAll()->pluck('name', 'id');
-//        $this->data['customers'] = $this->customerRepository->findAll()->pluck('name', 'id');
-//        $this->data['count_review'] = $this->pengajuanRepository->count_review();
-//        $this->data['count_approval'] = $this->pengajuanRepository->count_approval();
-//        $this->data['count_closed'] = $this->pengajuanRepository->count_closed();
-//        $this->data['count_draft'] = $this->pengajuanRepository->count_draft();
-//        $this->data['count_initiator'] = $this->pengajuanRepository->count_initiator();
-//        $this->data['count_rejected'] = $this->pengajuanRepository->count_rejected();
         return view('master::admin.customer.index',$this->data);
     }
 
@@ -59,7 +50,8 @@ class CustomerController extends MasterController
      */
     public function create()
     {
-        return view('master::create');
+//        return view('master::create');
+        return view('master::admin.customer.form', $this->data);
     }
 
     /**
@@ -67,9 +59,14 @@ class CustomerController extends MasterController
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+        $params = $request->validated();
+
+        if ($this->customerRepository->create($params)) {
+            return redirect('admin/master/customer')
+                ->with('success', 'Customer has been created');
+        }
     }
 
     /**
@@ -89,7 +86,8 @@ class CustomerController extends MasterController
      */
     public function edit($id)
     {
-        return view('master::edit');
+        $this->data['customer'] = $this->customerRepository->findById($id);
+        return view('master::admin.customer.form', $this->data);
     }
 
     /**
@@ -98,9 +96,18 @@ class CustomerController extends MasterController
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        //
+        $params = $request->validated();
+        $customer = $this->customerRepository->findById($id);
+
+        if ($this->customerRepository->update($id, $params)) {
+            return redirect('admin/master/customer')
+                ->with('success', 'Customer has been Updated');
+        }
+
+        return redirect('admin/master/customer/'. $id .'/edit')
+            ->with('error', 'Could not update the Customer');
     }
 
     /**
@@ -110,6 +117,12 @@ class CustomerController extends MasterController
      */
     public function destroy($id)
     {
-        //
+
+        if ($this->customerRepository->delete($id)) {
+                return redirect('admin/master/customer')
+                    ->with('success', 'Customer has been deleted.');
+        }
+
+        return redirect('admin/master/customer')->with('error', 'Could not delete the Customer.');
     }
 }

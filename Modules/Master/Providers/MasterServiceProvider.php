@@ -5,8 +5,8 @@ namespace Modules\Master\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
-use Modules\Jib\Repositories\Admin\CustomerRepository;
+use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Master\Repositories\Admin\CustomerRepository;
 
 class MasterServiceProvider extends ServiceProvider
 {

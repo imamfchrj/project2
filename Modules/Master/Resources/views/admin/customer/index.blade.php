@@ -14,14 +14,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="col-sm-3">
-                                <h4>Manage Pengajuan</h4>
-                            </div>
-                        </div>
+
                         <div class="card-body">
-                            {{--@include('jib::admin.shared.flash')--}}
-                            {{--@include('jib::admin.pengajuan._filter')--}}
+                            @include('master::admin.shared.flash')
+                            @include('master::admin.customer._filter')
                             <div class="table-responsive">
                                 <table id="customer" class="table table-bordered table-striped table-sm ">
                                 {{--<table class="class="table table-sm  table-bordered table-hover table-striped">--}}
