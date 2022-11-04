@@ -19,4 +19,5 @@ Route::prefix('admin/master')->as('master-')->namespace('\Modules\Master\Http\Co
 
     // CUSTOMER
     Route::resource('customer', 'CustomerController');
+    Route::resource('anggaran', 'AnggaranController');
 });

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factory;
 
 use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Master\Repositories\Admin\CustomerRepository;
+use Modules\Master\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
+use Modules\Master\Repositories\Admin\AnggaranRepository;
 
 class MasterServiceProvider extends ServiceProvider
 {
@@ -119,6 +121,11 @@ class MasterServiceProvider extends ServiceProvider
         $this->app->bind(
             CustomerRepositoryInterface::class,
             CustomerRepository::class
+        );
+
+        $this->app->bind(
+            AnggaranRepositoryInterface::class,
+            AnggaranRepository::class
         );
     }
 }

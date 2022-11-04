@@ -9,13 +9,11 @@
 namespace Modules\Master\Repositories\Admin;
 
 use DB;
-use Modules\Jib\Entities\Mcustomer;
-use Modules\Master\Http\Requests\Admin\CustomerRequest;
+use Modules\Master\Entities\Mcustomer;
 use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 
 class CustomerRepository implements CustomerRepositoryInterface
 {
-
     public function findAll($options = [])
     {
         $perPage = $options['per_page'] ?? null;
@@ -30,7 +28,7 @@ class CustomerRepository implements CustomerRepositoryInterface
         }
 
         if (!empty($options['filter']['q'])) {
-            $customer = $customer->with('minitiators')->where(function ($query) use ($options) {
+            $customer = $customer->where(function ($query) use ($options) {
                 $query->where('name', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
