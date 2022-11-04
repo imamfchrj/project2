@@ -6,24 +6,24 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
 use Modules\Master\Http\Controllers\MasterController;
-use Modules\Master\Http\Requests\Admin\CustomerRequest;
+use Modules\Master\Http\Requests\Admin\SegmentRequest;
 
-use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Master\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 
 use App\Authorizable;
 
-class CustomerController extends MasterController
+class SegmentController extends MasterController
 {
     use Authorizable;
 
-    private  $customerRepository;
+    private  $segmentRepository;
 
-    public function __construct(CustomerRepositoryInterface $customerRepository)
+    public function __construct(SegmentRepositoryInterface $segmentRepository)
     {
         parent::__construct();
-        $this->data['currentAdminMenu'] = 'customer';
+        $this->data['currentAdminMenu'] = 'segment';
 
-        $this->customerRepository = $customerRepository;
+        $this->segmentRepository = $segmentRepository;
     }
     /**
      * Display a listing of the resource.
@@ -39,9 +39,9 @@ class CustomerController extends MasterController
             ],
             'filter' => $params,
         ];
-        $this->data['customers'] = $this->customerRepository->findAll($options);
+        $this->data['segments'] = $this->segmentRepository->findAll($options);
         $this->data['filter'] = $params;
-        return view('master::admin.customer.index',$this->data);
+        return view('master::admin.segment.index',$this->data);
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomerController extends MasterController
      */
     public function create()
     {
-        return view('master::admin.customer.form', $this->data);
+        return view('master::admin.segment.form', $this->data);
     }
 
     /**
@@ -58,13 +58,13 @@ class CustomerController extends MasterController
      * @param Request $request
      * @return Renderable
      */
-    public function store(CustomerRequest $request)
+    public function store(SegmentRequest $request)
     {
         $params = $request->validated();
 
-        if ($this->customerRepository->create($params)) {
-            return redirect('admin/master/customer')
-                ->with('success', 'Customer has been created');
+        if ($this->segmentRepository->create($params)) {
+            return redirect('admin/master/segment')
+                ->with('success', 'Segment has been created');
         }
     }
 
@@ -85,8 +85,8 @@ class CustomerController extends MasterController
      */
     public function edit($id)
     {
-        $this->data['customer'] = $this->customerRepository->findById($id);
-        return view('master::admin.customer.form', $this->data);
+        $this->data['segment'] = $this->segmentRepository->findById($id);
+        return view('master::admin.segment.form', $this->data);
     }
 
     /**
@@ -95,18 +95,18 @@ class CustomerController extends MasterController
      * @param int $id
      * @return Renderable
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(SegmentRequest $request, $id)
     {
         $params = $request->validated();
-        $customer = $this->customerRepository->findById($id);
+        $segment = $this->segmentRepository->findById($id);
 
-        if ($this->customerRepository->update($id, $params)) {
-            return redirect('admin/master/customer')
-                ->with('success', 'Customer has been Updated');
+        if ($this->segmentRepository->update($id, $params)) {
+            return redirect('admin/master/segment')
+                ->with('success', 'Segment has been Updated');
         }
 
-        return redirect('admin/master/customer/'. $id .'/edit')
-            ->with('error', 'Could not update the Customer');
+        return redirect('admin/master/segment/'. $id .'/edit')
+            ->with('error', 'Could not update the Segment');
     }
 
     /**
@@ -117,11 +117,11 @@ class CustomerController extends MasterController
     public function destroy($id)
     {
 
-        if ($this->customerRepository->delete($id)) {
-                return redirect('admin/master/customer')
-                    ->with('success', 'Customer has been deleted.');
+        if ($this->segmentRepository->delete($id)) {
+            return redirect('admin/master/segment')
+                ->with('success', 'Segment has been deleted.');
         }
 
-        return redirect('admin/master/customer')->with('error', 'Could not delete the Customer.');
+        return redirect('admin/master/segment')->with('error', 'Could not delete the Segment.');
     }
 }

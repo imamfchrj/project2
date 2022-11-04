@@ -5,7 +5,7 @@ namespace Modules\Master\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mcustomer extends Model
+class Manggaran extends Model
 {
     use HasFactory;
 
@@ -19,11 +19,11 @@ class Mcustomer extends Model
      * @var string
      */
 
-    protected $table = 'm_customer';
+    protected $table = 'm_anggaran';
     protected $primaryKey = 'id';
 
     protected static function newFactory()
     {
-        return \Modules\Master\Database\factories\McustomerFactory::new();
+        return \Modules\Jib\Database\factories\ManggaranFactory::new();
     }
 }

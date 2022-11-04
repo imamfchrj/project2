@@ -1,9 +1,15 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: IT TELPRO
+ * Date: 05/11/2022
+ * Time: 00:17
+ */
 
 namespace Modules\Master\Repositories\Admin\Interfaces;
 
 
-interface CustomerRepositoryInterface
+interface StatusRepositoryInterface
 {
     public function findAll($options = []);
     public function create($params = []);

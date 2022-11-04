@@ -6,24 +6,24 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
 use Modules\Master\Http\Controllers\MasterController;
-use Modules\Master\Http\Requests\Admin\CustomerRequest;
+use Modules\Master\Http\Requests\Admin\StatusRequest;
 
-use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Master\Repositories\Admin\Interfaces\StatusRepositoryInterface;
 
 use App\Authorizable;
 
-class CustomerController extends MasterController
+class StatusController extends MasterController
 {
     use Authorizable;
 
-    private  $customerRepository;
+    private  $statusRepository;
 
-    public function __construct(CustomerRepositoryInterface $customerRepository)
+    public function __construct(StatusRepositoryInterface $statusRepository)
     {
         parent::__construct();
-        $this->data['currentAdminMenu'] = 'customer';
+        $this->data['currentAdminMenu'] = 'status';
 
-        $this->customerRepository = $customerRepository;
+        $this->statusRepository = $statusRepository;
     }
     /**
      * Display a listing of the resource.
@@ -39,9 +39,9 @@ class CustomerController extends MasterController
             ],
             'filter' => $params,
         ];
-        $this->data['customers'] = $this->customerRepository->findAll($options);
+        $this->data['statuss'] = $this->statusRepository->findAll($options);
         $this->data['filter'] = $params;
-        return view('master::admin.customer.index',$this->data);
+        return view('master::admin.status.index',$this->data);
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomerController extends MasterController
      */
     public function create()
     {
-        return view('master::admin.customer.form', $this->data);
+        return view('master::admin.status.form', $this->data);
     }
 
     /**
@@ -58,13 +58,13 @@ class CustomerController extends MasterController
      * @param Request $request
      * @return Renderable
      */
-    public function store(CustomerRequest $request)
+    public function store(StatusRequest $request)
     {
         $params = $request->validated();
 
-        if ($this->customerRepository->create($params)) {
-            return redirect('admin/master/customer')
-                ->with('success', 'Customer has been created');
+        if ($this->statusRepository->create($params)) {
+            return redirect('admin/master/status')
+                ->with('success', 'Status has been created');
         }
     }
 
@@ -85,8 +85,8 @@ class CustomerController extends MasterController
      */
     public function edit($id)
     {
-        $this->data['customer'] = $this->customerRepository->findById($id);
-        return view('master::admin.customer.form', $this->data);
+        $this->data['status'] = $this->statusRepository->findById($id);
+        return view('master::admin.status.form', $this->data);
     }
 
     /**
@@ -95,18 +95,18 @@ class CustomerController extends MasterController
      * @param int $id
      * @return Renderable
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(StatusRequest $request, $id)
     {
         $params = $request->validated();
-        $customer = $this->customerRepository->findById($id);
+        $status = $this->statusRepository->findById($id);
 
-        if ($this->customerRepository->update($id, $params)) {
-            return redirect('admin/master/customer')
-                ->with('success', 'Customer has been Updated');
+        if ($this->statusRepository->update($id, $params)) {
+            return redirect('admin/master/status')
+                ->with('success', 'Status has been Updated');
         }
 
-        return redirect('admin/master/customer/'. $id .'/edit')
-            ->with('error', 'Could not update the Customer');
+        return redirect('admin/master/status/'. $id .'/edit')
+            ->with('error', 'Could not update the Status');
     }
 
     /**
@@ -117,11 +117,11 @@ class CustomerController extends MasterController
     public function destroy($id)
     {
 
-        if ($this->customerRepository->delete($id)) {
-                return redirect('admin/master/customer')
-                    ->with('success', 'Customer has been deleted.');
+        if ($this->statusRepository->delete($id)) {
+            return redirect('admin/master/status')
+                ->with('success', 'Status has been deleted.');
         }
 
-        return redirect('admin/master/customer')->with('error', 'Could not delete the Customer.');
+        return redirect('admin/master/status')->with('error', 'Could not delete the Status.');
     }
 }

@@ -5,8 +5,22 @@ namespace Modules\Master\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-use Modules\Jib\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
-use Modules\Jib\Repositories\Admin\CustomerRepository;
+use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Master\Repositories\Admin\CustomerRepository;
+use Modules\Master\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
+use Modules\Master\Repositories\Admin\AnggaranRepository;
+use Modules\Master\Repositories\Admin\Interfaces\JenisRepositoryInterface;
+use Modules\Master\Repositories\Admin\JenisRepository;
+use Modules\Master\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
+use Modules\Master\Repositories\Admin\KategoriRepository;
+use Modules\Master\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
+use Modules\Master\Repositories\Admin\KesimpulanRepository;
+use Modules\Master\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
+use Modules\Master\Repositories\Admin\RisikoRepository;
+use Modules\Master\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
+use Modules\Master\Repositories\Admin\SegmentRepository;
+use Modules\Master\Repositories\Admin\Interfaces\StatusRepositoryInterface;
+use Modules\Master\Repositories\Admin\StatusRepository;
 
 class MasterServiceProvider extends ServiceProvider
 {
@@ -119,6 +133,41 @@ class MasterServiceProvider extends ServiceProvider
         $this->app->bind(
             CustomerRepositoryInterface::class,
             CustomerRepository::class
+        );
+
+        $this->app->bind(
+            AnggaranRepositoryInterface::class,
+            AnggaranRepository::class
+        );
+
+        $this->app->bind(
+            JenisRepositoryInterface::class,
+            JenisRepository::class
+        );
+
+        $this->app->bind(
+            KategoriRepositoryInterface::class,
+            KategoriRepository::class
+        );
+
+        $this->app->bind(
+            KesimpulanRepositoryInterface::class,
+            KesimpulanRepository::class
+        );
+
+        $this->app->bind(
+            RisikoRepositoryInterface::class,
+            RisikoRepository::class
+        );
+
+        $this->app->bind(
+            SegmentRepositoryInterface::class,
+            SegmentRepository::class
+        );
+
+        $this->app->bind(
+            StatusRepositoryInterface::class,
+            StatusRepository::class
         );
     }
 }
