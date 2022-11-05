@@ -10,13 +10,12 @@
         </div>
     </div>
     @if(isset($persetujuan))
-        {!! Form::model($persetujuan, ['url' => ['admin/jib/workspace/updateform', $persetujuan->id], 'method' => 'PUT',
-        'files' => true ]) !!}
-        {!! Form::hidden('id') !!}
+    {!! Form::model($persetujuan, ['url' => ['admin/jib/workspace/updateform', $persetujuan->id], 'method' => 'PUT',
+    'files' => true ]) !!}
+    {!! Form::hidden('id') !!}
     @else
-        {!! Form::open(['url' => 'admin/jib/workspace/storeform', 'files'=>true]) !!}
+    {!! Form::open(['url' => 'admin/jib/workspace/storeform', 'files'=>true]) !!}
     @endif
-    @csrf
     <div class="section-body">
         <div class="row">
             <div class="col-lg-12">
