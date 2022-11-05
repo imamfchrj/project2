@@ -27,7 +27,7 @@ class MomRepository implements MomRepositoryInterface
         $mom->aki = $params['aki'];
         $mom->attende = $params['attende'];
         $mom->catatan = $params['catatan'];
-        $mom->kelengkapan = $params['kelengkapan'];
+//        $mom->kelengkapan = $params['kelengkapan'];
         $mom->anggaran = $params['anggaran'];
         $mom->created_by = auth()->user()->id;
         $mom->updated_by = auth()->user()->name;
@@ -78,7 +78,7 @@ class MomRepository implements MomRepositoryInterface
         $mom->aki = $params['aki'];
         $mom->attende = $params['attende'];
         $mom->catatan = $params['catatan'];
-        $mom->kelengkapan = $params['kelengkapan'];
+//        $mom->kelengkapan = $params['kelengkapan'];
         $mom->anggaran = $params['anggaran'];
         $mom->created_by = auth()->user()->id;
         $mom->updated_by = auth()->user()->name;
