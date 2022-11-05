@@ -23,7 +23,7 @@
                                     <thead>
                                     <th>No</th>
                                     {{--<th>Rules</th>--}}
-                                    <th>Rules</th>
+                                    <th><Rules></Rules></th>
                                     <th>Urutan</th>
                                     <th>Petugas</th>
                                     <th>Nik</th>
