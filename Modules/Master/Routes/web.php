@@ -26,4 +26,5 @@ Route::prefix('admin/master')->as('master-')->namespace('\Modules\Master\Http\Co
     Route::resource('risiko', 'RisikoController');
     Route::resource('segment', 'SegmentController');
     Route::resource('status', 'StatusController');
+    Route::resource('pemeriksa', 'PemeriksaController');
 });
