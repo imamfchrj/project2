@@ -199,7 +199,9 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    @if ($pengajuan->status_id == 1)
                                     <th>Action</th>
+                                    @endif
                                 </thead>
                                 <tbody class="text-center">
                                     @forelse ($persetujuan as $setuju)
@@ -211,7 +213,6 @@
                                         {{--</a></td>--}}
                                         <td>{{ $setuju->created_at }}</td>
                                         <td>{{ $setuju->updated_by }}</td>
-                                        <!-- <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td> -->
                                         <td>
                                             @if(!empty($file_approval))
                                                 {{--{{ dd($file_approval->count()) }}--}}
@@ -225,6 +226,7 @@
                                                 -
                                             @endif
                                         </td>
+                                        @if ($pengajuan->status_id == 1)
                                         <td>
                                             <a class="btn btn-sm btn-primary"
                                                 href="{{ url('admin/jib/workspace/'. $setuju->id .'/editform')}}"><i
@@ -235,6 +237,7 @@
                                                     class="fas fa-print"></i>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @empty
                                     @endforelse
@@ -268,7 +271,9 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    @if ($pengajuan->status_id == 1)
                                     <th>Action</th>
+                                    @endif
                                 </thead>
                                 <tbody class="text-center">
                                     @forelse ($mom as $moms)
@@ -279,7 +284,6 @@
                                         {{--</a></td>--}}
                                         <td>{{ $moms->created_at }}</td>
                                         <td>{{ $moms->updated_by }}</td>
-                                        <!-- <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td> -->
                                         <td>
                                             @if(!empty($file_mom))
                                                 @if ($file_mom->count() > 0)
@@ -292,7 +296,7 @@
                                                 -
                                             @endif
                                         </td>
-
+                                        @if ($pengajuan->status_id == 1)
                                         <td>
                                             <a class="btn btn-sm btn-primary"
                                                 href="{{ url('admin/jib/workspace/'. $moms->id .'/editmom')}}"><i
@@ -303,6 +307,7 @@
                                                     class="fas fa-print"></i>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @empty
                                     @endforelse

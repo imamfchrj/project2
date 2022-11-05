@@ -143,14 +143,10 @@ class WorkspaceController extends JibController
             $this->data['file_jib'] = $pengajuan['file_jib'];
             $this->data['persetujuan'] = $persetujuan['persetujuan'];
             $this->data['file_approval'] = $persetujuan['file_approval'];
-            // $this->data['persetujuan'] = $persetujuan;
             $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
             $this->data['mom'] = $mom['mom'];
             $this->data['file_mom'] = $mom['file_mom'];
-
             $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
-
-            // $this->data['file_approval'] = $persetujuan['file_approval'];
 
             $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 

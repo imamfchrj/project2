@@ -814,30 +814,30 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
 
             // UPDATE PENGAJUAN
-            if ($pengajuan->status_id == 1) {
+            if ($pengajuan->status_id == 1) { // REVIEWER 0
                 $pengajuan->status_id = 2;
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 2) {
-                $pengajuan->status_id = 3;
+            } elseif ($pengajuan->status_id == 2) { // REVEIWER 1
+                if ($reviewer_count == 3) { // < 3M
+                    $pengajuan->status_id = 5; // Ke Approval
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                } else { // > 3M
+                    $pengajuan->status_id = 3; // Ke Reviewer 2
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
+            } elseif ($pengajuan->status_id == 3) { // REVIEWER 2
+                if ($reviewer_count == 4) { // 3-5M
+                    $pengajuan->status_id = 5; // Ke Approval
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                } else { // > 5M
+                    $pengajuan->status_id = 4; // Ke Reviewer 3
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
+            } elseif ($pengajuan->status_id == 4) { // REVIEWER 3
+                $pengajuan->status_id = 5; // Ke Approval
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 3) {
-                if ($reviewer_count == 3) {
-                    $pengajuan->status_id = 6;
-                    $pengajuan->pemeriksa_id = null;
-                } else {
-                    $pengajuan->status_id = 4;
-                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-                }
-            } elseif ($pengajuan->status_id == 4) {
-                if ($reviewer_count == 4) {
-                    $pengajuan->status_id = 6;
-                    $pengajuan->pemeriksa_id = null;
-                } else {
-                    $pengajuan->status_id = 5;
-                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-                }
-            } else {
-                $pengajuan->status_id = 6;
+            } else { // APPROVAL
+                $pengajuan->status_id = 6; // Closed
                 $pengajuan->pemeriksa_id = null;
             }
 
@@ -869,21 +869,29 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
 
             // UPDATE PENGAJUAN
-            if ($pengajuan->status_id == 1) {
-                $pengajuan->status_id = 8;
+            if ($pengajuan->status_id == 1) { // REVIEWER 0
+                $pengajuan->status_id = 8; // Ke Initiator
                 $pengajuan->pemeriksa_id = null;
-            } elseif ($pengajuan->status_id == 2) {
-                $pengajuan->status_id = 1;
+            } elseif ($pengajuan->status_id == 2) { // REVIEWER 1
+                $pengajuan->status_id = 1; // Ke Reviewer 0
                 $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 3) {
-                $pengajuan->status_id = 2;
+            } elseif ($pengajuan->status_id == 3) { // REVIEWER 2
+                $pengajuan->status_id = 2; // Ke Reviewer 1
                 $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 4) {
-                $pengajuan->status_id = 3;
+            } elseif ($pengajuan->status_id == 4) { // REVIEWER 3
+                $pengajuan->status_id = 3; // Ke Reviewer 2
                 $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
             } else {
-                $pengajuan->status_id = 4;
-                $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+                if ($reviewer_count == 3) { // < 3M
+                    $pengajuan->status_id = 2; // Ke Reviewer 1
+                    $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+                } elseif ($reviewer_count == 4) { // 3-5M
+                    $pengajuan->status_id = 3; // Ke Reviewer 2
+                    $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+                } else { // > 5M
+                    $pengajuan->status_id = 4; // Ke Reviewer 3
+                    $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
+                }
             }
 
             // Insert Review
