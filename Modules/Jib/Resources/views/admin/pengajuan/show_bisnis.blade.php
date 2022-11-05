@@ -214,11 +214,11 @@
                                                 {{--</a></td>--}}
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
-                                            <td>@if(!empty($file_approval))
-                                                    {{--{{ dd($file_approval->count()) }}--}}
-                                                    @if ($file_approval->count() > 0)
-                                                        <a href="{{ $file_approval->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
-                                                            {{ $file_approval->last()->name }}</a>
+                                            <td>@if(!empty($file_mom))
+                                                    {{--{{ dd($file_mom->count()) }}--}}
+                                                    @if ($file_mom->count() > 0)
+                                                        <a href="{{ $file_mom->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                            {{ $file_mom->last()->name }}</a>
                                                     @else
                                                         -
                                                     @endif

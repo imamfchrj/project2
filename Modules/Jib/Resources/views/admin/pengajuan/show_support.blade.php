@@ -200,7 +200,18 @@
                                                 {{--</a></td>--}}
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
-                                            <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                            <td>@if(!empty($file_mom))
+                                                    {{--{{ dd($file_mom->count()) }}--}}
+                                                    @if ($file_mom->count() > 0)
+                                                        <a href="{{ $file_mom->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                            {{ $file_mom->last()->name }}</a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse

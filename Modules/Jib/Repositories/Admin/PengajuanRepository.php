@@ -120,6 +120,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 //            ->orwhere('jib_pengajuan.status_id', 7)
 //            ->where('jib_reviewer.last_status', 'OPEN')
 //            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
+            // BERDASARKAN JIB REVIEWER YANG SEDANG OPEN
             ->orWhere(
                 function ($query) {
                     // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") { //Role Approver
@@ -128,6 +129,14 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     // }
                 }
             )
+            // ANDI STAFF BISCON
+            ->orWhere(
+                function ($query) {
+                    $query->where('jib_reviewer.last_status', 'OPEN')
+                        ->where('jib_reviewer.urutan', auth()->user()->group);
+                }
+            )
+            // STATUS DRAFT BY PEMBUAT
             ->orwhere(
                 function ($query) {
                     // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Initiator") { //Role Initiator
@@ -135,12 +144,14 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                             ->Where('jib_pengajuan.user_id', auth()->user()->id);
                     // }
                 }
-            )->orwhere(
-            function ($query) {
-                $query->where('jib_pengajuan.status_id', 8)
-                    ->Where('jib_pengajuan.user_id', auth()->user()->id);
-            }
-        )
+            )
+            // INITIATOR RETURNED DARI REVIEWER 0
+            ->orwhere(
+                function ($query) {
+                    $query->where('jib_pengajuan.status_id', 8)
+                        ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            )
             ->orderBy('jib_pengajuan.id', 'ASC')
             ->groupby(
                 'jib_pengajuan.id',
@@ -843,7 +854,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             return $pengajuan->save();
 
-            // Return
+        // Return
         } elseif ($status_btn == 2) {
             // Update REVIEWER
             $reviewer->last_status = 'QUEUE';
@@ -887,7 +898,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->save();
             }
             return $pengajuan->save();
-            // Reject
+        // Reject
         } else {
             // Update REVIEWER
             $reviewer->last_status = 'REJECT';
