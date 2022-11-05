@@ -375,36 +375,36 @@
                     <p class=MsoListParagraph style='margin-top:0cm;margin-right:0cm;margin-bottom:
   0cm;margin-left:15.9pt;text-indent:-18.0pt;line-height:normal'><b>C.</b><b><span
                                 style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;&nbsp;&nbsp;&nbsp;
-                            </span>Pembahasan dan Analisa</b></p>
+                            </span>Ketersediaan Anggaran</b></p>
                 </td>
             </tr>
+            {{--<tr>--}}
+                {{--<td width=28 valign=top style='width:21.05pt;border:solid windowtext 1.0pt;--}}
+  {{--border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>--}}
+                    {{--<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>1.</p>--}}
+                {{--</td>--}}
+                {{--<td width=217 colspan=2 valign=top style='width:163.0pt;border-top:none;--}}
+  {{--border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;--}}
+  {{--padding:0cm 5.4pt 0cm 5.4pt'>--}}
+                    {{--<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Review Kelengkapan--}}
+                        {{--Administrasi</p>--}}
+                {{--</td>--}}
+                {{--<td width=19 valign=top style='width:14.15pt;border-top:none;border-left:--}}
+  {{--none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;--}}
+  {{--padding:0cm 5.4pt 0cm 5.4pt'>--}}
+                    {{--<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>--}}
+                {{--</td>--}}
+                {{--<td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;--}}
+  {{--border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;--}}
+  {{--padding:0cm 5.4pt 0cm 5.4pt'>--}}
+                    {{--<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{--}}
+  {{--$mom->kelengkapan }}</p>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
             <tr>
                 <td width=28 valign=top style='width:21.05pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
                     <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>1.</p>
-                </td>
-                <td width=217 colspan=2 valign=top style='width:163.0pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-                    <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>Review Kelengkapan
-                        Administrasi</p>
-                </td>
-                <td width=19 valign=top style='width:14.15pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-                    <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>:</p>
-                </td>
-                <td width=337 colspan=2 valign=top style='width:252.6pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-                    <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>&nbsp;{{
-  $mom->kelengkapan }}</p>
-                </td>
-            </tr>
-            <tr>
-                <td width=28 valign=top style='width:21.05pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-                    <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>2.</p>
                 </td>
                 <td width=217 colspan=2 valign=top style='width:163.0pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
