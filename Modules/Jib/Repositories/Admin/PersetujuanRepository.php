@@ -91,7 +91,6 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
         // dd($persetujuan);
         if ($persetujuan->count() != 0) {
             $file_approval = $persetujuan->last()->getMedia('file_approval');
-//            dd($file_approval);
         } else {
             $file_approval = null;
         }

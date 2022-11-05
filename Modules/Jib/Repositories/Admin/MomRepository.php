@@ -36,7 +36,18 @@ class MomRepository implements MomRepositoryInterface
 
     public function findAllbyPengId($id)
     {
-        return Mom::where('pengajuan_id', $id)->get();
+        // return Mom::where('pengajuan_id', $id)->get();
+
+        // return Persetujuan::where('pengajuan_id', $id)->get();
+        $mom = Mom::where('pengajuan_id', $id)->get();
+        // dd($mom);
+        if ($mom->count() != 0) {
+            $file_mom = $mom->last()->getMedia('file_mom');
+        } else {
+            $file_mom = null;
+        }
+
+        return compact(['mom', 'file_mom']);
     }
 
     public function findbyPengId($id)
