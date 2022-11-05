@@ -58,6 +58,70 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         if (!empty($options['filter']['jenis'])) {
             $pengajuan = $pengajuan->where('jenis_id', $options['filter']['jenis']);
         }
+
+        $pengajuan = $pengajuan->select(
+            'jib_pengajuan.initiator_id',
+            'jib_pengajuan.id',
+            'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.segment_id',
+            'jib_pengajuan.customer_id',
+            'jib_pengajuan.kegiatan',
+            'jib_pengajuan.no_drp',
+            'jib_pengajuan.kategori_id',
+            'jib_pengajuan.nilai_capex',
+            'jib_pengajuan.pemeriksa_id',
+            'jib_pengajuan.status_id',
+            'jib_pengajuan.user_id',
+            'jib_reviewer.pengajuan_id'
+        )
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id','left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+//            ->orWhere(
+//                function ($query) {
+//                    // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") { //Role Approver
+//                    $query->where('jib_reviewer.last_status', 'OPEN')
+//                        ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
+//                    // }
+//                }
+//            )
+//            // ANDI STAFF BISCON
+//            ->orWhere(
+//                function ($query) {
+//                    $query->where('jib_reviewer.last_status', 'OPEN')
+//                        ->where('jib_reviewer.urutan', auth()->user()->group);
+//                }
+//            )
+//            // STATUS DRAFT BY PEMBUAT
+            ->orwhere(
+                function ($query) {
+                    if (auth()->user()->roles[0]->id != 1) { //Role Initiator
+                        $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                    }
+                }
+            )
+//            // INITIATOR RETURNED DARI REVIEWER 0
+//            ->orwhere(
+//                function ($query) {
+//                    $query->where('jib_pengajuan.status_id', 8)
+//                        ->Where('jib_pengajuan.user_id', auth()->user()->id);
+//                }
+//            )
+            ->orderBy('jib_pengajuan.id', 'ASC')
+            ->groupby(
+                'jib_pengajuan.id',
+                'jib_pengajuan.initiator_id',
+                'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.segment_id',
+                'jib_pengajuan.customer_id',
+                'jib_pengajuan.kegiatan',
+                'jib_pengajuan.no_drp',
+                'jib_pengajuan.kategori_id',
+                'jib_pengajuan.nilai_capex',
+                'jib_pengajuan.pemeriksa_id',
+                'jib_pengajuan.status_id',
+                'jib_pengajuan.user_id',
+                'jib_reviewer.pengajuan_id'
+            );
+
         if ($perPage) {
             return $pengajuan->paginate($perPage);
         }
