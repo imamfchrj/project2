@@ -818,32 +818,69 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
     public function count_review()
     {
-        return Pengajuan::whereIn('status_id', array(1, 2))->get()->count();
+        return Pengajuan::whereIn('status_id', array(1, 2))
+            ->where(
+                function ($query) {
+                    if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
+                        $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                    }
+                }
+            )->get()->count();
     }
 
     public function count_approval()
     {
-        return Pengajuan::whereIn('status_id', array(3, 4, 5))->get()->count();
+        return Pengajuan::whereIn('status_id', array(3, 4, 5))->where(
+            function ($query) {
+                if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
+                    $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            }
+        )->get()->count();
     }
 
     public function count_closed()
     {
-        return Pengajuan::whereIn('status_id', array(6))->get()->count();
+        return Pengajuan::whereIn('status_id', array(6))->where(
+            function ($query) {
+                if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
+                    $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            }
+        )->get()->count();
     }
 
     public function count_draft()
     {
-        return Pengajuan::whereIn('status_id', array(7))->get()->count();
+        return Pengajuan::whereIn('status_id', array(7))->where(
+            function ($query) {
+                if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
+                    $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            }
+        )->get()->count();
     }
 
     public function count_initiator()
     {
-        return Pengajuan::whereIn('status_id', array(8))->get()->count();
+        return Pengajuan::whereIn('status_id', array(8))->where(
+            function ($query) {
+                if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
+                    $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            }
+        )->get()->count();
     }
 
     public function count_rejected()
     {
-        return Pengajuan::whereIn('status_id', array(9))->get()->count();
+        return Pengajuan::whereIn('status_id', array(9))->where(
+            function ($query) {
+                if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
+                    $query->Where('jib_pengajuan.user_id', auth()->user()->id);
+                }
+            }
+        )->get()->count();
     }
 
     // Workspace
