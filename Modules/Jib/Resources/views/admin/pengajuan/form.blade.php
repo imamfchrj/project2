@@ -258,18 +258,40 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_2', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_2'), ['class' => 'form-control', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_2'), ['id' => 'seg', 'class' => 'form-control', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
-                            <div class="col-sm-5">
-                                {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
-                                'placeholder' => '-- Select Customer --']) !!}
+                        @if (empty($pengajuan->segment_id))
+                            <div class="form-group row" id="cust">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                <div class="col-sm-5">
+                                    {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
+                                    $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
+                                    'placeholder' => '-- Select Customer --']) !!}
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            @if ($pengajuan->segment_id != 6)
+                                <div class="form-group row" id="cust">
+                                    <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                    <div class="col-sm-5">
+                                        {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
+                                        'placeholder' => '-- Select Customer --']) !!}
+                                    </div>
+                                </div>
+                            @else
+                                <div class="form-group row" id="cust-draft">
+                                    <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                    <div class="col-sm-5">
+                                        {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
+                                        'placeholder' => '-- Select Customer --']) !!}
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">No DRP/DRK</label>
                             <div class="col-sm-5">

@@ -75,6 +75,7 @@
                                 </select>
                             </div>
                         </div>
+                        @if ($pengajuan->segment_id != 6)
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
@@ -85,6 +86,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
                             <div class="col-sm-5">

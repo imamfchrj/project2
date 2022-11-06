@@ -86,7 +86,7 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{ $peng->nama_sub_unit }}</td>
                                             <td>{{ $peng->msegments->name }}</td>
-                                            <td>{{ $peng->mcustomers->name }}</td>
+                                            <td>{{ !empty($peng->mcustomers->name) ? $peng->mcustomers->name : '-' }}</td>
                                             <td>{{ $peng->kegiatan }}</td>
                                             <td>{{ $peng->no_drp }}</td>
                                             <td>{{ $peng->mcategories->name }}</td>

@@ -429,7 +429,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 }
 
                 if ($params['draft_status'] === "false") {
-
                     $reviewer = [];
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
@@ -482,7 +481,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan->jib_number = $no_jib;
             $pengajuan->kegiatan = $params['kegiatan_2'];
             $pengajuan->segment_id = $params['segment_id_2'];
-            $pengajuan->customer_id = $params['customer_id_2'];
+            if ($params['segment_id_2'] != 6) {
+                $pengajuan->customer_id = $params['customer_id_2'];
+            }
             $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
             $pengajuan->nilai_capex = $params['nilai_capex_2'];
@@ -695,7 +696,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             // SUPPORT CAPEX/OPEX
         } else {
-
             // Insert Pengajuan
             $pengajuan = Pengajuan::findOrFail($params['id']);
             $pengajuan->initiator_id = $params['initiator_id'];
@@ -706,7 +706,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
             $pengajuan->kegiatan = $params['kegiatan_2'];
             $pengajuan->segment_id = $params['segment_id_2'];
-            $pengajuan->customer_id = $params['customer_id_2'];
+            if ($params['segment_id_2'] != 6) {
+                $pengajuan->customer_id = $params['customer_id_2'];
+            } else {
+                $pengajuan->customer_id = null;
+            }
             $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
             $pengajuan->nilai_capex = $params['nilai_capex_2'];
