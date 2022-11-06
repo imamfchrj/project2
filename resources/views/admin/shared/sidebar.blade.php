@@ -7,7 +7,7 @@
         <img class="my-3" src="{{ asset('admin/logo/Picture1qqqq.png') }}" height="70px" width="90px" />
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        {{--<a href="{{ url('/')}}">LS</a>--}}  
+        {{--<a href="{{ url('/')}}">LS</a>--}}
     </div>
     <ul class="sidebar-menu my-5">
         <li class="{{ ($currentAdminMenu == 'dashboard') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>

@@ -741,7 +741,7 @@
 
         <div>
 
-            <p align=center style='text-align:center'><b><span style='font-size:10.0pt'>FORM
+            <p align=center style='text-align:center'><img width=71 height=54 src="{{ asset('admin/stisla/assets/img/image001.png') }}" > &nbsp<b><span style='font-size:10.0pt'>FORM
                         PERSETUJUAN INISIATIF INVESTASI / CAPEX BISNIS</span></b><span style='font-size:14.0pt'>
                     <o:p></o:p>
                 </span></p>

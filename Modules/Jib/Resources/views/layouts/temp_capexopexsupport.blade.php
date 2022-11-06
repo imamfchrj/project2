@@ -58,8 +58,8 @@
 
         <p class=MsoNormal>&nbsp;</p>
 
-        <p class=MsoNormal align=center style='text-align:center'><b><span
-                    style='font-size:12.0pt;line-height:106%'>FORM PERSETUJUAN INISIATIF INVESTASI
+        <p class=MsoNormal align=center style='text-align:center'><img width=71 height=54 src="{{ asset('admin/stisla/assets/img/image001.png') }}" > &nbsp<b><span
+                    style='font-size:12.0pt;line-height:106%'> FORM PERSETUJUAN INISIATIF INVESTASI
                     / CAPEX OPEX SUPPORT</span></b></p>
 
         <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 style='border-collapse:collapse'>
