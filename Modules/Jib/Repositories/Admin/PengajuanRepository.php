@@ -310,8 +310,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_1'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_1'];
-                $pengajuan->nilai_capex = $params['nilai_capex_1'];
-                $pengajuan->est_revenue = $params['est_revenue'];
+                $nilai_capex_1 = str_replace(".","",$params['nilai_capex_1']);
+                $est_revenue = str_replace(".","",$params['est_revenue']);
+                $pengajuan->nilai_capex = $nilai_capex_1;
+                $pengajuan->est_revenue = $est_revenue;
                 $pengajuan->irr = $params['irr'];
                 $pengajuan->npv = $params['npv'];
                 $pengajuan->pbp = $params['pbp'];
@@ -350,8 +352,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_4'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_4'];
-                $pengajuan->nilai_capex = $params['nilai_capex_4'];
-                $pengajuan->est_revenue = $params['est_revenue_4'];
+                $nilai_capex_4 = str_replace(".","",$params['nilai_capex_4']);
+                $est_revenue_4 = str_replace(".","",$params['est_revenue_4']);
+                $pengajuan->nilai_capex = $nilai_capex_4;
+                $pengajuan->est_revenue = $est_revenue_4;
                 $pengajuan->cost = $params['cost'];
                 $pengajuan->profit_margin = $params['profit_margin'];
                 $pengajuan->net_cf = $params['net_cf'];
@@ -463,7 +467,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
-            $pengajuan->nilai_capex = $params['nilai_capex_2'];
+            $nilai_capex_2 = str_replace(".","",$params['nilai_capex_2']);
+            $pengajuan->nilai_capex = $nilai_capex_2;
             $pengajuan->bcr = $params['bcr'];
 
             if ($params['draft_status'] === "true") {
@@ -554,8 +559,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_1'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_1'];
-                $pengajuan->nilai_capex = $params['nilai_capex_1'];
-                $pengajuan->est_revenue = $params['est_revenue'];
+                $nilai_capex_1 = str_replace(".","",$params['nilai_capex_1']);
+                $est_revenue = str_replace(".","",$params['est_revenue']);
+                $pengajuan->nilai_capex = $nilai_capex_1;
+                $pengajuan->est_revenue = $est_revenue;
                 $pengajuan->irr = $params['irr'];
                 $pengajuan->npv = $params['npv'];
                 $pengajuan->pbp = $params['pbp'];
@@ -589,8 +596,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_4'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_4'];
-                $pengajuan->nilai_capex = $params['nilai_capex_4'];
-                $pengajuan->est_revenue = $params['est_revenue_4'];
+                $nilai_capex_4 = str_replace(".","",$params['nilai_capex_4']);
+                $est_revenue_4 = str_replace(".","",$params['est_revenue_4']);
+                $pengajuan->nilai_capex = $nilai_capex_4;
+                $pengajuan->est_revenue = $est_revenue_4;
                 $pengajuan->cost = $params['cost'];
                 $pengajuan->profit_margin = $params['profit_margin'];
                 $pengajuan->net_cf = $params['net_cf'];
@@ -690,7 +699,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
-            $pengajuan->nilai_capex = $params['nilai_capex_2'];
+            $nilai_capex_2 = str_replace(".","",$params['nilai_capex_2']);
+            $pengajuan->nilai_capex = $nilai_capex_2;
             $pengajuan->bcr = $params['bcr'];
 
             if ($params['draft_status'] == "true") {
