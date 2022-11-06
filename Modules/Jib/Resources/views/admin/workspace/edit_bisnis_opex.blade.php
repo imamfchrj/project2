@@ -98,7 +98,7 @@
                             <div class="col-sm-5">
                                 <input type="text" name="nilai_capex"
                                     class="form-control @error('nilai_capex') is-invalid @enderror @if (!$errors->has('nilai_capex') && old('nilai_capex')) is-valid @endif"
-                                    value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}"
+                                    value="{{ !empty($pengajuan->nilai_capex) ? number_format($pengajuan->nilai_capex) : '' }}"
                                     disabled>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                             <div class="col-sm-5">
                                 <input type="text" name="est_revenue"
                                     class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
-                                    value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" disabled>
+                                    value="{{ !empty($pengajuan) ? number_format($pengajuan->est_revenue) : '' }}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">

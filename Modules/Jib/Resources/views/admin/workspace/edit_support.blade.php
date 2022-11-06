@@ -100,7 +100,7 @@
                             <div class="col-sm-5">
                                 <input type="text" name="nilai_capex_2"
                                     class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"
-                                    value="{{!empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : null }}"
+                                    value="{{!empty($pengajuan->nilai_capex) ? number_format($pengajuan->nilai_capex) : null }}"
                                     disabled>
                             </div>
                         </div>
