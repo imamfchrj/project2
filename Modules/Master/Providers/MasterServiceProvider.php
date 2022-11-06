@@ -21,6 +21,8 @@ use Modules\Master\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
 use Modules\Master\Repositories\Admin\SegmentRepository;
 use Modules\Master\Repositories\Admin\Interfaces\StatusRepositoryInterface;
 use Modules\Master\Repositories\Admin\StatusRepository;
+use Modules\Master\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Master\Repositories\Admin\PemeriksaRepository;
 
 class MasterServiceProvider extends ServiceProvider
 {
@@ -168,6 +170,11 @@ class MasterServiceProvider extends ServiceProvider
         $this->app->bind(
             StatusRepositoryInterface::class,
             StatusRepository::class
+        );
+
+        $this->app->bind(
+            PemeriksaRepositoryInterface::class,
+            PemeriksaRepository::class
         );
     }
 }

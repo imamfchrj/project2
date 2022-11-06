@@ -86,7 +86,7 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{ $peng->nama_sub_unit }}</td>
                                             <td>{{ $peng->msegments->name }}</td>
-                                            <td>{{ $peng->mcustomers->name }}</td>
+                                            <td>{{ !empty($peng->mcustomers->name) ? $peng->mcustomers->name : '-' }}</td>
                                             <td>{{ $peng->kegiatan }}</td>
                                             <td>{{ $peng->no_drp }}</td>
                                             <td>{{ $peng->mcategories->name }}</td>
@@ -101,7 +101,7 @@
                                                 <td><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name }}</div></td>
                                             @elseif ($peng->status_id == 6) <!-- Closed -->
                                                 <td><div class="mt-1 badge badge-secondary">{{ $peng->mstatuses->name }}</div></td>
-                                            @elseif ($peng->status_id == 3 || $peng->status_id == 4 || $peng->status_id == 5) <!-- Approval -->
+                                            @elseif ($peng->status_id == 5) <!-- Approval -->
                                                 <td><div class="mt-1 badge badge-success">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
                                             @elseif ($peng->status_id == 9) <!-- Rejected -->
                                                 <td><div class="mt-1 badge badge-danger">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>

@@ -133,7 +133,7 @@
                             <label class="col-sm-2 col-form-label"><b>Kesimpulan dan Rekomendasi</b></label>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-6 col-form-label"><b>Pembahasan dan Analisa</b></label>
+                            <label class="col-sm-6 col-form-label"><b>Ketersediaan Anggaran</b></label>
 
                             <label class="col-sm-2 col-form-label">Catatan</label>
                             <div class="col-sm-4">
@@ -141,14 +141,14 @@
                                     style="height: 70px;">{{ !empty($mom->catatan) ? $mom->catatan : '' }}</textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Review Kelengkapan Administrasi</label>
-                            <div class="col-sm-4">
-                                <input type="text" name="kelengkapan"
-                                    class="form-control @error('kelengkapan') is-invalid @enderror @if (!$errors->has('kelengkapan') && old('kelengkapan')) is-valid @endif"
-                                    value="{{ !empty($mom->kelengkapan) ? $mom->kelengkapan : '' }}">
-                            </div>
-                        </div>
+                        {{--<div class="form-group row">--}}
+                            {{--<label class="col-sm-2 col-form-label">Review Kelengkapan Administrasi</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" name="kelengkapan"--}}
+                                    {{--class="form-control @error('kelengkapan') is-invalid @enderror @if (!$errors->has('kelengkapan') && old('kelengkapan')) is-valid @endif"--}}
+                                    {{--value="{{ !empty($mom->kelengkapan) ? $mom->kelengkapan : '' }}">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Review Ketersediaan Anggaran</label>
                             <div class="col-sm-4">

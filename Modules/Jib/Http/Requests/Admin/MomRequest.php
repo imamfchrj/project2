@@ -36,7 +36,7 @@ class MomRequest extends FormRequest
             'aki' => '',
             'attende' => '',
             'catatan' => '',
-            'kelengkapan' => '',
+//            'kelengkapan' => '',
             'anggaran' => '',
             'file_mom' => ''
         ]);

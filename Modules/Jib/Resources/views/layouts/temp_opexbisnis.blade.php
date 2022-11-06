@@ -56,7 +56,7 @@
 
     <div class=WordSection1>
 
-        <p class=MsoNormal align=center style='text-align:center'><b><span
+        <p class=MsoNormal align=center style='text-align:center'><img width=71 height=54 src="{{ asset('admin/stisla/assets/img/image001.png') }}" > &nbsp<b><span
                     style='font-size:14.0pt;line-height:106%'>FORM PERSETUJUAN INISIATIF INVESTASI
                     / OPEX BISNIS</span></b></p>
 

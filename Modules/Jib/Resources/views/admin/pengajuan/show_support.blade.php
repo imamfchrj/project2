@@ -69,6 +69,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @if ($pengajuan->segment_id != 6)
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                 <div class="col-sm-5">
@@ -79,6 +80,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">No DRP/DRK</label>
                                 <div class="col-sm-5">
@@ -92,7 +94,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" name="nilai_capex_2"
                                            class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"
-                                           value="{{!empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : null }}" disabled>
+                                           value="{{!empty($pengajuan->nilai_capex) ? number_format($pengajuan->nilai_capex)     : null }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -200,7 +202,18 @@
                                                 {{--</a></td>--}}
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
-                                            <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                            <td>@if(!empty($file_mom))
+                                                    {{--{{ dd($file_mom->count()) }}--}}
+                                                    @if ($file_mom->count() > 0)
+                                                        <a href="{{ $file_mom->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                            {{ $file_mom->last()->name }}</a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse

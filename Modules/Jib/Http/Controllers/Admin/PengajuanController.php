@@ -169,7 +169,10 @@ class PengajuanController extends JibController
         $persetujuan =$this->persetujuanRepository->findAllbyPengId($id);
         $this->data['persetujuan'] = $persetujuan['persetujuan'];
         $this->data['file_approval'] = $persetujuan['file_approval'];
-        $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+
+        $mom =$this->momRepository->findAllbyPengId($id);
+        $this->data['mom'] = $mom['mom'];
+        $this->data['file_mom'] = $mom['file_mom'];
 
         if ($this->data['pengajuan']->kategori_id == 1) {
             // BISNIS CAPEX
