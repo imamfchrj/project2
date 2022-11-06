@@ -4,12 +4,12 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
         {{--<a href="{{ url('/')}}">{{ config('app.name', 'Laravel') }}</a>--}}
-        <a href="">JIB ONLINE</a>
+        <img class="my-3" src="{{ asset('admin/logo/Picture1qqqq.png') }}" height="70px" width="90px" />
     </div>
-    {{--<div class="sidebar-brand sidebar-brand-sm">--}}
-        {{--<a href="{{ url('/')}}">LS</a>--}}
-    {{--</div>--}}
-    <ul class="sidebar-menu">
+    <div class="sidebar-brand sidebar-brand-sm">
+        {{--<a href="{{ url('/')}}">LS</a>--}}  
+    </div>
+    <ul class="sidebar-menu my-5">
         <li class="{{ ($currentAdminMenu == 'dashboard') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
         @foreach ($moduleAdminMenus as $moduleAdminMenu)
             <li class="menu-header">{{ $moduleAdminMenu['module'] }}</li>
