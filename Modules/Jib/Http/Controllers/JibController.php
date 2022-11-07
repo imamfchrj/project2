@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class JibController extends Controller
 {
     protected $data = [];
-    protected $perPage = 20;
+    protected $perPage = 100;
 
     public function __construct()
     {
