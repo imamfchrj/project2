@@ -70,6 +70,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.jib_number',
             'jib_pengajuan.segment_id',
             'jib_pengajuan.customer_id',
+            'jib_pengajuan.periode_up',
+            DB::raw('DATEDIFF(NOW(),jib_pengajuan.periode_up) AS aging'),
             'jib_pengajuan.kegiatan',
             'jib_pengajuan.no_drp',
             'jib_pengajuan.kategori_id',
@@ -95,6 +97,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'jib_pengajuan.jib_number',
                 'jib_pengajuan.segment_id',
                 'jib_pengajuan.customer_id',
+                'jib_pengajuan.periode_up',
+                'aging',
                 'jib_pengajuan.kegiatan',
                 'jib_pengajuan.no_drp',
                 'jib_pengajuan.kategori_id',
@@ -154,6 +158,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.jib_number',
             'jib_pengajuan.segment_id',
             'jib_pengajuan.customer_id',
+            'jib_pengajuan.periode_up',
             'jib_pengajuan.kegiatan',
             'jib_pengajuan.no_drp',
             'jib_pengajuan.kategori_id',
@@ -208,6 +213,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'jib_pengajuan.jib_number',
                 'jib_pengajuan.segment_id',
                 'jib_pengajuan.customer_id',
+                'jib_pengajuan.periode_up',
                 'jib_pengajuan.kegiatan',
                 'jib_pengajuan.no_drp',
                 'jib_pengajuan.kategori_id',
@@ -352,7 +358,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
                     //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
                 }
-                
+
                 $pengajuan->save();
             // BISNIS OPEX
             } else {
@@ -661,8 +667,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->profit_margin = $params['profit_margin'];
                 $pengajuan->net_cf = $params['net_cf'];
                 $pengajuan->suku_bunga = $params['suku_bunga'];
-                
-                
+
+
                 if ($params['draft_status'] == "true") {
                     $pengajuan->status_id = 7;
                 } else {
@@ -798,7 +804,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 } else {
                     $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 }
-                
+
                 if ($params['draft_status'] == "false") {
                     $reviewer = [];
                     foreach ($pemeriksa as $pem) {

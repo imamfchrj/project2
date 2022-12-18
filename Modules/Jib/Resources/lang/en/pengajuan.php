@@ -20,6 +20,7 @@ return [
     'bcr_label' => 'BCR',
     'persubmit_label' => 'Periode Submit',
     'perclose_label' => 'Periode Close',
+    'usia_dokumen' => 'Usia Dokumen',
     'status_label' => 'Status',
     'submitby_label' => 'Submit By',
     'action_label' => 'Action',

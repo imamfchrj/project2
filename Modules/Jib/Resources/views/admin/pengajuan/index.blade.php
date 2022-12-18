@@ -78,6 +78,7 @@
                                     {{--<th>@lang('jib::pengajuan.persubmit_label')</th>--}}
                                     {{--<th>@lang('jib::pengajuan.perclose_label')</th>--}}
                                     <th style="padding: 10px;">@lang('jib::pengajuan.status_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.usia_dokumen')</th>
                                     {{--<th>@lang('jib::pengajuan.submitby_label')</th>--}}
                                     <th style="padding: 10px;">@lang('jib::pengajuan.action_label')</th>
                                     </thead>
@@ -110,7 +111,7 @@
                                             @else <!-- Reviewer -->
                                                 <td style="padding: 10px;"><div class="mt-1 badge badge-warning">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
                                             @endif
-                                            {{--<td>{{ $peng->users->name }}</td>--}}
+                                            <td style="padding: 10px;">{{ $peng->aging.' Hari' }}</td>
                                             <td style="padding: 10px;">
                                                 @if ($peng->trashed())
                                                     @can('delete_jib-pengajuan')
