@@ -19,14 +19,38 @@ class DashboardController extends Controller
     public function index()
     {
 
-
-
         $jib = DB::table('jib_pengajuan as jb')
                 ->select('jb.*', 'm.name as nama_status', 'mk.name as nama_kategori')
                 ->join('m_status as m', 'm.id', '=', 'jb.status_id')
                 ->join('m_kategori as mk', 'm.id', '=', 'jb.kategori_id')
-                // ->where('user_id', '=', (Auth::user()->id))
+                // ->where('jb.nama_sub_unit', auth()->user()->id)
                 ->get();
+        // dd($jib);
+
+        if(auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver"){
+            $doc_draft = DB::table('jib_pengajuan')->where('status_id', '7')->count();
+            // dd($doc_draft);
+            $doc_review = DB::table('jib_pengajuan')->where('status_id', '1')->orWhere('status_id', '2')->count();
+            $doc_approval = DB::table('jib_pengajuan')->where('status_id', '3')->orWhere('status_id', '4')->orWhere('status_id', '5')->count();
+            $doc_return = DB::table('jib_pengajuan')->where('status_id', '8')->count();
+            $doc_rejected = DB::table('jib_pengajuan')->where('status_id', '9')->count();
+            $doc_closed = DB::table('jib_pengajuan')->where('status_id', '6')->count();
+            $doc_total = DB::table('jib_pengajuan')->count('status_id');
+            $bisnis = DB::table('jib_pengajuan')->orWhere('kategori_id', '1')->count();
+            $support = DB::table('jib_pengajuan')->orWhere('kategori_id', '2')->count();
+
+        }else{
+            $doc_draft = DB::table('jib_pengajuan')->where('status_id', '7')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $doc_review = DB::table('jib_pengajuan')->where('status_id', '1')->orWhere('status_id', '2')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $doc_approval = DB::table('jib_pengajuan')->where('status_id', '3')->orWhere('status_id', '4')->orWhere('status_id', '5')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $doc_return = DB::table('jib_pengajuan')->where('status_id', '8')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $doc_rejected = DB::table('jib_pengajuan')->where('status_id', '9')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $doc_closed = DB::table('jib_pengajuan')->where('status_id', '6')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $doc_total = DB::table('jib_pengajuan')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count('status_id');
+
+            $bisnis = DB::table('jib_pengajuan')->where('kategori_id', '1')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+            $support = DB::table('jib_pengajuan')->where('kategori_id', '2')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
+        }
 
         $rev = DB::table('jib_pengajuan')->sum('est_revenue');
         $nilai_capex = DB::table('jib_pengajuan')->sum('nilai_capex');
@@ -35,17 +59,7 @@ class DashboardController extends Controller
         $available_capex = DB::table('m_budget')->sum('saldo_rkap');
         $persen_realisasi = DB::table('m_budget')->sum('persen_realisasi_capex');
 
-        $doc_draft = DB::table('jib_pengajuan')->where('status_id', '7')->count();
-        $doc_review = DB::table('jib_pengajuan')->where('status_id', '1')->orWhere('status_id', '2')->count();
-        $doc_approval = DB::table('jib_pengajuan')->where('status_id', '3')->orWhere('status_id', '4')->orWhere('status_id', '5')->count();
-        $doc_return = DB::table('jib_pengajuan')->where('status_id', '8')->count();
-        $doc_rejected = DB::table('jib_pengajuan')->where('status_id', '9')->count();
-        $doc_closed = DB::table('jib_pengajuan')->where('status_id', '6')->count();
 
-        $doc_total = DB::table('jib_pengajuan')->count('status_id');
-
-        $bisnis = DB::table('jib_pengajuan')->where('kategori_id', '1')->count();
-        $support = DB::table('jib_pengajuan')->where('kategori_id', '2')->count();
 
          //Count AVG Completion JIB
          $averageTime = DB::table('jib_pengajuan')->select(\DB::raw("DATEDIFF(updated_at, created_at)AS day_diff"))->where('status_id', '6')->get()->avg('day_diff');

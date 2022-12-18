@@ -433,11 +433,16 @@
             ctx.font = 'bolder 20px Arial';
             ctx.fillStyle = color;
             (ctx.textAlign = 'center'),
-              ctx.fillText(
-                `${textLabel} = ${percentage}% , ${numberLabel}, ${sum}` ,
-                width / 2,
-                height / 2 + top
-              );
+            ctx.fillText(`${textLabel}`,
+            width / 2,
+              height / 3 + top,);
+            ctx.fillText(`${percentage}% , ${numberLabel}` ,
+              width / 2,
+              height / 2 + top,
+            );
+            ctx.fillText(`Total ${sum} JIB`,
+              width / 2,
+              height / 1.5 + top,);
           }
           // else if(chart._active.length  =! 0) {
           //   Chart.pluginService.register({
