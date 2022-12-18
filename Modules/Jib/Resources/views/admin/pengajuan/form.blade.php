@@ -106,7 +106,7 @@
                                     @endforeach
 
                                 </select>
-                                * bisnis : <br>* support :
+                                <hr>* bisnis : Berhubungan langsung dengan revenue <br>* support : Tidak berhubungan langsung dengan revenue
                             </div>
                             @error('kategori_id')
                             <div class="invalid-feedback">
