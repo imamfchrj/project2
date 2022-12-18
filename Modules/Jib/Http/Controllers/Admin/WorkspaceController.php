@@ -88,7 +88,7 @@ class WorkspaceController extends JibController
     {
         $params = $request->all();
         $options = [
-            'per_page' => $this->perPage,
+            'per_page' => 10,
             'order' => [
                 'id' => 'asc',
             ],
@@ -134,6 +134,7 @@ class WorkspaceController extends JibController
     {
         $user = auth()->user();
         $pengajuan = $this->pengajuanRepository->findById($id);
+        $this->data['initiatorAll'] = $this->initiatorRepository->findAllByUserId()->pluck('nama_sub_unit', 'id');
 
         if ($user->roles[0]->name == "Approver" || $user->roles[0]->name == "Reviewer") {
             $persetujuan = $this->persetujuanRepository->findAllbyPengId($id);
