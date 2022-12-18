@@ -43,13 +43,26 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.initiaor_label')</label>
                             <div class="col-sm-5">
-                                <input type="text" name="nama_sub_unit"
-                                    class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"
-                                    value="{{ old('nama_sub_unit', !empty($pengajuan) ? $pengajuan->nama_sub_unit : $initiator->nama_sub_unit) }}">
-                                <input type="hidden" name="initiator_id"
+                                @if($initiatorAll->count() == 1)
+                                    <input type="text" name="nama_sub_unit"
+                                        class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"
+                                        value="{{ old('nama_sub_unit', !empty($pengajuan) ? $pengajuan->nama_sub_unit : $initiator->nama_sub_unit) }}">
+                                    <input type="hidden" name="initiator_id"
                                     value="{{ old('initiator_id', !empty($pengajuan) ? $pengajuan->initiator_id : $initiator->id) }}">
-                                <input type="hidden" name="nama_posisi"
+                                    <input type="hidden" name="nama_posisi"
                                     value="{{ old('nama_posisi', !empty($pengajuan) ? $pengajuan->nama_posisi : $initiator->nama_posisi) }}">
+                                @else
+                                    <select class="form-control" name="nama_sub_unit" id="nama_sub_unit">
+                                        <option>-- Pilih Unit --</option>
+
+                                        @foreach ($initiatorAll as $key => $value)
+                                            <option value="{{ $key }}"
+                                                    {{ $key == (!empty($pengajuan)? $pengajuan->nama_sub_unit : '') ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                             @error('nama_sub_unit')
                             <div class="invalid-feedback">

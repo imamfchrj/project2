@@ -125,6 +125,7 @@ class PengajuanController extends JibController
 //        $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
 //        $this->data['roleId'] = null;
         $this->data['initiator'] = $this->initiatorRepository->findByUserId();
+        $this->data['initiatorAll'] = $this->initiatorRepository->findAllByUserId()->pluck('nama_sub_unit', 'id');
         $this->data['segment'] = $this->segmentRepository->findAll()->pluck('name', 'id');
         $this->data['segment_id'] = null;
         $this->data['customer'] = $this->customerRepository->findAll()->pluck('name', 'id');
