@@ -57,7 +57,7 @@
 
                                         @foreach ($initiatorAll as $key => $value)
                                             <option value="{{ $key }}"
-                                                    {{ $key == (!empty($pengajuan)? $pengajuan->nama_sub_unit : '') ? 'selected' : '' }}>
+                                                    {{ $key == (!empty($pengajuan)? $pengajuan->initiator_id : '') ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
