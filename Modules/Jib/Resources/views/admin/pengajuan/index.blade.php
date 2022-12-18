@@ -172,7 +172,20 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{--{{ $posts->links() }}--}}
+                            <div class="card-header">
+                                <h4 class="text-md-right">
+                                    Showing
+                                    {{ $pengajuan->firstItem() }}
+                                    to
+                                    {{ $pengajuan->lastItem() }}
+                                    of
+                                    {{ $pengajuan->total() }}
+                                    Entries
+                                </h4>
+                                <div class="card-header-action">
+                                    {{ $pengajuan->links() }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
