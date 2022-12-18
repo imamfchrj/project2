@@ -61,55 +61,57 @@
                             @include('jib::admin.shared.flash')
                             @include('jib::admin.pengajuan._filter')
                             <div class="table-responsive">
-                                <table id="pengajuan" class="table table-bordered table-striped table-sm ">
+                                <table id="pengajuan" class="table table-bordered table-striped table-sm" style="min-width: max-content">
                                 {{--<table class="class="table table-sm  table-bordered table-hover table-striped">--}}
                                     <thead>
-                                    <th>No</th>
-                                    <th>@lang('jib::pengajuan.initiaor_label')</th>
-                                    <th>@lang('jib::pengajuan.segment_label')</th>
-                                    <th>@lang('jib::pengajuan.customer_label')</th>
-                                    <th>@lang('jib::pengajuan.kegiatan_label')</th>
-                                    <th>@lang('jib::pengajuan.drp_label')</th>
-                                    <th>@lang('jib::pengajuan.kategori_label')</th>
-                                    <th>@lang('jib::pengajuan.nilai_capex_label')</th>
+                                    <th style="padding: 10px;">No</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.jib_number')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.initiaor_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.segment_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.customer_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.kegiatan_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.drp_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.kategori_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.nilai_capex_label')</th>
                                     {{--<th>@lang('jib::pengajuan.est_rev__label')</th>--}}
                                     {{--<th>@lang('jib::pengajuan.irr_label')</th>--}}
                                     {{--<th>@lang('jib::pengajuan.persubmit_label')</th>--}}
                                     {{--<th>@lang('jib::pengajuan.perclose_label')</th>--}}
-                                    <th>@lang('jib::pengajuan.status_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.status_label')</th>
                                     {{--<th>@lang('jib::pengajuan.submitby_label')</th>--}}
-                                    <th>@lang('jib::pengajuan.action_label')</th>
+                                    <th style="padding: 10px;">@lang('jib::pengajuan.action_label')</th>
                                     </thead>
                                     <tbody>
                                     @forelse ($pengajuan as $peng)
                                         <tr>
-                                            <td>{{$loop->iteration}}</td>
-                                            <td>{{ $peng->nama_sub_unit }}</td>
-                                            <td>{{ $peng->msegments->name }}</td>
-                                            <td>{{ !empty($peng->mcustomers->name) ? $peng->mcustomers->name : '-' }}</td>
-                                            <td>{{ $peng->kegiatan }}</td>
-                                            <td>{{ $peng->no_drp }}</td>
-                                            <td>{{ $peng->mcategories->name }}</td>
-                                            <td>{{ number_format($peng->nilai_capex) }}</td>
+                                            <td style="padding: 10px;">{{$loop->iteration}}</td>
+                                            <td style="padding: 10px;">{{ $peng->jib_number }}</td>
+                                            <td style="padding: 10px;">{{ $peng->nama_sub_unit }}</td>
+                                            <td style="padding: 10px;">{{ $peng->msegments->name }}</td>
+                                            <td style="padding: 10px;">{{ !empty($peng->mcustomers->name) ? $peng->mcustomers->name : '-' }}</td>
+                                            <td style="padding: 10px;">{{ $peng->kegiatan }}</td>
+                                            <td style="padding: 10px;">{{ $peng->no_drp }}</td>
+                                            <td style="padding: 10px;">{{ $peng->mcategories->name }}</td>
+                                            <td style="padding: 10px;">{{ number_format($peng->nilai_capex) }}</td>
                                             {{--<td>{{ number_format($peng->est_revenue) }}</td>--}}
                                             {{--<td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>--}}
                                             {{--<td>{{ $peng->periode_up }}</td>--}}
                                             {{--<td>{{ $peng->periode_end }}</td>--}}
                                             @if ($peng->status_id == 7) <!-- Draft -->
-                                                <td><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name.' - '.$peng->users->name}}</div></td>
+                                                <td style="padding: 10px;"><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name.' - '.$peng->users->name}}</div></td>
                                             @elseif ($peng->status_id == 8) <!-- Initiator -->
-                                                <td><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name }}</div></td>
+                                                <td style="padding: 10px;"><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name }}</div></td>
                                             @elseif ($peng->status_id == 6) <!-- Closed -->
-                                                <td><div class="mt-1 badge badge-secondary">{{ $peng->mstatuses->name }}</div></td>
+                                                <td style="padding: 10px;"><div class="mt-1 badge badge-secondary">{{ $peng->mstatuses->name }}</div></td>
                                             @elseif ($peng->status_id == 5) <!-- Approval -->
-                                                <td><div class="mt-1 badge badge-success">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
+                                                <td style="padding: 10px;"><div class="mt-1 badge badge-success">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
                                             @elseif ($peng->status_id == 9) <!-- Rejected -->
-                                                <td><div class="mt-1 badge badge-danger">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
+                                                <td style="padding: 10px;"><div class="mt-1 badge badge-danger">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
                                             @else <!-- Reviewer -->
-                                                <td><div class="mt-1 badge badge-warning">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
+                                                <td style="padding: 10px;"><div class="mt-1 badge badge-warning">{{ $peng->mstatuses->name.' - '.$peng->mpemeriksa->nama }}</div></td>
                                             @endif
                                             {{--<td>{{ $peng->users->name }}</td>--}}
-                                            <td>
+                                            <td style="padding: 10px;">
                                                 @if ($peng->trashed())
                                                     @can('delete_jib-pengajuan')
                                                         <a class="btn btn-sm btn-warning"

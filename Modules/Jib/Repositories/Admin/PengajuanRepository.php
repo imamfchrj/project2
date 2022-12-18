@@ -43,6 +43,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('jenis_id', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('jib_number', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
@@ -66,6 +67,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.initiator_id',
             'jib_pengajuan.id',
             'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.jib_number',
             'jib_pengajuan.segment_id',
             'jib_pengajuan.customer_id',
             'jib_pengajuan.kegiatan',
@@ -90,6 +92,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'jib_pengajuan.id',
                 'jib_pengajuan.initiator_id',
                 'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.jib_number',
                 'jib_pengajuan.segment_id',
                 'jib_pengajuan.customer_id',
                 'jib_pengajuan.kegiatan',
@@ -127,7 +130,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
                 $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
-//                    ->orWhere('name', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('jib_number', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
@@ -148,6 +151,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.initiator_id',
             'jib_pengajuan.id',
             'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.jib_number',
             'jib_pengajuan.segment_id',
             'jib_pengajuan.customer_id',
             'jib_pengajuan.kegiatan',
@@ -201,6 +205,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'jib_pengajuan.id',
                 'jib_pengajuan.initiator_id',
                 'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.jib_number',
                 'jib_pengajuan.segment_id',
                 'jib_pengajuan.customer_id',
                 'jib_pengajuan.kegiatan',

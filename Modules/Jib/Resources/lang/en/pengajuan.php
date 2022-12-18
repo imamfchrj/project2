@@ -4,6 +4,7 @@ return [
     'pengajuan_list' => 'List of pengajuan JIB',
     'pengajuan_detail' => 'Pengajuan JIB Detail',
 
+    'jib_number' => 'ID JIB',
     'initiaor_label' => 'Initiator',
     'segment_label' => 'Segment',
     'customer_label' => 'Customer',
