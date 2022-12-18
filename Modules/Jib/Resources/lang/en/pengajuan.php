@@ -9,7 +9,7 @@ return [
     'customer_label' => 'Customer',
     'jenis_label' => 'Jenis Pengadaan',
     'kegiatan_label' => 'Nama Kegiatan',
-    'drp_label' => 'No DRP',
+    'drp_label' => 'No DRP/DRK',
     'kategori_label' => 'Kategori',
     'nilai_capex_label' => 'Nilai CAPEX',
     'est_rev__label' => 'Est Rev',
