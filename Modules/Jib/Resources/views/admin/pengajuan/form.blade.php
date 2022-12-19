@@ -74,7 +74,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
                             <div class="col-sm-5">
 
-                                <select class="form-control" name="jenis_id" id="jenis_id">
+                                <select class="form-control browser-default select2" name="jenis_id" id="jenis_id">
                                     <option>@lang('jib::pengajuan.select_jenis_label')</option>
 
                                     @foreach ($jenis as $key => $value)
@@ -95,7 +95,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
                             <div class="col-sm-5">
-                                <select class="form-control" name="kategori_id" id="kategori_id">
+                                <select class="form-control browser-default select2" name="kategori_id" id="kategori_id">
                                     <option>@lang('jib::pengajuan.select_kategori_label')</option>
 
                                     @foreach ($kategori as $key => $value)
@@ -139,7 +139,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_1', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_1'), ['class' => 'form-control', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_1'), ['class' => 'browser-default select2', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('customer_id_1', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_1'), ['class' => 'form-control',
+                                $pengajuan->customer_id : old('customer_id_1'), ['class' => 'browser-default select2',
                                 'placeholder' => '-- Select Customer --']) !!}
                             </div>
                         </div>
@@ -270,7 +270,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_2', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_2'), ['id' => 'seg', 'class' => 'form-control', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_2'), ['id' => 'seg', 'class' => 'browser-default select2', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                 <div class="col-sm-5">
                                     {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                    $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
+                                    $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
                                     'placeholder' => '-- Select Customer --']) !!}
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
                                     <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                     <div class="col-sm-5">
                                         {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
                                         'placeholder' => '-- Select Customer --']) !!}
                                     </div>
                                 </div>
@@ -298,7 +298,7 @@
                                     <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                     <div class="col-sm-5">
                                         {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
                                         'placeholder' => '-- Select Customer --']) !!}
                                     </div>
                                 </div>
@@ -540,6 +540,23 @@
                 <div class="card hide" id="group-3">
                     <div class="card-header">
                         <h4>Notes</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            @if (!empty($notes))
+                                @foreach ($notes as $note)
+                                    <div class="col-md-2 text-center">
+                                        <i class="far fa-comment-dots"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ $note->created_at }} - <b>{{$note->nama_karyawan.' / '.$note->nik_gsd}}</b> -
+                                        {{$note->status}}<br>
+                                        {{ $note->notes }}
+                                        <hr>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                     <div class="card-body">
                         {{--<div class="row">--}}
