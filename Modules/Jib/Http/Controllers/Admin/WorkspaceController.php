@@ -174,6 +174,7 @@ class WorkspaceController extends JibController
             $this->data['jenis'] = $this->jenisRepository->findAll()->pluck('name', 'id');
             $this->data['jenis_id'] = null;
             $this->data['pemeriksa'] = $this->pemeriksaRepository->findAll();
+            $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
             return view('jib::admin.pengajuan.form', $this->data);
         }

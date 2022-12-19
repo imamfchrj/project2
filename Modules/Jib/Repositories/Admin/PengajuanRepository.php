@@ -205,7 +205,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                         ->Where('jib_pengajuan.user_id', auth()->user()->id);
                 }
             )
-            ->orderBy('jib_pengajuan.id', 'ASC')
+            ->orderBy('jib_pengajuan.id', 'DESC')
             ->groupby(
                 'jib_pengajuan.id',
                 'jib_pengajuan.initiator_id',
