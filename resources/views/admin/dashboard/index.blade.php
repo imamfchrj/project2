@@ -500,26 +500,32 @@
     //End Allocation Chart
 
     //Start Status JIB Chart//
-    const review = {!! json_encode($doc_review) !!};
-    const approval = {!! json_encode($doc_approval) !!};
-    const closed = {!! json_encode($doc_closed) !!};
-    const initiator = {!! json_encode($doc_return) !!};
+    // const review = {!! json_encode($doc_review) !!};
+    // const approval = {!! json_encode($doc_approval) !!};
+    // const closed = {!! json_encode($doc_closed) !!};
+    // const initiator = {!! json_encode($doc_return) !!};
+    // const draft = {!! json_encode($doc_draft) !!};
+    // const rejected = {!! json_encode($doc_rejected) !!};
 
     var data = {
-        labels: ['Review', 'Approval', 'Closed', 'Return'],
+        labels: ['Draft', 'Review', 'Approval', 'Return', 'Reject', 'Closed'],
         datasets: [{
         label: 'Status JIB',
         data: [
+            {{$doc_draft}},
             {{$doc_review}},
             {{$doc_approval}},
-            {{$doc_closed}},
-            {{$doc_return}}
+            {{$doc_return}},
+            {{$doc_rejected}},
+            {{$doc_closed}}
         ],
         backgroundColor: [
             'rgba(54, 162, 235, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgb(153, 102, 255,1)',
             'rgba(255, 99, 132, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)'
+            'rgba(201, 203, 207, 1)'
         ],
         hoverOffset : 4,
         cutout: '80%',
