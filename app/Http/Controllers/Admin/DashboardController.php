@@ -46,7 +46,7 @@ class DashboardController extends Controller
             $doc_return = DB::table('jib_pengajuan')->where('status_id', '8')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
             $doc_rejected = DB::table('jib_pengajuan')->where('status_id', '9')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
             $doc_closed = DB::table('jib_pengajuan')->where('status_id', '6')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
-            $doc_total = DB::table('jib_pengajuan')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count('status_id');
+            $doc_total = DB::table('jib_pengajuan')->count('status_id');
 
             $bisnis = DB::table('jib_pengajuan')->where('kategori_id', '1')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
             $support = DB::table('jib_pengajuan')->where('kategori_id', '2')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
