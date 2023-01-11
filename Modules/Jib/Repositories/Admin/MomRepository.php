@@ -2,11 +2,8 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
-use Facades\Str;
-use DB;
-
-use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 use Modules\Jib\Entities\Mom;
+use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 
 class MomRepository implements MomRepositoryInterface
 {
@@ -30,7 +27,7 @@ class MomRepository implements MomRepositoryInterface
         $mom->aki = $params['aki'];
         $mom->attende = $params['attende'];
         $mom->catatan = $params['catatan'];
-        $mom->kelengkapan = $params['kelengkapan'];
+//        $mom->kelengkapan = $params['kelengkapan'];
         $mom->anggaran = $params['anggaran'];
         $mom->created_by = auth()->user()->id;
         $mom->updated_by = auth()->user()->name;
@@ -39,12 +36,23 @@ class MomRepository implements MomRepositoryInterface
 
     public function findAllbyPengId($id)
     {
-        return Mom::where('pengajuan_id',$id)->get();
+        // return Mom::where('pengajuan_id', $id)->get();
+
+        // return Persetujuan::where('pengajuan_id', $id)->get();
+        $mom = Mom::where('pengajuan_id', $id)->get();
+        // dd($mom);
+        if ($mom->count() != 0) {
+            $file_mom = $mom->last()->getMedia('file_mom');
+        } else {
+            $file_mom = null;
+        }
+
+        return compact(['mom', 'file_mom']);
     }
 
     public function findbyPengId($id)
     {
-        return Mom::where('pengajuan_id',$id)->first();
+        return Mom::where('pengajuan_id', $id)->first();
     }
 
     public function findById($id)
@@ -70,10 +78,17 @@ class MomRepository implements MomRepositoryInterface
         $mom->aki = $params['aki'];
         $mom->attende = $params['attende'];
         $mom->catatan = $params['catatan'];
-        $mom->kelengkapan = $params['kelengkapan'];
+//        $mom->kelengkapan = $params['kelengkapan'];
         $mom->anggaran = $params['anggaran'];
         $mom->created_by = auth()->user()->id;
         $mom->updated_by = auth()->user()->name;
+
+        //Upload File
+        if (isset($params['file_mom'])) {
+            $mom->addMediaFromRequest('file_mom')->toMediaCollection('file_mom');
+            //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+        }
+
         return $mom->save();
     }
 

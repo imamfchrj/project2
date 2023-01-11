@@ -5,6 +5,25 @@ namespace Modules\Master\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
+use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
+use Modules\Master\Repositories\Admin\CustomerRepository;
+use Modules\Master\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
+use Modules\Master\Repositories\Admin\AnggaranRepository;
+use Modules\Master\Repositories\Admin\Interfaces\JenisRepositoryInterface;
+use Modules\Master\Repositories\Admin\JenisRepository;
+use Modules\Master\Repositories\Admin\Interfaces\KategoriRepositoryInterface;
+use Modules\Master\Repositories\Admin\KategoriRepository;
+use Modules\Master\Repositories\Admin\Interfaces\KesimpulanRepositoryInterface;
+use Modules\Master\Repositories\Admin\KesimpulanRepository;
+use Modules\Master\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
+use Modules\Master\Repositories\Admin\RisikoRepository;
+use Modules\Master\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
+use Modules\Master\Repositories\Admin\SegmentRepository;
+use Modules\Master\Repositories\Admin\Interfaces\StatusRepositoryInterface;
+use Modules\Master\Repositories\Admin\StatusRepository;
+use Modules\Master\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
+use Modules\Master\Repositories\Admin\PemeriksaRepository;
+
 class MasterServiceProvider extends ServiceProvider
 {
     /**
@@ -28,6 +47,7 @@ class MasterServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->registerRepositories();
     }
 
     /**
@@ -108,5 +128,53 @@ class MasterServiceProvider extends ServiceProvider
             }
         }
         return $paths;
+    }
+
+    private function registerRepositories()
+    {
+        $this->app->bind(
+            CustomerRepositoryInterface::class,
+            CustomerRepository::class
+        );
+
+        $this->app->bind(
+            AnggaranRepositoryInterface::class,
+            AnggaranRepository::class
+        );
+
+        $this->app->bind(
+            JenisRepositoryInterface::class,
+            JenisRepository::class
+        );
+
+        $this->app->bind(
+            KategoriRepositoryInterface::class,
+            KategoriRepository::class
+        );
+
+        $this->app->bind(
+            KesimpulanRepositoryInterface::class,
+            KesimpulanRepository::class
+        );
+
+        $this->app->bind(
+            RisikoRepositoryInterface::class,
+            RisikoRepository::class
+        );
+
+        $this->app->bind(
+            SegmentRepositoryInterface::class,
+            SegmentRepository::class
+        );
+
+        $this->app->bind(
+            StatusRepositoryInterface::class,
+            StatusRepository::class
+        );
+
+        $this->app->bind(
+            PemeriksaRepositoryInterface::class,
+            PemeriksaRepository::class
+        );
     }
 }

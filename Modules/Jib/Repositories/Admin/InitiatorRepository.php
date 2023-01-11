@@ -85,6 +85,12 @@ class InitiatorRepository implements InitiatorRepositoryInterface
         $user_id = auth()->user()->id;
         return Minitiator::where('user_id', $user_id)->firstorfail();
     }
+
+    public function findAllByUserId()
+    {
+        $user_id = auth()->user()->id;
+        return Minitiator::where('user_id', $user_id)->get();
+    }
 //
 //    public function create($params = [])
 //    {

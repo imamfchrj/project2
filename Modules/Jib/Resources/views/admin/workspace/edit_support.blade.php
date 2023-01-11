@@ -75,6 +75,7 @@
                                 </select>
                             </div>
                         </div>
+                        @if ($pengajuan->segment_id != 6)
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
@@ -85,6 +86,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
                             <div class="col-sm-5">
@@ -98,7 +100,7 @@
                             <div class="col-sm-5">
                                 <input type="text" name="nilai_capex_2"
                                     class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"
-                                    value="{{!empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : null }}"
+                                    value="{{!empty($pengajuan->nilai_capex) ? number_format($pengajuan->nilai_capex) : null }}"
                                     disabled>
                             </div>
                         </div>
@@ -167,7 +169,9 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    @if ($pengajuan->status_id == 1)
                                     <th>Action</th>
+                                    @endif
                                 </thead>
                                 <tbody class="text-center">
                                     @forelse ($persetujuan as $setuju)
@@ -179,7 +183,20 @@
                                         {{--</a></td>--}}
                                         <td>{{ $setuju->created_at }}</td>
                                         <td>{{ $setuju->updated_by }}</td>
-                                        <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
+                                        <td>
+                                            @if(!empty($file_approval))
+                                                {{--{{ dd($file_approval->count()) }}--}}
+                                                @if ($file_approval->count() > 0)
+                                                    <a href="{{ $file_approval->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                        {{ $file_approval->last()->name }}</a>
+                                                @else
+                                                    -
+                                                @endif
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                        @if ($pengajuan->status_id == 1)
                                         <td>
                                             <a class="btn btn-sm btn-primary"
                                                 href="{{ url('admin/jib/workspace/'. $setuju->id .'/editform')}}"><i
@@ -187,9 +204,10 @@
                                             </a>
                                             <a class="btn btn-sm btn-secondary" target="_blank"
                                                 href="{{ url('admin/jib/workspace/persetujuan/'. $setuju->id .'/download')}}"><i
-                                                    class="fas fa-download"></i>
+                                                    class="fas fa-print"></i>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @empty
                                     @endforelse
@@ -223,7 +241,9 @@
                                     <th>Created Date</th>
                                     <th>Created By</th>
                                     <th>Download Full Sign</th>
+                                    @if ($pengajuan->status_id == 1)
                                     <th>Action</th>
+                                    @endif
                                 </thead>
                                 <tbody class="text-center">
                                     @forelse ($mom as $moms)
@@ -234,13 +254,30 @@
                                         {{--</a></td>--}}
                                         <td>{{ $moms->created_at }}</td>
                                         <td>{{ $moms->updated_by }}</td>
-                                        <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                        <td>
+                                            @if(!empty($file_mom))
+                                                @if ($file_mom->count() > 0)
+                                                    <a href="{{ $file_mom->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                        {{ $file_mom->last()->name }}</a>
+                                                @else
+                                                    -
+                                                @endif
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        @if ($pengajuan->status_id == 1)
                                         <td>
                                             <a class="btn btn-sm btn-primary"
                                                 href="{{ url('admin/jib/workspace/'. $moms->id .'/editmom')}}"><i
                                                     class="far fa-edit"></i>
                                             </a>
+                                            <a class="btn btn-sm btn-secondary" target="_blank"
+                                                href="{{ url('admin/jib/workspace/mom/'. $moms->id .'/print')}}"><i
+                                                    class="fas fa-print"></i>
+                                            </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @empty
                                     @endforelse

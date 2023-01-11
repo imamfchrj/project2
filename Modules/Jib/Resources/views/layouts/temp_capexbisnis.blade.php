@@ -1,19 +1,16 @@
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-xmlns="http://www.w3.org/TR/REC-html40">
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"
+    xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
 
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=unicode">
-<meta name=ProgId content=Word.Document>
-<meta name=Generator content="Microsoft Word 15">
-<meta name=Originator content="Microsoft Word 15">
-<link rel=File-List href="temp_capexbisnis.blade.fld/filelist.xml">
-<title>{{ $persetujuan->no_drp }}</title>
-<link rel=themeData href="temp_capexbisnis.blade.fld/themedata.thmx">
-<link rel=colorSchemeMapping
-href="temp_capexbisnis.blade.fld/colorschememapping.xml">
-<!--[if gte mso 9]><xml>
+    <meta http-equiv=Content-Type content="text/html; charset=unicode">
+    <meta name=ProgId content=Word.Document>
+    <meta name=Generator content="Microsoft Word 15">
+    <meta name=Originator content="Microsoft Word 15">
+    <link rel=File-List href="temp_capexbisnis.blade.fld/filelist.xml">
+    <title>{{ $persetujuan->no_drp }}</title>
+    <link rel=themeData href="temp_capexbisnis.blade.fld/themedata.thmx">
+    <link rel=colorSchemeMapping href="temp_capexbisnis.blade.fld/colorschememapping.xml">
+    <!--[if gte mso 9]><xml>
  <w:WordDocument>
   <w:View>Print</w:View>
   <w:TrackMoves>false</w:TrackMoves>
@@ -44,7 +41,8 @@ href="temp_capexbisnis.blade.fld/colorschememapping.xml">
    <m:intLim m:val="subSup"/>
    <m:naryLim m:val="undOvr"/>
   </m:mathPr></w:WordDocument>
-</xml><![endif]--><!--[if gte mso 9]><xml>
+</xml><![endif]-->
+    <!--[if gte mso 9]><xml>
  <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
   DefSemiHidden="false" DefQFormat="false" DefPriority="99"
   LatentStyleCount="376">
@@ -624,80 +622,101 @@ href="temp_capexbisnis.blade.fld/colorschememapping.xml">
    Name="Smart Link"/>
  </w:LatentStyles>
 </xml><![endif]-->
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;
-	mso-font-charset:0;
-	mso-generic-font-family:roman;
-	mso-font-pitch:variable;
-	mso-font-signature:3 0 0 0 1 0;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{mso-style-unhide:no;
-	mso-style-qformat:yes;
-	mso-style-parent:"";
-	margin:0cm;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:"Times New Roman",serif;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:minor-fareast;}
-p
-	{mso-style-noshow:yes;
-	mso-style-priority:99;
-	mso-margin-top-alt:auto;
-	margin-right:0cm;
-	mso-margin-bottom-alt:auto;
-	margin-left:0cm;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:"Times New Roman",serif;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:minor-fareast;}
-p.msonormal0, li.msonormal0, div.msonormal0
-	{mso-style-name:msonormal;
-	mso-style-unhide:no;
-	mso-margin-top-alt:auto;
-	margin-right:0cm;
-	mso-margin-bottom-alt:auto;
-	margin-left:0cm;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:"Times New Roman",serif;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:minor-fareast;}
-p.msochpdefault, li.msochpdefault, div.msochpdefault
-	{mso-style-name:msochpdefault;
-	mso-style-unhide:no;
-	mso-margin-top-alt:auto;
-	margin-right:0cm;
-	mso-margin-bottom-alt:auto;
-	margin-left:0cm;
-	mso-pagination:widow-orphan;
-	font-size:10.0pt;
-	font-family:"Times New Roman",serif;
-	mso-fareast-font-family:"Times New Roman";
-	mso-fareast-theme-font:minor-fareast;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	mso-default-props:yes;
-	font-size:10.0pt;
-	mso-ansi-font-size:10.0pt;
-	mso-bidi-font-size:10.0pt;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:45.4pt 72.0pt 72.0pt 72.0pt;
-	mso-header-margin:35.4pt;
-	mso-footer-margin:35.4pt;
-	mso-paper-source:0;}
-div.WordSection1
-	{page:WordSection1;}
--->
-</style>
-<!--[if gte mso 10]>
+    <style>
+    <!--
+    /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 0;
+        mso-generic-font-family: roman;
+        mso-font-pitch: variable;
+        mso-font-signature: 3 0 0 0 1 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin: 0cm;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        font-family: "Times New Roman", serif;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+    }
+
+    p {
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-margin-top-alt: auto;
+        margin-right: 0cm;
+        mso-margin-bottom-alt: auto;
+        margin-left: 0cm;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        font-family: "Times New Roman", serif;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+    }
+
+    p.msonormal0,
+    li.msonormal0,
+    div.msonormal0 {
+        mso-style-name: msonormal;
+        mso-style-unhide: no;
+        mso-margin-top-alt: auto;
+        margin-right: 0cm;
+        mso-margin-bottom-alt: auto;
+        margin-left: 0cm;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        font-family: "Times New Roman", serif;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+    }
+
+    p.msochpdefault,
+    li.msochpdefault,
+    div.msochpdefault {
+        mso-style-name: msochpdefault;
+        mso-style-unhide: no;
+        mso-margin-top-alt: auto;
+        margin-right: 0cm;
+        mso-margin-bottom-alt: auto;
+        margin-left: 0cm;
+        mso-pagination: widow-orphan;
+        font-size: 10.0pt;
+        font-family: "Times New Roman", serif;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-size: 10.0pt;
+        mso-ansi-font-size: 10.0pt;
+        mso-bidi-font-size: 10.0pt;
+    }
+
+    @page WordSection1 {
+        size: 612.0pt 792.0pt;
+        margin: 45.4pt 72.0pt 72.0pt 72.0pt;
+        mso-header-margin: 35.4pt;
+        mso-footer-margin: 35.4pt;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+    -->
+    </style>
+    <!--[if gte mso 10]>
 <style>
  /* Style Definitions */
  table.MsoNormalTable
@@ -718,705 +737,726 @@ div.WordSection1
 
 <body lang=EN-ID style='tab-interval:36.0pt;word-wrap:break-word'>
 
-<div class=WordSection1>
+    <div class=WordSection1>
 
-<div>
+        <div>
 
-<p align=center style='text-align:center'><b><span style='font-size:10.0pt'>FORM
-PERSETUJUAN INISIATIF INVESTASI / CAPEX BISNIS</span></b><span
-style='font-size:14.0pt'><o:p></o:p></span></p>
+            <p align=center style='text-align:center'><img width=71 height=54 src="{{ asset('admin/stisla/assets/img/image001.png') }}" > &nbsp<b><span style='font-size:10.0pt'>FORM
+                        PERSETUJUAN INISIATIF INVESTASI / CAPEX BISNIS</span></b><span style='font-size:14.0pt'>
+                    <o:p></o:p>
+                </span></p>
 
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+            <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+                style='border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm'>
+                <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>1<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border-top:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>1
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>No DRP<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border-top:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>No DRP<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->no_drp }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:1'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>2<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>2
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Kelompok Akun<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Kelompok Akun<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
   $persetujuan->akun }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:2'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:2'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>3<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>3
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Nama Proyek<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Nama Proyek<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->kegiatan }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:3'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:3'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>4<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>4
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Customer<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Customer<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $customer }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:4'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $customer }}<o:p></o:p></span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:4'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>5<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>5
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Lokasi<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Lokasi<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $persetujuan->lokasi
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $persetujuan->lokasi
   }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:5'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:5'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>6<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>6
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Jangka Waktu Kerja Sama<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Jangka Waktu Kerja Sama<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->waktu_kerja }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:6'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:6'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>7<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>7
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Konstribusi Fee<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Konstribusi Fee<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->kontribusi_fee }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:7'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:7'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>8<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>8
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Skema Kerjasama GSD-Cust<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Skema Kerjasama GSD-Cust<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->skema }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:8'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:8'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>9<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>9
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Nilai Proyek<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Nilai Proyek<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $persetujuan->nilai_capex
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $persetujuan->nilai_capex
   }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:9'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:9'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $terbilang_capex
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $terbilang_capex
   }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:10'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:10'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>10<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>10
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Total Investasi GSD<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Total Investasi GSD<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->tot_invest }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:11'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:11'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $terbilang_invest
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{ $terbilang_invest
   }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:12'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:12'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>11<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>11
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Scope of Work<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Scope of Work<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->sow }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:13'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:13'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>12<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>12
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Delivery Time<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Delivery Time<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;{{
   $persetujuan->delivery_time }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:14'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:14'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>13<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>13
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Analisa Kelayakan Proyek<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Analisa Kelayakan Proyek<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:15'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:15'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>13.1 Analisa Kelayakan
-  Bisnis<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>13.1 Analisa Kelayakan
+                                Bisnis<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:16'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:16'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  Revenue<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span
+                                style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Revenue<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
   $persetujuan->est_revenue }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:17'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:17'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  IRR<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span
+                                style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                IRR<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
   $persetujuan->irr }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:18'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:18'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  NPV<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span
+                                style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                NPV<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
   $persetujuan->npv }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:19'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:19'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  Playback Period<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span
+                                style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Playback Period<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;{{
   $persetujuan->playback_period }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:20'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:20'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;WACC<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;WACC<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->wacc }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:21'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:21'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>13.2 Analisa Inherent Risk<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>13.2 Analisa Inherent Risk<o:p></o:p></span>
+                        </p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->analisa_risk }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:22'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:22'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  Score Inherent Risk<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span
+                                style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Score Inherent Risk<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->score_risk }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:23'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:23'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>13.3 Rencana Mitigasi<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>13.3 Rencana Mitigasi<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->rencana_mitigasi }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:24'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:24'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>13.4 Risiko Setelah
-  Mitigasi<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>13.4 Risiko Setelah
+                                Mitigasi<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->risk_mitigasi }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:25'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:25'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  Score Risiko Setelah Mitigasi<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span
+                                style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Score Risiko Setelah Mitigasi<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->score_mitigasi}}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:26'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:26'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>14<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>14
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Kesimpulan Usulan Initiatif
-  Bisnis<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Kesimpulan Usulan Initiatif
+                                Bisnis<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->kesimpulan }}<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:27;mso-yfti-lastrow:yes'>
-  <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:27;mso-yfti-lastrow:yes'>
+                    <td width=34 valign=top style='width:25.45pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:10.0pt'>15<o:p></o:p></span></p>
-  </td>
-  <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:10.0pt'>15
+                                <o:p></o:p></span></p>
+                    </td>
+                    <td width=221 valign=top style='width:165.7pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>Catatan<o:p></o:p></span></p>
-  </td>
-  <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
+                        <p class=MsoNormal><span style='font-size:10.0pt'>Catatan<o:p></o:p></span></p>
+                    </td>
+                    <td width=19 valign=top style='width:14.15pt;border:none;border-bottom:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
-  </td>
-  <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
+                        <p class=MsoNormal><span style='font-size:10.0pt'>:<o:p></o:p></span></p>
+                    </td>
+                    <td width=327 valign=top style='width:245.5pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
+                        <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp; {{
   $persetujuan->catatan }}<o:p></o:p></span></p>
-  </td>
- </tr>
-</table>
+                    </td>
+                </tr>
+            </table>
 
-<p class=MsoNormal><span style='font-size:9.0pt;color:white'>&nbsp;<o:p></o:p></span></p>
+            <p class=MsoNormal><span style='font-size:9.0pt;color:white'>&nbsp;<o:p></o:p></span></p>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+            <p class=MsoNormal>
+                <o:p>&nbsp;</o:p>
+            </p>
 
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>Pemeriksa 1</span></p>
-  </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>Pemeriksa 2</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1;height:67.35pt'>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt;
+            <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+                style='border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm'>
+                <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:9.0pt'>Pemeriksa 1</span></p>
+                    </td>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:9.0pt'>Pemeriksa 2</span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:1;height:67.35pt'>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:67.35pt'>
-  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
-  </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt;
+                        <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+                    </td>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:67.35pt'>
-  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:2'>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><u><span
-  style='font-size:9.0pt'>ABDILLAH HAMMAM NUR FAHMI</span></u></p>
-  </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><u><span
-  style='font-size:9.0pt'>YOU DEVY</span></u></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:3'>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>STAFF OPEX MONITORING &amp; CONTROLL</span></p>
-  </td>
-  <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>VP STRATEGIC BUSINESS DEVELOPMENT</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:4'>
-  <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'><o:p>&nbsp;</o:p></span></p>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'><o:p>&nbsp;</o:p></span></p>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>Jakarta, {{ $tanggal }}</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:5'>
-  <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>MENYETUJUI</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:6;height:60.05pt'>
-  <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+                        <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:2'>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><u><span
+                                    style='font-size:9.0pt'>ABDILLAH HAMMAM NUR FAHMI</span></u></p>
+                    </td>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><u><span style='font-size:9.0pt'>YOU
+                                    DEVY</span></u></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:3'>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:9.0pt'>STAFF
+                                OPEX MONITORING &amp; CONTROLL</span></p>
+                    </td>
+                    <td width=301 valign=top style='width:225.4pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:9.0pt'>VP
+                                STRATEGIC BUSINESS DEVELOPMENT</span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:4'>
+                    <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:9.0pt'>
+                                <o:p>&nbsp;</o:p>
+                            </span></p>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:9.0pt'>
+                                <o:p>&nbsp;</o:p>
+                            </span></p>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:9.0pt'>Jakarta, {{ $tanggal }}</span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:5'>
+                    <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:9.0pt'>MENYETUJUI</span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:6;height:60.05pt'>
+                    <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:60.05pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>&nbsp;</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:7;height:14.75pt'>
-  <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span
+                                style='font-size:9.0pt'>&nbsp;</span></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:7;height:14.75pt'>
+                    <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.75pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><u><span
-  style='font-size:9.0pt'>EVISTA M ARISANDY</span></u></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:8;mso-yfti-lastrow:yes;height:14.75pt'>
-  <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt;
+                        <p align=center style='margin-bottom:0cm;text-align:center'><u><span
+                                    style='font-size:9.0pt'>EVISTA M ARISANDY</span></u></p>
+                    </td>
+                </tr>
+                <tr style='mso-yfti-irow:8;mso-yfti-lastrow:yes;height:14.75pt'>
+                    <td width=601 colspan=2 valign=top style='width:450.8pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.75pt'>
-  <p align=center style='margin-bottom:0cm;text-align:center'><span
-  style='font-size:9.0pt'>EGM PMTMS</span></p>
-  </td>
- </tr>
-</table>
+                        <p align=center style='margin-bottom:0cm;text-align:center'><span style='font-size:9.0pt'>EGM
+                                PMTMS</span></p>
+                    </td>
+                </tr>
+            </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+            <p class=MsoNormal>
+                <o:p>&nbsp;</o:p>
+            </p>
 
-</div>
+        </div>
 
-</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
+    <script>
+    window.onload = function() {
+        window.print();
+    }
+    </script>
 </body>
 
 </html>

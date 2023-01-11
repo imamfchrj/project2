@@ -43,13 +43,26 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.initiaor_label')</label>
                             <div class="col-sm-5">
-                                <input type="text" name="nama_sub_unit"
-                                    class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"
-                                    value="{{ old('nama_sub_unit', !empty($pengajuan) ? $pengajuan->nama_sub_unit : $initiator->nama_sub_unit) }}">
-                                <input type="hidden" name="initiator_id"
+                                @if($initiatorAll->count() == 1)
+                                    <input type="text" name="nama_sub_unit"
+                                        class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"
+                                        value="{{ old('nama_sub_unit', !empty($pengajuan) ? $pengajuan->nama_sub_unit : $initiator->nama_sub_unit) }}">
+                                    <input type="hidden" name="initiator_id"
                                     value="{{ old('initiator_id', !empty($pengajuan) ? $pengajuan->initiator_id : $initiator->id) }}">
-                                <input type="hidden" name="nama_posisi"
+                                    <input type="hidden" name="nama_posisi"
                                     value="{{ old('nama_posisi', !empty($pengajuan) ? $pengajuan->nama_posisi : $initiator->nama_posisi) }}">
+                                @else
+                                    <select class="form-control" name="nama_sub_unit" id="nama_sub_unit">
+                                        <option>-- Pilih Unit --</option>
+
+                                        @foreach ($initiatorAll as $key => $value)
+                                            <option value="{{ $key }}"
+                                                    {{ $key == (!empty($pengajuan)? $pengajuan->initiator_id : '') ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                             @error('nama_sub_unit')
                             <div class="invalid-feedback">
@@ -61,7 +74,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.jenis_label')</label>
                             <div class="col-sm-5">
 
-                                <select class="form-control" name="jenis_id" id="jenis_id">
+                                <select class="form-control browser-default select2" name="jenis_id" id="jenis_id">
                                     <option>@lang('jib::pengajuan.select_jenis_label')</option>
 
                                     @foreach ($jenis as $key => $value)
@@ -82,7 +95,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.kategori_label')</label>
                             <div class="col-sm-5">
-                                <select class="form-control" name="kategori_id" id="kategori_id">
+                                <select class="form-control browser-default select2" name="kategori_id" id="kategori_id">
                                     <option>@lang('jib::pengajuan.select_kategori_label')</option>
 
                                     @foreach ($kategori as $key => $value)
@@ -93,7 +106,7 @@
                                     @endforeach
 
                                 </select>
-                                * bisnis : <br>* support :
+                                <hr>* bisnis : Berhubungan langsung dengan revenue <br>* support : Tidak berhubungan langsung dengan revenue
                             </div>
                             @error('kategori_id')
                             <div class="invalid-feedback">
@@ -126,7 +139,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_1', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_1'), ['class' => 'form-control', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_1'), ['class' => 'browser-default select2', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -134,7 +147,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('customer_id_1', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_1'), ['class' => 'form-control',
+                                $pengajuan->customer_id : old('customer_id_1'), ['class' => 'browser-default select2',
                                 'placeholder' => '-- Select Customer --']) !!}
                             </div>
                         </div>
@@ -154,7 +167,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
                             <div class="col-sm-5">
-                                <input type="text" name="nilai_capex_1"
+                                <input id="nilai_capex_1" type="text" name="nilai_capex_1"
                                     class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"
                                     value="{{ old('nilai_capex_1', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
                             </div>
@@ -167,7 +180,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.est_rev__label')</label>
                             <div class="col-sm-5">
-                                <input type="text" name="est_revenue"
+                                <input id="est_revenue" type="text" name="est_revenue"
                                     class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
                                     value="{{ old('est_revenue', !empty($pengajuan) ? $pengajuan->est_revenue : null) }}">
                             </div>
@@ -234,7 +247,6 @@
                     </div>
                 </div>
                 <!-- END CARD 1 -->
-
                 <!-- CARD 2 -->
                 <div class="card hide" id="group-2">
                     <div class="card-header">
@@ -258,18 +270,40 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_2', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_2'), ['class' => 'form-control', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_2'), ['id' => 'seg', 'class' => 'browser-default select2', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
-                            <div class="col-sm-5">
-                                {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_2'), ['class' => 'form-control',
-                                'placeholder' => '-- Select Customer --']) !!}
+                        @if (empty($pengajuan->segment_id))
+                            <div class="form-group row" id="cust">
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                <div class="col-sm-5">
+                                    {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
+                                    $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
+                                    'placeholder' => '-- Select Customer --']) !!}
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            @if ($pengajuan->segment_id != 6)
+                                <div class="form-group row" id="cust">
+                                    <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                    <div class="col-sm-5">
+                                        {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
+                                        'placeholder' => '-- Select Customer --']) !!}
+                                    </div>
+                                </div>
+                            @else
+                                <div class="form-group row" id="cust-draft">
+                                    <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
+                                    <div class="col-sm-5">
+                                        {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
+                                        'placeholder' => '-- Select Customer --']) !!}
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">No DRP/DRK</label>
                             <div class="col-sm-5">
@@ -286,7 +320,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
                             <div class="col-sm-5">
-                                <input type="text" name="nilai_capex_2"
+                                <input id="nilai_capex_2" type="text" name="nilai_capex_2"
                                     class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"
                                     value="{{ old('nilai_capex_2', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
                             </div>
@@ -327,39 +361,6 @@
                     </div>
                 </div>
                 <!-- END CARD 2 -->
-
-                <!-- Card Upload History -->
-                <div class="card hide" id="upload_history">
-                    <div class="card-header">
-                        <h4>Upload History</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="pengajuan" class="table table-bordered table-sm ">
-                                <thead class="thead-dark text-center">
-                                    <th>Upload Date</th>
-                                    <th>Uploader</th>
-                                    <th>Download</th>
-                                </thead>
-                                <tbody class="text-center">
-                                    @if(!empty($file_jib))
-                                    @foreach($file_jib as $file_upload)
-                                    <tr>
-                                        <td>{{ $file_upload->created_at }}</td>
-                                        <td>{{ !empty($pengajuan) ? $pengajuan->users->name.' / '.$pengajuan->users->nik_gsd : '' }}
-                                        </td>
-                                        <td><a href={{ $file_upload->uuid.'/download' }}><i class="fas fa-download"></i>
-                                                {{ $file_upload->name }}</a></td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Card Upload History -->
-
                 <!-- CARD 4 -->
                 <div class="card hide" id="group-4">
                     <div class="card-header">
@@ -411,7 +412,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nilai Proyek</label>
                             <div class="col-sm-5">
-                                <input type="text" name="nilai_capex_4"
+                                <input id="nilai_capex_4" type="text" name="nilai_capex_4"
                                     class="form-control @error('nilai_capex_4') is-invalid @enderror @if (!$errors->has('nilai_capex_4') && old('nilai_capex_4')) is-valid @endif"
                                     value="{{ old('nilai_capex_4', !empty($pengajuan) ? $pengajuan->nilai_capex : null) }}">
                             </div>
@@ -424,7 +425,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Revenue</label>
                             <div class="col-sm-5">
-                                <input type="text" name="est_revenue_4"
+                                <input id="est_revenue_4" type="text" name="est_revenue_4"
                                     class="form-control @error('est_revenue_4') is-invalid @enderror @if (!$errors->has('est_revenue_4') && old('est_revenue_4')) is-valid @endif"
                                     value="{{ old('est_revenue_4', !empty($pengajuan) ? $pengajuan->est_revenue : null) }}">
                             </div>
@@ -504,10 +505,58 @@
                     </div>
                 </div>
                 <!-- END CARD 4 -->
+                <!-- Card Upload History -->
+                <div class="card hide" id="upload_history">
+                    <div class="card-header">
+                        <h4>Upload History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="pengajuan" class="table table-bordered table-sm ">
+                                <thead class="thead-dark text-center">
+                                <th>Upload Date</th>
+                                <th>Uploader</th>
+                                <th>Download</th>
+                                </thead>
+                                <tbody class="text-center">
+                                @if(!empty($file_jib))
+                                    @foreach($file_jib as $file_upload)
+                                        <tr>
+                                            <td>{{ $file_upload->created_at }}</td>
+                                            <td>{{ !empty($pengajuan) ? $pengajuan->users->name.' / '.$pengajuan->users->nik_gsd : '' }}
+                                            </td>
+                                            <td><a href={{ $file_upload->uuid.'/download' }}><i class="fas fa-download"></i>
+                                                    {{ $file_upload->name }}</a></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Card Upload History -->
                 <!-- CARD 3 -->
                 <div class="card hide" id="group-3">
                     <div class="card-header">
                         <h4>Notes</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            @if (!empty($notes))
+                                @foreach ($notes as $note)
+                                    <div class="col-md-2 text-center">
+                                        <i class="far fa-comment-dots"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ $note->created_at }} - <b>{{$note->nama_karyawan.' / '.$note->nik_gsd}}</b> -
+                                        {{$note->status}}<br>
+                                        {{ $note->notes }}
+                                        <hr>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                     <div class="card-body">
                         {{--<div class="row">--}}
