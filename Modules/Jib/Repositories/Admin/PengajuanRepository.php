@@ -2,7 +2,10 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
+use App\Models\User;
 use DB;
+use Modules\Jib\Entities\Minitiator;
+use Modules\Jib\Entities\Mpemeriksa;
 use Modules\Jib\Entities\Pengajuan;
 use Modules\Jib\Entities\Review;
 use Modules\Jib\Entities\Reviewer;
@@ -40,6 +43,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('jenis_id', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('jib_number', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
@@ -63,8 +67,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.initiator_id',
             'jib_pengajuan.id',
             'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.jib_number',
             'jib_pengajuan.segment_id',
             'jib_pengajuan.customer_id',
+            'jib_pengajuan.periode_up',
+            DB::raw('DATEDIFF(NOW(),jib_pengajuan.periode_up) AS aging'),
             'jib_pengajuan.kegiatan',
             'jib_pengajuan.no_drp',
             'jib_pengajuan.kategori_id',
@@ -87,8 +94,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'jib_pengajuan.id',
                 'jib_pengajuan.initiator_id',
                 'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.jib_number',
                 'jib_pengajuan.segment_id',
                 'jib_pengajuan.customer_id',
+                'jib_pengajuan.periode_up',
+                'aging',
                 'jib_pengajuan.kegiatan',
                 'jib_pengajuan.no_drp',
                 'jib_pengajuan.kategori_id',
@@ -124,7 +134,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
                 $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
-//                    ->orWhere('name', 'LIKE', "%{$options['filter']['q']}%")
+                    ->orWhere('jib_number', 'LIKE', "%{$options['filter']['q']}%")
                     ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
             });
         }
@@ -145,8 +155,10 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.initiator_id',
             'jib_pengajuan.id',
             'jib_pengajuan.nama_sub_unit',
+            'jib_pengajuan.jib_number',
             'jib_pengajuan.segment_id',
             'jib_pengajuan.customer_id',
+            'jib_pengajuan.periode_up',
             'jib_pengajuan.kegiatan',
             'jib_pengajuan.no_drp',
             'jib_pengajuan.kategori_id',
@@ -193,13 +205,15 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                         ->Where('jib_pengajuan.user_id', auth()->user()->id);
                 }
             )
-            ->orderBy('jib_pengajuan.id', 'ASC')
+            ->orderBy('jib_pengajuan.id', 'DESC')
             ->groupby(
                 'jib_pengajuan.id',
                 'jib_pengajuan.initiator_id',
                 'jib_pengajuan.nama_sub_unit',
+                'jib_pengajuan.jib_number',
                 'jib_pengajuan.segment_id',
                 'jib_pengajuan.customer_id',
+                'jib_pengajuan.periode_up',
                 'jib_pengajuan.kegiatan',
                 'jib_pengajuan.no_drp',
                 'jib_pengajuan.kategori_id',
@@ -278,6 +292,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $array_bulan = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
         $bulan = $array_bulan[date('n')];
 
+        $cek_initiator = Minitiator::where('id', $params['nama_sub_unit'])
+            ->first();
+
         // BISNIS CAPEX / OPEX
         if ($params['kategori_id'] == 1) {
             // Format Number Bisnis
@@ -297,11 +314,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             if ($params['jenis_id'] == 1) {
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
-                $pengajuan->initiator_id = $params['initiator_id'];
+                if(empty($cek_initiator)){
+                    $cek_initiator = Minitiator::where('id', $params['initiator_id'])
+                        ->first();
+                    $pengajuan->initiator_id = $params['initiator_id'];
+                    $pengajuan->nama_posisi = $params['nama_posisi'];
+                    $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                }else{
+                    $pengajuan->initiator_id = $cek_initiator->id;
+                    $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
+                    $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                }
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
-                $pengajuan->nama_posisi = $params['nama_posisi'];
-                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
                 $pengajuan->tahun = $tahun;
                 $pengajuan->number = $new_number;
                 $pengajuan->jib_number = $no_jib;
@@ -333,17 +358,25 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
                     //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
                 }
-                
+
                 $pengajuan->save();
-                // BISNIS OPEX
+            // BISNIS OPEX
             } else {
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
-                $pengajuan->initiator_id = $params['initiator_id'];
+                if(empty($cek_initiator)){
+                    $cek_initiator = Minitiator::where('id', $params['initiator_id'])
+                        ->first();
+                    $pengajuan->initiator_id = $params['initiator_id'];
+                    $pengajuan->nama_posisi = $params['nama_posisi'];
+                    $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                }else{
+                    $pengajuan->initiator_id = $cek_initiator->id;
+                    $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
+                    $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                }
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
-                $pengajuan->nama_posisi = $params['nama_posisi'];
-                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
                 $pengajuan->tahun = $tahun;
                 $pengajuan->number = $new_number;
                 $pengajuan->jib_number = $no_jib;
@@ -409,6 +442,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     }
                 }
 
+                $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $cek_approver->objid_posisi)->where('rules', 0)->first();
+
                 if ($params['draft_status'] === "false") {
                     $reviewer = [];
                     foreach ($pemeriksa as $pem) {
@@ -429,13 +465,21 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                             'last_status' => $last_status,
                         ];
                     }
-
+                    $reviewer[] = [
+                        'pengajuan_id' => $pengajuan->id,
+                        'initiator_id' => $get_pem_by_approver->initiator_id,
+                        'pemeriksa_id' => $get_pem_by_approver->id,
+                        'nik' => $get_pem_by_approver->nik,
+                        'nama' => $get_pem_by_approver->nama,
+                        'urutan' => $get_pem_by_approver->urutan,
+                        'last_status' => "QUEUE",
+                    ];
                     return DB::table('jib_reviewer')->insert($reviewer);
                 } else {
                     return true;
                 }
             }
-            // SUPPORT CAPEX/OPEX
+        // SUPPORT CAPEX/OPEX
         } else {
             // FORMAT NUMBER SUPPORT
             $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
@@ -452,11 +496,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
             // Insert Pengajuan
             $pengajuan = new Pengajuan();
-            $pengajuan->initiator_id = $params['initiator_id'];
+            if(empty($cek_initiator)){
+                $cek_initiator = Minitiator::where('id', $params['initiator_id'])
+                    ->first();
+                $pengajuan->initiator_id = $params['initiator_id'];
+                $pengajuan->nama_posisi = $params['nama_posisi'];
+                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+            }else{
+                $pengajuan->initiator_id = $cek_initiator->id;
+                $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
+                $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+            }
             $pengajuan->jenis_id = $params['jenis_id'];
             $pengajuan->kategori_id = $params['kategori_id'];
-            $pengajuan->nama_posisi = $params['nama_posisi'];
-            $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
             $pengajuan->tahun = $tahun;
             $pengajuan->number = $new_number;
             $pengajuan->jib_number = $no_jib;
@@ -509,6 +561,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 } else {
                     $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 }
+                $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $cek_approver->objid_posisi)->where('rules', 0)->first();
 
                 if ($params['draft_status'] === "false") {
                     $reviewer = [];
@@ -530,6 +584,15 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                             'last_status' => $last_status,
                         ];
                     }
+                    $reviewer[] = [
+                        'pengajuan_id' => $pengajuan->id,
+                        'initiator_id' => $get_pem_by_approver->initiator_id,
+                        'pemeriksa_id' => $get_pem_by_approver->id,
+                        'nik' => $get_pem_by_approver->nik,
+                        'nama' => $get_pem_by_approver->nama,
+                        'urutan' => $get_pem_by_approver->urutan,
+                        'last_status' => "QUEUE",
+                    ];
                     return DB::table('jib_reviewer')->insert($reviewer);
                 } else {
                     return true;
@@ -604,8 +667,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->profit_margin = $params['profit_margin'];
                 $pengajuan->net_cf = $params['net_cf'];
                 $pengajuan->suku_bunga = $params['suku_bunga'];
-                
-                
+
+
                 if ($params['draft_status'] == "true") {
                     $pengajuan->status_id = 7;
                 } else {
@@ -741,7 +804,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 } else {
                     $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 }
-                
+
                 if ($params['draft_status'] == "false") {
                     $reviewer = [];
                     foreach ($pemeriksa as $pem) {
