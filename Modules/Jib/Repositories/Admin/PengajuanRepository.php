@@ -297,20 +297,20 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
         // BISNIS CAPEX / OPEX
         if ($params['kategori_id'] == 1) {
-            // Format Number Bisnis
-            $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 1)
-                ->orderBy('id', 'DESC')
-                ->first();
-            if (empty($last_pegnajuan)) {
-                $new_number = sprintf("%05d", 00001);
-            } else {
-                $last_number = $last_pegnajuan->number;
-                $new_numbers = $last_number + 1;
-                $new_number = sprintf("%05d", $new_numbers);
-            }
-
             // BISNIS CAPEX
             if ($params['jenis_id'] == 1) {
+                // Format Number CAPEX Bisnis
+                $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 1)->where('jenis_id', 1)
+                    ->orderBy('id', 'DESC')
+                    ->first();
+                if (empty($last_pegnajuan)) {
+                    $new_number = sprintf("%05d", 00001);
+                } else {
+                    $last_number = $last_pegnajuan->number;
+                    $new_numbers = $last_number + 1;
+                    $new_number = sprintf("%05d", $new_numbers);
+                }
+
                 $no_jib = $new_number . '/JIB/CAPEX/B/' . $bulan . '/' . $tahun;
 
                 // Insert Pengajuan
@@ -363,6 +363,17 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->save();
                 // BISNIS OPEX
             } else {
+                // Format Number OPEX Bisnis
+                $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 1)->where('jenis_id', 2)
+                    ->orderBy('id', 'DESC')
+                    ->first();
+                if (empty($last_pegnajuan)) {
+                    $new_number = sprintf("%05d", 00001);
+                } else {
+                    $last_number = $last_pegnajuan->number;
+                    $new_numbers = $last_number + 1;
+                    $new_number = sprintf("%05d", $new_numbers);
+                }
                 $no_jib = $new_number . '/JIB/OPEX/B/' . $bulan . '/' . $tahun;
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
@@ -449,6 +460,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
                 if ($params['draft_status'] === "false") {
                     $reviewer = [];
+                    $urutan_terakhir = 1;
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
@@ -466,6 +478,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
+                        $urutan_terakhir++;
                     }
                     $reviewer[] = [
                         'pengajuan_id' => $pengajuan->id,
@@ -473,7 +486,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                         'pemeriksa_id' => $get_pem_by_approver->id,
                         'nik' => $get_pem_by_approver->nik,
                         'nama' => $get_pem_by_approver->nama,
-                        'urutan' => $get_pem_by_approver->urutan,
+                        'urutan' => $urutan_terakhir,
                         'last_status' => "QUEUE",
                     ];
                     return DB::table('jib_reviewer')->insert($reviewer);
@@ -483,20 +496,31 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             // SUPPORT CAPEX/OPEX
         } else {
-            // FORMAT NUMBER SUPPORT
-            $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
-                ->orderBy('id', 'DESC')
-                ->first();
-            if (empty($last_pegnajuan)) {
-                $new_number = sprintf("%05d", 00001);
-            } else {
-                $last_number = $last_pegnajuan->number;
-                $new_numbers = $last_number + 1;
-                $new_number = sprintf("%05d", $new_numbers);
-            }
             if ($params['jenis_id'] == 1) {
+                // FORMAT NUMBER CAPEX SUPPORT
+                $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)->where('jenis_id', 1)
+                    ->orderBy('id', 'DESC')
+                    ->first();
+                if (empty($last_pegnajuan)) {
+                    $new_number = sprintf("%05d", 00001);
+                } else {
+                    $last_number = $last_pegnajuan->number;
+                    $new_numbers = $last_number + 1;
+                    $new_number = sprintf("%05d", $new_numbers);
+                }
                 $no_jib = $new_number . '/JIB/CAPEX/S/' . $bulan . '/' . $tahun;
             } else {
+                // FORMAT NUMBER OPEX SUPPORT
+                $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)->where('jenis_id', 2)
+                    ->orderBy('id', 'DESC')
+                    ->first();
+                if (empty($last_pegnajuan)) {
+                    $new_number = sprintf("%05d", 00001);
+                } else {
+                    $last_number = $last_pegnajuan->number;
+                    $new_numbers = $last_number + 1;
+                    $new_number = sprintf("%05d", $new_numbers);
+                }
                 $no_jib = $new_number . '/JIB/OPEX/S/' . $bulan . '/' . $tahun;
             }
 
@@ -573,6 +597,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
                 if ($params['draft_status'] === "false") {
                     $reviewer = [];
+                    $urutan_terakhir = 1;
                     foreach ($pemeriksa as $pem) {
                         if ($pem->urutan == 1) {
                             $last_status = "OPEN";
@@ -590,6 +615,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                             'urutan' => $pem->urutan,
                             'last_status' => $last_status,
                         ];
+                        $urutan_terakhir++;
                     }
                     $reviewer[] = [
                         'pengajuan_id' => $pengajuan->id,
@@ -597,7 +623,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                         'pemeriksa_id' => $get_pem_by_approver->id,
                         'nik' => $get_pem_by_approver->nik,
                         'nama' => $get_pem_by_approver->nama,
-                        'urutan' => $get_pem_by_approver->urutan,
+                        'urutan' => $urutan_terakhir,
                         'last_status' => "QUEUE",
                     ];
                     return DB::table('jib_reviewer')->insert($reviewer);
@@ -611,8 +637,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     //Revisi Pengajuan
     public function update($params = [])
     {
-        // dd($params);
-        // $id = $this->get('id');
         // BISNIS CAPEX / OPEX
         if ($params['kategori_id'] == 1) {
             // BISNIS CAPEX

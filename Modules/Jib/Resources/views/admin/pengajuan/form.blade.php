@@ -384,7 +384,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_4', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_4'), ['class' => 'form-control', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_4'), ['class' => 'browser-default select2', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -392,7 +392,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('customer_id_4', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_4'), ['class' => 'form-control',
+                                $pengajuan->customer_id : old('customer_id_4'), ['class' => 'browser-default select2',
                                 'placeholder' => '-- Select Customer --']) !!}
                             </div>
                         </div>
