@@ -81,7 +81,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.user_id',
             'jib_reviewer.pengajuan_id'
         )
-            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id','left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left')// di tambahkan left option, karena draft tidak insert dulu ke reviewer
             ->orwhere(
                 function ($query) {
                     if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
@@ -168,7 +168,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.user_id',
             'jib_reviewer.pengajuan_id'
         )
-            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id','left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left')// di tambahkan left option, karena draft tidak insert dulu ke reviewer
 //            ->where('jib_pengajuan.user_id', auth()->user()->id)
 //            ->orwhere('jib_pengajuan.status_id', 7)
 //            ->where('jib_reviewer.last_status', 'OPEN')
@@ -177,8 +177,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             ->orWhere(
                 function ($query) {
                     // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") { //Role Approver
-                        $query->where('jib_reviewer.last_status', 'OPEN')
-                            ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
+                    $query->where('jib_reviewer.last_status', 'OPEN')
+                        ->where('jib_reviewer.nik', auth()->user()->nik_gsd);
                     // }
                 }
             )
@@ -193,8 +193,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             ->orwhere(
                 function ($query) {
                     // if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Initiator") { //Role Initiator
-                        $query->where('jib_pengajuan.status_id', 7)
-                            ->Where('jib_pengajuan.user_id', auth()->user()->id);
+                    $query->where('jib_pengajuan.status_id', 7)
+                        ->Where('jib_pengajuan.user_id', auth()->user()->id);
                     // }
                 }
             )
@@ -308,19 +308,20 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $new_numbers = $last_number + 1;
                 $new_number = sprintf("%05d", $new_numbers);
             }
-            $no_jib = $new_number . '/JIB/B/' . $bulan . '/' . $tahun;
 
             // BISNIS CAPEX
             if ($params['jenis_id'] == 1) {
+                $no_jib = $new_number . '/JIB/CAPEX/B/' . $bulan . '/' . $tahun;
+
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
-                if(empty($cek_initiator)){
+                if (empty($cek_initiator)) {
                     $cek_initiator = Minitiator::where('id', $params['initiator_id'])
                         ->first();
                     $pengajuan->initiator_id = $params['initiator_id'];
                     $pengajuan->nama_posisi = $params['nama_posisi'];
                     $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-                }else{
+                } else {
                     $pengajuan->initiator_id = $cek_initiator->id;
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
@@ -335,8 +336,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_1'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_1'];
-                $nilai_capex_1 = str_replace(".","",$params['nilai_capex_1']);
-                $est_revenue = str_replace(".","",$params['est_revenue']);
+                $nilai_capex_1 = str_replace(".", "", $params['nilai_capex_1']);
+                $est_revenue = str_replace(".", "", $params['est_revenue']);
                 $pengajuan->nilai_capex = $nilai_capex_1;
                 $pengajuan->est_revenue = $est_revenue;
                 $pengajuan->irr = $params['irr'];
@@ -360,17 +361,18 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 }
 
                 $pengajuan->save();
-            // BISNIS OPEX
+                // BISNIS OPEX
             } else {
+                $no_jib = $new_number . '/JIB/OPEX/B/' . $bulan . '/' . $tahun;
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
-                if(empty($cek_initiator)){
+                if (empty($cek_initiator)) {
                     $cek_initiator = Minitiator::where('id', $params['initiator_id'])
                         ->first();
                     $pengajuan->initiator_id = $params['initiator_id'];
                     $pengajuan->nama_posisi = $params['nama_posisi'];
                     $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-                }else{
+                } else {
                     $pengajuan->initiator_id = $cek_initiator->id;
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
@@ -385,8 +387,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_4'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_4'];
-                $nilai_capex_4 = str_replace(".","",$params['nilai_capex_4']);
-                $est_revenue_4 = str_replace(".","",$params['est_revenue_4']);
+                $nilai_capex_4 = str_replace(".", "", $params['nilai_capex_4']);
+                $est_revenue_4 = str_replace(".", "", $params['est_revenue_4']);
                 $pengajuan->nilai_capex = $nilai_capex_4;
                 $pengajuan->est_revenue = $est_revenue_4;
                 $pengajuan->cost = $params['cost'];
@@ -479,7 +481,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     return true;
                 }
             }
-        // SUPPORT CAPEX/OPEX
+            // SUPPORT CAPEX/OPEX
         } else {
             // FORMAT NUMBER SUPPORT
             $last_pegnajuan = Pengajuan::where('tahun', $tahun)->where('kategori_id', 2)
@@ -492,17 +494,22 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $new_numbers = $last_number + 1;
                 $new_number = sprintf("%05d", $new_numbers);
             }
-            $no_jib = $new_number . '/JIB/S/' . $bulan . '/' . $tahun;
+            if ($params['jenis_id'] == 1) {
+                $no_jib = $new_number . '/JIB/CAPEX/S/' . $bulan . '/' . $tahun;
+            } else {
+                $no_jib = $new_number . '/JIB/OPEX/S/' . $bulan . '/' . $tahun;
+            }
+
 
             // Insert Pengajuan
             $pengajuan = new Pengajuan();
-            if(empty($cek_initiator)){
+            if (empty($cek_initiator)) {
                 $cek_initiator = Minitiator::where('id', $params['initiator_id'])
                     ->first();
                 $pengajuan->initiator_id = $params['initiator_id'];
                 $pengajuan->nama_posisi = $params['nama_posisi'];
                 $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-            }else{
+            } else {
                 $pengajuan->initiator_id = $cek_initiator->id;
                 $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                 $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
@@ -519,7 +526,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
-            $nilai_capex_2 = str_replace(".","",$params['nilai_capex_2']);
+            $nilai_capex_2 = str_replace(".", "", $params['nilai_capex_2']);
             $pengajuan->nilai_capex = $nilai_capex_2;
             $pengajuan->bcr = $params['bcr'];
 
@@ -622,8 +629,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_1'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_1'];
-                $nilai_capex_1 = str_replace(".","",$params['nilai_capex_1']);
-                $est_revenue = str_replace(".","",$params['est_revenue']);
+                $nilai_capex_1 = str_replace(".", "", $params['nilai_capex_1']);
+                $est_revenue = str_replace(".", "", $params['est_revenue']);
                 $pengajuan->nilai_capex = $nilai_capex_1;
                 $pengajuan->est_revenue = $est_revenue;
                 $pengajuan->irr = $params['irr'];
@@ -659,8 +666,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->customer_id = $params['customer_id_4'];
                 $pengajuan->periode_up = date('Y-m-d H:i:s');
                 $pengajuan->no_drp = $params['no_drp_4'];
-                $nilai_capex_4 = str_replace(".","",$params['nilai_capex_4']);
-                $est_revenue_4 = str_replace(".","",$params['est_revenue_4']);
+                $nilai_capex_4 = str_replace(".", "", $params['nilai_capex_4']);
+                $est_revenue_4 = str_replace(".", "", $params['est_revenue_4']);
                 $pengajuan->nilai_capex = $nilai_capex_4;
                 $pengajuan->est_revenue = $est_revenue_4;
                 $pengajuan->cost = $params['cost'];
@@ -762,7 +769,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             $pengajuan->periode_up = date('Y-m-d H:i:s');
             $pengajuan->no_drp = $params['no_drp_2'];
-            $nilai_capex_2 = str_replace(".","",$params['nilai_capex_2']);
+            $nilai_capex_2 = str_replace(".", "", $params['nilai_capex_2']);
             $pengajuan->nilai_capex = $nilai_capex_2;
             $pengajuan->bcr = $params['bcr'];
 
@@ -969,26 +976,21 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
 
             // UPDATE PENGAJUAN
-            if ($pengajuan->status_id == 1) { // REVIEWER 0
+            if ($pengajuan->status_id == 1) { // REVIEWER 1 BISCON
                 $pengajuan->status_id = 2;
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 2) { // REVEIWER 1
-                if ($reviewer_count == 3) { // < 3M
-                    $pengajuan->status_id = 5; // Ke Approval
-                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-                } else { // > 3M
-                    $pengajuan->status_id = 3; // Ke Reviewer 2
-                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-                }
-            } elseif ($pengajuan->status_id == 3) { // REVIEWER 2
-                if ($reviewer_count == 4) { // 3-5M
+            } elseif ($pengajuan->status_id == 2) { // REVEIWER 2 PAK BUDI
+                $pengajuan->status_id = 3; // Ke Approval
+                $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+            } elseif ($pengajuan->status_id == 3) { // REVIEWER 3 YOU DEVY
+                if ($reviewer_count == 4) { // 0-5 M
                     $pengajuan->status_id = 5; // Ke Approval
                     $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
                 } else { // > 5M
-                    $pengajuan->status_id = 4; // Ke Reviewer 3
+                    $pengajuan->status_id = 4; // Ke Reviewer 4
                     $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
                 }
-            } elseif ($pengajuan->status_id == 4) { // REVIEWER 3
+            } elseif ($pengajuan->status_id == 4) { // REVIEWER 4
                 $pengajuan->status_id = 5; // Ke Approval
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
             } else { // APPROVAL
@@ -1009,7 +1011,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             return $pengajuan->save();
 
-        // Return
+            // Return
         } elseif ($status_btn == 2) {
             // Update REVIEWER
             $reviewer->last_status = 'QUEUE';
@@ -1061,7 +1063,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->save();
             }
             return $pengajuan->save();
-        // Reject
+            // Reject
         } else {
             // Update REVIEWER
             $reviewer->last_status = 'REJECT';
