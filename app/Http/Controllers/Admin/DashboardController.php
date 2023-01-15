@@ -19,15 +19,23 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $jib = DB::table('jib_pengajuan as jb')
-                ->select('jb.*', 'm.name as nama_status', 'mk.name as nama_kategori')
-                ->join('m_status as m', 'm.id', '=', 'jb.status_id')
-                ->join('m_kategori as mk', 'm.id', '=', 'jb.kategori_id')
-                // ->where('jb.nama_sub_unit', auth()->user()->id)
-                ->get();
-        // dd($jib);
+        $user = DB::table('users as u')
+            ->join('m_initiator as i', 'i.user_id', '=', 'u.id')
+            ->get();
 
-        if(auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver"){
+        $jib = DB::table('jib_pengajuan as jb')
+            ->select('jb.*', 'm.name as nama_status', 'mk.name as nama_kategori')
+            ->join('m_status as m', 'm.id', '=', 'jb.status_id')
+            ->join('m_kategori as mk', 'm.id', '=', 'jb.kategori_id')
+            // ->join('m_initiator as i', 'i.user_id', '=', 'jb.user_id')
+            // ->join('user', '')
+            // ->where('jb.nama_sub_unit', $user->nama_sub_unit)
+            ->get();
+        // dd($user);
+
+
+
+        if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") {
             $doc_draft = DB::table('jib_pengajuan')->where('status_id', '7')->count();
             // dd($doc_draft);
             $doc_review = DB::table('jib_pengajuan')->where('status_id', '1')->orWhere('status_id', '2')->count();
@@ -38,8 +46,7 @@ class DashboardController extends Controller
             $doc_total = DB::table('jib_pengajuan')->count('status_id');
             $bisnis = DB::table('jib_pengajuan')->orWhere('kategori_id', '1')->count();
             $support = DB::table('jib_pengajuan')->orWhere('kategori_id', '2')->count();
-
-        }else{
+        } else {
             $doc_draft = DB::table('jib_pengajuan')->where('status_id', '7')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
             $doc_review = DB::table('jib_pengajuan')->where('status_id', '1')->orWhere('status_id', '2')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
             $doc_approval = DB::table('jib_pengajuan')->where('status_id', '3')->orWhere('status_id', '4')->orWhere('status_id', '5')->orWhere('nama_sub_unit', auth()->user()->nama_sub_unit)->count();
@@ -61,8 +68,8 @@ class DashboardController extends Controller
 
 
 
-         //Count AVG Completion JIB
-         $averageTime = DB::table('jib_pengajuan')->select(\DB::raw("DATEDIFF(updated_at, created_at)AS day_diff"))->where('status_id', '6')->get()->avg('day_diff');
+        //Count AVG Completion JIB
+        $averageTime = DB::table('jib_pengajuan')->select(\DB::raw("DATEDIFF(updated_at, created_at)AS day_diff"))->where('status_id', '6')->get()->avg('day_diff');
 
 
         //Number Format
@@ -70,16 +77,16 @@ class DashboardController extends Controller
             return 'Rp. ' . number_format($value, 0, '.', ',');
         });
 
-        Str::macro('num', function($number){
+        Str::macro('num', function ($number) {
             if ($number < 1000000) {
                 // Anything less than a million
-                $format = 'Rp. '. number_format($number);
+                $format = 'Rp. ' . number_format($number);
             } else if ($number < 1000000000) {
                 // Anything less than a billion
-                $format = 'Rp. '.number_format($number / 1000000, 2) . 'JT';
+                $format = 'Rp. ' . number_format($number / 1000000, 2) . 'JT';
             } else {
                 // At least a billion
-                $format = 'Rp. '.number_format($number / 1000000000, 2) . 'M';
+                $format = 'Rp. ' . number_format($number / 1000000000, 2) . 'M';
             }
             echo $format;
         });
