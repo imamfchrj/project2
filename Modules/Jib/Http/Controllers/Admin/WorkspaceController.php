@@ -23,9 +23,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\ReviewRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\RisikoRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\SegmentRepositoryInterface;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\Support\MediaStream;
 use PDF;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class WorkspaceController extends JibController
 {
@@ -45,7 +44,8 @@ class WorkspaceController extends JibController
     $jenisRepository,
         $pemeriksaRepository;
 
-    public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
+    public function __construct(
+        PengajuanRepositoryInterface $pengajuanRepository,
         SegmentRepositoryInterface $segmentRepository,
         CustomerRepositoryInterface $customerRepository,
         ReviewRepositoryInterface $reviewRepository,
@@ -57,7 +57,8 @@ class WorkspaceController extends JibController
         InitiatorRepositoryInterface $initiatorRepository,
         KategoriRepositoryInterface $kategoriRepository,
         JenisRepositoryInterface $jenisRepository,
-        PemeriksaRepositoryInterface $pemeriksaRepository, ) {
+        PemeriksaRepositoryInterface $pemeriksaRepository
+    ) {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
 
@@ -78,6 +79,7 @@ class WorkspaceController extends JibController
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
     }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -86,7 +88,7 @@ class WorkspaceController extends JibController
     {
         $params = $request->all();
         $options = [
-            'per_page' => $this->perPage,
+            'per_page' => 10,
             'order' => [
                 'id' => 'asc',
             ],
@@ -132,19 +134,20 @@ class WorkspaceController extends JibController
     {
         $user = auth()->user();
         $pengajuan = $this->pengajuanRepository->findById($id);
+        $this->data['initiatorAll'] = $this->initiatorRepository->findAllByUserId()->pluck('nama_sub_unit', 'id');
 
-        if ($user->roles[0]->name == "Approver") {
+        if ($user->roles[0]->name == "Approver" || $user->roles[0]->name == "Reviewer") {
             $persetujuan = $this->persetujuanRepository->findAllbyPengId($id);
+            $mom = $this->momRepository->findAllbyPengId($id);
 
             $this->data['pengajuan'] = $pengajuan['pengajuan'];
             $this->data['file_jib'] = $pengajuan['file_jib'];
-            // $this->data['persetujuan'] = $persetujuan['persetujuan'];
-            $this->data['persetujuan'] = $persetujuan;
+            $this->data['persetujuan'] = $persetujuan['persetujuan'];
+            $this->data['file_approval'] = $persetujuan['file_approval'];
             $this->data['persetujuan_id'] = $this->persetujuanRepository->findbyPengId($id);
-            $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+            $this->data['mom'] = $mom['mom'];
+            $this->data['file_mom'] = $mom['file_mom'];
             $this->data['mom_id'] = $this->momRepository->findbyPengId($id);
-
-            // $this->data['file_approval'] = $persetujuan['file_approval'];
 
             $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
@@ -171,6 +174,7 @@ class WorkspaceController extends JibController
             $this->data['jenis'] = $this->jenisRepository->findAll()->pluck('name', 'id');
             $this->data['jenis_id'] = null;
             $this->data['pemeriksa'] = $this->pemeriksaRepository->findAll();
+            $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
             return view('jib::admin.pengajuan.form', $this->data);
         }
@@ -235,10 +239,10 @@ class WorkspaceController extends JibController
     public function storeform(PersetujuanRequest $request)
     {
         $params = $request->validated();
-
+        $persetujuan = null;
         if ($persetujuan = $this->persetujuanRepository->create($params)) {
 
-            download($persetujuan->id);
+//            $this->download($persetujuan->id);
 
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pengajuan.success_create_message'));
@@ -275,7 +279,6 @@ class WorkspaceController extends JibController
         $this->data['anggaran_id'] = null;
 
         return view('jib::admin.workspace.createform_mom', $this->data);
-
     }
 
     public function editmom($id)
@@ -294,12 +297,11 @@ class WorkspaceController extends JibController
     public function storemom(MomRequest $request)
     {
         $params = $request->validated();
-
+        
         if ($mom = $this->momRepository->create($params)) {
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
-
     }
 
     /**
@@ -341,6 +343,38 @@ class WorkspaceController extends JibController
     public function destroy($id)
     {
         //
+    }
+
+    public function download_fullsign($id, $uid)
+    {
+        # code...
+        $filedownload = Media::where('uuid', $uid)->first();
+        return response()->download($filedownload->getPath());
+    }
+
+    public function download_mom($id, $uid)
+    {
+        
+        # code...
+        $filedownload = Media::where('uuid', $uid)->first();
+        return response()->download($filedownload->getPath());
+    }
+
+    public function download_mom_print($id)
+    {
+        # code...
+
+        $this->data['mom'] = $this->momRepository->findById($id);
+        $pengajuan_id = $this->data['mom']->pengajuan_id;
+        $pengajuan = $this->pengajuanRepository->findById($pengajuan_id);
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['file_jib'] = $pengajuan['file_jib'];
+        $this->data['anggaran'] = $this->anggaranRepository->findAll()->pluck('name', 'id');
+        $this->data['anggaran_id'] = null;
+
+        return View('jib::layouts.temp_bisnismom', ['mom' => $this->data['mom'],
+        'pengajuan' => $this->data['pengajuan'],
+        'tanggal' => Carbon::now()]);
     }
 
     public function download($id)

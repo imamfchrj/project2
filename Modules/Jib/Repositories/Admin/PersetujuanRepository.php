@@ -86,11 +86,16 @@ class PersetujuanRepository implements PersetujuanRepositoryInterface
 
     public function findAllbyPengId($id)
     {
-        return Persetujuan::where('pengajuan_id', $id)->get();
-        // $persetujuan = Persetujuan::where('pengajuan_id', $id)->get();
-        // $file_approval = $persetujuan->getMedia('file_approval');
+        // return Persetujuan::where('pengajuan_id', $id)->get();
+        $persetujuan = Persetujuan::where('pengajuan_id', $id)->get();
+        // dd($persetujuan);
+        if ($persetujuan->count() != 0) {
+            $file_approval = $persetujuan->last()->getMedia('file_approval');
+        } else {
+            $file_approval = null;
+        }
 
-        // return compact(['persetujuan', 'file_approval']);
+        return compact(['persetujuan', 'file_approval']);
     }
 
     public function findById($id)

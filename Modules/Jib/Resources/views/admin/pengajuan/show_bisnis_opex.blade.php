@@ -92,7 +92,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" name="nilai_capex_1"
                                            class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"
-                                           value="{{ !empty($pengajuan->nilai_capex) ? $pengajuan->nilai_capex : '' }}" disabled>
+                                           value="{{ !empty($pengajuan->nilai_capex) ? number_format($pengajuan->nilai_capex) : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -100,7 +100,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" name="est_revenue"
                                            class="form-control @error('est_revenue') is-invalid @enderror @if (!$errors->has('est_revenue') && old('est_revenue')) is-valid @endif"
-                                           value="{{ !empty($pengajuan) ? $pengajuan->est_revenue : '' }}" disabled>
+                                           value="{{ !empty($pengajuan) ? number_format($pengajuan->est_revenue) : '' }}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -189,7 +189,18 @@
                                                 {{--</a></td>--}}
                                             <td>{{ $setuju->created_at }}</td>
                                             <td>{{ $setuju->updated_by }}</td>
-                                            <td>{{ !empty($setuju->file_fullsign)?$setuju->file_fullsign :'-' }}</td>
+                                            <td>@if(!empty($file_approval))
+                                                    {{--{{ dd($file_approval->count()) }}--}}
+                                                    @if ($file_approval->count() > 0)
+                                                        <a href="{{ $file_approval->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                            {{ $file_approval->last()->name }}</a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse
@@ -221,7 +232,18 @@
                                                 {{--</a></td>--}}
                                             <td>{{ $moms->created_at }}</td>
                                             <td>{{ $moms->updated_by }}</td>
-                                            <td>{{ !empty($moms->file_fullsign)?$moms->file_fullsign :'-' }}</td>
+                                            <td>@if(!empty($file_mom))
+                                                    {{--{{ dd($file_mom->count()) }}--}}
+                                                    @if ($file_mom->count() > 0)
+                                                        <a href="{{ $file_mom->last()->uuid.'/download' }}"><i class="fas fa-download"></i>
+                                                            {{ $file_mom->last()->name }}</a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse

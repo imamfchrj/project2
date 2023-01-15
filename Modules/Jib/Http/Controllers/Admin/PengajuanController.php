@@ -76,9 +76,9 @@ class PengajuanController extends JibController
     {
         $params = $request->all();
         $options = [
-            'per_page' => $this->perPage,
+            'per_page' => 10,
             'order' => [
-                'id' => 'asc',
+                'id' => 'desc',
             ],
             'filter' => $params,
         ];
@@ -125,6 +125,7 @@ class PengajuanController extends JibController
 //        $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
 //        $this->data['roleId'] = null;
         $this->data['initiator'] = $this->initiatorRepository->findByUserId();
+        $this->data['initiatorAll'] = $this->initiatorRepository->findAllByUserId()->pluck('nama_sub_unit', 'id');
         $this->data['segment'] = $this->segmentRepository->findAll()->pluck('name', 'id');
         $this->data['segment_id'] = null;
         $this->data['customer'] = $this->customerRepository->findAll()->pluck('name', 'id');
@@ -165,8 +166,14 @@ class PengajuanController extends JibController
         $this->data['pengajuan']=$pengajuan['pengajuan'];
         $this->data['file_jib'] = $pengajuan['file_jib'];
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
-        $this->data['persetujuan'] = $this->persetujuanRepository->findAllbyPengId($id);
-        $this->data['mom'] = $this->momRepository->findAllbyPengId($id);
+
+        $persetujuan =$this->persetujuanRepository->findAllbyPengId($id);
+        $this->data['persetujuan'] = $persetujuan['persetujuan'];
+        $this->data['file_approval'] = $persetujuan['file_approval'];
+
+        $mom =$this->momRepository->findAllbyPengId($id);
+        $this->data['mom'] = $mom['mom'];
+        $this->data['file_mom'] = $mom['file_mom'];
 
         if ($this->data['pengajuan']->kategori_id == 1) {
             // BISNIS CAPEX
