@@ -6,6 +6,7 @@ use App\Authorizable;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Modules\Jib\Entities\Reviewer;
 use Modules\Jib\Http\Controllers\JibController;
 use Modules\Jib\Http\Requests\Admin\MomRequest;
 use Modules\Jib\Http\Requests\Admin\PersetujuanRequest;
@@ -31,17 +32,17 @@ class WorkspaceController extends JibController
     use Authorizable;
 
     private $pengajuanRepository,
-    $segmentRepository,
-    $customerRepository,
-    $reviewRepository,
-    $persetujuanRepository,
-    $momRepository,
-    $kesimpulanRepository,
-    $risikoRepository,
-    $anggaranRepository,
-    $initiatorRepository,
-    $kategoriRepository,
-    $jenisRepository,
+        $segmentRepository,
+        $customerRepository,
+        $reviewRepository,
+        $persetujuanRepository,
+        $momRepository,
+        $kesimpulanRepository,
+        $risikoRepository,
+        $anggaranRepository,
+        $initiatorRepository,
+        $kategoriRepository,
+        $jenisRepository,
         $pemeriksaRepository;
 
     public function __construct(
@@ -58,7 +59,8 @@ class WorkspaceController extends JibController
         KategoriRepositoryInterface $kategoriRepository,
         JenisRepositoryInterface $jenisRepository,
         PemeriksaRepositoryInterface $pemeriksaRepository
-    ) {
+    )
+    {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'workspace';
 
@@ -134,9 +136,16 @@ class WorkspaceController extends JibController
     {
         $user = auth()->user();
         $pengajuan = $this->pengajuanRepository->findById($id);
+        $reviewer = Reviewer::where('last_status', 'OPEN')->where('pengajuan_id', $id)->first();
+        $approver = 0;
+        if (!empty($reviewer)) {
+            if ($user->nik_gsd == $reviewer->nik) {
+                $approver = 1;
+            }
+        }
         $this->data['initiatorAll'] = $this->initiatorRepository->findAllByUserId()->pluck('nama_sub_unit', 'id');
 
-        if ($user->roles[0]->name == "Approver" || $user->roles[0]->name == "Reviewer") {
+        if ($user->roles[0]->name == "Approver" || $user->roles[0]->name == "Reviewer" || $approver == 1) {
             $persetujuan = $this->persetujuanRepository->findAllbyPengId($id);
             $mom = $this->momRepository->findAllbyPengId($id);
 
@@ -297,7 +306,7 @@ class WorkspaceController extends JibController
     public function storemom(MomRequest $request)
     {
         $params = $request->validated();
-        
+
         if ($mom = $this->momRepository->create($params)) {
             return redirect('admin/jib/workspace/' . $params['pengajuan_id'] . '/editworkspace')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
@@ -354,7 +363,7 @@ class WorkspaceController extends JibController
 
     public function download_mom($id, $uid)
     {
-        
+
         # code...
         $filedownload = Media::where('uuid', $uid)->first();
         return response()->download($filedownload->getPath());
@@ -373,8 +382,8 @@ class WorkspaceController extends JibController
         $this->data['anggaran_id'] = null;
 
         return View('jib::layouts.temp_bisnismom', ['mom' => $this->data['mom'],
-        'pengajuan' => $this->data['pengajuan'],
-        'tanggal' => Carbon::now()]);
+            'pengajuan' => $this->data['pengajuan'],
+            'tanggal' => Carbon::now()]);
     }
 
     public function download($id)
