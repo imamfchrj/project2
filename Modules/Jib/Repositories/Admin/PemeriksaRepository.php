@@ -85,7 +85,7 @@ class PemeriksaRepository implements PemeriksaRepositoryInterface
 
     public function findByRules($rule_id)
     {
-        return Mpemeriksa::where('rules', $rule_id)->get();
+        return Mpemeriksa::where('rules', $rule_id)->where('petugas', '!=', 'APPROVER')->get();
     }
 
 //

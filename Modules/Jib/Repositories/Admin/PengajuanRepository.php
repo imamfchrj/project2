@@ -436,63 +436,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $review->notes = $params['note'];
                     $review->save();
                 }
-                // Insert M_Reviewer
-                if ($params['jenis_id'] == 1) {
-                    if ($params['nilai_capex_1'] <= 3000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                    } else if ($params['nilai_capex_1'] > 3000000000 && $params['nilai_capex_1'] <= 5000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-                    } else {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-                    }
-                } else {
-                    if ($params['nilai_capex_4'] <= 3000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                    } else if ($params['nilai_capex_4'] > 3000000000 && $params['nilai_capex_4'] <= 5000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-                    } else {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-                    }
-                }
-
-                $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
-                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $cek_approver->objid_posisi)->where('rules', 0)->first();
-
-                if ($params['draft_status'] === "false") {
-                    $reviewer = [];
-                    $urutan_terakhir = 1;
-                    foreach ($pemeriksa as $pem) {
-                        if ($pem->urutan == 1) {
-                            $last_status = "OPEN";
-                            $pengajuan->pemeriksa_id = $pem->id;
-                            $pengajuan->save();
-                        } else {
-                            $last_status = "QUEUE";
-                        }
-                        $reviewer[] = [
-                            'pengajuan_id' => $pengajuan->id,
-                            'initiator_id' => $pem->initiator_id,
-                            'pemeriksa_id' => $pem->id,
-                            'nik' => $pem->nik,
-                            'nama' => $pem->nama,
-                            'urutan' => $pem->urutan,
-                            'last_status' => $last_status,
-                        ];
-                        $urutan_terakhir++;
-                    }
-                    $reviewer[] = [
-                        'pengajuan_id' => $pengajuan->id,
-                        'initiator_id' => $get_pem_by_approver->initiator_id,
-                        'pemeriksa_id' => $get_pem_by_approver->id,
-                        'nik' => $get_pem_by_approver->nik,
-                        'nama' => $get_pem_by_approver->nama,
-                        'urutan' => $urutan_terakhir,
-                        'last_status' => "QUEUE",
-                    ];
-                    return DB::table('jib_reviewer')->insert($reviewer);
-                } else {
-                    return true;
-                }
             }
             // SUPPORT CAPEX/OPEX
         } else {
@@ -584,53 +527,92 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $review->notes = $params['note'];
                     $review->save();
                 }
-                // Insert Reviewer
-                if ($params['nilai_capex_2'] <= 3000000000) {
-                    $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                } elseif ($params['nilai_capex_2'] > 3000000000 && $params['nilai_capex_2'] <= 5000000000) {
-                    $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-                } else {
-                    $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-                }
-                $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
-                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $cek_approver->objid_posisi)->where('rules', 0)->first();
-
-                if ($params['draft_status'] === "false") {
-                    $reviewer = [];
-                    $urutan_terakhir = 1;
-                    foreach ($pemeriksa as $pem) {
-                        if ($pem->urutan == 1) {
-                            $last_status = "OPEN";
-                            $pengajuan->pemeriksa_id = $pem->id;
-                            $pengajuan->save();
-                        } else {
-                            $last_status = "QUEUE";
-                        }
-                        $reviewer[] = [
-                            'pengajuan_id' => $pengajuan->id,
-                            'initiator_id' => $pem->initiator_id,
-                            'pemeriksa_id' => $pem->id,
-                            'nik' => $pem->nik,
-                            'nama' => $pem->nama,
-                            'urutan' => $pem->urutan,
-                            'last_status' => $last_status,
-                        ];
-                        $urutan_terakhir++;
-                    }
-                    $reviewer[] = [
-                        'pengajuan_id' => $pengajuan->id,
-                        'initiator_id' => $get_pem_by_approver->initiator_id,
-                        'pemeriksa_id' => $get_pem_by_approver->id,
-                        'nik' => $get_pem_by_approver->nik,
-                        'nama' => $get_pem_by_approver->nama,
-                        'urutan' => $urutan_terakhir,
-                        'last_status' => "QUEUE",
-                    ];
-                    return DB::table('jib_reviewer')->insert($reviewer);
-                } else {
-                    return true;
-                }
             }
+        }
+
+        // Insert M_Reviewer
+        if ($params['kategori_id'] == 1 && $params['jenis_id'] == 1) { // BISNIS CAPEX
+            $nilai_capex = $params['nilai_capex_1'];
+            $segment = $params['segment_id_1'];
+        } else if ($params['kategori_id'] == 1 && $params['jenis_id'] == 2) { // BISNIS OPEX
+            $nilai_capex = $params['nilai_capex_4'];
+            $segment = $params['segment_id_4'];
+        } else { // SUPPORT CAPEX OPEX
+            $nilai_capex = $params['nilai_capex_2'];
+            $segment = $params['segment_id_2'];
+        }
+
+        // Insert M_Reviewer
+        $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
+        // CEK KP / REG
+        if ($cek_initiator->kantor == 'KANTOR PUSAT') { // KP - Pemilik CAPEX/OPEX
+            $objid_approver = $cek_approver->objid_posisi;
+            // GET REVIEWER dan APPROVER BY RULES
+            if ($nilai_capex <= 3000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 1)->where('petugas', 'APPROVER')->first();
+            } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 2)->where('petugas', 'APPROVER')->first();
+            } else {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
+            }
+        } else { // REG - Pemilik CAPEX
+            // GET REVIEWER dan APPROVER BY RULES
+            if ($nilai_capex <= 250000000) {
+                $objid_approver = $cek_approver->objid_posisi;
+                $pemeriksa = $this->pemeriksaRepository->findByRules(4);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 4)->where('petugas', 'APPROVER')->first();
+            } else if ($nilai_capex > 250000000 && $nilai_capex <= 3000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(5);
+                $get_pem_by_approver = Mpemeriksa::where('segment_id', $segment)->where('rules', 5)->where('petugas', 'APPROVER')->first();
+            } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(6);
+                if ($params['kategori_id'] == 1) {
+                    $get_pem_by_approver = Mpemeriksa::where('segment_id', 1)->where('rules', 6)->where('petugas', 'APPROVER')->first();
+                } else {
+                    $get_pem_by_approver = Mpemeriksa::where('segment_id', 2)->where('rules', 6)->where('petugas', 'APPROVER')->first();
+                }
+            } else {
+                $objid_approver = $cek_approver->objid_posisi;
+                $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
+            }
+        }
+
+        if ($params['draft_status'] === "false") {
+            $reviewer = [];
+            foreach ($pemeriksa as $pem) {
+                if ($pem->urutan == 1) {
+                    $last_status = "OPEN";
+                    $pengajuan->pemeriksa_id = $pem->id;
+                    $pengajuan->save();
+                } else {
+                    $last_status = "QUEUE";
+                }
+                $reviewer[] = [
+                    'pengajuan_id' => $pengajuan->id,
+                    'initiator_id' => $pem->initiator_id,
+                    'pemeriksa_id' => $pem->id,
+                    'nik' => $pem->nik,
+                    'nama' => $pem->nama,
+                    'urutan' => $pem->urutan,
+                    'last_status' => $last_status,
+                ];
+            }
+            $reviewer[] = [
+                'pengajuan_id' => $pengajuan->id,
+                'initiator_id' => $get_pem_by_approver->initiator_id,
+                'pemeriksa_id' => $get_pem_by_approver->id,
+                'nik' => $get_pem_by_approver->nik,
+                'nama' => $get_pem_by_approver->nama,
+                'urutan' => $get_pem_by_approver->urutan,
+                'last_status' => "QUEUE",
+            ];
+            return DB::table('jib_reviewer')->insert($reviewer);
+        } else {
+            return true;
         }
     }
 
@@ -657,11 +639,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
                 }
-//                $pengajuan->initiator_id = $params['initiator_id'];
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
-//                $pengajuan->nama_posisi = $params['nama_posisi'];
-//                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
                 $pengajuan->kegiatan = $params['kegiatan_1'];
                 $pengajuan->segment_id = $params['segment_id_1'];
                 $pengajuan->customer_id = $params['customer_id_1'];
@@ -705,11 +684,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
                 }
-//                $pengajuan->initiator_id = $params['initiator_id'];
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
-//                $pengajuan->nama_posisi = $params['nama_posisi'];
-//                $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
                 $pengajuan->kegiatan = $params['kegiatan_4'];
                 $pengajuan->segment_id = $params['segment_id_4'];
                 $pengajuan->customer_id = $params['customer_id_4'];
@@ -736,7 +712,6 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 //Upload File
                 if (isset($params['file_jib_1'])) {
                     $pengajuan->addMediaFromRequest('file_jib_1')->toMediaCollection('file_jib');
-                    //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
                 }
                 $pengajuan->save();
             }
@@ -752,64 +727,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $review->notes = $params['note'];
                     $review->save();
                 }
-                // Insert M_Reviewer
-                if ($params['jenis_id'] == 1) {
-                    if ($params['nilai_capex_1'] <= 3000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                    } else if ($params['nilai_capex_1'] > 3000000000 && $params['nilai_capex_1'] <= 5000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-                    } else {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-                    }
-                } else {
-                    if ($params['nilai_capex_4'] <= 3000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                    } else if ($params['nilai_capex_4'] > 3000000000 && $params['nilai_capex_4'] <= 5000000000) {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-                    } else {
-                        $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-                    }
-                }
-                $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
-                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $cek_approver->objid_posisi)->where('rules', 0)->first();
-
-                if ($params['draft_status'] == "false") {
-                    $reviewer = [];
-                    $urutan_terakhir = 1;
-                    foreach ($pemeriksa as $pem) {
-                        if ($pem->urutan == 1) {
-                            $last_status = "OPEN";
-                            $pengajuan->pemeriksa_id = $pem->id;
-                            $pengajuan->save();
-                        } else {
-                            $last_status = "QUEUE";
-                        }
-                        $reviewer[] = [
-                            'pengajuan_id' => $pengajuan->id,
-                            'initiator_id' => $pem->initiator_id,
-                            'pemeriksa_id' => $pem->id,
-                            'nik' => $pem->nik,
-                            'nama' => $pem->nama,
-                            'urutan' => $pem->urutan,
-                            'last_status' => $last_status,
-                        ];
-                        $urutan_terakhir++;
-                    }
-                    $reviewer[] = [
-                        'pengajuan_id' => $pengajuan->id,
-                        'initiator_id' => $get_pem_by_approver->initiator_id,
-                        'pemeriksa_id' => $get_pem_by_approver->id,
-                        'nik' => $get_pem_by_approver->nik,
-                        'nama' => $get_pem_by_approver->nama,
-                        'urutan' => $urutan_terakhir,
-                        'last_status' => "QUEUE",
-                    ];
-                    return DB::table('jib_reviewer')->insert($reviewer);
-                } else {
-                    return true;
-                }
             }
-            // SUPPORT CAPEX/OPEX
+        // SUPPORT CAPEX/OPEX
         } else {
             // Insert Pengajuan
             $pengajuan = Pengajuan::findOrFail($params['id']);
@@ -824,12 +743,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                 $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
             }
-//            $pengajuan->initiator_id = $params['initiator_id'];
             $pengajuan->jenis_id = $params['jenis_id'];
             $pengajuan->kategori_id = $params['kategori_id'];
-//            $pengajuan->nama_posisi = $params['nama_posisi'];
-//            $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
-
             $pengajuan->kegiatan = $params['kegiatan_2'];
             $pengajuan->segment_id = $params['segment_id_2'];
             if ($params['segment_id_2'] != 6) {
@@ -856,9 +771,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             //Upload File
             if (isset($params['file_jib_2'])) {
                 $pengajuan->addMediaFromRequest('file_jib_2')->toMediaCollection('file_jib');
-                //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
             }
-
             $pengajuan->save();
 
             // insert M review
@@ -873,54 +786,92 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $review->notes = $params['note'];
                     $review->save();
                 }
-                // Insert Reviewer
-                if ($params['nilai_capex_2'] <= 3000000000) {
-                    $pemeriksa = $this->pemeriksaRepository->findByRules(1);
-                } elseif ($params['nilai_capex_2'] > 3000000000 && $params['nilai_capex_2'] <= 5000000000) {
-                    $pemeriksa = $this->pemeriksaRepository->findByRules(2);
-                } else {
-                    $pemeriksa = $this->pemeriksaRepository->findByRules(3);
-                }
-
-                $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
-                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $cek_approver->objid_posisi)->where('rules', 0)->first();
-
-                if ($params['draft_status'] == "false") {
-                    $reviewer = [];
-                    $urutan_terakhir=1;
-                    foreach ($pemeriksa as $pem) {
-                        if ($pem->urutan == 1) {
-                            $last_status = "OPEN";
-                            $pengajuan->pemeriksa_id = $pem->id;
-                            $pengajuan->save();
-                        } else {
-                            $last_status = "QUEUE";
-                        }
-                        $reviewer[] = [
-                            'pengajuan_id' => $pengajuan->id,
-                            'initiator_id' => $pem->initiator_id,
-                            'pemeriksa_id' => $pem->id,
-                            'nik' => $pem->nik,
-                            'nama' => $pem->nama,
-                            'urutan' => $pem->urutan,
-                            'last_status' => $last_status,
-                        ];
-                        $urutan_terakhir++;
-                    }
-                    $reviewer[] = [
-                        'pengajuan_id' => $pengajuan->id,
-                        'initiator_id' => $get_pem_by_approver->initiator_id,
-                        'pemeriksa_id' => $get_pem_by_approver->id,
-                        'nik' => $get_pem_by_approver->nik,
-                        'nama' => $get_pem_by_approver->nama,
-                        'urutan' => $urutan_terakhir,
-                        'last_status' => "QUEUE",
-                    ];
-                    return DB::table('jib_reviewer')->insert($reviewer);
-                } else {
-                    return true;
-                }
             }
+        }
+
+        // Insert M_Reviewer
+        if ($params['kategori_id'] == 1 && $params['jenis_id'] == 1) { // BISNIS CAPEX
+            $nilai_capex = $params['nilai_capex_1'];
+            $segment = $params['segment_id_1'];
+        } else if ($params['kategori_id'] == 1 && $params['jenis_id'] == 2) { // BISNIS OPEX
+            $nilai_capex = $params['nilai_capex_4'];
+            $segment = $params['segment_id_4'];
+        } else { // SUPPORT CAPEX OPEX
+            $nilai_capex = $params['nilai_capex_2'];
+            $segment = $params['segment_id_2'];
+        }
+
+        // Insert M_Reviewer
+        $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
+        // CEK KP / REG
+        if ($cek_initiator->kantor == 'KANTOR PUSAT') { // KP - Pemilik CAPEX/OPEX
+            $objid_approver = $cek_approver->objid_posisi;
+            // GET REVIEWER dan APPROVER BY RULES
+            if ($nilai_capex <= 3000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(1);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 1)->where('petugas', 'APPROVER')->first();
+            } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(2);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 2)->where('petugas', 'APPROVER')->first();
+            } else {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
+            }
+        } else { // REG - Pemilik CAPEX
+            // GET REVIEWER dan APPROVER BY RULES
+            if ($nilai_capex <= 250000000) {
+                $objid_approver = $cek_approver->objid_posisi;
+                $pemeriksa = $this->pemeriksaRepository->findByRules(4);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 4)->where('petugas', 'APPROVER')->first();
+            } else if ($nilai_capex > 250000000 && $nilai_capex <= 3000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(5);
+                $get_pem_by_approver = Mpemeriksa::where('segment_id', $segment)->where('rules', 5)->where('petugas', 'APPROVER')->first();
+            } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
+                $pemeriksa = $this->pemeriksaRepository->findByRules(6);
+                if ($params['kategori_id'] == 1) {
+                    $get_pem_by_approver = Mpemeriksa::where('segment_id', 1)->where('rules', 6)->where('petugas', 'APPROVER')->first();
+                } else {
+                    $get_pem_by_approver = Mpemeriksa::where('segment_id', 2)->where('rules', 6)->where('petugas', 'APPROVER')->first();
+                }
+            } else {
+                $objid_approver = $cek_approver->objid_posisi;
+                $pemeriksa = $this->pemeriksaRepository->findByRules(3);
+                $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
+            }
+        }
+
+        if ($params['draft_status'] == "false") {
+            $reviewer = [];
+            foreach ($pemeriksa as $pem) {
+                if ($pem->urutan == 1) {
+                    $last_status = "OPEN";
+                    $pengajuan->pemeriksa_id = $pem->id;
+                    $pengajuan->save();
+                } else {
+                    $last_status = "QUEUE";
+                }
+                $reviewer[] = [
+                    'pengajuan_id' => $pengajuan->id,
+                    'initiator_id' => $pem->initiator_id,
+                    'pemeriksa_id' => $pem->id,
+                    'nik' => $pem->nik,
+                    'nama' => $pem->nama,
+                    'urutan' => $pem->urutan,
+                    'last_status' => $last_status,
+                ];
+            }
+            $reviewer[] = [
+                'pengajuan_id' => $pengajuan->id,
+                'initiator_id' => $get_pem_by_approver->initiator_id,
+                'pemeriksa_id' => $get_pem_by_approver->id,
+                'nik' => $get_pem_by_approver->nik,
+                'nama' => $get_pem_by_approver->nama,
+                'urutan' => $get_pem_by_approver->urutan,
+                'last_status' => "QUEUE",
+            ];
+            return DB::table('jib_reviewer')->insert($reviewer);
+        } else {
+            return true;
         }
     }
 
@@ -1046,7 +997,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $pengajuan = Pengajuan::where('id', $pengajuan_id)->firstorfail();
         $reviewer = Reviewer::where('pengajuan_id', $pengajuan_id)->where('last_status', 'OPEN')->firstorfail();
         $urutan = $reviewer->urutan; // 1
-        $reviewer_count = Reviewer::where('pengajuan_id', $pengajuan_id)->count(); //3
+        $reviewer_count = Reviewer::where('pengajuan_id', $pengajuan_id)->count();
         // Approve
         if ($status_btn == 1) {
             // Update REVIEWER
@@ -1060,25 +1011,30 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
 
             // UPDATE PENGAJUAN
-            if ($pengajuan->status_id == 1) { // REVIEWER 1 BISCON
+            if ($pengajuan->status_id == 1) { // REVIEWER 1 STAFF BISCON
                 $pengajuan->status_id = 2;
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 2) { // REVEIWER 2 PAK BUDI
-                $pengajuan->status_id = 3; // Ke Approval
-                $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 3) { // REVIEWER 3 YOU DEVY
-                if ($reviewer_count == 4) { // 0-5 M
-                    $pengajuan->status_id = 5; // Ke Approval
+            } elseif ($pengajuan->status_id == 2) { // REVEIWER 2 MGR BUSINESS & OPERATION CONTROL
+                if ($reviewer_count == 3) {
+                    $pengajuan->status_id = 5; // REG < 250 JT ke Approval
                     $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
-                } else { // > 5M
-                    $pengajuan->status_id = 4; // Ke Reviewer 4
+                } else {
+                    $pengajuan->status_id = 3;
                     $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
                 }
-            } elseif ($pengajuan->status_id == 4) { // REVIEWER 4
-                $pengajuan->status_id = 5; // Ke Approval
+            } elseif ($pengajuan->status_id == 3) { // REVIEWER 3 VP RISK MANAGEMENT&BUSINESS PERFORMANCE
+                if ($reviewer_count == 4) {
+                    $pengajuan->status_id = 5;
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                } else {
+                    $pengajuan->status_id = 4;
+                    $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
+                }
+            } elseif ($pengajuan->status_id == 4) {
+                $pengajuan->status_id = 5;
                 $pengajuan->pemeriksa_id = $reviewer_next->pemeriksa_id;
             } else { // APPROVAL
-                $pengajuan->status_id = 6; // Closed
+                $pengajuan->status_id = 6;
                 $pengajuan->pemeriksa_id = null;
             }
 
@@ -1095,7 +1051,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             return $pengajuan->save();
 
-            // Return
+        // Return
         } elseif ($status_btn == 2) {
             // Update REVIEWER
             $reviewer->last_status = 'QUEUE';
@@ -1110,27 +1066,27 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
 
             // UPDATE PENGAJUAN
-            if ($pengajuan->status_id == 1) { // REVIEWER 0
+            if ($pengajuan->status_id == 1) { // REVIEWER 1 STAFF BISCON
                 $pengajuan->status_id = 8; // Ke Initiator
                 $pengajuan->pemeriksa_id = null;
-            } elseif ($pengajuan->status_id == 2) { // REVIEWER 1
-                $pengajuan->status_id = 1; // Ke Reviewer 0
+            } elseif ($pengajuan->status_id == 2) { // REVEIWER 2 MGR BUSINESS & OPERATION CONTROL
+                $pengajuan->status_id = 1; // Ke Reviewer 1
                 $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 3) { // REVIEWER 2
-                $pengajuan->status_id = 2; // Ke Reviewer 1
+            } elseif ($pengajuan->status_id == 3) { // REVIEWER 3 VP RISK MANAGEMENT&BUSINESS PERFORMANCE
+                $pengajuan->status_id = 2; // Ke Reviewer 2
                 $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
-            } elseif ($pengajuan->status_id == 4) { // REVIEWER 3
-                $pengajuan->status_id = 3; // Ke Reviewer 2
+            } elseif ($pengajuan->status_id == 4) { // // REVIEWER 4 DIR FRM
+                $pengajuan->status_id = 3; // Ke Reviewer
                 $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
             } else {
-                if ($reviewer_count == 3) { // < 3M
-                    $pengajuan->status_id = 2; // Ke Reviewer 1
+                if ($reviewer_count == 3) {
+                    $pengajuan->status_id = 2; // Ke Reviewer 2
                     $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
-                } elseif ($reviewer_count == 4) { // 3-5M
-                    $pengajuan->status_id = 3; // Ke Reviewer 2
+                } elseif ($reviewer_count == 4) {
+                    $pengajuan->status_id = 3; // Ke Reviewer 3
                     $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
-                } else { // > 5M
-                    $pengajuan->status_id = 4; // Ke Reviewer 3
+                } else {
+                    $pengajuan->status_id = 4; // Ke Reviewer 4
                     $pengajuan->pemeriksa_id = $reviewer_before->pemeriksa_id;
                 }
             }
@@ -1147,7 +1103,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->save();
             }
             return $pengajuan->save();
-            // Reject
+        // Reject
         } else {
             // Update REVIEWER
             $reviewer->last_status = 'REJECT';

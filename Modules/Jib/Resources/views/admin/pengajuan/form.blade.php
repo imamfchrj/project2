@@ -46,7 +46,7 @@
                                 @if($initiatorAll->count() == 1)
                                     <input type="text" name="nama_sub_unit"
                                         class="form-control @error('nama_sub_unit') is-invalid @enderror @if (!$errors->has('nama_sub_unit') && old('nama_sub_unit')) is-valid @endif"
-                                        value="{{ old('nama_sub_unit', !empty($pengajuan) ? $pengajuan->nama_sub_unit : $initiator->nama_sub_unit) }}">
+                                        value="{{ old('nama_sub_unit', !empty($pengajuan) ? $pengajuan->nama_sub_unit : $initiator->nama_sub_unit) }}" readonly>
                                     <input type="hidden" name="initiator_id"
                                     value="{{ old('initiator_id', !empty($pengajuan) ? $pengajuan->initiator_id : $initiator->id) }}">
                                     <input type="hidden" name="nama_posisi"
@@ -584,9 +584,4 @@
     </div>
     {!! Form::close() !!}
 </section>
-{{--<script src="{{ asset ('modules/jib/js/pengajuan.js') }}"></script>--}}
 @endsection
-{{--@section('scripts')--}}
-{{--<script src="{{ asset('js/pengajuan.js') }}"></script>--}}
-
-{{--@endsection--}}
