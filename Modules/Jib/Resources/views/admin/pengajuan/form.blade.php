@@ -139,7 +139,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_1', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_1'), ['class' => 'browser-default select2', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_1'), ['class' => 'browser-default select2 segment_id_select', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('customer_id_1', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_1'), ['class' => 'browser-default select2',
+                                $pengajuan->customer_id : old('customer_id_1'), ['class' => 'browser-default select2 customer_select',
                                 'placeholder' => '-- Select Customer --']) !!}
                             </div>
                         </div>
@@ -270,7 +270,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_2', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_2'), ['id' => 'seg', 'class' => 'browser-default select2', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_2'), ['class' => 'browser-default select2 segment_id_select', 'id' => 'seg', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                                 <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                 <div class="col-sm-5">
                                     {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                    $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
+                                    $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2 customer_select',
                                     'placeholder' => '-- Select Customer --']) !!}
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
                                     <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                     <div class="col-sm-5">
                                         {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2 customer_select',
                                         'placeholder' => '-- Select Customer --']) !!}
                                     </div>
                                 </div>
@@ -298,7 +298,7 @@
                                     <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                                     <div class="col-sm-5">
                                         {!! Form::select('customer_id_2', $customer, !empty($pengajuan->customer_id) ?
-                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2',
+                                        $pengajuan->customer_id : old('customer_id_2'), ['class' => 'browser-default select2 customer_select',
                                         'placeholder' => '-- Select Customer --']) !!}
                                     </div>
                                 </div>
@@ -384,7 +384,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.segment_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('segment_id_4', $segment, !empty($pengajuan->segment_id) ?
-                                $pengajuan->segment_id : old('segment_id_4'), ['class' => 'browser-default select2', 'placeholder'
+                                $pengajuan->segment_id : old('segment_id_4'), ['class' => 'browser-default select2 segment_id_select', 'placeholder'
                                 => '-- Select Segment --']) !!}
                             </div>
                         </div>
@@ -392,7 +392,7 @@
                             <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.customer_label')</label>
                             <div class="col-sm-5">
                                 {!! Form::select('customer_id_4', $customer, !empty($pengajuan->customer_id) ?
-                                $pengajuan->customer_id : old('customer_id_4'), ['class' => 'browser-default select2',
+                                $pengajuan->customer_id : old('customer_id_4'), ['class' => 'browser-default select2 customer_select',
                                 'placeholder' => '-- Select Customer --']) !!}
                             </div>
                         </div>
@@ -585,3 +585,48 @@
     {!! Form::close() !!}
 </section>
 @endsection
+@push('custom-script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        // alert('tes');
+       $('.segment_id_select').on('change', function(){
+           // alert('tes');
+           var segment_id = $(this).val();
+           var url = "/admin/jib/pengajuan/findcustomername/"+segment_id;
+           // console.log(segment_id);
+           $.ajax({
+               type : 'GET',
+{{--               url : '{!! URL::to('findCustomerName') !!}',--}}
+               url : url,
+               data : {'id':segment_id},
+               success : function(data){
+                   // console.log('success');
+                   //
+                   // console.log(data);
+                   $('.customer_select').empty();
+                   $('.customer_select').append('<option value="0">-- Select Customer --</option>')
+                   $.each(data, function(index, custnameObj){
+                       $('.customer_select').append('<option value="'+custnameObj.id+'">'+custnameObj.name+'</option>')
+                   });
+               },
+               error : function(){
+
+               }
+           });
+
+       });
+
+        $('#seg').on('change', function () {
+            var segment_id = $('#seg').val();
+
+            if (segment_id == 6) {
+                $("#cust").hide();
+            } else {
+                $("#cust").show();
+                $("#cust-draft").show();
+            }
+            return false;
+        });
+    });
+</script>
+@endpush
