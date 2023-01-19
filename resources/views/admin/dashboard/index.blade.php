@@ -2,6 +2,7 @@
 
 @section('content')
 <section class="section">
+  @include('admin.dashboard._filter')
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
@@ -395,8 +396,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
-
+<script src="{{ asset('admin/stisla/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0"></script>
 <script>
 
@@ -549,6 +551,16 @@
       config
     );
     //End Status JIB Chart//
+
+    if(jQuery().daterangepicker) {
+    if($(".dtpick").length) {
+      $('.dtpick').daterangepicker({
+        locale: {format: 'DD-MM-YYYY'},
+        singleDatePicker: true,
+      });
+    }
+  }
+
 
 </script>
 </section>
