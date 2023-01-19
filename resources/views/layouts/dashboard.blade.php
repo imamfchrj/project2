@@ -84,5 +84,6 @@
         @if ($currentAdminMenu && $currentAdminMenu == 'dashboard')
             <script src="{{ asset('admin/stisla/assets/js/page/index.js') }}"></script>
         @endif
+    @stack('custom-script')
     </body>
 </html>

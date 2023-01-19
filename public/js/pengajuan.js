@@ -66,18 +66,6 @@ $('#kategori_id').on('change', function () {
     return false;
 });
 
-$('#seg').on('change', function () {
-    var segment_id = $('#seg').val();
-
-    if (segment_id == 6) {
-        $("#cust").hide();
-    } else {
-        $("#cust").show();
-        $("#cust-draft").show();
-    }
-    return false;
-});
-
 $(document).ready(function () {
     $("#group-1").hide();
     $("#group-2").hide();

@@ -5,6 +5,7 @@ namespace Modules\Jib\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
+use Modules\Jib\Entities\Mcustomer;
 use Modules\Jib\Http\Controllers\JibController;
 use Modules\Jib\Http\Requests\Admin\PengajuanRequest;
 
@@ -27,16 +28,16 @@ class PengajuanController extends JibController
 {
     use Authorizable;
 
-    private  $pengajuanRepository,
-             $initiatorRepository,
-             $segmentRepository,
-             $customerRepository,
-             $kategoriRepository,
-             $reviewRepository,
-             $pemeriksaRepository,
-             $jenisRepository,
-             $persetujuanRepository,
-             $momRepository;
+    private $pengajuanRepository,
+        $initiatorRepository,
+        $segmentRepository,
+        $customerRepository,
+        $kategoriRepository,
+        $reviewRepository,
+        $pemeriksaRepository,
+        $jenisRepository,
+        $persetujuanRepository,
+        $momRepository;
 
     public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
                                 InitiatorRepositoryInterface $initiatorRepository,
@@ -50,7 +51,7 @@ class PengajuanController extends JibController
                                 MomRepositoryInterface $momRepository)
     {
         parent::__construct();
-        $this->data['currentAdminMenu'] = 'pengajuan';
+        $this->data['currentAdminMenu'] = 'list pengajuan';
 
         $this->pengajuanRepository = $pengajuanRepository;
         $this->initiatorRepository = $initiatorRepository;
@@ -67,6 +68,7 @@ class PengajuanController extends JibController
         $this->data['viewTrash'] = false;
 
     }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -92,7 +94,7 @@ class PengajuanController extends JibController
         $this->data['count_draft'] = $this->pengajuanRepository->count_draft();
         $this->data['count_initiator'] = $this->pengajuanRepository->count_initiator();
         $this->data['count_rejected'] = $this->pengajuanRepository->count_rejected();
-        return view('jib::admin.pengajuan.index',$this->data);
+        return view('jib::admin.pengajuan.index', $this->data);
     }
 
     public function trashed(Request $request)
@@ -163,15 +165,15 @@ class PengajuanController extends JibController
     {
         $pengajuan = $this->pengajuanRepository->findById($id);
 
-        $this->data['pengajuan']=$pengajuan['pengajuan'];
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
         $this->data['file_jib'] = $pengajuan['file_jib'];
         $this->data['notes'] = $this->reviewRepository->findByPengajuanId($id);
 
-        $persetujuan =$this->persetujuanRepository->findAllbyPengId($id);
+        $persetujuan = $this->persetujuanRepository->findAllbyPengId($id);
         $this->data['persetujuan'] = $persetujuan['persetujuan'];
         $this->data['file_approval'] = $persetujuan['file_approval'];
 
-        $mom =$this->momRepository->findAllbyPengId($id);
+        $mom = $this->momRepository->findAllbyPengId($id);
         $this->data['mom'] = $mom['mom'];
         $this->data['file_mom'] = $mom['file_mom'];
 
@@ -179,8 +181,8 @@ class PengajuanController extends JibController
             // BISNIS CAPEX
             if ($this->data['pengajuan']->jenis_id == 1) {
                 return view('jib::admin.pengajuan.show_bisnis', $this->data);
-            // BISNIS OPEX
-            }else {
+                // BISNIS OPEX
+            } else {
                 return view('jib::admin.pengajuan.show_bisnis_opex', $this->data);
             }
         } else {
@@ -189,17 +191,18 @@ class PengajuanController extends JibController
 
     }
 
-   public function download($uid)
-   {
-       # code...
-        $filedownload = Media::where('uuid',$uid)->first();
-       return response()->download($filedownload->getPath());
-   }
+    public function download($uid)
+    {
+        # code...
+        $filedownload = Media::where('uuid', $uid)->first();
+        return response()->download($filedownload->getPath());
+    }
 
-   public function down(Media $mediaItem)
-   {
-      return $mediaItem;
-   }
+    public function down(Media $mediaItem)
+    {
+        return $mediaItem;
+    }
+
     /**
      * Show the form for editing the specified resource.
      * @param int $id
@@ -225,7 +228,7 @@ class PengajuanController extends JibController
             return redirect('admin/jib/pengajuan')
                 ->with('success', __('blog::pegnajuan.success_update_message'));
         }
-    
+
     }
 
     /**
@@ -233,7 +236,7 @@ class PengajuanController extends JibController
      * @param int $id
      * @return Renderable
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $permanentDelete = (bool)$request->get('_permanent_delete');
 
@@ -255,5 +258,12 @@ class PengajuanController extends JibController
         }
 
         return redirect('admin/jib/pengajuan/trashed')->with('error', __('jib::pengajuan.fail_restore_message'));
+    }
+
+    public function findcustomername($id)
+    {
+        $data_cust = Mcustomer::select('name', 'id')->where('segment_id', $id)->get();
+//        $data_cust = Mcustomer::all();
+        return response()->json($data_cust);
     }
 }

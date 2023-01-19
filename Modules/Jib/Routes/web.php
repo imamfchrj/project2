@@ -45,5 +45,7 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::get('pengajuan/{uid}/download', 'PengajuanController@download')->name('pengajuan.download');
     Route::resource('pengajuan', 'PengajuanController');
 
+    Route::get('pengajuan/findcustomername/{id}', 'PengajuanController@findcustomername')->name('pengajuan.findcustomername');
+
 //    Route::resource('selesai', 'SelesaiController');
 });

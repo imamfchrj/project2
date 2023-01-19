@@ -63,10 +63,10 @@ class Pengajuan extends Model implements HasMedia
     }
 
     // const filter status
-    public const REVIEWER_0 = 1;
-    public const REVIEWER_1 = 2;
-    public const REVIEWER_2 = 3;
-    public const REVIEWER_3 = 4;
+    public const REVIEWER_1 = 1;
+    public const REVIEWER_2 = 2;
+    public const REVIEWER_3 = 3;
+    public const REVIEWER_4 = 4;
     public const APPROVAL = 5;
     public const CLOSED = 6;
     public const DRAFT = 7;
@@ -77,10 +77,10 @@ class Pengajuan extends Model implements HasMedia
 //    public const PAGE = 'page';
 
     public const STATUSES = [
-        self::REVIEWER_0 => 'Reviewer 0',
         self::REVIEWER_1 => 'Reviewer 1',
         self::REVIEWER_2 => 'Reviewer 2',
         self::REVIEWER_3 => 'Reviewer 3',
+        self::REVIEWER_4 => 'Reviewer 4',
         self::APPROVAL => 'Approval',
         self::CLOSED => 'Closed',
         self::DRAFT => 'Draft',
