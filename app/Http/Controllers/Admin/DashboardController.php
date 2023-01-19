@@ -33,7 +33,6 @@ class DashboardController extends Controller
         // dd($user);
 
 
-
         if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->name == "Approver") {
             $doc_draft = DB::table('jib_pengajuan')->where('status_id', '7')->count();
             $doc_review = DB::table('jib_pengajuan')->where('status_id', '1')->orWhere('status_id', '2')->count();
@@ -64,7 +63,6 @@ class DashboardController extends Controller
         $total_realisasi = DB::table('m_budget')->sum('realisasi_capex');
         $available_capex = DB::table('m_budget')->sum('saldo_rkap');
         $persen_realisasi = DB::table('m_budget')->sum('persen_realisasi_capex');
-
 
 
         //Count AVG Completion JIB
