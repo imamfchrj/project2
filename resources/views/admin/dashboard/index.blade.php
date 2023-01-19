@@ -1,22 +1,21 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="far fa-folder-open"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>BUDGET CAPEX YTD <?php echo date('Y'); ?> </h4>
-                        </div>
-                        <div class="card-body">
-                            {{-- Rp. 668,56Bn --}}
-                            {{ Str::num($budget_capex) }}
-                        </div>
-                    </div>
+<section class="section">
+  @include('admin.dashboard._filter')
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+              <div class="card-icon bg-danger">
+                <i class="far fa-folder-open"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4>BUDGET CAPEX YTD <?php echo date("Y"); ?> </h4>
+                </div>
+                <div class="card-body">
+                  {{-- Rp. 668,56Bn --}}
+                  {{ Str::num($budget_capex) }}
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
@@ -475,6 +474,12 @@
                     } = chart;
                     ctx.save();
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
+<script src="{{ asset('admin/stisla/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0"></script>
+<script>
                     if (chart._active.length > 0) {
                         const textLabel = chart.config.data.labels[chart._active[0].index];
                         const numberLabel =
@@ -488,7 +493,6 @@
                         const color =
                             chart.config.data.datasets[chart._active[0].datasetIndex]
                             .backgroundColor[chart._active[0].index];
-
                         ctx.font = 'bolder 20px Arial';
                         ctx.fillStyle = color;
                         (ctx.textAlign = 'center'),
@@ -654,7 +658,16 @@
                     hoverOffset: 4,
                 }, ]
             };
-
+    if(jQuery().daterangepicker) {
+    if($(".dtpick").length) {
+      $('.dtpick').daterangepicker({
+        locale: {format: 'DD-MM-YYYY'},
+        singleDatePicker: true,
+      });
+    }
+  }
+</script>
+</section>
             var config = {
                 type: 'bar',
                 data,
