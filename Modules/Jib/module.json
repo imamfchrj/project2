@@ -22,13 +22,7 @@
             "name": "List Pengajuan",
             "route": "admin/jib/pengajuan",
             "permission": "view_jib-pengajuan"
-        },
-        {
-            "icon": "fa fa-file",
-            "name": "Selesai",
-            "route": "admin/jib/selesai",
-            "permission": "view_jib-selesai"
         }
     ],
-    "permissions": ["jib-workspace", "jib-pengajuan", "jib-selesai "]
+    "permissions": ["jib-workspace", "jib-pengajuan"]
 }

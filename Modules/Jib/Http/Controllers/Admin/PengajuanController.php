@@ -51,7 +51,7 @@ class PengajuanController extends JibController
                                 MomRepositoryInterface $momRepository)
     {
         parent::__construct();
-        $this->data['currentAdminMenu'] = 'pengajuan';
+        $this->data['currentAdminMenu'] = 'list pengajuan';
 
         $this->pengajuanRepository = $pengajuanRepository;
         $this->initiatorRepository = $initiatorRepository;
