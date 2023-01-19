@@ -532,52 +532,65 @@ class PengajuanRepository implements PengajuanRepositoryInterface
 
         // Insert M_Reviewer
         if ($params['kategori_id'] == 1 && $params['jenis_id'] == 1) { // BISNIS CAPEX
-            $nilai_capex = $params['nilai_capex_1'];
+            $nilai_capex = str_replace(".", "", $params['nilai_capex_1']);
             $segment = $params['segment_id_1'];
+//            dd('aaa');
         } else if ($params['kategori_id'] == 1 && $params['jenis_id'] == 2) { // BISNIS OPEX
-            $nilai_capex = $params['nilai_capex_4'];
+            $nilai_capex = str_replace(".", "", $params['nilai_capex_4']);
             $segment = $params['segment_id_4'];
+//            dd('bbb');
         } else { // SUPPORT CAPEX OPEX
-            $nilai_capex = $params['nilai_capex_2'];
+            $nilai_capex = str_replace(".", "", $params['nilai_capex_2']);
             $segment = $params['segment_id_2'];
+//            dd('ccc');
         }
 
         // Insert M_Reviewer
         $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
         // CEK KP / REG
         if ($cek_initiator->kantor == 'KANTOR PUSAT') { // KP - Pemilik CAPEX/OPEX
+//            dd('aaa');
             $objid_approver = $cek_approver->objid_posisi;
             // GET REVIEWER dan APPROVER BY RULES
             if ($nilai_capex <= 3000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(1);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 1)->where('petugas', 'APPROVER')->first();
+//                dd('abbb');
             } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(2);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 2)->where('petugas', 'APPROVER')->first();
+//                dd('accc');
             } else {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
+//                dd('addd');
             }
         } else { // REG - Pemilik CAPEX
+//            dd('bbb');
             // GET REVIEWER dan APPROVER BY RULES
             if ($nilai_capex <= 250000000) {
                 $objid_approver = $cek_approver->objid_posisi;
                 $pemeriksa = $this->pemeriksaRepository->findByRules(4);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 4)->where('petugas', 'APPROVER')->first();
+//                dd('bccc');
             } else if ($nilai_capex > 250000000 && $nilai_capex <= 3000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(5);
                 $get_pem_by_approver = Mpemeriksa::where('segment_id', $segment)->where('rules', 5)->where('petugas', 'APPROVER')->first();
+//                dd('bddd');
             } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(6);
                 if ($params['kategori_id'] == 1) {
                     $get_pem_by_approver = Mpemeriksa::where('segment_id', 1)->where('rules', 6)->where('petugas', 'APPROVER')->first();
+//                    dd('beee');
                 } else {
                     $get_pem_by_approver = Mpemeriksa::where('segment_id', 2)->where('rules', 6)->where('petugas', 'APPROVER')->first();
+//                    dd('bfff');
                 }
             } else {
                 $objid_approver = $cek_approver->objid_posisi;
                 $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
+//                dd('bggg');
             }
         }
 
