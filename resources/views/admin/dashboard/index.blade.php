@@ -17,155 +17,169 @@
                   {{-- Rp. 668,56Bn --}}
                   {{ Str::num($budget_capex) }}
                 </div>
-              </div>
             </div>
-          </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-          <div class="card card-statistic-1">
-            <div class="card-icon bg-primary">
-              <i class="fas fa-balance-scale "></i>
-            </div>
-            <div class="card-wrap">
-              <div class="card-header">
-                <h4>Total Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
-              </div>
-              <div class="card-body">
-                {{ Str::num($total_realisasi) }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-              <div class="card-icon bg-success">
-                <i class="fas fa-check "></i>
-              </div>
-              <div class="card-wrap">
-                <div class="card-header">
-                  <h4>Available CAPEX YTD <?php echo date("Y"); ?></h4>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-balance-scale "></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Realisasi CAPEX YTD <?php echo date('Y'); ?></h4>
+                        </div>
+                        <div class="card-body">
+                            {{ Str::num($total_realisasi) }}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {{ Str::num($available_capex) }}
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                        <i class="fas fa-check "></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Available CAPEX YTD <?php echo date('Y'); ?></h4>
+                        </div>
+                        <div class="card-body">
+                            {{ Str::num($available_capex) }}
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-              <div class="card-icon bg-info">
-                <i class="fas fa-percent"></i>
-              </div>
-              <div class="card-wrap">
-                <div class="card-header">
-                  <h4>% Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-info">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>% Realisasi CAPEX YTD <?php echo date('Y'); ?></h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $persen_realisasi }}%
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {{ $persen_realisasi }}%
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <i class="fas fa-hourglass"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Nilai CAPEX YTD <?php echo date('Y'); ?></h4>
+                        </div>
+                        <div class="card-body">
+                            {{ Str::num($nilai_capex) }}
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-              <div class="card-icon bg-warning">
-                <i class="fas fa-hourglass"></i>
-              </div>
-              <div class="card-wrap">
-                <div class="card-header">
-                  <h4>Nilai CAPEX YTD <?php echo date("Y"); ?></h4>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-secondary">
+                        <i class="far fa-file"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>EST. REVENUE YTD <?php echo date('Y'); ?></h4>
+                        </div>
+                        <div class="card-body">
+                            {{-- 1,201 --}}
+                            {{ Str::num($rev) }}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                  {{ Str::num($nilai_capex) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="card-stats">
+                        <div class="card-stats-title">JIB Statistics YTD -
+                            <div class="dropdown d-inline">
+                                <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
+                                    id="orders-month">August</a>
+                                <ul class="dropdown-menu dropdown-menu-sm">
+                                    <li class="dropdown-title">Select Month</li>
+                                    <li><a href="#" class="dropdown-item">January</a></li>
+                                    <li><a href="#" class="dropdown-item">February</a></li>
+                                    <li><a href="#" class="dropdown-item">March</a></li>
+                                    <li><a href="#" class="dropdown-item">April</a></li>
+                                    <li><a href="#" class="dropdown-item">May</a></li>
+                                    <li><a href="#" class="dropdown-item">June</a></li>
+                                    <li><a href="#" class="dropdown-item">July</a></li>
+                                    <li><a href="#" class="dropdown-item active">August</a></li>
+                                    <li><a href="#" class="dropdown-item">September</a></li>
+                                    <li><a href="#" class="dropdown-item">October</a></li>
+                                    <li><a href="#" class="dropdown-item">November</a></li>
+                                    <li><a href="#" class="dropdown-item">December</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown d-inline">
+                                <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
+                                    id="orders-month">2023</a>
+                                <ul class="dropdown-menu dropdown-menu-sm">
+                                    <li class="dropdown-title">Select Year</li>
+                                    <li><a href="#" class="dropdown-item">2017</a></li>
+                                    <li><a href="#" class="dropdown-item">2018</a></li>
+                                    <li><a href="#" class="dropdown-item">2019</a></li>
+                                    <li><a href="#" class="dropdown-item">2020</a></li>
+                                    <li><a href="#" class="dropdown-item">2021</a></li>
+                                    <li><a href="#" class="dropdown-item">2022</a></li>
+                                    <li><a href="#" class="dropdown-item active">2023</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-stats-items">
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_draft }}</div>
+                                <div class="card-stats-item-label">Draft</div>
+                            </div>
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_review }}</div>
+                                <div class="card-stats-item-label">Review</div>
+                            </div>
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_approval }}</div>
+                                <div class="card-stats-item-label">Approval</div>
+                            </div>
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_return }}</div>
+                                <div class="card-stats-item-label">Return</div>
+                            </div>
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_rejected }}</div>
+                                <div class="card-stats-item-label">Rejected</div>
+                            </div>
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_closed }}</div>
+                                <div class="card-stats-item-label">Closed</div>
+                            </div>
+                            <div class="card-stats-item">
+                                <div class="card-stats-item-count">{{ $doc_total }}</div>
+                                <div class="card-stats-item-label">Total</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Average Completion Day /JIB</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $averageTime }} day
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-          <div class="card card-statistic-1">
-            <div class="card-icon bg-secondary">
-              <i class="far fa-file"></i>
-            </div>
-            <div class="card-wrap">
-              <div class="card-header">
-                <h4>EST. REVENUE YTD <?php echo date("Y"); ?></h4>
-              </div>
-              <div class="card-body">
-                {{-- 1,201 --}}
-                {{ Str::num($rev) }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      <div class="card card-statistic-2">
-        <div class="card-stats">
-          <div class="card-stats-title">JIB Statistics YTD -
-            <div class="dropdown d-inline">
-              <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">August</a>
-              <ul class="dropdown-menu dropdown-menu-sm">
-                <li class="dropdown-title">Select Month</li>
-                <li><a href="#" class="dropdown-item">January</a></li>
-                <li><a href="#" class="dropdown-item">February</a></li>
-                <li><a href="#" class="dropdown-item">March</a></li>
-                <li><a href="#" class="dropdown-item">April</a></li>
-                <li><a href="#" class="dropdown-item">May</a></li>
-                <li><a href="#" class="dropdown-item">June</a></li>
-                <li><a href="#" class="dropdown-item">July</a></li>
-                <li><a href="#" class="dropdown-item active">August</a></li>
-                <li><a href="#" class="dropdown-item">September</a></li>
-                <li><a href="#" class="dropdown-item">October</a></li>
-                <li><a href="#" class="dropdown-item">November</a></li>
-                <li><a href="#" class="dropdown-item">December</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="card-stats-items">
-            <div class="card-stats-item">
-              <div class="card-stats-item-count">{{$doc_draft}}</div>
-              <div class="card-stats-item-label">Draft</div>
-            </div>
-            <div class="card-stats-item">
-              <div class="card-stats-item-count">{{$doc_review}}</div>
-              <div class="card-stats-item-label">Review</div>
-            </div>
-            <div class="card-stats-item">
-              <div class="card-stats-item-count">{{$doc_approval}}</div>
-              <div class="card-stats-item-label">Approval</div>
-            </div>
-            <div class="card-stats-item">
-                <div class="card-stats-item-count">{{$doc_return}}</div>
-                <div class="card-stats-item-label">Return</div>
-            </div>
-            <div class="card-stats-item">
-                <div class="card-stats-item-count">{{$doc_rejected}}</div>
-                <div class="card-stats-item-label">Rejected</div>
-            </div>
-            <div class="card-stats-item">
-                <div class="card-stats-item-count">{{$doc_closed}}</div>
-                <div class="card-stats-item-label">Closed</div>
-            </div>
-            <div class="card-stats-item">
-              <div class="card-stats-item-count">{{$doc_total}}</div>
-              <div class="card-stats-item-label">Total</div>
-          </div>
-          </div>
-        </div>
-        <div class="card-icon shadow-primary bg-primary">
-          <i class="fas fa-archive"></i>
-        </div>
-        <div class="card-wrap">
-          <div class="card-header">
-            <h4>Average Completion Day /JIB</h4>
-          </div>
-          <div class="card-body">
-            {{$averageTime}} day
-          </div>
-        </div>
-      </div>
-    </div>
-    {{-- <div class="col-lg-4 col-md-4 col-sm-12">
+            {{-- <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">
         <div class="card-chart">
           <canvas id="balance-chart" height="80"></canvas>
@@ -183,7 +197,7 @@
         </div>
       </div>
     </div> --}}
-    {{-- <div class="col-lg-4 col-md-4 col-sm-12">
+            {{-- <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">
         <div class="card-chart">
           <canvas id="sales-chart" height="80"></canvas>
@@ -201,8 +215,8 @@
         </div>
       </div>
     </div> --}}
-  </div>
-  {{-- <div class="row">
+        </div>
+        {{-- <div class="row">
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
@@ -330,70 +344,135 @@
       </div>
     </div>
   </div> --}}
-  <div class="row">
-    <div class="col-12 col-md-6 col-lg-6">
-      <div class="card">
-        <div class="card-header">
-          <h4>Allocation</h4>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Allocation</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart3"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Status JIB</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart4"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <canvas id="myChart3"></canvas>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>IRR</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart6"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>JIB/UNIT</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart5"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-6">
-      <div class="card">
-        <div class="card-header">
-          <h4>Status JIB</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>JIB ONLINE</h4>
+                        <div class="card-header-action">
+                            <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive table-invoice">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Kegiatan</th>
+                                    <th>Inisiator</th>
+                                    <th>Pembagian</th>
+                                    <th>Nilai CAPEX</th>
+                                    <th>Est. Revenue</th>
+                                    <th>IRR</th>
+                                    <th>Status</th>
+                                    <th>Year</th>
+                                </tr>
+                                @foreach ($jib as $item)
+                                    <tr>
+                                        <td><a href="#">{{ $item->kegiatan }}</a></td>
+                                        <td class="font-weight-600">{{ $item->nama_sub_unit }}</td>
+                                        <td class="font-weight-600">{{ $item->nama_kategori }}</td>
+                                        <td class="font-weight-600">{{ Str::rupiah($item->nilai_capex) }}</td>
+                                        <td class="font-weight-600">{{ Str::rupiah($item->est_revenue) }}</td>
+                                        <td class="font-weight-600">{{ $item->irr }}</td>
+                                        <td class="font-weight-600">{{ $item->nama_status }}</td>
+                                        <td class="font-weight-600">
+                                            {{ \Carbon\Carbon::parse($item->created_at)->format('Y') }}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <canvas id="myChart4"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4>JIB ONLINE</h4>
-          <div class="card-header-action">
-            <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
-          </div>
-        </div>
-        <div class="card-body p-0">
-          <div class="table-responsive table-invoice">
-            <table class="table table-striped">
-              <tr>
-                <th>Kegiatan</th>
-                <th>Inisiator</th>
-                <th>Pembagian</th>
-                <th>Nilai CAPEX</th>
-                <th>Est. Revenue</th>
-                <th>IRR</th>
-                <th>Status</th>
-                <th>Year</th>
-              </tr>
-              @foreach ($jib as $item)
-              <tr>
-                <td><a href="#">{{ $item->kegiatan}}</a></td>
-                <td class="font-weight-600">{{ $item->nama_sub_unit}}</td>
-                <td class="font-weight-600">{{ $item->nama_kategori}}</td>
-                <td class="font-weight-600">{{ Str::rupiah($item->nilai_capex) }}</td>
-                <td class="font-weight-600">{{ Str::rupiah($item->est_revenue) }}</td>
-                <td class="font-weight-600">{{ $item->irr}}</td>
-                <td class="font-weight-600">{{ $item->nama_status}}</td>
-                <td class="font-weight-600"> {{\Carbon\Carbon::parse($item->created_at)->format('Y')}}</td>
-              </tr>
-              @endforeach
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js">
+        </script>
 
-  </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0"></script>
+        <script>
+            const counter = {
+                id: 'counter',
+                beforeDraw(chart, args, options) {
+                    const {
+                        ctx,
+                        chartArea: {
+                            left,
+                            right,
+                            top,
+                            bottom,
+                            width,
+                            height
+                        },
+                    } = chart;
+                    ctx.save();
+                    ctx.font = 'bolder 20px Arial';
+                    ctx.fillStyle = 'black';
+                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2.7,
+                        height / 2 + top, );
+                },
+            }
+
+            const hoverLabel = {
+                id: 'hoverLabel',
+                afterDraw(chart, args, options) {
+                    const {
+                        ctx,
+                        chartArea: {
+                            left,
+                            right,
+                            top,
+                            bottom,
+                            width,
+                            height
+                        },
+                    } = chart;
+                    ctx.save();
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -401,157 +480,184 @@
 <script src="{{ asset('admin/stisla/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0"></script>
 <script>
+                    if (chart._active.length > 0) {
+                        const textLabel = chart.config.data.labels[chart._active[0].index];
+                        const numberLabel =
+                            chart.config.data.datasets[chart._active[0].datasetIndex].data[
+                                chart._active[0].index
+                            ];
 
-    //Start Allocation Chart//
-    const bisnis = {!! json_encode($bisnis) !!};
-    const support = {!! json_encode($support) !!};
-    const total = {!! json_encode($doc_total) !!};
+                        const sum = chart._metasets[chart._active[0].datasetIndex].total;
+                        const percentage = parseFloat((numberLabel / sum * 100).toFixed(1));
+                        // const color = 'black';
+                        const color =
+                            chart.config.data.datasets[chart._active[0].datasetIndex]
+                            .backgroundColor[chart._active[0].index];
+                        ctx.font = 'bolder 20px Arial';
+                        ctx.fillStyle = color;
+                        (ctx.textAlign = 'center'),
+                        ctx.fillText(`${textLabel}`,
+                            width / 2,
+                            height / 3 + top, );
+                        ctx.fillText(`${percentage}% , ${numberLabel}`,
+                            width / 2,
+                            height / 2 + top,
+                        );
+                        ctx.fillText(`Total ${sum} JIB`,
+                            width / 2,
+                            height / 1.5 + top, );
+                    }
+                },
+            };
+            //Start Allocation Chart//
+            var data = {
+                labels: ['Support', 'Bisnis'],
+                datasets: [{
+                    label: 'Status JIB',
+                    data: [
+                        {{ $support }},
+                        {{ $bisnis }},
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    hoverOffset: 4,
+                    cutout: '80%',
+                }]
+            };
 
+            var config = {
+                type: 'doughnut',
+                data,
+                options: {
+                    responsive: true,
+                    aspectRatio: 2,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    console.log(context)
+                                    console.log(context.label)
+                                    console.log(context.parsed)
 
+                                    const datapoints = chart.data.datasets[0].data;
 
-    const hoverLabel = {
-      id: 'hoverLabel',
-        afterDraw(chart, args, options) {
-          const {
-            ctx,
-            chartArea: { left, right, top, bottom, width, height },
-          } = chart;
-          ctx.save();
+                                    function totalSum(total, datapoint) {
+                                        return total + datapoint;
+                                    }
 
-          if (chart._active.length > 0) {
-            const textLabel = chart.config.data.labels[chart._active[0].index];
-            const numberLabel =
-              chart.config.data.datasets[chart._active[0].datasetIndex].data[
-                chart._active[0].index
-              ];
+                                    const totalValue = datapoints.reduce(totalSum, 0)
+                                    const percentageValue = (context.parsed / totalValue * 100).toFixed(0);
+                                    return `${context.label} : ${percentageValue}%, ${context.parsed}  `;
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [counter],
 
-            const sum = chart._metasets[chart._active[0].datasetIndex].total;
-            const percentage = parseFloat((numberLabel/sum*100).toFixed(1));
-            // const color = 'black';
-            const color =
-              chart.config.data.datasets[chart._active[0].datasetIndex]
-                .backgroundColor[chart._active[0].index];
+            };
 
-            ctx.font = 'bolder 20px Arial';
-            ctx.fillStyle = color;
-            (ctx.textAlign = 'center'),
-            ctx.fillText(`${textLabel}`,
-            width / 2,
-              height / 3 + top,);
-            ctx.fillText(`${percentage}% , ${numberLabel}` ,
-              width / 2,
-              height / 2 + top,
+            // render init block
+            window.chart = new Chart(
+                document.getElementById('myChart3').getContext('2d'),
+                config
             );
-            ctx.fillText(`Total ${sum} JIB`,
-              width / 2,
-              height / 1.5 + top,);
-          }
-          // else if(chart._active.length  =! 0) {
-          //   Chart.pluginService.register({
-          //     beforeDraw: function (chart) {
-          //         var width = chart.chart.width,
-          //             height = chart.chart.height,
-          //             ctx = chart.chart.ctx;
-          //         ctx.restore();
-          //         var fontSize = (height / 114).toFixed(2);
-          //         ctx.font = fontSize + "em sans-serif";
-          //         ctx.textBaseline = "middle";
-          //         var text = chart.config.options.elements.center.text,
-          //             textX = Math.round((width - ctx.measureText(text).width) / 2),
-          //             textY = height / 2;
-          //         ctx.fillText(text, textX, textY);
-          //         ctx.save();
-          //     }
-          //   });
-          // }
-      },
-    };
+            //End Allocation Chart
 
-    var data = {
-        labels: ['Bisnis', 'Support'],
-        datasets: [{
-        label: 'Status JIB',
-        data: [
-            {{$bisnis}},
-            {{$support}},
-        ],
-        backgroundColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)'
-        ],
-        hoverOffset : 4,
-        cutout: '80%',
-      }]
-    };
+            //Start Status JIB Chart//
+            var data = {
+                labels: ['Draft', 'Review', 'Approval', 'Return', 'Reject', 'Closed'],
+                datasets: [{
+                    label: 'Status JIB',
+                    data: [
+                        {{ $doc_draft }},
+                        {{ $doc_review }},
+                        {{ $doc_approval }},
+                        {{ $doc_return }},
+                        {{ $doc_rejected }},
+                        {{ $doc_closed }}
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgb(153, 102, 255,1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(201, 203, 207, 1)'
+                    ],
+                    hoverOffset: 4,
+                    cutout: '80%',
 
-    var config = {
-      type: 'doughnut',
-      data,
-      options: {
-        responsive: true,
-        aspectRatio: 2,
-      },
-      plugins : [hoverLabel]
-    };
+                }]
+            };
 
-    // render init block
-    window.chart = new Chart(
-      document.getElementById('myChart3').getContext('2d'),
-      config
-    );
-    //End Allocation Chart
+            var config = {
+                type: 'doughnut',
+                data,
+                options: {
+                    responsive: true,
+                    aspectRatio: 2,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    console.log(context)
+                                    console.log(context.label)
+                                    console.log(context.parsed)
 
-    //Start Status JIB Chart//
-    // const review = {!! json_encode($doc_review) !!};
-    // const approval = {!! json_encode($doc_approval) !!};
-    // const closed = {!! json_encode($doc_closed) !!};
-    // const initiator = {!! json_encode($doc_return) !!};
-    // const draft = {!! json_encode($doc_draft) !!};
-    // const rejected = {!! json_encode($doc_rejected) !!};
+                                    const datapoints = chart.data.datasets[0].data;
 
-    var data = {
-        labels: ['Draft', 'Review', 'Approval', 'Return', 'Reject', 'Closed'],
-        datasets: [{
-        label: 'Status JIB',
-        data: [
-            {{$doc_draft}},
-            {{$doc_review}},
-            {{$doc_approval}},
-            {{$doc_return}},
-            {{$doc_rejected}},
-            {{$doc_closed}}
-        ],
-        backgroundColor: [
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 205, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgb(153, 102, 255,1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(201, 203, 207, 1)'
-        ],
-        hoverOffset : 4,
-        cutout: '80%',
+                                    function totalSum(total, datapoint) {
+                                        return total + datapoint;
+                                    }
 
-      }]
-    };
+                                    const totalValue = datapoints.reduce(totalSum, 0)
+                                    const percentageValue = (context.parsed / totalValue * 100).toFixed(0);
+                                    return `${context.label} : ${percentageValue}%, ${context.parsed}  `;
+                                }
+                            }
+                        }
+                    }
+                },
 
-    var config = {
-      type: 'doughnut',
-      data,
-      options: {
-        responsive: true,
-        aspectRatio: 2,
-      },
-      plugins : [hoverLabel]
-    };
+                plugins: [counter]
+            };
 
-    // render init block
-    window.chart = new Chart(
-      document.getElementById('myChart4').getContext('2d'),
-      config
-    );
-    //End Status JIB Chart//
+            // render init block
+            window.chart = new Chart(
+                document.getElementById('myChart4').getContext('2d'),
+                config
+            );
+            //End Status JIB Chart//
 
+            //Start IRR Chart//
+            var data = {
+                labels: ['<11%', '11% - 15%', '>15%'],
+                datasets: [{
+                    label: 'PD',
+                    data: [0, 7, 2],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    hoverOffset: 4,
+                }, {
+                    label: 'MDPI',
+                    data: [0, 3, 5],
+                    backgroundColor: [
+                        'rgba(255, 205, 86, 1)',
+                    ],
+                    hoverOffset: 4,
+                }, {
+                    label: 'TMS',
+                    data: [3, 6, 1],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 1)',
+                    ],
+                    hoverOffset: 4,
+                }, ]
+            };
     if(jQuery().daterangepicker) {
     if($(".dtpick").length) {
       $('.dtpick').daterangepicker({
@@ -560,10 +666,59 @@
       });
     }
   }
-
-
 </script>
 </section>
+            var config = {
+                type: 'bar',
+                data,
+                options: {
+                    responsive: true,
+                    aspectRatio: 2,
+                },
+            };
 
+            // render init block
+            window.chart = new Chart(
+                document.getElementById('myChart6').getContext('2d'),
+                config
+            );
+            //End IRR Chart
+
+            //Start Per UNIT Chart//
+            var data = {
+                labels: ['Support', 'Bisnis'],
+                datasets: [{
+                    label: 'Status JIB',
+                    data: [
+
+                        {{ $support }},
+                        {{ $bisnis }},
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    hoverOffset: 4,
+                    cutout: '80%',
+                }]
+            };
+
+            var config = {
+                type: 'doughnut',
+                data,
+                options: {
+                    responsive: true,
+                    aspectRatio: 2,
+                },
+                plugins: [counter]
+            };
+
+            // render init block
+            window.chart = new Chart(
+                document.getElementById('myChart5').getContext('2d'),
+                config
+            );
+            //End Per UNIT Chart
+        </script>
+    </section>
 @endsection
-
