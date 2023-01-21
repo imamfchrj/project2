@@ -430,28 +430,18 @@
             //Start IRR Chart//
             var data = {
                 labels: ['<11%', '11% - 15%', '>15%'],
-                datasets: [{
-                    label: 'PD',
-                    data: [0, 7, 2],
+                datasets: [
+                @foreach($irr as $unit => $irr_item)
+                {
+                    label:" {{ $unit }} ",
+                    data: [ {{ $irr_item[0] }}, {{ $irr_item[1] }}, {{ $irr_item[2] }}],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 1)'
+                        'rgba({{ rand(190, 200) }}, {{ rand(100, 190) }}, {{ rand(100, 190) }}, 1)'
                     ],
                     hoverOffset: 4,
-                }, {
-                    label: 'MDPI',
-                    data: [0, 3, 5],
-                    backgroundColor: [
-                        'rgba(255, 205, 86, 1)',
-                    ],
-                    hoverOffset: 4,
-                }, {
-                    label: 'TMS',
-                    data: [3, 6, 1],
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 1)',
-                    ],
-                    hoverOffset: 4,
-                },]
+                },
+                @endforeach
+              ]
             };
 
             var config = {
