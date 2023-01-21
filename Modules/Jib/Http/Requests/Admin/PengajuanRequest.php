@@ -33,6 +33,11 @@ class PengajuanRequest extends FormRequest
             'kategori_id' => '',
             'nama_posisi' => '',
             'nama_sub_unit' => '',
+            'kode_sub_unit' => '',
+            'singkatan_unit' => '',
+            'cc' => '',
+            'bulan_id' => '',
+            'bulan' => '',
 
             'kegiatan_1' => '',
             'segment_id_1' => '',

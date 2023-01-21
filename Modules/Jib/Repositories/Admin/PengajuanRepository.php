@@ -292,6 +292,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $array_bulan = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
         $bulan = $array_bulan[date('n')];
 
+        $array_nama_bulan = array(1 => "JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER");
+        $nama_bulan = $array_nama_bulan[date('n')];
+
         $cek_initiator = Minitiator::where('id', $params['nama_sub_unit'])
             ->first();
 
@@ -311,7 +314,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $new_number = sprintf("%05d", $new_numbers);
                 }
 
-                $no_jib = $new_number . '/JIB/CAPEX/B/' . $bulan . '/' . $tahun;
+                    $no_jib = $new_number . '/JIB/CAPEX/B/' . $bulan . '/' . $tahun;
 
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
@@ -321,11 +324,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->initiator_id = $params['initiator_id'];
                     $pengajuan->nama_posisi = $params['nama_posisi'];
                     $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                    $pengajuan->kode_sub_unit = $params['kode_sub_unit'];
+                    $pengajuan->singkatan_unit = $params['singkatan_unit'];
+                    $pengajuan->cc = $params['cc'];
                 } else {
                     $pengajuan->initiator_id = $cek_initiator->id;
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                    $pengajuan->kode_sub_unit = $cek_initiator->kode_sub_unit;
+                    $pengajuan->singkatan_unit = $cek_initiator->singkatan_unit;
+                    $pengajuan->cc = $cek_initiator->cc;
                 }
+                $pengajuan->bulan_id = date('m');
+                $pengajuan->bulan = $nama_bulan;
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
                 $pengajuan->tahun = $tahun;
@@ -383,11 +394,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->initiator_id = $params['initiator_id'];
                     $pengajuan->nama_posisi = $params['nama_posisi'];
                     $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                    $pengajuan->kode_sub_unit = $params['kode_sub_unit'];
+                    $pengajuan->singkatan_unit = $params['singkatan_unit'];
+                    $pengajuan->cc = $params['cc'];
                 } else {
                     $pengajuan->initiator_id = $cek_initiator->id;
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                    $pengajuan->kode_sub_unit = $cek_initiator->kode_sub_unit;
+                    $pengajuan->singkatan_unit = $cek_initiator->singkatan_unit;
+                    $pengajuan->cc = $cek_initiator->cc;
                 }
+                $pengajuan->bulan_id = date('m');
+                $pengajuan->bulan = $nama_bulan;
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
                 $pengajuan->tahun = $tahun;
@@ -476,11 +495,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->initiator_id = $params['initiator_id'];
                 $pengajuan->nama_posisi = $params['nama_posisi'];
                 $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                $pengajuan->kode_sub_unit = $params['kode_sub_unit'];
+                $pengajuan->singkatan_unit = $params['singkatan_unit'];
+                $pengajuan->cc = $params['cc'];
             } else {
                 $pengajuan->initiator_id = $cek_initiator->id;
                 $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                 $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                $pengajuan->kode_sub_unit = $cek_initiator->kode_sub_unit;
+                $pengajuan->singkatan_unit = $cek_initiator->singkatan_unit;
+                $pengajuan->cc = $cek_initiator->cc;
             }
+            $pengajuan->bulan_id = date('m');
+            $pengajuan->bulan = $nama_bulan;
             $pengajuan->jenis_id = $params['jenis_id'];
             $pengajuan->kategori_id = $params['kategori_id'];
             $pengajuan->tahun = $tahun;
@@ -632,6 +659,9 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     //Revisi Pengajuan
     public function update($params = [])
     {
+        $array_nama_bulan = array(1 => "JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER");
+        $nama_bulan = $array_nama_bulan[date('n')];
+
         $cek_initiator = Minitiator::where('id', $params['nama_sub_unit'])
             ->first();
 
@@ -647,11 +677,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->initiator_id = $params['initiator_id'];
                     $pengajuan->nama_posisi = $params['nama_posisi'];
                     $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                    $pengajuan->kode_sub_unit = $params['kode_sub_unit'];
+                    $pengajuan->singkatan_unit = $params['singkatan_unit'];
+                    $pengajuan->cc = $params['cc'];
                 } else {
                     $pengajuan->initiator_id = $cek_initiator->id;
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                    $pengajuan->kode_sub_unit = $cek_initiator->kode_sub_unit;
+                    $pengajuan->singkatan_unit = $cek_initiator->singkatan_unit;
+                    $pengajuan->cc = $cek_initiator->cc;
                 }
+                $pengajuan->bulan_id = date('m');
+                $pengajuan->bulan = $nama_bulan;
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
                 $pengajuan->kegiatan = $params['kegiatan_1'];
@@ -692,11 +730,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $pengajuan->initiator_id = $params['initiator_id'];
                     $pengajuan->nama_posisi = $params['nama_posisi'];
                     $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                    $pengajuan->kode_sub_unit = $params['kode_sub_unit'];
+                    $pengajuan->singkatan_unit = $params['singkatan_unit'];
+                    $pengajuan->cc = $params['cc'];
                 } else {
                     $pengajuan->initiator_id = $cek_initiator->id;
                     $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                     $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                    $pengajuan->kode_sub_unit = $cek_initiator->kode_sub_unit;
+                    $pengajuan->singkatan_unit = $cek_initiator->singkatan_unit;
+                    $pengajuan->cc = $cek_initiator->cc;
                 }
+                $pengajuan->bulan_id = date('m');
+                $pengajuan->bulan = $nama_bulan;
                 $pengajuan->jenis_id = $params['jenis_id'];
                 $pengajuan->kategori_id = $params['kategori_id'];
                 $pengajuan->kegiatan = $params['kegiatan_4'];
@@ -751,11 +797,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $pengajuan->initiator_id = $params['initiator_id'];
                 $pengajuan->nama_posisi = $params['nama_posisi'];
                 $pengajuan->nama_sub_unit = $params['nama_sub_unit'];
+                $pengajuan->kode_sub_unit = $params['kode_sub_unit'];
+                $pengajuan->singkatan_unit = $params['singkatan_unit'];
+                $pengajuan->cc = $params['cc'];
             } else {
                 $pengajuan->initiator_id = $cek_initiator->id;
                 $pengajuan->nama_posisi = $cek_initiator->nama_posisi;
                 $pengajuan->nama_sub_unit = $cek_initiator->nama_sub_unit;
+                $pengajuan->kode_sub_unit = $cek_initiator->kode_sub_unit;
+                $pengajuan->singkatan_unit = $cek_initiator->singkatan_unit;
+                $pengajuan->cc = $cek_initiator->cc;
             }
+            $pengajuan->bulan_id = date('m');
+            $pengajuan->bulan = $nama_bulan;
             $pengajuan->jenis_id = $params['jenis_id'];
             $pengajuan->kategori_id = $params['kategori_id'];
             $pengajuan->kegiatan = $params['kegiatan_2'];
