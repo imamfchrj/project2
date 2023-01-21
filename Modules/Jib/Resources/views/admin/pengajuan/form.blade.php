@@ -10,20 +10,11 @@
         </div>
     </div>
     @if(isset($pengajuan))
-    {!! Form::model($pengajuan, ['url' => ['admin/jib/pengajuan', $pengajuan->id], 'method' => 'PUT', 'files' => true ])
-    !!}
-    {!! Form::hidden('id') !!}
+        {!! Form::model($pengajuan, ['url' => ['admin/jib/pengajuan', $pengajuan->id], 'method' => 'PUT', 'files' => true ]) !!}
+        {!! Form::hidden('id') !!}
     @else
-    {!! Form::open(['url' => 'admin/jib/pengajuan', 'files'=>true]) !!}
-    <!-- {!! Form::hidden('xxxxxxx') !!} -->
+        {!! Form::open(['url' => 'admin/jib/pengajuan', 'files'=>true]) !!}
     @endif
-    {{--@if (empty($pengajuan))--}}
-    {{--<form method="POST" action="{{ route('users.store') }}">--}}
-    {{--@else--}}
-    {{--<form method="POST" action="{{ route('users.update', $pengajuan->id) }}">--}}
-    {{--<input type="hidden" name="id" value="{{ $pengajuan->id }}"/>--}}
-    {{--@method('PUT')--}}
-    {{--@endif--}}
     @csrf
     <input type="hidden" id="draft_status" name="draft_status" />
     <div class="section-body">
