@@ -15,16 +15,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            {{--<div class="col-sm-3">--}}
-                                {{--<h4>@lang('jib::pengajuan.manage_pengajuan')</h4>--}}
-                            {{--</div>--}}
                             @if($viewTrash == false)
                             <div class="col-sm-8">
                                 <div class="row">
-                                    {{--<div class="col mb-4 mb-lg-0 font-weight-bold text-center">--}}
-                                        {{--<div>{{ $count_review + $count_approval }}</div>--}}
-                                        {{--<div class="mt-2 badge badge-info">On Progress</div>--}}
-                                    {{--</div>--}}
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
                                         <div>{{ $count_draft }}</div>
                                         <div class="mt-2 badge badge-info">Draft</div>
@@ -62,7 +55,6 @@
                             @include('jib::admin.pengajuan._filter')
                             <div class="table-responsive">
                                 <table id="pengajuan" class="table table-bordered table-striped table-sm" style="min-width: max-content">
-                                {{--<table class="class="table table-sm  table-bordered table-hover table-striped">--}}
                                     <thead>
                                     <th style="padding: 10px;">No</th>
                                     <th style="padding: 10px;">@lang('jib::pengajuan.jib_number')</th>
@@ -73,13 +65,8 @@
                                     <th style="padding: 10px;">@lang('jib::pengajuan.drp_label')</th>
                                     <th style="padding: 10px;">@lang('jib::pengajuan.kategori_label')</th>
                                     <th style="padding: 10px;">@lang('jib::pengajuan.nilai_capex_label')</th>
-                                    {{--<th>@lang('jib::pengajuan.est_rev__label')</th>--}}
-                                    {{--<th>@lang('jib::pengajuan.irr_label')</th>--}}
-                                    {{--<th>@lang('jib::pengajuan.persubmit_label')</th>--}}
-                                    {{--<th>@lang('jib::pengajuan.perclose_label')</th>--}}
                                     <th style="padding: 10px;">@lang('jib::pengajuan.status_label')</th>
                                     <th style="padding: 10px;">@lang('jib::pengajuan.usia_dokumen')</th>
-                                    {{--<th>@lang('jib::pengajuan.submitby_label')</th>--}}
                                     <th style="padding: 10px;">@lang('jib::pengajuan.action_label')</th>
                                     </thead>
                                     <tbody>
@@ -94,10 +81,6 @@
                                             <td style="padding: 10px;">{{ $peng->no_drp }}</td>
                                             <td style="padding: 10px;">{{ $peng->mcategories->name }}</td>
                                             <td style="padding: 10px;">{{ number_format($peng->nilai_capex) }}</td>
-                                            {{--<td>{{ number_format($peng->est_revenue) }}</td>--}}
-                                            {{--<td>{{ !empty($peng->irr) ? $peng->irr."%" : "-" }} </td>--}}
-                                            {{--<td>{{ $peng->periode_up }}</td>--}}
-                                            {{--<td>{{ $peng->periode_end }}</td>--}}
                                             @if ($peng->status_id == 7) <!-- Draft -->
                                                 <td style="padding: 10px;"><div class="mt-1 badge badge-info">{{ $peng->mstatuses->name.' - '.$peng->users->name}}</div></td>
                                             @elseif ($peng->status_id == 8) <!-- Initiator -->
@@ -140,15 +123,8 @@
                                                         <a class="btn btn-sm btn-primary"
                                                            href="{{ url('admin/jib/pengajuan/'. $peng->id )}}"><i
                                                                     class="far fa-eye"></i>
-                                                            {{--@lang('jib::pengajuan.btn_show_label')--}}
                                                         </a>
                                                     @endcan
-                                                    {{--@can('edit_jib-pengajuan')--}}
-                                                        {{--<a class="btn btn-sm btn-success"--}}
-                                                           {{--href="{{ url('admin/jib/pengajuan/'. $peng->id .'/edit')}}"><i--}}
-                                                                    {{--class="far fa-edit"></i> @lang('jib::pengajuan.btn_edit_label')--}}
-                                                        {{--</a>--}}
-                                                    {{--@endcan--}}
                                                     @can('delete_jib-pengajuan')
                                                         <a href="{{ url('admin/jib/pengajuan/'. $peng->id) }}"
                                                            class="btn btn-sm btn-danger" onclick="
@@ -157,7 +133,6 @@
                                                                 document.getElementById('delete-role-{{ $peng->id }}').submit();
                                                                 }">
                                                             <i class="far fa-trash-alt"></i>
-                                                            {{--@lang('jib::pengajuan.btn_delete_label')--}}
                                                         </a>
                                                         <form id="delete-role-{{ $peng->id }}"
                                                               action="{{ url('admin/jib/pengajuan/'. $peng->id) }}"

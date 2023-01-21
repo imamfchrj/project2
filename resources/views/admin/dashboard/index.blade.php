@@ -3,6 +3,8 @@
 @section('content')
     <section class="section">
         @include('admin.dashboard._filter')
+
+        {{-- DATA DIATAS --}}
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
@@ -60,7 +62,7 @@
                             <h4>% Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
                         </div>
                         <div class="card-body">
-                            {{ $persen_realisasi }}%
+                            {{ number_format($persen_realisasi, 2) }}%
                         </div>
                     </div>
                 </div>
@@ -72,7 +74,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Nilai CAPEX YTD <?php echo date("Y"); ?></h4>
+                            <h4>Total Pengajuan CAPEX YTD <?php echo date("Y"); ?></h4>
                         </div>
                         <div class="card-body">
                             {{ Str::num($nilai_capex) }}
@@ -97,45 +99,14 @@
                 </div>
             </div>
         </div>
+        {{--END DATA DIATAS--}}
+
+        {{--AVG JIB--}}
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="card-stats">
-                        <div class="card-stats-title">JIB Statistics YTD -
-                            <div class="dropdown d-inline">
-                                <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
-                                   id="orders-month">August</a>
-                                <ul class="dropdown-menu dropdown-menu-sm">
-                                    <li class="dropdown-title">Select Month</li>
-                                    <li><a href="#" class="dropdown-item">January</a></li>
-                                    <li><a href="#" class="dropdown-item">February</a></li>
-                                    <li><a href="#" class="dropdown-item">March</a></li>
-                                    <li><a href="#" class="dropdown-item">April</a></li>
-                                    <li><a href="#" class="dropdown-item">May</a></li>
-                                    <li><a href="#" class="dropdown-item">June</a></li>
-                                    <li><a href="#" class="dropdown-item">July</a></li>
-                                    <li><a href="#" class="dropdown-item active">August</a></li>
-                                    <li><a href="#" class="dropdown-item">September</a></li>
-                                    <li><a href="#" class="dropdown-item">October</a></li>
-                                    <li><a href="#" class="dropdown-item">November</a></li>
-                                    <li><a href="#" class="dropdown-item">December</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown d-inline">
-                                <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
-                                   id="orders-month">2023</a>
-                                <ul class="dropdown-menu dropdown-menu-sm">
-                                    <li class="dropdown-title">Select Year</li>
-                                    <li><a href="#" class="dropdown-item">2017</a></li>
-                                    <li><a href="#" class="dropdown-item">2018</a></li>
-                                    <li><a href="#" class="dropdown-item">2019</a></li>
-                                    <li><a href="#" class="dropdown-item">2020</a></li>
-                                    <li><a href="#" class="dropdown-item">2021</a></li>
-                                    <li><a href="#" class="dropdown-item">2022</a></li>
-                                    <li><a href="#" class="dropdown-item active">2023</a></li>
-
-                                </ul>
-                            </div>
+                        <div class="card-stats-title">JIB Statistics
                         </div>
                         <div class="card-stats-items">
                             <div class="card-stats-item">
@@ -182,6 +153,8 @@
                 </div>
             </div>
         </div>
+        {{--END AVG JIB--}}
+
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
@@ -232,7 +205,7 @@
                     <div class="card-header">
                         <h4>JIB ONLINE</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                            <a href="jib/pengajuan" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -251,12 +224,12 @@
                                 @foreach ($jib as $item)
                                 <tr>
                                     <td><a href="#">{{ $item->kegiatan}}</a></td>
-                                    <td class="font-weight-600">{{ $item->nama_sub_unit}}</td>
-                                    <td class="font-weight-600">{{ $item->nama_kategori}}</td>
+                                    <td class="font-weight-600">{{ $item->nama_sub_unit }}</td>
+                                    <td class="font-weight-600">{{ $item->mcategories->name }}</td>
                                     <td class="font-weight-600">{{ Str::rupiah($item->nilai_capex) }}</td>
                                     <td class="font-weight-600">{{ Str::rupiah($item->est_revenue) }}</td>
                                     <td class="font-weight-600">{{ $item->irr}}</td>
-                                    <td class="font-weight-600">{{ $item->nama_status}}</td>
+                                    <td class="font-weight-600">{{ $item->mstatuses->name }}</td>
                                     <td class="font-weight-600"> {{\Carbon\Carbon::parse($item->created_at)->format('Y')}}</td>
                                 </tr>
                                 @endforeach
@@ -290,7 +263,7 @@
                     ctx.save();
                     ctx.font = 'bolder 20px Arial';
                     ctx.fillStyle = 'black';
-                    {{--ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2.7, height / 2 + top);--}}
+                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2.4, height / 2 + top);
                 },
             };
 
@@ -337,7 +310,7 @@
             var data = {
                 labels: ['Bisnis', 'Support'],
                 datasets: [{
-                    label: 'Status JIB',
+                    label: 'Allocation',
                     data: [
                         {{$bisnis}},
                         {{$support}},
@@ -444,7 +417,6 @@
                         }
                     }
                 },
-
                 plugins: [counter]
             };
 
@@ -481,14 +453,6 @@
                     hoverOffset: 4,
                 },]
             };
-            if (jQuery().daterangepicker) {
-                if ($(".dtpick").length) {
-                    $('.dtpick').daterangepicker({
-                        locale: {format: 'DD-MM-YYYY'},
-                        singleDatePicker: true,
-                    });
-                }
-            }
 
             var config = {
                 type: 'bar',
@@ -507,19 +471,29 @@
             //End IRR Chart
 
             //Start Per UNIT Chart//
-            var data = {
-                labels: ['Support', 'Bisnis'],
-                datasets: [{
-                    label: 'Status JIB',
-                    data: [
+            const cek_tot_data = +{{ $doc_total }};
+            const backgroundcolor = [];
+            for(i=0; i<cek_tot_data; i++){
+                const r = Math.floor(Math.random()*255);
+                const g = Math.floor(Math.random()*255);
+                const b = Math.floor(Math.random()*255);
+                backgroundcolor.push('rgba('+r+', '+g+', '+b+', 0.6)');
+            }
 
-                        {{ $support }},
-                        {{ $bisnis }},
+            var data = {
+                labels: [
+                    @foreach($pengajuan_by_unit as $unit)
+                    '{{ $unit->singkatan_unit }}',
+                    @endforeach
+                ],
+                datasets: [{
+                    label: 'JIB per Unit',
+                    data: [
+                        @foreach($pengajuan_by_unit as $unit)
+                            {{ $unit->jumlah }},
+                        @endforeach
                     ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
+                    backgroundColor: backgroundcolor,
                     hoverOffset: 4,
                     cutout: '80%',
                 }]
