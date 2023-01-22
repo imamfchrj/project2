@@ -2,6 +2,7 @@
 
 namespace Modules\Jib\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,9 @@ use Modules\Jib\Repositories\Admin\Interfaces\PersetujuanRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 
 use App\Authorizable;
+
+use App\Exports\JibExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengajuanController extends JibController
 {
@@ -265,5 +269,10 @@ class PengajuanController extends JibController
         $data_cust = Mcustomer::select('name', 'id')->where('segment_id', $id)->get();
 //        $data_cust = Mcustomer::all();
         return response()->json($data_cust);
+    }
+
+    public function jibexport()
+    {
+        return Excel::download(new JibExport, 'JIB.xlsx');
     }
 }

@@ -46,6 +46,10 @@
                                         <div>{{ $count_review + $count_approval + $count_closed + $count_draft + $count_initiator + $count_rejected}}</div>
                                         <div class="mt-2 badge badge-dark">Total</div>
                                     </div>
+                                    <div class="col mb-6 mb-lg-0 font-weight-bold   text-center">
+                                        <div>-</div>
+                                        <div  class="mt-2 badge badge-success"><a href="{{ url('admin/jib/pengajuan/jibexport') }}"> Export Excel</a></div>
+                                    </div>
                                 </div>
                             </div>
                             @endif

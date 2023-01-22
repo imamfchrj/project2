@@ -46,6 +46,7 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::resource('pengajuan', 'PengajuanController');
 
     Route::get('pengajuan/findcustomername/{id}', 'PengajuanController@findcustomername')->name('pengajuan.findcustomername');
+    Route::get('pengajuan/jibexport', 'PengajuanController@jibexport')->name('pengajuan.jibexport');
 
 //    Route::resource('selesai', 'SelesaiController');
 });
