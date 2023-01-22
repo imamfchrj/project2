@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+use Modules\Jib\Entities\Minitiator;
 use Modules\Jib\Entities\Pengajuan;
 use Modules\Jib\Entities\Mbudgetrkap;
 
@@ -22,9 +23,8 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         // CEK USER DAN INITIATOR
-        $user = DB::table('users as u')
-            ->join('m_initiator as i', 'i.user_id', '=', 'u.id')
-            ->get();
+        $initiator = (new Minitiator())->where('is_pgs', null)->where('user_id', auth()->user()->id)->firstorfail();
+//        dd($initiator);
 
         $params = $request->all();
         $options = [
@@ -43,8 +43,6 @@ class DashboardController extends Controller
         $this->data['tahuns'] = $f_tahun;
         // END GET FILTER BULAN DAN TAHUN
 
-        //JIKA YANG LOGIN ADMIN REVIEWER
-        //        if (auth()->user()->roles[0]->id == 1 || auth()->user()->roles[0]->id == 5 || auth()->user()->roles[0]->id == 7) {
         $budget_capex = (new Mbudgetrkap());
         $total_realisasi = (new Pengajuan())->where('jenis_id', 1); // CAPEX
         $nilai_capex = (new Pengajuan())->where('jenis_id', 1); // CAPEX
@@ -65,27 +63,45 @@ class DashboardController extends Controller
             ->where('jenis_id', 1)->groupby('kode_sub_unit', 'cc', 'singkatan_unit');
 
         $jib = Pengajuan::where('jib_pengajuan.jenis_id', 1);
-        //        } else {
-        //            $budget_capex = (new Mbudgetrkap());
-        //            $total_realisasi = (new Pengajuan())->where('jenis_id', 1); // CAPEX
-        //            $nilai_capex = (new Pengajuan())->where('jenis_id', 1); // CAPEX
-        //            $rev = (new Pengajuan())->where('jenis_id', 1); // CAPEX
-        //
-        //            $doc_draft = (new Pengajuan())->where('status_id', 7)->where('jenis_id', 1);
-        //            $doc_review = (new Pengajuan())->whereIn('status_id', array(1, 2, 3, 4))->where('jenis_id', 1);
-        //            $doc_approval = (new Pengajuan())->where('status_id', 5)->where('jenis_id', 1);
-        //            $doc_return = (new Pengajuan())->where('status_id', 8)->where('jenis_id', 1);
-        //            $doc_rejected = (new Pengajuan())->where('status_id', 9)->where('jenis_id', 1);
-        //            $doc_closed = (new Pengajuan())->where('status_id', 6)->where('jenis_id', 1);
-        //            $doc_total = (new Pengajuan())->where('jenis_id', 1);
-        //
-        //            $bisnis = Pengajuan::where('kategori_id', '1')->where('jenis_id', 1);
-        //            $support = Pengajuan::where('kategori_id', '2')->where('jenis_id', 1);
-        //
-        //            $pengajuan_by_unit = Pengajuan::select(DB::raw('nama_sub_unit, count(nama_sub_unit) as jumlah'))->where('jenis_id', 1)->groupby('nama_sub_unit');
-        //
-        //            $jib = Pengajuan::where('jib_pengajuan.jenis_id', 1);
-        //        }
+
+        // IRR
+        $data = Pengajuan::select('id', 'singkatan_unit', 'irr', DB::raw('count(*) as total'))
+            ->whereJenis_id('1')
+            ->where('kategori_id', 1)
+            ->groupBy('id', 'singkatan_unit', 'irr');
+
+        $data_unit = Pengajuan::select('id', 'singkatan_unit', DB::raw('count(*) as total'))
+            ->whereJenis_id('1')
+            ->where('kategori_id', 1)
+            ->groupBy('id', 'singkatan_unit');
+
+        //JIKA YANG LOGIN INITIATOR
+        if (auth()->user()->roles[0]->id == 2) {
+            $budget_capex = $budget_capex->where('cc', $initiator->cc);
+            $total_realisasi = $total_realisasi->where('kode_sub_unit', $initiator->kode_sub_unit); // CAPEX
+            $nilai_capex = $nilai_capex->where('kode_sub_unit', $initiator->kode_sub_unit); // CAPEX
+            $rev = $rev->where('kode_sub_unit', $initiator->kode_sub_unit); // CAPEX
+
+            $doc_draft = $doc_draft->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $doc_review = $doc_review->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $doc_approval = $doc_approval->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $doc_return = $doc_return->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $doc_rejected = $doc_rejected->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $doc_closed = $doc_closed->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $doc_total = $doc_total->where('kode_sub_unit', $initiator->kode_sub_unit);
+
+            $bisnis = $bisnis->where('kode_sub_unit', $initiator->kode_sub_unit);
+            $support = $support->where('kode_sub_unit', $initiator->kode_sub_unit);
+
+            $pengajuan_by_unit = $pengajuan_by_unit->where('kode_sub_unit', $initiator->kode_sub_unit);
+
+            $jib = $jib->where('kode_sub_unit', $initiator->kode_sub_unit);
+
+            // IRR
+            $data = $data->where('kode_sub_unit', $initiator->kode_sub_unit);
+
+            $data_unit = $data_unit->where('kode_sub_unit', $initiator->kode_sub_unit);
+        }
 
         if (!empty($options['filter']['bulan'])) {
             $budget_capex = $budget_capex->where('periode', $options['filter']['bulan']);
@@ -104,9 +120,11 @@ class DashboardController extends Controller
             $bisnis = $bisnis->where('bulan_id', $options['filter']['bulan']);
             $support = $support->where('bulan_id', $options['filter']['bulan']);
 
+            $pengajuan_by_unit = $pengajuan_by_unit->where('bulan_id', $options['filter']['bulan']);
+
             $jib = $jib->where('bulan_id', $options['filter']['bulan']);
 
-            $pengajuan_by_unit = $pengajuan_by_unit->where('bulan_id', $options['filter']['bulan']);
+            $data = $data->whereBulan_id($options['filter']['bulan']);
         }
 
         if (!empty($options['filter']['tahun'])) {
@@ -126,9 +144,11 @@ class DashboardController extends Controller
             $bisnis = $bisnis->where('tahun', $options['filter']['tahun']);
             $support = $support->where('tahun', $options['filter']['tahun']);
 
+            $pengajuan_by_unit = $pengajuan_by_unit->where('tahun', $options['filter']['tahun']);
+
             $jib = $jib->where('tahun', $options['filter']['tahun']);
 
-            $pengajuan_by_unit = $pengajuan_by_unit->where('tahun', $options['filter']['tahun']);
+            $data = $data->whereTahun($options['filter']['tahun']);
         }
 
         $budget_capex = $budget_capex->sum('nilai_program');
@@ -149,7 +169,11 @@ class DashboardController extends Controller
         $bisnis = $bisnis->count();
         $support = $support->count();
 
-        $jib = $jib->get();
+        if (!empty($options['per_page'])) {
+            $jib = $jib->paginate($options['per_page']);
+        } else {
+            $jib = $jib->get();
+        }
 
         $pengajuan_by_unit = $pengajuan_by_unit->get();
 
@@ -196,37 +220,6 @@ class DashboardController extends Controller
             }
             echo $format;
         });
-
-        #IRR
-
-        $kurang_dari = 0;
-        $sama_dengan = 0;
-        $lebih_dari = 0;
-
-        $data = Pengajuan::select('singkatan_unit', 'irr', DB::raw('count(*) as total'))
-            ->whereJenis_id('1')
-            ->groupBy('singkatan_unit', 'irr');
-
-        if (!empty($options['filter']['bulan'])) {
-            $data = $data->whereBulan_id($options['filter']['bulan']);
-        }
-
-        if (!empty($options['filter']['tahun'])) {
-            $data = $data->whereTahun($options['filter']['tahun']);
-        }
-
-
-        $data_unit = Pengajuan::select('singkatan_unit', DB::raw('count(*) as total'))
-            ->whereJenis_id('1')
-            ->groupBy('singkatan_unit');
-
-        if (!empty($options['filter']['bulan'])) {
-            $data = $data->whereBulan_id($options['filter']['bulan']);
-        }
-
-        if (!empty($options['filter']['tahun'])) {
-            $data = $data->whereTahun($options['filter']['tahun']);
-        }
 
         $item_result = [];
 
