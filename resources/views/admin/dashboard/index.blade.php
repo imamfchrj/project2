@@ -436,7 +436,7 @@
                     label:" {{ $unit }} ",
                     data: [ {{ $irr_item[0] }}, {{ $irr_item[1] }}, {{ $irr_item[2] }}],
                     backgroundColor: [
-                        'rgba({{ rand(190, 200) }}, {{ rand(100, 190) }}, {{ rand(100, 190) }}, 1)'
+                        'rgba({{ rand(190, 200) }}, {{ rand(50, 190) }}, {{ rand(100, 190) }}, 1)'
                     ],
                     hoverOffset: 4,
                 },

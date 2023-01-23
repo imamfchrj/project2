@@ -238,7 +238,7 @@ class DashboardController extends Controller
             foreach ($data->get() as $item_unit) {
                 if ($item_unit->irr < 11 && $item_unit->singkatan_unit == $item) {
                     $kurang_dari++;
-                } elseif ($item_unit->irr >= 11 && $item_unit->irr <= 15 && $item_unit->singkatan_unit == $item) {
+                } elseif (($item_unit->irr >= 11 && $item_unit->irr <= 15) && $item_unit->singkatan_unit == $item) {
                     $sama_dengan++;
                 } elseif ($item_unit->irr > 15 && $item_unit->singkatan_unit == $item) {
                     $lebih_dari++;
