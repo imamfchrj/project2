@@ -436,7 +436,7 @@
                     label:" {{ $unit }} ",
                     data: [ {{ $irr_item[0] }}, {{ $irr_item[1] }}, {{ $irr_item[2] }}],
                     backgroundColor: [
-                        'rgba({{ rand(190, 200) }}, {{ rand(50, 190) }}, {{ rand(100, 190) }}, 1)'
+                        'rgba({{ rand(190, 200) }}, {{ rand(100, 190) }}, {{ rand(100, 190) }}, 0.7)'
                     ],
                     hoverOffset: 4,
                 },
@@ -467,7 +467,7 @@
                 const r = Math.floor(Math.random()*255);
                 const g = Math.floor(Math.random()*255);
                 const b = Math.floor(Math.random()*255);
-                backgroundcolor.push('rgba('+r+', '+g+', '+b+', 0.6)');
+                backgroundcolor.push('rgba('+r+', '+g+', '+b+', 0.7)');
             }
 
             var data = {

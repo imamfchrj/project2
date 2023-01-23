@@ -42,6 +42,12 @@
                                     value="{{ old('initiator_id', !empty($pengajuan) ? $pengajuan->initiator_id : $initiator->id) }}">
                                     <input type="hidden" name="nama_posisi"
                                     value="{{ old('nama_posisi', !empty($pengajuan) ? $pengajuan->nama_posisi : $initiator->nama_posisi) }}">
+                                    <input type="hidden" name="kode_sub_unit"
+                                           value="{{ old('kode_sub_unit', !empty($pengajuan) ? $pengajuan->kode_sub_unit : $initiator->kode_sub_unit) }}">
+                                    <input type="hidden" name="cc"
+                                           value="{{ old('cc', !empty($pengajuan) ? $pengajuan->cc : $initiator->cc) }}">
+                                    <input type="hidden" name="singkatan_unit"
+                                           value="{{ old('singkatan_unit', !empty($pengajuan) ? $pengajuan->singkatan_unit : $initiator->singkatan_unit) }}">
                                 @else
                                     <select class="form-control" name="nama_sub_unit" id="nama_sub_unit">
                                         <option>-- Pilih Unit --</option>
