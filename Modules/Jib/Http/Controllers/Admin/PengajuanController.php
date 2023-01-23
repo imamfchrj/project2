@@ -273,6 +273,10 @@ class PengajuanController extends JibController
 
     public function jibexport()
     {
-        return Excel::download(new JibExport, 'JIB.xlsx');
+        // return Excel::download(new JibExport, 'JIB.xlsx');
+        ob_end_clean(); 
+        ob_start(); 
+        
+        return Excel::download(new JibExport, 'JIB-Online_'.date('Y-m-d H-i-s').'.xlsx');
     }
 }
