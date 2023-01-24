@@ -27,10 +27,13 @@
             .btn-filter {
                 padding: .500rem .75rem;
             }
+            .btn {
+                letter-spacing: normal;
+            }
         </style>
     </head>
 
-    <body>
+    <body class="sidebar-mini">
         <div id="app">
             <div class="main-wrapper">
                 @include('admin.shared.navbar')

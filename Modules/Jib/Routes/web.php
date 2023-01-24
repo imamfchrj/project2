@@ -41,12 +41,12 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
 
     // PENGAJUAN
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');
+    Route::get('pengajuan/jibexport', 'PengajuanController@jibexport')->name('pengajuan.jibexport');
     Route::get('pengajuan/{id}/restore', 'PengajuanController@restore')->name('pengajuan.restore');
     Route::get('pengajuan/{uid}/download', 'PengajuanController@download')->name('pengajuan.download');
     Route::resource('pengajuan', 'PengajuanController');
 
     Route::get('pengajuan/findcustomername/{id}', 'PengajuanController@findcustomername')->name('pengajuan.findcustomername');
-    Route::get('pengajuan/jibexport', 'PengajuanController@jibexport')->name('pengajuan.jibexport');
 
 //    Route::resource('selesai', 'SelesaiController');
 });
