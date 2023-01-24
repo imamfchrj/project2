@@ -33,7 +33,7 @@
         </style>
     </head>
 
-    <body class="sidebar-mini">
+    <body>
         <div id="app">
             <div class="main-wrapper">
                 @include('admin.shared.navbar')
