@@ -39,7 +39,9 @@ return [
     'btn_delete_label' => 'Delete',
     'btn_delete_permanent_label' => 'Delete Permanently',
     'btn_restore_label' => 'Restore',
-    'btn_show_trashed_label' => 'JIB Deleted',
+    // 'btn_show_trashed_label' => 'JIB Deleted',
+    'btn_show_trashed_label' => 'Deleted',
+    'btn_export_label' => 'Export',
 
     'updated_at_label' => 'Last Update',
     'publish_date_label' => 'Publish Date',

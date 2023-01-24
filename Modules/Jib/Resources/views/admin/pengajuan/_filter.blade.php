@@ -27,11 +27,16 @@
                 <a href="{{ url('admin/jib/pengajuan/create') }}" class="btn btn-icon btn-block icon-left btn-success btn-filter"><i class="fas fa-plus-circle"></i> @lang('jib::pengajuan.btn_create_label')</a>
             @endcan
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-1">
             @can('delete_jib-pengajuan')
                 @if (!$viewTrash)
-                    <a href="{{ url('admin/jib/pengajuan/trashed') }}" class="btn btn-icon btn-block icon-left btn-light btn-filter"><i class="fas fa-trash"></i> @lang('jib::pengajuan.btn_show_trashed_label')</a>
+                    <a href="{{ url('admin/jib/pengajuan/trashed') }}" class="btn btn-icon btn-block icon-left btn-dark btn-filter"><i class="fas fa-trash"></i> @lang('jib::pengajuan.btn_show_trashed_label')</a>
                 @endif
+            @endcan
+        </div>
+        <div class="form-group col-md-1">
+            @can('add_jib-pengajuan')
+                <a href="{{ url('admin/jib/pengajuan/jibexport') }}" class="btn btn-icon btn-block icon-left btn-info btn-filter"><i class="fas fa-file-excel"></i> @lang('jib::pengajuan.btn_export_label')</a>
             @endcan
         </div>
     </div>
