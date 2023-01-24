@@ -315,7 +315,7 @@
                             @enderror
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
+                            <label class="col-sm-2 col-form-label">Nilai Capex/Opex</label>
                             <div class="col-sm-5">
                                 <input id="nilai_capex_2" type="text" name="nilai_capex_2"
                                     class="form-control @error('nilai_capex_2') is-invalid @enderror @if (!$errors->has('nilai_capex_2') && old('nilai_capex_2')) is-valid @endif"

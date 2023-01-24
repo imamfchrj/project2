@@ -262,8 +262,11 @@
                     } = chart;
                     ctx.save();
                     ctx.font = 'bolder 20px Arial';
+                    // ctx.font = 2 * window.innerWidth + "px Arial";
                     ctx.fillStyle = 'black';
-                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2.4, height / 2 + top);
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2, height - 100);
+                    {{--ctx.fillText('Total JIB : ' + {{ $doc_total }}, 0, 0);--}}
                 },
             };
 
