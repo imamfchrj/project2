@@ -12,7 +12,7 @@ return [
     'kegiatan_label' => 'Nama Kegiatan',
     'drp_label' => 'No DRP/DRK',
     'kategori_label' => 'Kategori',
-    'nilai_capex_label' => 'Nilai CAPEX',
+    'nilai_capex_label' => 'Nilai CAPEX/OPEX',
     'est_rev__label' => 'Est Rev',
     'irr_label' => 'IRR',
     'npv_label' => 'NPV',

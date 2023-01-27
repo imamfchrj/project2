@@ -82,7 +82,7 @@
                             </div>
                             @endif
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">No DRP/DRK</label>
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_2"
                                            class="form-control @error('no_drp_2') is-invalid @enderror @if (!$errors->has('no_drp_2') && old('no_drp_2')) is-valid @endif"
