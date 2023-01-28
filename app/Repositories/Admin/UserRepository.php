@@ -48,11 +48,9 @@ class UserRepository implements UserRepositoryInterface
             'users.name',
             'users.objid_posisi',
             'users.email',
-            'm_initiator.nama_posisi'
+            'a.nama_posisi'
         )
-            ->join('m_initiator', 'm_initiator.user_id', '=', 'users.id')
-            ->where('is_pgs', 0)
-//            ->orderBy('users.name', 'ASC')
+            ->join('m_initiator as a', 'a.user_id', '=', 'users.id')
             ->groupby(
                 'users.id',
                 'users.nik',
@@ -60,7 +58,7 @@ class UserRepository implements UserRepositoryInterface
                 'users.name',
                 'users.objid_posisi',
                 'users.email',
-                'm_initiator.nama_posisi'
+                'a.nama_posisi'
             );
 
         if ($perPage) {
@@ -102,19 +100,32 @@ class UserRepository implements UserRepositoryInterface
     public function update($id, $params = [])
     {
         $user = User::findOrFail($id);
+        $cek_initiator = Minitiator::where('id', $params['initiator_id'])->firstorfail();
 
+//        if (!$params['password']) {
+//            unset($params['password']);
+//        } else {
+//            $params['password'] = Hash::make($params['password']);
+//        }
+
+//        return DB::transaction(function () use ($params, $user) {
+//            $user->update($params);
+//            $this->syncRolesAndPermissions($params, $user);
+
+        $user->nik = $params['nik'];
+        $user->nik_gsd = $params['nik_gsd'];
+        $user->name = $params['name'];
+        $user->objid_posisi = $cek_initiator->objid_posisi;
+        $user->email = $params['email'];
         if (!$params['password']) {
             unset($params['password']);
         } else {
-            $params['password'] = Hash::make($params['password']);
+            $user->password = Hash::make($params['password']);
         }
+        $this->syncRolesAndPermissions($params, $user);
 
-        return DB::transaction(function () use ($params, $user) {
-            $user->update($params);
-            $this->syncRolesAndPermissions($params, $user);
-
-            return $user;
-        });
+        return $user->save();
+//        });
     }
 
     public function delete($id)

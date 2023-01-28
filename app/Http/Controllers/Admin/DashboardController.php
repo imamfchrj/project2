@@ -23,7 +23,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         // CEK USER DAN INITIATOR
-        $initiator = (new Minitiator())->where('is_pgs', null)->where('user_id', auth()->user()->id)->firstorfail();
+        $initiator = (new Minitiator())->where('is_pgs', 0)->where('user_id', auth()->user()->id)->firstorfail();
 //        dd($initiator);
 
         $params = $request->all();

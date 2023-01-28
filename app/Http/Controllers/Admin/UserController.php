@@ -12,6 +12,7 @@ use App\Repositories\Admin\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Admin\Interfaces\PermissionRepositoryInterface;
 use App\Repositories\Admin\Interfaces\UserRepositoryInterface;
 
+use Modules\Jib\Entities\Minitiator;
 use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
 
 use App\Authorizable;
@@ -48,7 +49,7 @@ class UserController extends Controller
         $options = [
             'per_page' => $this->perPage,
             'order' => [
-                'users.created_at' => 'desc',
+                'users.name' => 'asc',
             ],
             'filter' => $params,
         ];
@@ -78,9 +79,9 @@ class UserController extends Controller
     {
         $this->data['permissions'] = $this->permissionRepository->findAll();
         $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
-//        $this->data['initiators'] = $this->initiatorRepository->findAll()->pluck('nama_posisi', 'id');
+        $this->data['initiators'] = $this->initiatorRepository->findAll()->pluck('nama_posisi', 'id');
         $this->data['roleId'] = null;
-//        $this->data['initiatorId'] = null;
+        $this->data['initiatorId'] = null;
 
         return view('admin.users.form', $this->data);
     }
@@ -131,6 +132,9 @@ class UserController extends Controller
         $this->data['permissions'] = $this->permissionRepository->findAll();
         $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
         $this->data['roleId'] = $user->roles->first() ? $user->roles->first()->id : null;
+        $this->data['initiators'] = $this->initiatorRepository->findAll()->pluck('nama_posisi', 'id');
+        $cek_initiator = Minitiator::where('objid_posisi', $user->objid_posisi)->firstorfail();
+        $this->data['initiatorId'] = $cek_initiator->id;
 
         return view('admin.users.form', $this->data);
     }
