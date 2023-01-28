@@ -11,7 +11,7 @@
                 $per_found = $user->hasDirectPermission($perm->name);
             }
 
-            $labelName = Str::of($perm->name)->replace('_', ' ');
+            $labelName = Str::of($perm->nama_rapih)->replace('_', ' ');
         ?>
         <div class="col-sm-3">
             <div class="form-check">
