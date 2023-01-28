@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Models\Role;
+use Modules\Jib\Entities\Minitiator;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -40,10 +41,32 @@ class UserRepository implements UserRepositoryInterface
                 ->orWhere('nik_gsd', 'LIKE', "%{$options['filter']['q']}%");
         }
 
+        $users = $users->select(
+            'users.id',
+            'users.nik',
+            'users.nik_gsd',
+            'users.name',
+            'users.objid_posisi',
+            'users.email',
+            'm_initiator.nama_posisi'
+        )
+            ->join('m_initiator', 'm_initiator.user_id', '=', 'users.id')
+            ->where('is_pgs', 0)
+//            ->orderBy('users.name', 'ASC')
+            ->groupby(
+                'users.id',
+                'users.nik',
+                'users.nik_gsd',
+                'users.name',
+                'users.objid_posisi',
+                'users.email',
+                'm_initiator.nama_posisi'
+            );
+
         if ($perPage) {
             return $users->paginate($perPage);
         }
-        
+
         return $users->get();
     }
 
@@ -54,40 +77,53 @@ class UserRepository implements UserRepositoryInterface
 
     public function create($params = [])
     {
-        return DB::transaction(function () use ($params) {
-            $params['password']= Hash::make( $params['password']);
-            $user = User::create($params);
-            $this->syncRolesAndPermissions($params, $user);
-            
-            return $user;
-        });
+//        return DB::transaction(function () use ($params) {
+
+        $cek_initiator = Minitiator::where('id', $params['initiator_id'])->firstorfail();
+        $params['password'] = Hash::make($params['password']);
+//            $user = User::create($params);
+
+        $user = new User();
+        $user->nik = $params['nik'];
+        $user->nik_gsd = $params['nik_gsd'];
+        $user->name = $params['name'];
+        $user->objid_posisi = $cek_initiator->objid_posisi;
+        $user->email = $params['email'];
+        $user->password = $params['password'];
+        $this->syncRolesAndPermissions($params, $user);
+        $user->save();
+
+        $cek_initiator->user_id = $user->id;
+
+        return $cek_initiator->save();
+//        });
     }
 
     public function update($id, $params = [])
     {
         $user = User::findOrFail($id);
-        
+
         if (!$params['password']) {
             unset($params['password']);
-        }else{
-            $params['password']= Hash::make( $params['password']);
+        } else {
+            $params['password'] = Hash::make($params['password']);
         }
 
         return DB::transaction(function () use ($params, $user) {
             $user->update($params);
             $this->syncRolesAndPermissions($params, $user);
-            
+
             return $user;
         });
     }
 
     public function delete($id)
     {
-        $user  = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         return $user->delete();
     }
-    
+
     /**
      * Sync roles and permissions
      *

@@ -12,6 +12,8 @@ use App\Repositories\Admin\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Admin\Interfaces\PermissionRepositoryInterface;
 use App\Repositories\Admin\Interfaces\UserRepositoryInterface;
 
+use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
+
 use App\Authorizable;
 
 class UserController extends Controller
@@ -21,14 +23,16 @@ class UserController extends Controller
     private $roleRepository;
     private $permissionRepository;
     private $userRepository;
+    private $initiatorRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository, RoleRepositoryInterface $roleRepository, PermissionRepositoryInterface $permissionRepository) // phpcs:ignore
+    public function __construct(UserRepositoryInterface $userRepository, RoleRepositoryInterface $roleRepository, PermissionRepositoryInterface $permissionRepository, InitiatorRepositoryInterface $initiatorRepository) // phpcs:ignore
     {
         parent::__construct();
 
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
+        $this->initiatorRepository = $initiatorRepository;
 
         $this->data['currentAdminMenu'] = 'users';
     }
@@ -44,7 +48,7 @@ class UserController extends Controller
         $options = [
             'per_page' => $this->perPage,
             'order' => [
-                'created_at' => 'desc',
+                'users.created_at' => 'desc',
             ],
             'filter' => $params,
         ];
@@ -74,7 +78,9 @@ class UserController extends Controller
     {
         $this->data['permissions'] = $this->permissionRepository->findAll();
         $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
+//        $this->data['initiators'] = $this->initiatorRepository->findAll()->pluck('nama_posisi', 'id');
         $this->data['roleId'] = null;
+//        $this->data['initiatorId'] = null;
 
         return view('admin.users.form', $this->data);
     }
