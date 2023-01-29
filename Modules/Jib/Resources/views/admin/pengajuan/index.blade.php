@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-header">
                             @if($viewTrash == false)
-                            <div class="col-sm-8">
+                            <div class="col-sm-10 mb-4">
                                 <div class="row">
                                     <div class="col mb-4 mb-lg-0 font-weight-bold text-center">
                                         <div>{{ $count_draft }}</div>
