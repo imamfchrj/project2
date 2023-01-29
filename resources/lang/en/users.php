@@ -7,6 +7,8 @@ return [
     'nik_label' => 'Nik',
     'nik_gsd_label' => 'Nik GSD',
     'email_label' => 'Email',
+    'posisi_label' => 'Posisi',
+    'select_posisi_label' => '-- Pilih Posisi --',
     'updated_at_label' => 'Updated',
     'verified_at_label' => 'Verified',
     'created_at_label' => 'Created',
@@ -20,7 +22,7 @@ return [
     'password_confirmation_label' => 'Password Confirmation',
     'role_label' => 'Role',
     'set_user_permissions_label' => 'Add Custom Permissions',
-    'select_role_label' => 'Select Role',
+    'select_role_label' => '-- Pilih Role --',
 
     'success_create_message' => 'The user has been saved.',
     'fail_create_message' => 'The user could not be saved.',

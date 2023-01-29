@@ -51,6 +51,9 @@ class UserRequest extends FormRequest
             'role_id' => [
 
             ],
+            'initiator_id' => [
+
+            ],
         ];
     }
 }

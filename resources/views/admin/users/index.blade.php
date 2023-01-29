@@ -24,8 +24,9 @@
                             <table class="table table-bordered table-striped table-md">
                                 <thead>
                                     <th>@lang('users.name_label')</th>
-                                    <th>@lang('users.nik_label')</th>
+                                    {{--<th>@lang('users.nik_label')</th>--}}
                                     <th>@lang('users.nik_gsd_label')</th>
+                                    <th>@lang('users.posisi_label')</th>
                                     <th>@lang('users.email_label')</th>
                                     {{--<th>@lang('users.verified_at_label')</th>--}}
                                     <th>@lang('users.user_role')</th>
@@ -35,8 +36,9 @@
                                     @forelse ($users as $user)
                                         <tr>
                                             <td>{{ $user->name}}</td>
-                                            <td>{{ $user->nik}}</td>
+                                            {{--<td>{{ $user->nik}}</td>--}}
                                             <td>{{ $user->nik_gsd}}</td>
+                                            <td>{{ $user->nama_posisi}}</td>
                                             <td>{{ $user->email}}</td>
                                             {{--<td>{{ $user->verified_at_formatted}}</td>--}}
                                             <td>{{ $user->roles->implode('name', ', ') }}</td>

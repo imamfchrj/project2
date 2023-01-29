@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">NO DRK</label>
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.drp_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="no_drp_1"
                                            class="form-control @error('no_drp_1') is-invalid @enderror @if (!$errors->has('no_drp_1') && old('no_drp_1')) is-valid @endif"
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Nilai Proyek</label>
+                                <label class="col-sm-2 col-form-label">@lang('jib::pengajuan.nilai_capex_label')</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="nilai_capex_1"
                                            class="form-control @error('nilai_capex_1') is-invalid @enderror @if (!$errors->has('nilai_capex_1') && old('nilai_capex_1')) is-valid @endif"

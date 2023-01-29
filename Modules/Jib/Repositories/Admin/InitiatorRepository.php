@@ -10,38 +10,37 @@ use Modules\Jib\Entities\Minitiator;
 
 class InitiatorRepository implements InitiatorRepositoryInterface
 {
-//    public function findAll($options = [])
-//    {
-//        $perPage = $options['per_page'] ?? null;
-//        $orderByFields = $options['order'] ?? [];
-//
-////        $pengajuan = (new Pengajuan())->with('user');
-//        $pengajuan = (new Pengajuan())->with('msegments','mcustomers','mcategories','mstatuses','users','minitiators');
-//
-//        if ($orderByFields) {
-//            foreach ($orderByFields as $field => $sort) {
-//                $pengajuan = $pengajuan->orderBy($field, $sort);
-//            }
-//        }
-//
-//        if (!empty($options['filter']['q'])) {
-//            $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
+    public function findAll($options = [])
+    {
+        $perPage = $options['per_page'] ?? null;
+        $orderByFields = $options['order'] ?? [];
+
+        $initiator = (new Minitiator());
+
+        if ($orderByFields) {
+            foreach ($orderByFields as $field => $sort) {
+                $initiator = $initiator->orderBy($field, $sort);
+            }
+        }
+
+        if (!empty($options['filter']['q'])) {
+//            $initiator = $initiator->with('minitiators')->where(function ($query) use ($options) {
 //                $query->where('segment_id', 'LIKE', "%{$options['filter']['q']}%")
 //                    ->orWhere('nama_sub_unit', 'LIKE', "%{$options['filter']['q']}%")
 //                    ->orWhere('customer_id', 'LIKE', "%{$options['filter']['q']}%");
 //            });
-//        }
-//
+        }
+
 //        if (!empty($options['filter']['status'])) {
-//            $pengajuan = $pengajuan->where('status_id', $options['filter']['status']);
+//            $initiator = $initiator->where('status_id', $options['filter']['status']);
 //        }
-//
-//        if ($perPage) {
-//            return $pengajuan->paginate($perPage);
-//        }
-//
-//        return $pengajuan->get();
-//    }
+
+        if ($perPage) {
+            return $initiator->paginate($perPage);
+        }
+
+        return $initiator->get();
+    }
 
 //    public function findAllInTrash($options = [])
 //    {

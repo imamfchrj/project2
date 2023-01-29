@@ -262,8 +262,11 @@
                     } = chart;
                     ctx.save();
                     ctx.font = 'bolder 20px Arial';
+                    // ctx.font = 2 * window.innerWidth + "px Arial";
                     ctx.fillStyle = 'black';
-                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2.4, height / 2 + top);
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2, height - 100);
+                    {{--ctx.fillText('Total JIB : ' + {{ $doc_total }}, 0, 0);--}}
                 },
             };
 
@@ -428,6 +431,9 @@
             //End Status JIB Chart//
 
             //Start IRR Chart//
+            const r = 0;
+            const g = 0;
+            const b = 255;
             var data = {
                 labels: ['<11%', '11% - 15%', '>15%'],
                 datasets: [
@@ -438,6 +444,9 @@
                     backgroundColor: [
                         'rgba({{ rand(190, 200) }}, {{ rand(100, 190) }}, {{ rand(100, 190) }}, 0.7)'
                     ],
+                    // backgroundColor: [
+                    //     'rgba('+r+','+g+','+b+', 0.7)'
+                    // ],
                     hoverOffset: 4,
                 },
                 @endforeach
