@@ -24,12 +24,6 @@
             "permission": "view_master-customer"
         },
         {
-            "icon": "fa fa-user-alt",
-            "name": "Initiator",
-            "route": "admin/master/initiator",
-            "permission": "view_master-initiator"
-        },
-        {
             "icon": "fa fa-money-bill",
             "name": "Jenis",
             "route": "admin/master/jenis",

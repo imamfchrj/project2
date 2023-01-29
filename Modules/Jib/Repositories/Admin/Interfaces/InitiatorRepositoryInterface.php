@@ -6,7 +6,7 @@ use Modules\Jib\Entities\Minitiator;
 
 interface InitiatorRepositoryInterface
 {
-//    public function findAll($options = []);
+    public function findAll($options = []);
     public function findAllByUserId();
 //    public function findAllInTrash($options = []);
     public function findById($id);

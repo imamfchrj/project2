@@ -63,6 +63,23 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>@lang('users.posisi_label')</label>
+                                <select class="form-control browser select2" name="initiator_id">
+                                    <option>@lang('users.select_posisi_label')</option>
+
+                                    @foreach ($initiators as $key => $value)
+                                        <option value="{{ $key }}" {{ $key == $initiatorId ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('initiator_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>@lang('users.email_label')</label>
                                 <input type="text" name="email"
                                        class="form-control @error('email') is-invalid @enderror @if (!$errors->has('email') && old('email')) is-valid @endif"
@@ -95,7 +112,7 @@
                             </div>
                             <div class="form-group">
                                 <label>@lang('users.role_label')</label>
-                                <select class="form-control" name="role_id">
+                                <select class="form-control browser select2" name="role_id">
                                     <option>@lang('users.select_role_label')</option>
 
                                     @foreach ($roles as $key => $value)

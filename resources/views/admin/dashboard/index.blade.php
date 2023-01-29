@@ -432,6 +432,9 @@
             //End Status JIB Chart//
 
             //Start IRR Chart//
+            const r = 0;
+            const g = 0;
+            const b = 255;
             var data = {
                 labels: ['<11%', '11% - 15%', '>15%'],
                 datasets: [
@@ -442,6 +445,9 @@
                     backgroundColor: [
                         'rgba(104, 0, 255, {{ 0.4 * $loop->iteration }})'
                     ],
+                    // backgroundColor: [
+                    //     'rgba('+r+','+g+','+b+', 0.7)'
+                    // ],
                     hoverOffset: 4,
                 },
                 @endforeach

@@ -10,7 +10,7 @@
         {{--<a href="{{ url('/')}}">LS</a>--}}
     </div>
     <ul class="sidebar-menu my-5">
-        <li class="{{ ($currentAdminMenu == 'dashboard') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+        <li class="{{ ($currentAdminMenu == 'dashboard') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fab fa-dashcube"></i> <span>Dashboard</span></a></li>
         @foreach ($moduleAdminMenus as $moduleAdminMenu)
             <li class="menu-header">{{ $moduleAdminMenu['module'] }}</li>
             @foreach ($moduleAdminMenu['admin_menus'] as $moduleMenu)
@@ -27,7 +27,7 @@
             <li class="{{ ($currentAdminMenu == 'roles') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/roles')}}"><i class="fas fa-lock"></i> <span>@lang('roles.menu_role_label')</span></a></li>
         @endcan
         @if (auth()->user()->hasRole(\App\Models\Role::ADMIN))
-            <li class="{{ ($currentAdminMenu == 'settings') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/settings')}}"><i class="fas fa-cogs"></i> <span>@lang('settings.menu_settings_label')</span></a></li>
+            {{--<li class="{{ ($currentAdminMenu == 'settings') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/settings')}}"><i class="fas fa-cogs"></i> <span>@lang('settings.menu_settings_label')</span></a></li>--}}
         @endif
     </ul>
 </aside>
