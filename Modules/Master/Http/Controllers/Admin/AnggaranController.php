@@ -5,6 +5,7 @@ namespace Modules\Master\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
+use Modules\Master\Entities\Manggaran;
 use Modules\Master\Http\Controllers\MasterController;
 use Modules\Master\Http\Requests\Admin\AnggaranRequest;
 
@@ -16,7 +17,7 @@ class AnggaranController extends MasterController
 {
     use Authorizable;
 
-    private  $anggaranRepository;
+    private $anggaranRepository;
 
     public function __construct(AnggaranRepositoryInterface $anggaranRepository)
     {
@@ -25,6 +26,7 @@ class AnggaranController extends MasterController
 
         $this->anggaranRepository = $anggaranRepository;
     }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -41,7 +43,20 @@ class AnggaranController extends MasterController
         ];
         $this->data['anggarans'] = $this->anggaranRepository->findAll($options);
         $this->data['filter'] = $params;
-        return view('master::admin.anggaran.index',$this->data);
+        return view('master::admin.anggaran.index', $this->data);
+    }
+
+    public function list_anggaran()
+    {
+        $query = Manggaran::orderBy('name', 'asc');
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('opsi', function ($data) {
+                return '<span>Edit</span> | <span class="text-danger">Delete</span>';
+            })
+            ->rawColumns(['opsi'])
+            ->make(true);
     }
 
     /**
@@ -105,7 +120,7 @@ class AnggaranController extends MasterController
                 ->with('success', 'Anggaran has been Updated');
         }
 
-        return redirect('admin/master/anggaran/'. $id .'/edit')
+        return redirect('admin/master/anggaran/' . $id . '/edit')
             ->with('error', 'Could not update the Anggaran');
     }
 

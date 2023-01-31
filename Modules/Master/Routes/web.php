@@ -27,4 +27,6 @@ Route::prefix('admin/master')->as('master-')->namespace('\Modules\Master\Http\Co
     Route::resource('segment', 'SegmentController');
     Route::resource('status', 'StatusController');
     Route::resource('pemeriksa', 'PemeriksaController');
+
+    Route::get('anggaran/list-table', 'AnggaranController@list_anggaran')->name('master.list-table');
 });

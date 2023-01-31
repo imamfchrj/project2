@@ -23,6 +23,8 @@
         <link rel="stylesheet" href="{{ asset('admin/stisla/assets/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('admin/stisla/assets/css/components.css') }}">
         <link rel="stylesheet" href="{{ asset('admin/stisla/assets/css/custom.css') }}">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.css"/>
         <style>
             .btn-filter {
                 padding: .500rem .75rem;
@@ -57,6 +59,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         {{--<script src="https://cdn.dataatbles.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
         {{--<script src="https://cdn.dataatbles.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>--}}
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
         <script src="{{ asset('admin/stisla/assets/js/stisla.js') }}"></script>
 
         <!-- JS Libraies -->
