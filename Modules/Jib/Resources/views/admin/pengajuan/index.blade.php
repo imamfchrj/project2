@@ -175,3 +175,31 @@
         </div>
     </section>
 @endsection
+@push('custom-script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.segment_id_select').on('change', function(){
+                var segment_id = $(this).val();
+                var url = "/admin/jib/pengajuan/findcustomername/"+segment_id;
+                $.ajax({
+                    type : 'GET',
+                    url : url,
+                    data : {'id':segment_id},
+                    success : function(data){
+                        // console.log('success');
+                        //
+                        // console.log(data);
+                        $('.customer_select').empty();
+                        $('.customer_select').append('<option value="0">-- Customer --</option>')
+                        $.each(data, function(index, custnameObj){
+                            $('.customer_select').append('<option value="'+custnameObj.id+'">'+custnameObj.name+'</option>')
+                        });
+                    },
+                    error : function(){
+
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
