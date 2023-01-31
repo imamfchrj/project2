@@ -4,7 +4,7 @@ namespace Modules\Master\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-
+use Modules\Jib\Repositories\Admin\BudgetRepository as AdminBudgetRepository;
 use Modules\Master\Repositories\Admin\Interfaces\CustomerRepositoryInterface;
 use Modules\Master\Repositories\Admin\CustomerRepository;
 use Modules\Master\Repositories\Admin\Interfaces\AnggaranRepositoryInterface;
@@ -23,6 +23,8 @@ use Modules\Master\Repositories\Admin\Interfaces\StatusRepositoryInterface;
 use Modules\Master\Repositories\Admin\StatusRepository;
 use Modules\Master\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Master\Repositories\Admin\PemeriksaRepository;
+use Modules\Master\Repositories\Admin\Interfaces\BudgetRepositoryInterface;
+use Modules\Master\Repositories\Admin\BudgetRepository;
 
 class MasterServiceProvider extends ServiceProvider
 {
@@ -176,5 +178,11 @@ class MasterServiceProvider extends ServiceProvider
             PemeriksaRepositoryInterface::class,
             PemeriksaRepository::class
         );
+
+        $this->app->bind(
+            BudgetRepositoryInterface::class,
+            BudgetRepository::class
+        );
+
     }
 }
