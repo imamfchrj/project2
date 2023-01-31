@@ -28,10 +28,10 @@ Route::prefix('admin/master')->as('master-')->namespace('\Modules\Master\Http\Co
     Route::resource('status', 'StatusController');
     Route::resource('pemeriksa', 'PemeriksaController');
 
+    Route::get('anggaran/list-table', 'AnggaranController@list_anggaran')->name('master.list-table');
 
     Route::get('budget/download', 'BudgetController@download')->name('budget.download');
     Route::get('budget/upload', 'BudgetController@upload')->name('budget.import');
     Route::resource('budget', 'BudgetController');
-
-   
+    
 });

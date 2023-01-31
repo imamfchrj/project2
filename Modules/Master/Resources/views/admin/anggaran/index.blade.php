@@ -24,12 +24,12 @@
                                     <th>Nama Anggaran</th>
                                     <th>Action</th>
                                     </thead>
-                                    <tbody>
-                                    @forelse ($anggarans as $anggaran)
-                                        <tr>
-                                            <td>{{$loop->iteration}}</td>
-                                            <td>{{ $anggaran->name }}</td>
-                                            <td>
+                                    {{--<tbody>--}}
+                                    {{--@forelse ($anggarans as $anggaran)--}}
+                                        {{--<tr>--}}
+                                            {{--<td>{{$loop->iteration}}</td>--}}
+                                            {{--<td>{{ $anggaran->name }}</td>--}}
+                                            {{--<td>--}}
                                                 {{--@can('view_master-anggaran')--}}
                                                     {{--<a class="btn btn-sm btn-primary"--}}
                                                         {{--href="{{ url('admin/master/anggaran/'. $anggaran->id )}}"><i--}}
@@ -37,36 +37,36 @@
                                                         {{--Show--}}
                                                     {{--</a>--}}
                                                 {{--@endcan--}}
-                                                @can('edit_master-anggaran')
-                                                    <a class="btn btn-sm btn-warning"
-                                                       href="{{ url('admin/master/anggaran/'. $anggaran->id .'/edit')}}"><i
-                                                                class="far fa-edit"></i>
-                                                        Edit
-                                                    </a>
-                                                @endcan
-                                                @can('delete_master-anggaran')
-                                                    <a href="{{ url('admin/master/anggaran/'. $anggaran->id) }}"
-                                                       class="btn btn-sm btn-danger" onclick="
-                                                            event.preventDefault();
-                                                            if (confirm('Do you want to remove this?')) {
-                                                            document.getElementById('delete-role-{{ $anggaran->id }}').submit();
-                                                            }">
-                                                        <i class="far fa-trash-alt"></i>
-                                                        Delete
-                                                    </a>
-                                                    <form id="delete-role-{{ $anggaran->id }}"
-                                                          action="{{ url('admin/master/anggaran/'. $anggaran->id) }}"
-                                                          method="POST">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        @csrf
-                                                    </form>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                    @empty
+                                                {{--@can('edit_master-anggaran')--}}
+                                                    {{--<a class="btn btn-sm btn-warning"--}}
+                                                       {{--href="{{ url('admin/master/anggaran/'. $anggaran->id .'/edit')}}"><i--}}
+                                                                {{--class="far fa-edit"></i>--}}
+                                                        {{--Edit--}}
+                                                    {{--</a>--}}
+                                                {{--@endcan--}}
+                                                {{--@can('delete_master-anggaran')--}}
+                                                    {{--<a href="{{ url('admin/master/anggaran/'. $anggaran->id) }}"--}}
+                                                       {{--class="btn btn-sm btn-danger" onclick="--}}
+                                                            {{--event.preventDefault();--}}
+                                                            {{--if (confirm('Do you want to remove this?')) {--}}
+                                                            {{--document.getElementById('delete-role-{{ $anggaran->id }}').submit();--}}
+                                                            {{--}">--}}
+                                                        {{--<i class="far fa-trash-alt"></i>--}}
+                                                        {{--Delete--}}
+                                                    {{--</a>--}}
+                                                    {{--<form id="delete-role-{{ $anggaran->id }}"--}}
+                                                          {{--action="{{ url('admin/master/anggaran/'. $anggaran->id) }}"--}}
+                                                          {{--method="POST">--}}
+                                                        {{--<input type="hidden" name="_method" value="DELETE">--}}
+                                                        {{--@csrf--}}
+                                                    {{--</form>--}}
+                                                {{--@endcan--}}
+                                            {{--</td>--}}
+                                        {{--</tr>--}}
+                                    {{--@empty--}}
 
-                                    @endforelse
-                                    </tbody>
+                                    {{--@endforelse--}}
+                                    {{--</tbody>--}}
                                 </table>
                             </div>
                         </div>
@@ -74,5 +74,25 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="table-anggaran" value ="{{ route('master.list-table') }}">
     </section>
 @endsection
+@push('custom-script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#anggaran').DataTable({
+                ordering : true,
+                serverSide : true,
+                processing : true,
+                ajax : {
+                    'url' : $('#table-anggaran').val()
+                },
+                columns : [
+                    { data : 'DT_RowIndex', name : 'DT_RowIndex', width : '10px', orderable : false, searchable : false },
+                    { data : 'name', name : 'name' },
+                    { data : 'opsi', name : 'opsi', orderable : false, searchable : false}
+                ]
+            });
+        });
+    </script>
+@endpush
