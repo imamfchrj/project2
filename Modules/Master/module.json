@@ -13,9 +13,15 @@
     "admin_menus": [
         {
             "icon": "fa fa-dollar-sign",
-            "name": "Anggaran",
+            "name": "Tipe Anggaran",
             "route": "admin/master/anggaran",
             "permission": "view_master-anggaran"
+        },
+        {
+            "icon": "fas fa-hand-holding-usd",
+            "name": "Budget RKAP",
+            "route": "admin/master/budget",
+            "permission": "view_master-budget"
         },
         {
             "icon": "fa fa-person-booth",
@@ -64,6 +70,18 @@
             "name": "Status",
             "route": "admin/master/status",
             "permission": "view_master-status"
+        },
+        {
+            "icon": "fa fa-down",
+            "name": "Download",
+            "route": "admin/master/budget/download",
+            "permission": "download_master-budget"
+        },
+        {
+            "icon": "fa fa-down",
+            "name": "Download",
+            "route": "admin/master/budget/upload",
+            "permission": "upload_master-budget"
         }
     ],
     "permissions": [
@@ -76,6 +94,7 @@
         "master-pemeriksa",
         "master-risiko",
         "master-segment",
-        "master-status"
+        "master-status",
+        "master-budget"
     ]
 }

@@ -261,12 +261,13 @@
                         },
                     } = chart;
                     ctx.save();
-                    ctx.font = 'bolder 20px Arial';
-                    // ctx.font = 2 * window.innerWidth + "px Arial";
-                    ctx.fillStyle = 'black';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width / 2, height - 100);
-                    {{--ctx.fillText('Total JIB : ' + {{ $doc_total }}, 0, 0);--}}
+                    var sz = (width/30).toFixed(2);
+                    // ctx.font = 'bolder 20px Arial';
+                    ctx.font = sz + 'px Arial';
+                    ctx.fillStyle = 'normal';
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('Total JIB : ' + {{ $doc_total }}, width/2 , height/2 + top);
                 },
             };
 
@@ -323,7 +324,7 @@
                     'rgba(255, 206, 86, 1)'
                     ],
                 hoverOffset: 4,
-                cutout: '80%',
+                cutout: '60%',
                 }]
             };
 
@@ -387,7 +388,7 @@
                         'rgba(201, 203, 207, 1)'
                     ],
                     hoverOffset: 4,
-                    cutout: '80%',
+                    cutout: '60%',
 
                 }]
             };
@@ -442,7 +443,7 @@
                     label:" {{ $unit }} ",
                     data: [ {{ $irr_item[0] }}, {{ $irr_item[1] }}, {{ $irr_item[2] }}],
                     backgroundColor: [
-                        'rgba({{ rand(190, 200) }}, {{ rand(100, 190) }}, {{ rand(100, 190) }}, 0.7)'
+                        'rgba(104, 0, 255, {{ 0.4 * $loop->iteration }})'
                     ],
                     // backgroundColor: [
                     //     'rgba('+r+','+g+','+b+', 0.7)'
@@ -494,7 +495,7 @@
                     ],
                     backgroundColor: backgroundcolor,
                     hoverOffset: 4,
-                    cutout: '80%',
+                    cutout: '60%',
                 }]
             };
 
