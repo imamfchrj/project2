@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" id="table-anggaran" value ="{{ route('master.list-table') }}">
+        <input type="hidden" id="table-anggaran" value ="{{ url('admin/master/anggaran/list-table') }}">
     </section>
 @endsection
 @push('custom-script')
