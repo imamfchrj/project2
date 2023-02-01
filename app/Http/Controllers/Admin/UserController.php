@@ -15,6 +15,8 @@ use App\Repositories\Admin\Interfaces\UserRepositoryInterface;
 use Modules\Jib\Entities\Minitiator;
 use Modules\Jib\Repositories\Admin\Interfaces\InitiatorRepositoryInterface;
 
+use App\Models\UserLoginHis;
+
 use App\Authorizable;
 
 class UserController extends Controller
@@ -37,6 +39,7 @@ class UserController extends Controller
 
         $this->data['currentAdminMenu'] = 'users';
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -89,7 +92,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
@@ -108,7 +111,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -121,7 +124,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -142,8 +145,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, $id)
@@ -156,13 +159,13 @@ class UserController extends Controller
         }
 
         return redirect('admin/users')
-                ->with('error', __('users.fail_to_update_message', ['name' => $user->name]));
+            ->with('error', __('users.fail_to_update_message', ['name' => $user->name]));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -185,6 +188,25 @@ class UserController extends Controller
         }
 
         return redirect('admin/users')
-                ->with('error', __('users.fail_to_delete_message', ['name' => $user->name]));
+            ->with('error', __('users.fail_to_delete_message', ['name' => $user->name]));
+    }
+
+    public function users_login_his()
+    {
+        $data = UserLoginHis::all();
+        if (request()->ajax()) {
+            return datatables()->of($data)
+//                ->addColumn('action', 'companies.action')
+//                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->editColumn('created_at', function ($data) {
+                    $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)
+                        ->format('Y-m-d H:i:s');
+                    return $formatedDate;
+                })
+                ->make(true);
+        }
+
+        return view('admin.users.index_log_user', $this->data);
     }
 }
