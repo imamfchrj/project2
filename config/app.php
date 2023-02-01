@@ -179,6 +179,7 @@ return [
         App\Providers\AdminRepositoryServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class
     ],
 
     /*
