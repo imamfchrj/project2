@@ -43,6 +43,7 @@ class LoginEvent
         try {
             $user = $event->user;
             $user_id = $user->id;
+            $nik = $user->nik_gsd;
             $name = $user->name;
             $email = $user->email;
             $user_ip = request()->getClientIp();
@@ -70,6 +71,7 @@ class LoginEvent
 
             DB::table('user_login_his')->insert([
                 'user_id' => $user_id,
+                'nik' => $nik,
                 'name' => $name,
                 'email' => $email,
                 'user_ip' => $user_ip,
