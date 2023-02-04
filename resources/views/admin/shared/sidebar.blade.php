@@ -29,5 +29,8 @@
         @if (auth()->user()->hasRole(\App\Models\Role::ADMIN))
             {{--<li class="{{ ($currentAdminMenu == 'settings') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/settings')}}"><i class="fas fa-cogs"></i> <span>@lang('settings.menu_settings_label')</span></a></li>--}}
         @endif
+        @if (auth()->user()->hasRole(\App\Models\Role::ADMIN) || auth()->user()->roles[0]->name == "Reviewer")
+            <li class="{{ ($currentAdminMenu == 'user_login_his') ? $activeClass : '' }}"><a class="nav-link" href="{{ url('admin/users_login_his')}}"><i class="fas fa-cogs"></i> <span>User Login History</span></a></li>
+        @endif
     </ul>
 </aside>

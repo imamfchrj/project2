@@ -90,7 +90,7 @@ class WorkspaceController extends JibController
     {
         $params = $request->all();
         $options = [
-            'per_page' => 10,
+            'per_page' => 30,
             'order' => [
                 'id' => 'asc',
             ],

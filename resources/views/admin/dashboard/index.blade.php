@@ -2,238 +2,246 @@
 
 @section('content')
     <section class="section">
+        <div class="section-header">
+            <h1>DASHBOARD</h1>
+            <div class="section-header-breadcrumb">
+                {{--<div class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>--}}
+            </div>
+        </div>
+        <div class="section-body">
         @include('admin.dashboard._filter')
 
         {{-- DATA DIATAS --}}
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="far fa-folder-open"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>BUDGET CAPEX YTD <?php echo date("Y"); ?> </h4>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-danger">
+                            <i class="far fa-folder-open"></i>
                         </div>
-                        <div class="card-body">
-                            {{-- Rp. 668,56Bn --}}
-                            {{ Str::num($budget_capex) }}
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>BUDGET CAPEX YTD <?php echo date("Y"); ?> </h4>
+                            </div>
+                            <div class="card-body">
+                                {{-- Rp. 668,56Bn --}}
+                                {{ Str::num($budget_capex) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-balance-scale "></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
+                            </div>
+                            <div class="card-body">
+                                {{ Str::num($total_realisasi) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-check "></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Available CAPEX YTD <?php echo date("Y"); ?></h4>
+                            </div>
+                            <div class="card-body">
+                                {{ Str::num($available_capex) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>% Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
+                            </div>
+                            <div class="card-body">
+                                {{ number_format($persen_realisasi, 2) }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-warning">
+                            <i class="fas fa-hourglass"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Pengajuan CAPEX YTD <?php echo date("Y"); ?></h4>
+                            </div>
+                            <div class="card-body">
+                                {{ Str::num($nilai_capex) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-secondary">
+                            <i class="far fa-file"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>EST. REVENUE YTD <?php echo date("Y"); ?></h4>
+                            </div>
+                            <div class="card-body">
+                                {{-- 1,201 --}}
+                                {{ Str::num($rev) }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="fas fa-balance-scale "></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
-                        </div>
-                        <div class="card-body">
-                            {{ Str::num($total_realisasi) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-check "></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Available CAPEX YTD <?php echo date("Y"); ?></h4>
-                        </div>
-                        <div class="card-body">
-                            {{ Str::num($available_capex) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-info">
-                        <i class="fas fa-percent"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>% Realisasi CAPEX YTD <?php echo date("Y"); ?></h4>
-                        </div>
-                        <div class="card-body">
-                            {{ number_format($persen_realisasi, 2) }}%
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="fas fa-hourglass"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Pengajuan CAPEX YTD <?php echo date("Y"); ?></h4>
-                        </div>
-                        <div class="card-body">
-                            {{ Str::num($nilai_capex) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-secondary">
-                        <i class="far fa-file"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>EST. REVENUE YTD <?php echo date("Y"); ?></h4>
-                        </div>
-                        <div class="card-body">
-                            {{-- 1,201 --}}
-                            {{ Str::num($rev) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{--END DATA DIATAS--}}
+            {{--END DATA DIATAS--}}
 
-        {{--AVG JIB--}}
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card card-statistic-2">
-                    <div class="card-stats">
-                        <div class="card-stats-title">JIB Statistics
+            {{--AVG JIB--}}
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card card-statistic-2">
+                        <div class="card-stats">
+                            <div class="card-stats-title">JIB Statistics
+                            </div>
+                            <div class="card-stats-items">
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_draft}}</div>
+                                    <div class="card-stats-item-label">Draft</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_review}}</div>
+                                    <div class="card-stats-item-label">Review</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_approval}}</div>
+                                    <div class="card-stats-item-label">Approval</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_return}}</div>
+                                    <div class="card-stats-item-label">Return</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_rejected}}</div>
+                                    <div class="card-stats-item-label">Rejected</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_closed}}</div>
+                                    <div class="card-stats-item-label">Closed</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{$doc_total}}</div>
+                                    <div class="card-stats-item-label">Total</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-stats-items">
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_draft}}</div>
-                                <div class="card-stats-item-label">Draft</div>
+                        <div class="card-icon shadow-primary bg-primary">
+                            <i class="fas fa-archive"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Average Completion Day /JIB</h4>
                             </div>
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_review}}</div>
-                                <div class="card-stats-item-label">Review</div>
-                            </div>
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_approval}}</div>
-                                <div class="card-stats-item-label">Approval</div>
-                            </div>
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_return}}</div>
-                                <div class="card-stats-item-label">Return</div>
-                            </div>
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_rejected}}</div>
-                                <div class="card-stats-item-label">Rejected</div>
-                            </div>
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_closed}}</div>
-                                <div class="card-stats-item-label">Closed</div>
-                            </div>
-                            <div class="card-stats-item">
-                                <div class="card-stats-item-count">{{$doc_total}}</div>
-                                <div class="card-stats-item-label">Total</div>
+                            <div class="card-body">
+                                {{$averageTime}} day
                             </div>
                         </div>
                     </div>
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-archive"></i>
-                    </div>
-                    <div class="card-wrap">
+                </div>
+            </div>
+            {{--END AVG JIB--}}
+
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
                         <div class="card-header">
-                            <h4>Average Completion Day /JIB</h4>
+                            <h4>Allocation</h4>
                         </div>
                         <div class="card-body">
-                            {{$averageTime}} day
+                            <canvas id="myChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Status JIB</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart4"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {{--END AVG JIB--}}
-
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Allocation</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myChart3"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Status JIB</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myChart4"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>IRR</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myChart6"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>JIB/UNIT</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myChart5"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>JIB ONLINE</h4>
-                        <div class="card-header-action">
-                            <a href="jib/pengajuan" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>IRR</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart6"></canvas>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive table-invoice">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>Kegiatan</th>
-                                    <th>Inisiator</th>
-                                    <th>Pembagian</th>
-                                    <th>Nilai CAPEX</th>
-                                    <th>Est. Revenue</th>
-                                    <th>IRR</th>
-                                    <th>Status</th>
-                                    <th>Year</th>
-                                </tr>
-                                @foreach ($jib as $item)
-                                <tr>
-                                    <td><a href="#">{{ $item->kegiatan}}</a></td>
-                                    <td class="font-weight-600">{{ $item->nama_sub_unit }}</td>
-                                    <td class="font-weight-600">{{ $item->mcategories->name }}</td>
-                                    <td class="font-weight-600">{{ Str::rupiah($item->nilai_capex) }}</td>
-                                    <td class="font-weight-600">{{ Str::rupiah($item->est_revenue) }}</td>
-                                    <td class="font-weight-600">{{ $item->irr}}</td>
-                                    <td class="font-weight-600">{{ $item->mstatuses->name }}</td>
-                                    <td class="font-weight-600"> {{\Carbon\Carbon::parse($item->created_at)->format('Y')}}</td>
-                                </tr>
-                                @endforeach
-                            </table>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>JIB/UNIT</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart5"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>JIB ONLINE</h4>
+                            <div class="card-header-action">
+                                <a href="jib/pengajuan" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive table-invoice">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Kegiatan</th>
+                                        <th>Inisiator</th>
+                                        <th>Pembagian</th>
+                                        <th>Nilai CAPEX</th>
+                                        <th>Est. Revenue</th>
+                                        <th>IRR</th>
+                                        <th>Status</th>
+                                        <th>Year</th>
+                                    </tr>
+                                    @foreach ($jib as $item)
+                                    <tr>
+                                        <td><a href="#">{{ $item->kegiatan}}</a></td>
+                                        <td class="font-weight-600">{{ $item->nama_sub_unit }}</td>
+                                        <td class="font-weight-600">{{ $item->mcategories->name }}</td>
+                                        <td class="font-weight-600">{{ Str::rupiah($item->nilai_capex) }}</td>
+                                        <td class="font-weight-600">{{ Str::rupiah($item->est_revenue) }}</td>
+                                        <td class="font-weight-600">{{ $item->irr}}</td>
+                                        <td class="font-weight-600">{{ $item->mstatuses->name }}</td>
+                                        <td class="font-weight-600"> {{\Carbon\Carbon::parse($item->created_at)->format('Y')}}</td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

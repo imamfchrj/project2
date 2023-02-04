@@ -11,10 +11,10 @@
             {{--{!! Form::select('status', $statuses, !empty($filter['status']) ? $filter['status'] : old('status'), ['class' => 'form-control', 'placeholder' => '-- Status --']) !!}--}}
         {{--</div>--}}
         <div class="form-group col-md-2">
-            {!! Form::select('segment', $segments, !empty($filter['segment']) ? $filter['segment'] : old('segment'), ['class' => 'form-control', 'placeholder' => '-- Segment --']) !!}
+            {!! Form::select('segment', $segments, !empty($filter['segment']) ? $filter['segment'] : old('segment'), ['class' => 'form-control select2 segment_id_select', 'placeholder' => '-- Segment --']) !!}
         </div>
         <div class="form-group col-md-2">
-            {!! Form::select('customer', $customers, !empty($filter['customer']) ? $filter['customer'] : old('customer'), ['class' => 'form-control', 'placeholder' => '-- Customer --']) !!}
+            {!! Form::select('customer', $customers, !empty($filter['customer']) ? $filter['customer'] : old('customer'), ['class' => 'form-control select2 customer_select', 'placeholder' => '-- Customer --']) !!}
         </div>
         <div class="form-group col-md-1">
             <button class="btn btn-block btn-primary btn-filter"><i class="fas fa-search"></i> {{ __('general.btn_search_label') }}</button>
