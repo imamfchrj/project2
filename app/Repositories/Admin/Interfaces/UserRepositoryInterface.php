@@ -8,5 +8,6 @@ interface UserRepositoryInterface
     public function findById($id);
     public function create($params = []);
     public function update($id, $params = []);
+    public function update_profile($id, $params = []);
     public function delete($id);
 }

@@ -3,7 +3,7 @@ $route = 'admin/dashboard';
 @endphp
 
 {!! Form::open(['url' => $route, 'method' => 'GET']) !!}
-<div class="row" style="margin-top: 80px;">
+<div class="row" style="margin-top: 10px;">
     <div class="form-group col-sm-2 offset-md-6">
         {!! Form::select('bulan', $bulans, !empty($filter['bulan']) ? $filter['bulan'] : '<option value="0"> -- Pilih Bulan --</option>', ['class' => 'form-control browser-default select2', 'placeholder' => '-- Pilih Bulan --']) !!}
     </div>

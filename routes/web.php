@@ -40,4 +40,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('settings', [AdminSetting::class, 'update'])->name('settings.update');
 
     Route::get('users_login_his', [AdminUser::class, 'users_login_his'])->name('users.users_login_his');
+
+    Route::get('profile/{id}/editprofile', [AdminUser::class, 'profile'])->name('users.profile');
+    Route::match(['put', 'patch'], 'profile/{id}', [AdminUser::class, 'profile_update'])->name('users.profile_update');
 });

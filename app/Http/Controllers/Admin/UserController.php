@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\Admin\ProfileRequest;
 
 use App\Repositories\Admin\Interfaces\RoleRepositoryInterface;
 use App\Repositories\Admin\Interfaces\PermissionRepositoryInterface;
@@ -193,6 +194,7 @@ class UserController extends Controller
 
     public function users_login_his()
     {
+        $this->data['currentAdminMenu'] = 'user_login_his';
         $data = UserLoginHis::all();
         if (request()->ajax()) {
             return datatables()->of($data)
@@ -208,5 +210,43 @@ class UserController extends Controller
         }
 
         return view('admin.users.index_log_user', $this->data);
+    }
+
+    public function profile($id)
+    {
+//        $user_id = auth()->user()->id;
+        $this->data['currentAdminMenu'] = '';
+
+        $user = $this->userRepository->findById($id);
+        $this->data['user'] = $user;
+//        $this->data['permissions'] = $this->permissionRepository->findAll();
+//        $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
+//        $this->data['roleId'] = $user->roles->first() ? $user->roles->first()->id : null;
+//        $this->data['initiators'] = $this->initiatorRepository->findAll()->pluck('nama_posisi', 'id');
+//        $cek_initiator = Minitiator::where('objid_posisi', $user->objid_posisi)->firstorfail();
+//        $this->data['initiatorId'] = $cek_initiator->id;
+
+        return view('admin.users.profile', $this->data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function profile_update(ProfileRequest $request, $id)
+    {
+        $user = $this->userRepository->findById($id);
+
+        if ($this->userRepository->update_profile($id, $request->validated())) {
+            return redirect('admin/profile')
+                ->with('success', __('users.success_updated_message', ['name' => $user->name]));
+        }
+
+        return redirect('admin/profile')
+            ->with('error', __('users.fail_to_update_message', ['name' => $user->name]));
+
+
     }
 }

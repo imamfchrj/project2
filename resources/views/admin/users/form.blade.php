@@ -110,6 +110,7 @@
                                     </div>
                                 @enderror
                             </div>
+                            @if (auth()->user()->hasRole(\App\Models\Role::ADMIN) || auth()->user()->roles[0]->name == "Reviewer")
                             <div class="form-group">
                                 <label>@lang('users.role_label')</label>
                                 <select class="form-control browser select2" name="role_id">
@@ -127,7 +128,7 @@
                                     </div>
                                 @enderror
                             </div>
-
+                            @endif
                         </div>
                         <div class="card-footer text-right">
                             <button
@@ -135,6 +136,7 @@
                         </div>
                     </div>
                 </div>
+                @if (auth()->user()->hasRole(\App\Models\Role::ADMIN) || auth()->user()->roles[0]->name == "Reviewer")
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
@@ -145,6 +147,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
         </form>

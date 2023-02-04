@@ -128,6 +128,23 @@ class UserRepository implements UserRepositoryInterface
 //        });
     }
 
+    public function update_profile($id, $params = [])
+    {
+        $user = User::findOrFail($id);
+
+        $user->nik = $params['nik'];
+        $user->nik_gsd = $params['nik_gsd'];
+        $user->name = $params['name'];
+        $user->email = $params['email'];
+        if (!$params['password']) {
+            unset($params['password']);
+        } else {
+            $user->password = Hash::make($params['password']);
+        }
+
+        return $user->save();
+    }
+
     public function delete($id)
     {
         $user = User::findOrFail($id);
