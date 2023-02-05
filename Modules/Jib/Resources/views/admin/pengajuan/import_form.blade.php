@@ -80,6 +80,8 @@
         </div>
     </div>
     {!! Form::close() !!}
+
+    
 </section>
 @endsection
 @push('custom-script')
