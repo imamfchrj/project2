@@ -26,7 +26,9 @@ use Modules\Jib\Repositories\Admin\Interfaces\MomRepositoryInterface;
 use App\Authorizable;
 
 use App\Exports\JibExport;
+use App\Imports\JibImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Jib\Entities\Pengajuan;
 
 class PengajuanController extends JibController
 {
@@ -43,17 +45,18 @@ class PengajuanController extends JibController
         $persetujuanRepository,
         $momRepository;
 
-    public function __construct(PengajuanRepositoryInterface $pengajuanRepository,
-                                InitiatorRepositoryInterface $initiatorRepository,
-                                SegmentRepositoryInterface $segmentRepository,
-                                CustomerRepositoryInterface $customerRepository,
-                                KategoriRepositoryInterface $kategoriRepository,
-                                ReviewRepositoryInterface $reviewRepository,
-                                PemeriksaRepositoryInterface $pemeriksaRepository,
-                                JenisRepositoryInterface $jenisRepository,
-                                PersetujuanRepositoryInterface $persetujuanRepository,
-                                MomRepositoryInterface $momRepository)
-    {
+    public function __construct(
+        PengajuanRepositoryInterface $pengajuanRepository,
+        InitiatorRepositoryInterface $initiatorRepository,
+        SegmentRepositoryInterface $segmentRepository,
+        CustomerRepositoryInterface $customerRepository,
+        KategoriRepositoryInterface $kategoriRepository,
+        ReviewRepositoryInterface $reviewRepository,
+        PemeriksaRepositoryInterface $pemeriksaRepository,
+        JenisRepositoryInterface $jenisRepository,
+        PersetujuanRepositoryInterface $persetujuanRepository,
+        MomRepositoryInterface $momRepository
+    ) {
         parent::__construct();
         $this->data['currentAdminMenu'] = 'list pengajuan';
 
@@ -70,7 +73,6 @@ class PengajuanController extends JibController
 
         $this->data['statuses'] = $this->pengajuanRepository->getStatuses();
         $this->data['viewTrash'] = false;
-
     }
 
     /**
@@ -127,9 +129,9 @@ class PengajuanController extends JibController
      */
     public function create()
     {
-//        $this->data['permissions'] = $this->permissionRepository->findAll();
-//        $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
-//        $this->data['roleId'] = null;
+        //        $this->data['permissions'] = $this->permissionRepository->findAll();
+        //        $this->data['roles'] = $this->roleRepository->findAll()->pluck('name', 'id');
+        //        $this->data['roleId'] = null;
         $this->data['initiator'] = $this->initiatorRepository->findByUserId();
         $this->data['initiatorAll'] = $this->initiatorRepository->findAllByUserId()->pluck('nama_sub_unit', 'id');
         $this->data['segment'] = $this->segmentRepository->findAll()->pluck('name', 'id');
@@ -154,7 +156,7 @@ class PengajuanController extends JibController
         $params = $request->validated();
 
         if ($pengajuan = $this->pengajuanRepository->create($params)) {
-//            $pemeriksa = $this->pemeriksaRepository->create();
+            //            $pemeriksa = $this->pemeriksaRepository->create();
             return redirect('admin/jib/pengajuan')
                 ->with('success', __('blog::pegnajuan.success_create_message'));
         }
@@ -192,7 +194,6 @@ class PengajuanController extends JibController
         } else {
             return view('jib::admin.pengajuan.show_support', $this->data);
         }
-
     }
 
     public function download($uid)
@@ -227,12 +228,11 @@ class PengajuanController extends JibController
     {
         // dd($request);
         $params = $request->validated();
-// dd($params);
+        // dd($params);
         if ($pengajuan = $this->pengajuanRepository->update($params)) {
             return redirect('admin/jib/pengajuan')
                 ->with('success', __('blog::pegnajuan.success_update_message'));
         }
-
     }
 
     /**
@@ -267,16 +267,53 @@ class PengajuanController extends JibController
     public function findcustomername($id)
     {
         $data_cust = Mcustomer::select('name', 'id')->where('segment_id', $id)->get();
-//        $data_cust = Mcustomer::all();
+        //        $data_cust = Mcustomer::all();
         return response()->json($data_cust);
     }
 
     public function jibexport()
     {
         // return Excel::download(new JibExport, 'JIB.xlsx');
-        ob_end_clean(); 
-        ob_start(); 
+        ob_end_clean();
+        ob_start();
+
+        return Excel::download(new JibExport, 'JIB-Online_' . date('Y-m-d H-i-s') . '.xlsx');
+    }
+
+    public function jibImport(PengajuanRequest $request)
+    {
+        # code...
+        $this->data['currentAdminMenu'] = 'list pengajuan realisasi';
+
+        $params = $request->all();
+        $options = [
+            'per_page' => 30,
+            'order' => [
+                'id' => 'desc',
+            ],
+            'filter' => $params,
+        ];
+
+        $pengajuan = $this->pengajuanRepository->findAll($options);
+
+        $this->data['pengajuan'] = $pengajuan['pengajuan'];
+        $this->data['filter'] = $params;
+
+        $this->data['file_realisasi'] = $pengajuan['file_realisasi'];
+
+        return view('jib::admin.pengajuan.import_form', $this->data);
+    }
+
+    public function realisasi_upload(Request $request)
+    {
+        $params = $request->validate([
+            'file_realisasi' => 'required|mimes:xlsx',
+         ]);
+
+        if ($this->pengajuanRepository->jibImport($params)) {
+            return redirect('admin/jib/realisasi')
+                ->with('success', 'The file has been imported');
+        }
         
-        return Excel::download(new JibExport, 'JIB-Online_'.date('Y-m-d H-i-s').'.xlsx');
     }
 }

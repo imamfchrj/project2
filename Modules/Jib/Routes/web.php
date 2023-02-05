@@ -39,6 +39,11 @@ Route::prefix('admin/jib')->as('jib-')->namespace('\Modules\Jib\Http\Controllers
     Route::match(['get', 'post'], 'workspace/storemom', 'WorkspaceController@storemom')->name('workspace.storemom');
     Route::match(['put', 'patch'], 'workspace/updatemom/{id}', 'WorkspaceController@updatemom')->name('workspace.updatemom');
 
+     # Realisasi
+     Route::match(['get','post'], 'realisasi', 'PengajuanController@jibImport')->name('realisasi.realisasi');
+     Route::get('realisasi/download', 'PengajuanController@realisasi_download')->name('realisasi.download');
+     Route::post('realisasi/upload', 'PengajuanController@realisasi_upload')->name('realisasi.upload');
+
     // PENGAJUAN
     Route::get('pengajuan/trashed', 'PengajuanController@trashed')->name('pengajuan.trashed');
     Route::get('pengajuan/jibexport', 'PengajuanController@jibexport')->name('pengajuan.jibexport');

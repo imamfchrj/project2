@@ -46,6 +46,8 @@ return [
     'updated_at_label' => 'Last Update',
     'publish_date_label' => 'Publish Date',
     'pengajuan_add_new' => 'New pengajuan JIB',
+    'realisasi_add_new' => 'New realisasi JIB',
+    'import_realisasi' => 'Realisasi JIB',
     'pengajuan_update' => 'Update pengajuan JIB',
     'add_card_title' => 'Add New pengajuan',
     'update_card_title' => 'Update pengajuan',
