@@ -22,7 +22,13 @@
             "name": "List Pengajuan",
             "route": "admin/jib/pengajuan",
             "permission": "view_jib-pengajuan"
+        },
+        {
+            "icon": "fa fa-list",
+            "name": "Realisasi",
+            "route": "admin/jib/realisasi",
+            "permission": "view_jib-realisasi"
         }
     ],
-    "permissions": ["jib-workspace", "jib-pengajuan"]
+    "permissions": ["jib-workspace", "jib-pengajuan", "jib-realisasi"]
 }
