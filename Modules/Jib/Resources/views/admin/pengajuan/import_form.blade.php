@@ -25,13 +25,16 @@
                         @include('jib::admin.shared.flash')
                     </div>
                     <div class="card-body">
+
                         <div class="form-group">
-                            <label class="col-sm-2 col-form-label">File Upload</label>
-                            <div class="col-sm-5">
-                                <!-- @if (!empty($pengajuan) && $pengajuan->featured_image)
-                                <img src="{{ $pengajuan->featured_image }}" alt="{{ $pengajuan->featured_image_caption }}" class="img-fluid img-thumbnail" />
-                                @endif -->
-                                <input type="file" name="file_realisasi" class="form-control btn primary" />
+                            <label>Pilih file Upload</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-file-import"></i>
+                                    </div>
+                                </div>
+                                <input type="file" class="form-control" placeholder="pilih file" id="file_realisasi" name="file_realisasi">
                             </div>
                             @error('file_realisasi')
                             <div class="invalid-feedback">
@@ -40,13 +43,12 @@
                             @enderror
                         </div>
                     </div>
-              
                     <div class="card-footer text-left">
                         <button id="btn_realisasi" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
                 <!-- Card Upload History -->
-                <div class="card" id="realisasi_history">
+                <!-- <div class="card" id="realisasi_history">
                     <div class="card-header">
                         <h4>Upload History</h4>
                     </div>
@@ -74,14 +76,14 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- End Card Upload History -->
             </div>
         </div>
     </div>
     {!! Form::close() !!}
 
-    
+
 </section>
 @endsection
 @push('custom-script')

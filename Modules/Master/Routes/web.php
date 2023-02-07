@@ -31,7 +31,8 @@ Route::prefix('admin/master')->as('master-')->namespace('\Modules\Master\Http\Co
     Route::get('anggaran/list-table', 'AnggaranController@list_anggaran')->name('master.list-table');
 
     Route::get('budget/download', 'BudgetController@download')->name('budget.download');
-    Route::get('budget/upload', 'BudgetController@upload')->name('budget.import');
+    // Route::get('budget/upload', 'BudgetController@upload')->name('budget.import');
+    Route::post('budget/upload', 'BudgetController@budget_import')->name('budget.import');
     Route::resource('budget', 'BudgetController');
     
 });
