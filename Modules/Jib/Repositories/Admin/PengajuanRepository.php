@@ -13,6 +13,8 @@ use Modules\Jib\Repositories\Admin\Interfaces\PemeriksaRepositoryInterface;
 use Modules\Jib\Repositories\Admin\Interfaces\PengajuanRepositoryInterface;
 
 //use Modules\Blog\Entities\Tag;
+use App\Imports\JibImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengajuanRepository implements PengajuanRepositoryInterface
 {
@@ -28,7 +30,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $perPage = $options['per_page'] ?? null;
         $orderByFields = $options['order'] ?? [];
 
-//        $pengajuan = (new Pengajuan())->with('user');
+        //        $pengajuan = (new Pengajuan())->with('user');
         $pengajuan = (new Pengajuan())
             ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa', 'mjenises');
 
@@ -81,7 +83,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.user_id',
             'jib_reviewer.pengajuan_id'
         )
-            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left')// di tambahkan left option, karena draft tidak insert dulu ke reviewer
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
             ->orwhere(
                 function ($query) {
                     if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
@@ -124,11 +126,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         $pengajuan = (new Pengajuan())
             ->with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators', 'mpemeriksa');
 
-//        if ($orderByFields) {
-//            foreach ($orderByFields as $field => $sort) {
-//                $pengajuan = $pengajuan->orderBy($field, $sort);
-//            }
-//        }
+        //        if ($orderByFields) {
+        //            foreach ($orderByFields as $field => $sort) {
+        //                $pengajuan = $pengajuan->orderBy($field, $sort);
+        //            }
+        //        }
 
         if (!empty($options['filter']['q'])) {
             $pengajuan = $pengajuan->with('minitiators')->where(function ($query) use ($options) {
@@ -168,11 +170,11 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.user_id',
             'jib_reviewer.pengajuan_id'
         )
-            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left')// di tambahkan left option, karena draft tidak insert dulu ke reviewer
-//            ->where('jib_pengajuan.user_id', auth()->user()->id)
-//            ->orwhere('jib_pengajuan.status_id', 7)
-//            ->where('jib_reviewer.last_status', 'OPEN')
-//            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+            //            ->where('jib_pengajuan.user_id', auth()->user()->id)
+            //            ->orwhere('jib_pengajuan.status_id', 7)
+            //            ->where('jib_reviewer.last_status', 'OPEN')
+            //            ->where('jib_reviewer.nik', auth()->user()->nik_gsd)
             // BERDASARKAN JIB REVIEWER YANG SEDANG OPEN
             ->orWhere(
                 function ($query) {
@@ -264,13 +266,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         return $pengajuan->get();
     }
 
-//
+    //
     public function findById($id)
     {
         $pengajuan = Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
             ->findOrFail($id);
         $file_jib = $pengajuan->getMedia('file_jib');
-// dd($pengajuan);
+        // dd($pengajuan);
         return compact(['pengajuan', 'file_jib']);
         // return Pengajuan::with('msegments', 'mcustomers', 'mcategories', 'mstatuses', 'users', 'minitiators')
         //     ->findOrFail($id);
@@ -314,7 +316,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $new_number = sprintf("%05d", $new_numbers);
                 }
 
-                    $no_jib = $new_number . '/JIB/CAPEX/B/' . $bulan . '/' . $tahun;
+                $no_jib = $new_number . '/JIB/CAPEX/B/' . $bulan . '/' . $tahun;
 
                 // Insert Pengajuan
                 $pengajuan = new Pengajuan();
@@ -561,63 +563,63 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         if ($params['kategori_id'] == 1 && $params['jenis_id'] == 1) { // BISNIS CAPEX
             $nilai_capex = str_replace(".", "", $params['nilai_capex_1']);
             $segment = $params['segment_id_1'];
-//            dd('aaa');
+            //            dd('aaa');
         } else if ($params['kategori_id'] == 1 && $params['jenis_id'] == 2) { // BISNIS OPEX
             $nilai_capex = str_replace(".", "", $params['nilai_capex_4']);
             $segment = $params['segment_id_4'];
-//            dd('bbb');
+            //            dd('bbb');
         } else { // SUPPORT CAPEX OPEX
             $nilai_capex = str_replace(".", "", $params['nilai_capex_2']);
             $segment = $params['segment_id_2'];
-//            dd('ccc');
+            //            dd('ccc');
         }
 
         // Insert M_Reviewer
         $cek_approver = Minitiator::where('objid_posisi', $cek_initiator->objid_posisi_appr)->first();
         // CEK KP / REG
         if ($cek_initiator->kantor == 'KANTOR PUSAT') { // KP - Pemilik CAPEX/OPEX
-//            dd('aaa');
+            //            dd('aaa');
             $objid_approver = $cek_approver->objid_posisi;
             // GET REVIEWER dan APPROVER BY RULES
             if ($nilai_capex <= 3000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(1);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 1)->where('petugas', 'APPROVER')->first();
-//                dd('abbb');
+                //                dd('abbb');
             } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(2);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 2)->where('petugas', 'APPROVER')->first();
-//                dd('accc');
+                //                dd('accc');
             } else {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
-//                dd('addd');
+                //                dd('addd');
             }
         } else { // REG - Pemilik CAPEX
-//            dd('bbb');
+            //            dd('bbb');
             // GET REVIEWER dan APPROVER BY RULES
             if ($nilai_capex <= 250000000) {
                 $objid_approver = $cek_approver->objid_posisi;
                 $pemeriksa = $this->pemeriksaRepository->findByRules(4);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 4)->where('petugas', 'APPROVER')->first();
-//                dd('bccc');
+                //                dd('bccc');
             } else if ($nilai_capex > 250000000 && $nilai_capex <= 3000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(5);
                 $get_pem_by_approver = Mpemeriksa::where('segment_id', $segment)->where('rules', 5)->where('petugas', 'APPROVER')->first();
-//                dd('bddd');
+                //                dd('bddd');
             } else if ($nilai_capex > 3000000000 && $nilai_capex <= 5000000000) {
                 $pemeriksa = $this->pemeriksaRepository->findByRules(6);
                 if ($params['kategori_id'] == 1) {
                     $get_pem_by_approver = Mpemeriksa::where('segment_id', 1)->where('rules', 6)->where('petugas', 'APPROVER')->first();
-//                    dd('beee');
+                    //                    dd('beee');
                 } else {
                     $get_pem_by_approver = Mpemeriksa::where('segment_id', 2)->where('rules', 6)->where('petugas', 'APPROVER')->first();
-//                    dd('bfff');
+                    //                    dd('bfff');
                 }
             } else {
                 $objid_approver = $cek_approver->objid_posisi;
                 $pemeriksa = $this->pemeriksaRepository->findByRules(3);
                 $get_pem_by_approver = Mpemeriksa::where('objid_posisi', $objid_approver)->where('rules', 3)->where('petugas', 'APPROVER')->first();
-//                dd('bggg');
+                //                dd('bggg');
             }
         }
 
@@ -787,7 +789,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                     $review->save();
                 }
             }
-        // SUPPORT CAPEX/OPEX
+            // SUPPORT CAPEX/OPEX
         } else {
             // Insert Pengajuan
             $pengajuan = Pengajuan::findOrFail($params['id']);
@@ -945,13 +947,13 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     public function delete($id, $permanentDelete = false)
     {
         $pengajuan = Pengajuan::withTrashed()->findOrFail($id);
-//        dd($pengajuan);
+        //        dd($pengajuan);
         $this->checkUserCanDeletePost($pengajuan);
 
         return DB::transaction(function () use ($pengajuan, $permanentDelete) {
             if ($permanentDelete) {
-//                $pengajuan->tags()->sync([]);
-//                $pengajuan->categories()->sync([]);
+                //                $pengajuan->tags()->sync([]);
+                //                $pengajuan->categories()->sync([]);
 
                 return $pengajuan->forceDelete();
             }
@@ -963,7 +965,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
     private function checkUserCanDeletePost($pengajuan)
     {
         $currentUser = auth()->user();
-//        dd($currentUser);
+        //        dd($currentUser);
         $canDeletePengajuan = $currentUser->hasRole('Superadmin') || ($pengajuan->user_id == $currentUser->id);
 
         if ($canDeletePengajuan) {
@@ -1118,7 +1120,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             return $pengajuan->save();
 
-        // Return
+            // Return
         } elseif ($status_btn == 2) {
             // Update REVIEWER
             $reviewer->last_status = 'QUEUE';
@@ -1170,7 +1172,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->save();
             }
             return $pengajuan->save();
-        // Reject
+            // Reject
         } else {
             // Update REVIEWER
             $reviewer->last_status = 'REJECT';
@@ -1192,5 +1194,20 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             }
             return $pengajuan->save();
         }
+    }
+
+    public function jibImport($param = [])
+    {
+        # code.
+        $file = $param['file_realisasi'];
+
+        //Upload File
+        // if (isset($file)) {
+        //     $pengajuan->addMediaFromRequest('file_realisasi')->toMediaCollection('file_realisasi');
+            //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+            Excel::import(new JibImport, $file);
+        // }
+
+        return true;
     }
 }
