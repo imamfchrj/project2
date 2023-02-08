@@ -7,6 +7,8 @@ use DB;
 
 use Modules\Master\Entities\Mbudgetrkap;
 use Modules\Master\Repositories\Admin\Interfaces\BudgetRepositoryInterface;
+use App\Imports\BudgetImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BudgetRepository implements BudgetRepositoryInterface
 {
@@ -40,8 +42,8 @@ class BudgetRepository implements BudgetRepositoryInterface
     {
         // Insert Customer
         $anggaran = new Mbudgetrkap();
-        $anggaran->name = $params['name'];
-        return $anggaran->save();
+        // $anggaran->name = $params['name'];
+        return $anggaran->save($params);
     }
 
     public function findById($id)
@@ -60,5 +62,15 @@ class BudgetRepository implements BudgetRepositoryInterface
     {
         $anggaran = Mbudgetrkap::findOrFail($id);
         return $anggaran->forceDelete();
+    }
+
+    public function BudgetImport($param = [])
+    {
+        # code.
+        $file = $param['file_upload_rkap'];
+        
+        // Excel::import(new BudgetImport, $file);
+
+        return Excel::import(new BudgetImport, $file);;
     }
 }

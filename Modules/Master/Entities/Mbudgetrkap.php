@@ -10,7 +10,26 @@ class Mbudgetrkap extends Model
     use HasFactory;
 
     protected $fillable = [
-        'program'
+        'tahun',
+        'periode',
+        'ba',
+        'ba_name',
+        'cc',
+        'cc_name',
+        'program',
+        'customer',
+        'portofolio',
+        'lokasi_project',
+        'kelompok_aset',
+        'nilai_program',
+        'kategori_capex_id',
+        'kategori_capex_name',
+        'klasifikasi_capex_id',
+        'klasifikasi_capex_name',
+        'prioritas',
+        'nama_drp',
+        'reff',
+        'no_drp',
     ];
 
     /**
