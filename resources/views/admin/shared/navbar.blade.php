@@ -146,8 +146,14 @@
                 {{--</div>--}}
             {{--</div>--}}
         {{--</li>--}}
+        {{ $no = 0 }}
+        @foreach ($notifications as $notif)
+            @if ($notif->nik_penerima == Auth::user()->nik_gsd)
+                {{ $no++ }}
+            @endif
+        @endforeach
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                                                     class="nav-link notification-toggle nav-link-lg @if($count_notif_unread > 0) beep @endif"><i
+                                                     class="nav-link notification-toggle nav-link-lg @if($no > 0) beep @endif"><i
                         class="far fa-bell"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Notifications
@@ -157,17 +163,19 @@
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
                     @foreach ($notifications as $notif)
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                        <div class="dropdown-item-icon bg-primary text-white">
-                            <i class="fas fa-bell"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                            {{--Template update is available now!--}}
-                            <b>JIB No : {{ $notif->deskripsi }} </b>
-                            <p>{{ $notif->tipe }} {{ $notif->nama }}</p>
-                            <div class="time text-primary">{{ $notif->created_at }}</div>
-                        </div>
-                    </a>
+                        @if ($notif->nik_penerima == Auth::user()->nik_gsd)
+                        <a href="#" class="dropdown-item dropdown-item-unread">
+                            <div class="dropdown-item-icon bg-primary text-white">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="dropdown-item-desc">
+                                {{--Template update is available now!--}}
+                                <b>JIB No : {{ $notif->deskripsi }} </b>
+                                <p>{{ $notif->tipe }} {{ $notif->nama }}</p>
+                                <div class="time text-primary">{{ $notif->created_at }}</div>
+                            </div>
+                        </a>
+                        @endif
                     @endforeach
                 </div>
                 <div class="dropdown-footer text-center">
