@@ -17,4 +17,6 @@ interface BudgetRepositoryInterface
     public function create($params = []);
     public function update($id, $params = []);
     public function delete($id);
+    public function BudgetImport($params = []);
+
 }

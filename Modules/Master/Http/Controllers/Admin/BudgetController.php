@@ -4,18 +4,13 @@ namespace Modules\Master\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-
 use Modules\Master\Http\Controllers\MasterController;
 use Modules\Master\Http\Requests\Admin\BudgetRequest;
-
 use Modules\Master\Repositories\Admin\Interfaces\BudgetRepositoryInterface;
-
 use App\Authorizable;
 use App\Exports\BudgetExport;
-use Datatables;
 use Modules\Master\Entities\Mbudgetrkap;
 use Maatwebsite\Excel\Facades\Excel;
-
 
 class BudgetController extends MasterController
 {
@@ -50,17 +45,27 @@ class BudgetController extends MasterController
     public function download()
     {
         # code...
-        ob_end_clean(); 
-        ob_start(); 
-        
-        return Excel::download(new BudgetExport, 'Budget-JIB-Online_'.date('Y-m-d H-i-s').'.xlsx');
+        ob_end_clean();
+        ob_start();
+
+        return Excel::download(new BudgetExport, 'Budget-JIB-Online_' . date('Y-m-d H-i-s') . '.xlsx');
     }
 
-    public function upload()
+    public function budget_import(Request $request)
     {
-        # code...
-        return view('master::admin.budget._form-upload', $this->data);
+        $params = $request->validate([
+            'file_upload_rkap' => 'required|mimes:xlsx|max:2048',
+        ]);
+
+        if ($this->anggaranRepository->BudgetImport($params)) {
+            return redirect('admin/master/budget')
+                ->with('success', 'The file has been imported');
+        }
+
+        return redirect('admin/master/budget/')
+        ->with('error', 'Something wrong');
     }
+
     /**
      * Show the form for creating a new resource.
      * @return Renderable
