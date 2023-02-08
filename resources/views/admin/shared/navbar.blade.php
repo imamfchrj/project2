@@ -164,7 +164,7 @@
                 <div class="dropdown-list-content dropdown-list-icons">
                     @foreach ($notifications as $notif)
                         @if ($notif->nik_penerima == Auth::user()->nik_gsd)
-                        <a href="#" class="dropdown-item dropdown-item-unread">
+                        <a href="{{ url('admin/notification/'.$notif->id.'/readbyid') }}" class="dropdown-item dropdown-item-unread">
                             <div class="dropdown-item-icon bg-primary text-white">
                                 <i class="fas fa-bell"></i>
                             </div>
