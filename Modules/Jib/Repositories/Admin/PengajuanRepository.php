@@ -2,6 +2,7 @@
 
 namespace Modules\Jib\Repositories\Admin;
 
+use App\Models\Notifications;
 use App\Models\User;
 use DB;
 use Modules\Jib\Entities\Minitiator;
@@ -652,6 +653,17 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'urutan' => $get_pem_by_approver->urutan,
                 'last_status' => "QUEUE",
             ];
+
+            $notification = new Notifications();
+            $notification->deskripsi = $no_jib;
+            $notification->tipe = 'Submitted By';
+            $notification->nik = auth()->user()->nik_gsd;
+            $notification->nama = auth()->user()->name;
+            $notification->is_read = 0;
+            $notification->nik_penerima = '99518821';
+            $notification->nama_penerima = 'ABDILLAH HAMMAM NUR FAHMI';
+            $notification->save();
+
             return DB::table('jib_reviewer')->insert($reviewer);
         } else {
             return true;
