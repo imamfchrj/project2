@@ -18,55 +18,12 @@
                             @include('master::admin.shared.flash')
                             @include('master::admin.anggaran._filter')
                             <div class="table-responsive">
-                                <table id="anggaran" class="table table-bordered table-striped table-sm ">
+                                <table id="tbl_anggaran" class="table table-bordered table-striped table-sm ">
                                     <thead>
                                     <th>No</th>
                                     <th>Nama Anggaran</th>
                                     <th>Action</th>
                                     </thead>
-                                    {{--<tbody>--}}
-                                    {{--@forelse ($anggarans as $anggaran)--}}
-                                        {{--<tr>--}}
-                                            {{--<td>{{$loop->iteration}}</td>--}}
-                                            {{--<td>{{ $anggaran->name }}</td>--}}
-                                            {{--<td>--}}
-                                                {{--@can('view_master-anggaran')--}}
-                                                    {{--<a class="btn btn-sm btn-primary"--}}
-                                                        {{--href="{{ url('admin/master/anggaran/'. $anggaran->id )}}"><i--}}
-                                                                {{--class="far fa-eye"></i>--}}
-                                                        {{--Show--}}
-                                                    {{--</a>--}}
-                                                {{--@endcan--}}
-                                                {{--@can('edit_master-anggaran')--}}
-                                                    {{--<a class="btn btn-sm btn-warning"--}}
-                                                       {{--href="{{ url('admin/master/anggaran/'. $anggaran->id .'/edit')}}"><i--}}
-                                                                {{--class="far fa-edit"></i>--}}
-                                                        {{--Edit--}}
-                                                    {{--</a>--}}
-                                                {{--@endcan--}}
-                                                {{--@can('delete_master-anggaran')--}}
-                                                    {{--<a href="{{ url('admin/master/anggaran/'. $anggaran->id) }}"--}}
-                                                       {{--class="btn btn-sm btn-danger" onclick="--}}
-                                                            {{--event.preventDefault();--}}
-                                                            {{--if (confirm('Do you want to remove this?')) {--}}
-                                                            {{--document.getElementById('delete-role-{{ $anggaran->id }}').submit();--}}
-                                                            {{--}">--}}
-                                                        {{--<i class="far fa-trash-alt"></i>--}}
-                                                        {{--Delete--}}
-                                                    {{--</a>--}}
-                                                    {{--<form id="delete-role-{{ $anggaran->id }}"--}}
-                                                          {{--action="{{ url('admin/master/anggaran/'. $anggaran->id) }}"--}}
-                                                          {{--method="POST">--}}
-                                                        {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                                        {{--@csrf--}}
-                                                    {{--</form>--}}
-                                                {{--@endcan--}}
-                                            {{--</td>--}}
-                                        {{--</tr>--}}
-                                    {{--@empty--}}
-
-                                    {{--@endforelse--}}
-                                    {{--</tbody>--}}
                                 </table>
                             </div>
                         </div>
@@ -74,25 +31,76 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" id="table-anggaran" value ="{{ url('admin/master/anggaran/list-table') }}">
     </section>
 @endsection
 @push('custom-script')
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#anggaran').DataTable({
-                ordering : true,
-                serverSide : true,
-                processing : true,
-                ajax : {
-                    'url' : $('#table-anggaran').val()
-                },
-                columns : [
-                    { data : 'DT_RowIndex', name : 'DT_RowIndex', width : '10px', orderable : false, searchable : false },
-                    { data : 'name', name : 'name' },
-                    { data : 'opsi', name : 'opsi', orderable : false, searchable : false}
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#tbl_anggaran').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('admin/master/anggaran') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ],
+                order: [
+                    [0, 'asc']
                 ]
             });
         });
     </script>
 @endpush
+
+{{--<tbody>--}}
+{{--@forelse ($anggarans as $anggaran)--}}
+    {{--<tr>--}}
+        {{--<td>{{$loop->iteration}}</td>--}}
+        {{--<td>{{ $anggaran->name }}</td>--}}
+        {{--<td>--}}
+            {{--@can('view_master-anggaran')--}}
+                {{--<a class="btn btn-sm btn-primary"--}}
+                   {{--href="{{ url('admin/master/anggaran/'. $anggaran->id )}}"><i--}}
+                            {{--class="far fa-eye"></i>--}}
+                    {{--Show--}}
+                {{--</a>--}}
+            {{--@endcan--}}
+            {{--@can('edit_master-anggaran')--}}
+                {{--<a class="btn btn-sm btn-warning"--}}
+                   {{--href="{{ url('admin/master/anggaran/'. $anggaran->id .'/edit')}}"><i--}}
+                            {{--class="far fa-edit"></i>--}}
+                    {{--Edit--}}
+                {{--</a>--}}
+            {{--@endcan--}}
+            {{--@can('delete_master-anggaran')--}}
+                {{--<a href="{{ url('admin/master/anggaran/'. $anggaran->id) }}"--}}
+                   {{--class="btn btn-sm btn-danger" onclick="--}}
+                        {{--event.preventDefault();--}}
+                        {{--if (confirm('Do you want to remove this?')) {--}}
+                        {{--document.getElementById('delete-role-{{ $anggaran->id }}').submit();--}}
+                        {{--}">--}}
+                    {{--<i class="far fa-trash-alt"></i>--}}
+                    {{--Delete--}}
+                {{--</a>--}}
+                {{--<form id="delete-role-{{ $anggaran->id }}"--}}
+                      {{--action="{{ url('admin/master/anggaran/'. $anggaran->id) }}"--}}
+                      {{--method="POST">--}}
+                    {{--<input type="hidden" name="_method" value="DELETE">--}}
+                    {{--@csrf--}}
+                {{--</form>--}}
+            {{--@endcan--}}
+        {{--</td>--}}
+    {{--</tr>--}}
+{{--@empty--}}
+
+{{--@endforelse--}}
+{{--</tbody>--}}
