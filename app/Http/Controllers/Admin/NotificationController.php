@@ -17,7 +17,7 @@ class NotificationController extends Controller
     public function index()
     {
         $this->data['currentAdminMenu'] = '';
-        $data = Notifications::all();
+        $data = Notifications::where('nik_penerima', auth()->user()->nik_gsd);
         if (request()->ajax()) {
             return datatables()->of($data)
                 ->addIndexColumn()
@@ -33,7 +33,6 @@ class NotificationController extends Controller
 
     public function markasread()
     {
-        $this->data['currentAdminMenu'] = '';
         Notifications::where('nik_penerima', auth()->user()->nik_gsd)->where('is_read', 0)
             ->update(['is_read' => 1, 'read_at' => date('Y-m-d H:i:s')]);
         return redirect()->back();
