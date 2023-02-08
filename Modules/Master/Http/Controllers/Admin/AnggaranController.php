@@ -33,16 +33,29 @@ class AnggaranController extends MasterController
      */
     public function index(Request $request)
     {
-        $params = $request->all();
-        $options = [
-            'per_page' => $this->perPage,
-            'order' => [
-                'id' => 'asc',
-            ],
-            'filter' => $params,
-        ];
-        $this->data['anggarans'] = $this->anggaranRepository->findAll($options);
-        $this->data['filter'] = $params;
+//        $params = $request->all();
+//        $options = [
+//            'per_page' => $this->perPage,
+//            'order' => [
+//                'id' => 'asc',
+//            ],
+//            'filter' => $params,
+//        ];
+//        $this->data['anggarans'] = $this->anggaranRepository->findAll($options);
+//        $this->data['filter'] = $params;
+//        return view('master::admin.anggaran.index', $this->data);
+        $this->data['currentAdminMenu'] = 'tipe anggaran';
+        $data = Manggaran::all();
+        if (request()->ajax()) {
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
+                    $button = '<button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"><i class="far fa-edit"></i></button>    ';
+                    $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';
+                    return $button;
+                })
+                ->make(true);
+        }
         return view('master::admin.anggaran.index', $this->data);
     }
 
