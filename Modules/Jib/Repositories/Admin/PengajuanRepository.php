@@ -84,7 +84,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.user_id',
             'jib_reviewer.pengajuan_id'
         )
-            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left')// di tambahkan left option, karena draft tidak insert dulu ke reviewer
             ->orwhere(
                 function ($query) {
                     if (auth()->user()->roles[0]->id != 1 && auth()->user()->roles[0]->id != 7) {
@@ -171,7 +171,7 @@ class PengajuanRepository implements PengajuanRepositoryInterface
             'jib_pengajuan.user_id',
             'jib_reviewer.pengajuan_id'
         )
-            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left') // di tambahkan left option, karena draft tidak insert dulu ke reviewer
+            ->join('jib_reviewer', 'jib_reviewer.pengajuan_id', '=', 'jib_pengajuan.id', 'left')// di tambahkan left option, karena draft tidak insert dulu ke reviewer
             //            ->where('jib_pengajuan.user_id', auth()->user()->id)
             //            ->orwhere('jib_pengajuan.status_id', 7)
             //            ->where('jib_reviewer.last_status', 'OPEN')
@@ -950,6 +950,17 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 'urutan' => $get_pem_by_approver->urutan,
                 'last_status' => "QUEUE",
             ];
+
+            $notification = new Notifications();
+            $notification->deskripsi = $pengajuan->jib_number;
+            $notification->tipe = 'Submitted By';
+            $notification->nik = auth()->user()->nik_gsd;
+            $notification->nama = auth()->user()->name;
+            $notification->is_read = 0;
+            $notification->nik_penerima = '99518821';
+            $notification->nama_penerima = 'ABDILLAH HAMMAM NUR FAHMI';
+            $notification->save();
+
             return DB::table('jib_reviewer')->insert($reviewer);
         } else {
             return true;
@@ -1130,9 +1141,28 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->notes = $params['note'];
                 $review->save();
             }
+
+            // Insert Notification
+            $notification = new Notifications();
+            $notification->deskripsi = $pengajuan->jib_number;
+            $notification->nik = auth()->user()->nik_gsd;
+            $notification->nama = auth()->user()->name;
+            $notification->is_read = 0;
+            if ($pengajuan->status_id == 6) {
+                $user_pembuat = User::where('id', $pengajuan->user_id)->firstorfail();
+                $notification->tipe = 'Closed By';
+                $notification->nik_penerima = $user_pembuat->nik_gsd;
+                $notification->nama_penerima = $user_pembuat->name;
+            } else {
+                $notification->tipe = 'Approved By';
+                $notification->nik_penerima = $reviewer_next->nik;
+                $notification->nama_penerima = $reviewer_next->nama;
+            }
+            $notification->save();
+
             return $pengajuan->save();
 
-            // Return
+        // Return
         } elseif ($status_btn == 2) {
             // Update REVIEWER
             $reviewer->last_status = 'QUEUE';
@@ -1183,6 +1213,25 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->notes = $params['note'];
                 $review->save();
             }
+
+
+            // Insert Notification
+            $notification = new Notifications();
+            $notification->deskripsi = $pengajuan->jib_number;
+            $notification->tipe = 'Returned By';
+            $notification->nik = auth()->user()->nik_gsd;
+            $notification->nama = auth()->user()->name;
+            $notification->is_read = 0;
+            if ($urutan != 1) {
+                $notification->nik_penerima = $reviewer_before->nik;
+                $notification->nama_penerima = $reviewer_before->nama;
+            } else {
+                $user_pembuat = User::where('id', $pengajuan->user_id)->firstorfail();
+                $notification->nik_penerima = $user_pembuat->nik_gsd;
+                $notification->nama_penerima = $user_pembuat->name;
+            }
+            $notification->save();
+
             return $pengajuan->save();
             // Reject
         } else {
@@ -1204,6 +1253,19 @@ class PengajuanRepository implements PengajuanRepositoryInterface
                 $review->notes = $params['note'];
                 $review->save();
             }
+
+            // Insert Notification
+            $user_pembuat = User::where('id', $pengajuan->user_id)->firstorfail();
+
+            $notification = new Notifications();
+            $notification->deskripsi = $pengajuan->jib_number;
+            $notification->tipe = 'Rejected By';
+            $notification->nik = auth()->user()->nik_gsd;
+            $notification->nama = auth()->user()->name;
+            $notification->is_read = 0;
+            $notification->nik_penerima = $user_pembuat->nik_gsd;
+            $notification->nama_penerima = $user_pembuat->name;
+            $notification->save();
             return $pengajuan->save();
         }
     }
@@ -1216,8 +1278,8 @@ class PengajuanRepository implements PengajuanRepositoryInterface
         //Upload File
         // if (isset($file)) {
         //     $pengajuan->addMediaFromRequest('file_realisasi')->toMediaCollection('file_realisasi');
-            //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
-            Excel::import(new JibImport, $file);
+        //$pengajuan->file_jib = $pengajuan->getFirstMedia('file_jib')->getUrl();
+        Excel::import(new JibImport, $file);
         // }
 
         return true;
