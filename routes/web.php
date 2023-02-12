@@ -47,4 +47,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('/notification', [AdminNotification::class, 'index'])->name('notification.index');
     Route::get('/notification/markasread', [AdminNotification::class, 'markasread'])->name('notification.read');
+    Route::get('/notification/{id}/readbyid', [AdminNotification::class, 'readbyid'])->name('notification.readbyid');
 });

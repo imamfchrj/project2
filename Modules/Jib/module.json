@@ -24,7 +24,7 @@
             "permission": "view_jib-pengajuan"
         },
         {
-            "icon": "fa fa-list",
+            "icon": "fas fa-receipt",
             "name": "Realisasi",
             "route": "admin/jib/realisasi",
             "permission": "view_jib-realisasi"

@@ -37,4 +37,12 @@ class NotificationController extends Controller
             ->update(['is_read' => 1, 'read_at' => date('Y-m-d H:i:s')]);
         return redirect()->back();
     }
+
+    public function readbyid($id)
+    {
+        Notifications::where('nik_penerima', auth()->user()->nik_gsd)->where('is_read', 0)
+            ->where('id', $id)
+            ->update(['is_read' => 1, 'read_at' => date('Y-m-d H:i:s')]);
+        return redirect()->back();
+    }
 }
